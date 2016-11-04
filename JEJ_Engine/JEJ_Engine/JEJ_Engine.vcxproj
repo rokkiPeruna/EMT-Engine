@@ -79,10 +79,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Grafiikkamoottori_JEJ\source\Core\EngineObject.cpp" />
+    <ClCompile Include="..\..\source\Graphics\Graphics.cpp" />
+    <ClCompile Include="..\..\source\Graphics\OGL_ES2.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Grafiikkamoottori_JEJ\include\Core\EngineObject.hpp" />
+    <ClInclude Include="..\..\include\Graphics\Graphics.hpp" />
+    <ClInclude Include="..\..\include\Graphics\OGL_ES2.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
