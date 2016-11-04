@@ -24,7 +24,7 @@ namespace jej //NAMESPACE jej
 		static EngineObject& getInstance();
 
 		//Initialize engine, should be first call in main
-		static bool Initialize(const std::string& root);
+		static bool Initialize(const std::string& p_root, const WindowInitData& p_data = WindowInitData(), const WindowOSInitData& p_osData = WindowOSInitData());
 
 		//Disabled copy-constructors, there should be only one EngineObject
 		EngineObject(const EngineObject&) = delete;
@@ -41,8 +41,8 @@ namespace jej //NAMESPACE jej
 
 	private:
 
-		std::unique_ptr<Graphics> m_graphicsPtr;
-		std::unique_ptr<Window> m_windowPtr;
+		std::shared_ptr<Graphics> m_graphicsPtr;
+		std::shared_ptr<Window> m_windowPtr;
 
 	};
 

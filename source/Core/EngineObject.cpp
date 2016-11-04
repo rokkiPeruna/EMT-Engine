@@ -30,12 +30,12 @@ namespace jej //NAMESPACE jej
 	}
 	//////////////////////////////////////////
 
-	bool EngineObject::Initialize(const std::string& root)
+	bool EngineObject::Initialize(const std::string& p_root, const WindowInitData& p_data = WindowInitData(), const WindowOSInitData& p_osData = WindowOSInitData())
 	{
 		auto& engine = getInstance();
-
-		engine.m_graphicsPtr = std::make_unique<Graphics>();
-		engine.m_windowPtr = std::make_unique<Window>();
+		
+		engine.m_windowPtr = std::make_shared<Window>(new Window(p_data, p_osData));
+		engine.m_graphicsPtr = std::make_shared<Graphics>(new Graphics(engine.m_windowPtr));
 
 	}
 	//////////////////////////////////////////
