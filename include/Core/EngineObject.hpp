@@ -21,7 +21,7 @@ namespace jej //NAMESPACE jej
 	public:
 
 		//Return engine
-		static EngineObject& getInstance();
+		static EngineObject& GetInstance();
 
 		//Initialize engine, should be first call in main
 		static bool Initialize(const std::string& p_root, const WindowInitData& p_data = WindowInitData(), const WindowOSInitData& p_osData = WindowOSInitData());
@@ -38,6 +38,9 @@ namespace jej //NAMESPACE jej
 
 		//Mother of all updates
 		void EngineUpdate();
+
+		std::shared_ptr<Graphics>& GetGraphicsRef();
+		std::shared_ptr<Window>& GetWindowRef();
 
 	private:
 

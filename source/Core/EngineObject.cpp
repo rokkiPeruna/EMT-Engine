@@ -23,7 +23,7 @@ namespace jej //NAMESPACE jej
 	}
 	//////////////////////////////////////////
 
-	EngineObject& EngineObject::getInstance()
+	EngineObject& EngineObject::GetInstance()
 	{
 		static EngineObject engine;
 		return engine;
@@ -42,13 +42,25 @@ namespace jej //NAMESPACE jej
 
 	void EngineObject::EngineDraw()
 	{
-		m_graphicsPtr->drawAll();
+		m_graphicsPtr->_drawAll();
 	}
 	//////////////////////////////////////////
 
 	void EngineObject::EngineUpdate()
 	{
-		m_graphicsPtr->updateBuffersAll();
+		m_graphicsPtr->_updateBuffersAll();
+	}
+	//////////////////////////////////////////
+
+	std::shared_ptr<Graphics>& EngineObject::GetGraphicsRef() 
+	{
+		return m_graphicsPtr;
+	}
+	//////////////////////////////////////////
+
+	std::shared_ptr<Window>& EngineObject::GetWindowRef() 
+	{
+		return m_windowPtr;
 	}
 	//////////////////////////////////////////
 
