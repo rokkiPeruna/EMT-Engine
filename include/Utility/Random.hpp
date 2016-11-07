@@ -4,7 +4,7 @@
 #include <limits>
 #include <random>
 
-namespace kerberos
+namespace jej
 {
 
     template <class T>
@@ -25,20 +25,24 @@ namespace kerberos
         Random();
 
         //Constructor with limits
-        Random(const T min, const T max);
+        Random(const T p_min, const T p_max);
+
+        //Disabled copy-constructors
+        Random(const Random&) = delete;
+        void operator=(const Random&) = delete;
 
         //Destructor
         ~Random();
 
         //Set limits
-		inline Random& setRange(const T min, const T max);
+		inline Random& SetRange(const T p_min, const T p_max);
 
         //Randomize
-        inline T r();
+        inline T Randomize();
 
     };
 
-#include <Util/Inl/Random.inl>
+#include <Utility/Inl/Random.inl>
 
 }
 #endif

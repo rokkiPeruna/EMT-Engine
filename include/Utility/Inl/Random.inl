@@ -4,18 +4,24 @@ Random<T>::Random() :
 m_eng(std::random_device()()),
 m_min((std::numeric_limits<T>::min)()),
 m_max((std::numeric_limits<T>::max)())
-{}
+{
+
+}
 
 template <class T>
 Random<T>::Random(const T min, const T max) :
 m_eng(std::random_device()()),
 m_min(min <= max ? min : max),
 m_max(max >= min ? max : min)
-{}
+{
+
+}
 
 template<class T>
 Random<T>::~Random()
-{}
+{
+
+}
 
 template <class T>
 inline Random<T>& Random<T>::setRange(const T min, const T max)

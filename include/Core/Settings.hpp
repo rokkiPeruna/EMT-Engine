@@ -6,6 +6,21 @@ namespace jej
 {
 	namespace settings
 	{
+        
+#ifdef _DEBUG //If debug build
+
+#define ENABLE_ASSERTS
+#define JEJ_DEBUG_MODE
+#define JEJ_DEBUG_LEVEL 4
+
+#else //If not debug build
+
+#define JEJ_DEBUG_LEVEL 0
+
+#endif //If debug build ends
+
+		
+        //Windows GL attributes
 #ifdef _WIN32
 		static const EGLint attributeList[] =
 		{
@@ -18,6 +33,8 @@ namespace jej
 			EGL_SAMPLE_BUFFERS, 0,
 			EGL_NONE
 		};
+
+        //Android GL attributes
 #elif defined ANDROID
 		static const EGLint attributeList[] =
 		{

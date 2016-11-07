@@ -1,17 +1,14 @@
 #ifndef JEJ_ASSERT_HPP
 #define JEJ_ASSERT_HPP
 
-#include <Windows.h>
+#include <Core/Settings.hpp>
+
 #include <string>
-
-#define ENABLE_ASSERTS
-
-#ifdef _DEBUG
-#define JEJ_DEBUG_MODE
-#endif
 
 namespace jej
 {
+
+    //Macros for _assertion
 
 #ifdef ENABLE_ASSERTS
 
@@ -25,6 +22,7 @@ namespace jej
 
 #endif
 
+    //Actual assert function
 	void _assertion(const bool p_expression, const std::string& p_file, const unsigned int p_line, const std::string& p_message);
 
 }
