@@ -2,7 +2,7 @@
 
 #include <Core/EngineObject.hpp>
 
-#include <Graphics/GraphicsES2.hpp>
+#include <Graphics/OGL_ES2.hpp>
 #include <Window/Window.hpp>
 
 
