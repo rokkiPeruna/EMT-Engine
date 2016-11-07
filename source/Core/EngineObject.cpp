@@ -36,9 +36,8 @@ namespace jej //NAMESPACE jej
 
         settings::rootPath = p_root;
 
-        engine.m_windowPtr = std::make_shared<Win32Window>(Win32Window(p_data, p_osData));
-        engine.m_graphicsPtr = std::make_shared<OGL_ES2>(OGL_ES2(engine.m_windowPtr, settings::attributeList));
-
+        engine.m_windowPtr.reset(new Win32Window(p_data, p_osData));     //= std::make_shared<Win32Window>(new Win32Window(p_data, p_osData));
+        engine.m_graphicsPtr.reset(new OGL_ES2(engine.m_windowPtr, settings::attributeList)); // = std::make_shared<OGL_ES2>(new OGL_ES2(engine.m_windowPtr, settings::attributeList));
 
         return true;
     }

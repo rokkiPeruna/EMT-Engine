@@ -23,8 +23,8 @@ namespace jej//NAMESPACE jej STARTS
 
     struct WindowBaseInitData
     {
-        short int sizeX = 0;
-        short int sizeY = 0;
+        short int sizeX = 200;
+        short int sizeY = 200;
         std::wstring nameApp = L"appName";
         std::wstring nameMenu = L"menuName";
         std::wstring nameWindow = L"windowName";
@@ -43,10 +43,8 @@ namespace jej//NAMESPACE jej STARTS
         //Default constructor
         Window();
 
-        //Copy
-        Window(const Window&);
-
         //Disabled copy constructor
+        Window(const Window&) = delete;
         void operator=(const Window&) = delete;
 
         //Destructor

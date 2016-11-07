@@ -15,6 +15,8 @@ namespace jej //NAMESPACE jej
 	class EngineObject
 	{
 
+        friend class Win32Window;
+
 	private:
 
 		//Constructor

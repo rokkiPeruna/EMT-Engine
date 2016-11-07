@@ -15,8 +15,8 @@ namespace jej//NAMESPACE jej STARTS
     //Win32 specific initializing data
     struct WindowOSInitData
     {
-        short int offSetX = 0;
-        short int offSetY = 0;
+        short int offsetX = 0;
+        short int offsetY = 0;
 
         HINSTANCE m_hInstance;
         HWND m_hWnd;
@@ -24,21 +24,18 @@ namespace jej//NAMESPACE jej STARTS
         LPWSTR cursor = IDC_ARROW;
         DWORD style = WS_OVERLAPPEDWINDOW | WS_VISIBLE;
         UINT classStyle = CS_HREDRAW | CS_VREDRAW;
-        COLORREF bg = 0x00111111;
-        HBRUSH brushG;
+        COLORREF backGroundColor = 0x00111111;
+        HBRUSH brush = CreateSolidBrush(backGroundColor);
 
         RECT rectWin;
 
         WindowOSInitData(){};
     };
 
-    class Win32Window
-        :public Window
+    class Win32Window : public Window
     {
 
     public:
-        //Default constuctor
-        Win32Window();
 
         //Constructor for user given size, style, etc.
         //Takes in two structs, first for common window attributes,
@@ -46,10 +43,8 @@ namespace jej//NAMESPACE jej STARTS
         //See WindowBaseInitData and WindowOSInitData for more information
         Win32Window(const WindowBaseInitData*, const WindowOSInitData*);
 
-        //Copy-constructor
-        //Win32Window(const Win32Window&);
-
         //Disabled copy constructor
+        Win32Window(const Win32Window&) = delete;
         void operator=(const Win32Window&) = delete;
 
         //Destructor
@@ -79,7 +74,6 @@ namespace jej//NAMESPACE jej STARTS
 
         //Set window's OS specific init data
         virtual void SetWinOSData(const WindowOSInitData&) override;
-
 
 
     private:
