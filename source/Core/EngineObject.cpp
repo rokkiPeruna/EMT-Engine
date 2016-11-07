@@ -2,7 +2,7 @@
 
 #include <Core/EngineObject.hpp>
 
-#include <Graphics/GraphicsES2.hpp>
+#include <Graphics/OGL_ES2.hpp>
 #include <Window/Window.hpp>
 
 
@@ -42,13 +42,13 @@ namespace jej //NAMESPACE jej
 
 	void EngineObject::EngineDraw()
 	{
-		m_graphicsPtr->drawAll();
+		m_graphicsPtr->_drawAll();
 	}
 	//////////////////////////////////////////
 
 	void EngineObject::EngineUpdate()
 	{
-		m_graphicsPtr->updateBuffersAll();
+		m_graphicsPtr->_updateBuffersAll();
 	}
 	//////////////////////////////////////////
 
