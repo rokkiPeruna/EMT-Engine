@@ -43,8 +43,10 @@ namespace jej//NAMESPACE jej STARTS
         //Default constructor
         Window();
 
-        //Disabled copy constructors
-        Window(const Window&) = delete;
+        //Copy
+        Window(const Window&);
+
+        //Disabled copy constructor
         void operator=(const Window&) = delete;
 
         //Destructor

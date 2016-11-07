@@ -52,9 +52,6 @@
     <Filter Include="Header Files\Utility\Inl">
       <UniqueIdentifier>{8e1001f7-3e17-41a7-b9b4-858f5df4487f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\_main">
-      <UniqueIdentifier>{1b27bbda-5eb1-43d8-909c-785731de3401}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -75,8 +72,17 @@
     <ClCompile Include="..\..\source\Graphics\OGL_ES2.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files\_main</Filter>
+    <ClCompile Include="..\..\source\Window\AndroidWindow.cpp">
+      <Filter>Source Files\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Window\Win32Window.cpp">
+      <Filter>Source Files\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Window\Window.cpp">
+      <Filter>Source Files\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Core\Settings.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +109,15 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Utility\Various.hpp">
       <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Window\AndroidWindow.hpp">
+      <Filter>Header Files\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Window\Win32Window.hpp">
+      <Filter>Header Files\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Window\Window.hpp">
+      <Filter>Header Files\Window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

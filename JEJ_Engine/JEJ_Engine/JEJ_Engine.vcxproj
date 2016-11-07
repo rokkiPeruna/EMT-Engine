@@ -39,7 +39,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)..\TestGame\lib</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)..\TestGame\lib</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>
@@ -54,6 +59,9 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <OutputFile>$(SolutionDir)..\TestGame\lib\JEJ_Engine.lib</OutputFile>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -73,17 +81,23 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <OutputFile>$(SolutionDir)..\TestGame\lib\JEJ_Engine.lib</OutputFile>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Grafiikkamoottori_JEJ\source\Core\EngineObject.cpp" />
+    <ClCompile Include="..\..\source\Core\Settings.cpp" />
     <ClCompile Include="..\..\source\Graphics\Graphics.cpp" />
     <ClCompile Include="..\..\source\Graphics\OGL_ES2.cpp" />
     <ClCompile Include="..\..\source\Utility\Assert.cpp" />
     <ClCompile Include="..\..\source\Utility\Messenger.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\..\source\Window\AndroidWindow.cpp" />
+    <ClCompile Include="..\..\source\Window\Win32Window.cpp" />
+    <ClCompile Include="..\..\source\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Grafiikkamoottori_JEJ\include\Core\EngineObject.hpp" />
@@ -94,6 +108,9 @@
     <ClInclude Include="..\..\include\Utility\Messenger.hpp" />
     <ClInclude Include="..\..\include\Utility\Random.hpp" />
     <ClInclude Include="..\..\include\Utility\Various.hpp" />
+    <ClInclude Include="..\..\include\Window\AndroidWindow.hpp" />
+    <ClInclude Include="..\..\include\Window\Win32Window.hpp" />
+    <ClInclude Include="..\..\include\Window\Window.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\include\Utility\Inl\Messenger.inl" />

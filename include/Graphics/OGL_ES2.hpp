@@ -5,6 +5,8 @@
 
 #include <Core/Settings.hpp>
 
+#include <memory>
+
 namespace jej
 {
 	class Window;
@@ -20,14 +22,16 @@ namespace jej
 
 #ifdef _WIN32
 		// Constructor for windows surface
-		OGL_ES2(Window* p_window, const EGLint p_attributeList[]);
+		OGL_ES2(std::shared_ptr<Window> p_window, const EGLint p_attributeList[]);
 
 #elif defined ANDOID
 		// Constructor for android surface
 		OGL_ES2(Window* p_window, const EGLint p_attributeList[], android_app* p_androidApplication);
 #endif
 
-		OGL_ES2(const OGL_ES2&) = delete;
+        OGL_ES2(const OGL_ES2&);
+
+        //Disabled copy-constructor
 		void operator=(const OGL_ES2&) = delete;
 
 		virtual ~OGL_ES2();
@@ -39,7 +43,7 @@ namespace jej
 
 #ifdef _WIN32
 		// Context creation for window surface
-		bool _createContext(Window* p_window, const EGLint p_attributeList[] = settings::attributeList);
+		bool _createContext(std::shared_ptr<Window> p_window, const EGLint p_attributeList[] = settings::attributeList);
 #elif defined ANDROID
 		// Context creation for android surface
 		bool _createContext(Window* p_window, android_app* p_androidApplication,  const EGLint p_attributeList[] = settings::attributeList);

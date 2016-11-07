@@ -12,6 +12,8 @@ namespace jej //NAMESPACE jej
 	{
 	public:
 
+        friend class EngineObject;
+
 		// Default values for drawing if not set elswhere
 		enum class DEFAULTS
 		{
@@ -31,12 +33,14 @@ namespace jej //NAMESPACE jej
 
 		virtual bool _drawAll() = 0;
 
-		virtual void _updateBuffers(const unsigned int) = 0;
+        // eglSwapBuffers posts its color buffer to the associated native window
+        virtual void _swapBuffers() = 0;
+        
+        virtual void _updateBuffers(const unsigned int) = 0;
 		
 		virtual void _updateBuffersAll() = 0;
 
-		// eglSwapBuffers posts its color buffer to the associated native window
-		virtual void _swapBuffers() = 0;
+		
 
 
 

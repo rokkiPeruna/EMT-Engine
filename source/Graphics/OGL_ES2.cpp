@@ -1,10 +1,13 @@
 
 #include <Graphics/OGL_ES2.hpp>
 
+#include <Utility/Assert.hpp>
+#include <Window/Window.hpp>
+
 namespace jej
 {
 
-	OGL_ES2::OGL_ES2(Window* p_window, const EGLint p_attributeList[]):
+	OGL_ES2::OGL_ES2(std::shared_ptr<Window> p_window, const EGLint p_attributeList[]):
 		m_context(EGL_NO_CONTEXT),
 		m_display(EGL_NO_DISPLAY),
 		m_surface(EGL_NO_SURFACE)
@@ -24,7 +27,7 @@ namespace jej
 
 
 #ifdef _WIN32
-	bool OGL_ES2::_createContext(Window* p_window, const EGLint p_attributeList[])
+	bool OGL_ES2::_createContext(std::shared_ptr<Window> p_window, const EGLint p_attributeList[])
 	{
 		EGLint configs = 0;
 		EGLint major = 0;
@@ -133,11 +136,13 @@ namespace jej
 	bool OGL_ES2::_draw()
 	{
 		// TODO: add functionality
+        return true;
 	}
 
 	bool OGL_ES2::_drawAll()
 	{
-		// TODO: Add functionaility
+		// TODO: Add functionality
+        return true;
 	}
 	/////////////////////////////////
 
@@ -149,7 +154,7 @@ namespace jej
 
 	void OGL_ES2::_updateBuffers(const unsigned int p_index)
 	{
-		// TODO: Add functionailty
+		// TODO: Add functionality
 	}
 	/////////////////////////////////
 
