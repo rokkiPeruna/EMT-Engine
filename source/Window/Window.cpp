@@ -4,7 +4,8 @@
 namespace jej //NAMESPACE jej STARTS
 {
 	//Default constructor
-	Window::Window()
+	Window::Window():
+        m_isWinActive(false)
 	{
 
 	}
