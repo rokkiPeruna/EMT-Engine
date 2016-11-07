@@ -9,10 +9,10 @@ m_max((std::numeric_limits<T>::max)())
 }
 
 template <class T>
-Random<T>::Random(const T min, const T max) :
+Random<T>::Random(const T p_min, const T p_max) :
 m_eng(std::random_device()()),
-m_min(min <= max ? min : max),
-m_max(max >= min ? max : min)
+m_min(p_min <= p_max ? p_min : p_max),
+m_max(p_max >= p_min ? p_max : p_min)
 {
 
 }
@@ -24,15 +24,15 @@ Random<T>::~Random()
 }
 
 template <class T>
-inline Random<T>& Random<T>::setRange(const T min, const T max)
+inline Random<T>& Random<T>::SetRange(const T p_min, const T p_max)
 {
-    m_min = min <= max ? min : max;
-    m_max = max >= min ? max : min;
+    m_min = p_min <= p_max ? p_min : p_max;
+    m_max = p_max >= p_min ? p_max : p_min;
     return *this;
 }
 
 template <class T>
-inline T Random<T>::r()
+inline T Random<T>::Randomize()
 {
     return static_cast<T>(std::uniform_real_distribution<long double>(m_min, m_max)(m_eng));
 }
