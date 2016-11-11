@@ -4,19 +4,34 @@
 namespace jej
 {
 
-    unsigned int Component::m_IDCounter = 0u;
-    unsigned int Component::m_IDRemovedCounter = 0u;
+    unsigned int Component::m_componentIDCounter = 0u;
+    unsigned int Component::m_componentIDRemovedCounter = 0u;
 
     Component::Component() :
-        ID(m_IDCounter)
+        m_componentType(),
+        m_componentID(++m_componentIDCounter),
+        m_parentEntityID()
     {
-        ++m_IDCounter;
+
     }
-    //
+
+    Component::Component(const Component& p_other):
+        m_componentID(++m_componentIDCounter),
+        m_parentEntityID(p_other.m_parentEntityID)
+    {
+
+    }
+
+    Component& Component::operator=(const Component& p_other)
+    {
+        m_componentID = ++m_componentIDCounter;
+        m_parentEntityID = p_other.m_parentEntityID;
+        return *this;
+    }
 
     Component::~Component()
     {
-        ++m_IDRemovedCounter;
+        ++m_componentIDRemovedCounter;
     }
     //
 }

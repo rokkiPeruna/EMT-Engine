@@ -2,34 +2,48 @@
 #define JEJ_ENTITY_HPP
 
 //
+#include <memory>
+#include <string>
 #include <vector>
 //
 
-//
-#include <EntityComponentSys/Components/Component.hpp>
-//
 
 namespace jej
 {
 
-    
+    class Component;
 
     class Entity
     {
+        //For manipulating components
+        friend class UserSystem;
+
+        //For debugging memory
+        friend class EngineObject;
+
     public:
-        Entity();
+        
+        Entity(const std::string& p_name = "");
+
+        Entity(const Entity&) = delete;
+        Entity operator=(const Entity&) = delete;
 
         virtual ~Entity();
 
-        template <typename Args>
-        bool AddComponent(ComponentType p_compType, Args ... args);
-
-        bool RemoveComponent(ComponentType p_compType);
-
     private:
 
-        std::vector<Component*> m_components;
+        const std::string m_name;
+
+        unsigned int m_entityID;
+
+        static unsigned int m_entityIDCounter;
+        static unsigned int m_entityIDRemovedCounter;
+
+        std::vector<std::shared_ptr<Component>> m_components;
+
     };
+
+
 }
 
 #endif

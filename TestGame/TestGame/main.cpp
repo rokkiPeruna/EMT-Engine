@@ -1,24 +1,33 @@
 
 #include <Core/EngineObject.hpp>
 #include <EntityComponentSys/Entity.hpp>
-#include <TransformComponent.hpp>
+#include <EntityComponentSys/Components/TransformComponent.hpp>
 
-#include <Systems/System.hpp>
+#include <EntityComponentSys/Systems/System.hpp>
+#include <EntityComponentSys/Systems/UserSystem.hpp>
+
+#include <Utility/Random.hpp>
 
 int main(int argc, char* argv[])
 {
-    jej::System::_transformCont.reserve(1000);
 
-    jej::Entity player;
+    jej::Entity player("player1");
 
-    player.AddComponent(jej::ComponentType::Transform,
-     jej::Vector2f(0.f,0.f),
-     jej::Vector2f(1, 1),
-     jej::Vector4f(0, 0, 50, 0));
+    auto& editor = jej::UserSystem::GetInstance();
 
-     
-        
+    editor.AddComponent<jej::TransformComponent>(player, jej::ComponentType::Transform,
+        jej::Vector2f(3.f, 5.f),
+        jej::Vector2f(1, 1),
+        jej::Vector4f(9, 2, 50, 1));
+
+
     jej::EngineObject::Initialize(argv[0]);
+
+    bool on = editor.HasComponent(player, jej::ComponentType::Transform);
+
+    auto transvormi = editor.GetComponentPtr<jej::TransformComponent>(player, jej::ComponentType::Transform);
+
+    transvormi->position.x += transvormi->position.x;
 
     return 0;
 }

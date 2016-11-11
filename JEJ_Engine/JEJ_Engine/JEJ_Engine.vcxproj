@@ -95,6 +95,7 @@
     <ClCompile Include="..\..\source\EntityComponentSys\Components\TransformComponent.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Entity.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\System.cpp" />
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\UserSystem.cpp" />
     <ClCompile Include="..\..\source\Graphics\Graphics.cpp" />
     <ClCompile Include="..\..\source\Graphics\OGL_ES2.cpp" />
     <ClCompile Include="..\..\source\Utility\Assert.cpp" />
@@ -105,11 +106,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Grafiikkamoottori_JEJ\include\Core\EngineObject.hpp" />
+    <ClInclude Include="..\..\include\Core\BaseStructs.hpp" />
     <ClInclude Include="..\..\include\Core\Settings.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\Component.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\TransformComponent.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Entity.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\System.hpp" />
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\UserSystem.hpp" />
     <ClInclude Include="..\..\include\Graphics\Graphics.hpp" />
     <ClInclude Include="..\..\include\Graphics\OGL_ES2.hpp" />
     <ClInclude Include="..\..\include\Utility\Assert.hpp" />
@@ -121,6 +124,7 @@
     <ClInclude Include="..\..\include\Window\Window.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\include\EntityComponentSys\Systems\Inl\UserSystem.inl" />
     <None Include="..\..\include\Utility\Inl\Messenger.inl" />
     <None Include="..\..\include\Utility\Inl\Random.inl" />
   </ItemGroup>

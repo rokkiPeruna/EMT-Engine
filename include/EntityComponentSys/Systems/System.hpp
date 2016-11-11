@@ -2,6 +2,7 @@
 #define JEJ_SYSTEM_HPP
 
 //
+#include <tuple>
 #include <vector>
 //
 
@@ -13,20 +14,25 @@ namespace jej
 {
     class System
     {
-    public:
-        //
+
+        //For modifying containers
+        friend class UserSystem;
+
+    private:
+
+        //Singleton constructor
         System();
 
-        //
+    public:
+        
+        //Disabled copy-constructors
+        System(const System&) = delete;
+        System operator=(const System&) = delete;
+
+        //Destructor
         virtual ~System();
 
-        //Staattinen säiliö Transform komponenteille
-        static std::vector<TransformComponent> _transformCont;
-
-        //Staattinen säiliö nönnönönönöö komponenteille
-        //Staattinen säiliö n-1 komponenteille
     };
 }
-
 
 #endif

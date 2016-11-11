@@ -76,6 +76,9 @@
     <Filter Include="Source Files\EntityComponentSystem\Entity">
       <UniqueIdentifier>{134ab7b3-7d14-4347-b741-25b8e5f72adc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\EntityComponentSystem\Systems\Inl">
+      <UniqueIdentifier>{cc1530c3-8f21-4551-a726-11fb1d4382f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -118,6 +121,9 @@
       <Filter>Source Files\EntityComponentSystem\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\System.cpp">
+      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\UserSystem.cpp">
       <Filter>Source Files\EntityComponentSystem\Systems</Filter>
     </ClCompile>
   </ItemGroup>
@@ -167,6 +173,12 @@
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\System.hpp">
       <Filter>Header Files\EntityComponentSystem\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\UserSystem.hpp">
+      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Core\BaseStructs.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\include\Utility\Inl\Messenger.inl">
@@ -174,6 +186,9 @@
     </None>
     <None Include="..\..\include\Utility\Inl\Random.inl">
       <Filter>Header Files\Utility\Inl</Filter>
+    </None>
+    <None Include="..\..\include\EntityComponentSys\Systems\Inl\UserSystem.inl">
+      <Filter>Header Files\EntityComponentSystem\Systems\Inl</Filter>
     </None>
   </ItemGroup>
 </Project>

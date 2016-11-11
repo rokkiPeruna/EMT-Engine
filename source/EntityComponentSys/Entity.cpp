@@ -1,9 +1,18 @@
 #include <EntityComponentSys/Entity.hpp>
 
+#include <EntityComponentSys/Systems/System.hpp>
+
+#include <algorithm>
 
 namespace jej
 {
-    Entity::Entity()
+
+    unsigned int Entity::m_entityIDCounter = 0u;
+    unsigned int Entity::m_entityIDRemovedCounter = 0u;
+
+    Entity::Entity(const std::string& p_name) :
+        m_name(p_name),
+        m_entityID(++m_entityIDCounter)
     {
 
     }
@@ -11,18 +20,10 @@ namespace jej
 
     Entity::~Entity()
     {
-
+        ++m_entityIDRemovedCounter;
     }
     //
 
-    //Public methods
-    template<typename Args>
-    bool Entity::AddComponent(ComponentType p_compType, Args ... args)
-    {
-        //Check if entity already has a given component type
-            //
 
-        //If not, add component
-            //Switch-case
-    }
+
 }

@@ -2,13 +2,16 @@
 
 #include <Core/EngineObject.hpp>
 
+#include <EntityComponentSys/Components/Component.hpp>
+#include <EntityComponentSys/Entity.hpp>
 #include <Graphics/OGL_ES2.hpp>
+#include <Utility/Assert.hpp>
+#include <Utility/Messenger.hpp>
 #include <Window/Win32Window.hpp>
 
 
 namespace jej //NAMESPACE jej
 {
-
     EngineObject::EngineObject() :
         m_graphicsPtr(nullptr),
         m_windowPtr(nullptr)
@@ -19,7 +22,24 @@ namespace jej //NAMESPACE jej
 
     EngineObject::~EngineObject()
     {
+        //Zero if everything is ok.
+        //Positive if something is not removed
+        //Negative if something is removed too much
+        const int componentLeak = Component::m_componentIDCounter - Component::m_componentIDRemovedCounter;
+        const int entityLeak = Entity::m_entityIDCounter - Entity::m_entityIDRemovedCounter;
 
+        //No leaks - no asserts
+        JEJ_ASSERT(componentLeak == 0, "Component memory leak!");
+        JEJ_ASSERT(entityLeak == 0, "Entity memory leak!");
+
+        //No leaks - no warnings
+        if (componentLeak != 0)
+            Messenger::Add(Messenger::MessageType::Warning, "Amount of leaking components: ", componentLeak);
+
+        if (entityLeak != 0)
+            Messenger::Add(Messenger::MessageType::Warning, "Amount of leaking components: ", entityLeak);
+
+        //TODO Write messenger contents to log file here
     }
     //////////////////////////////////////////
 

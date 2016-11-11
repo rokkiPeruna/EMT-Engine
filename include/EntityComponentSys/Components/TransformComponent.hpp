@@ -5,51 +5,27 @@
 #include <EntityComponentSys/Components/Component.hpp>
 //
 
+#include <Core/BaseStructs.hpp>
+
 namespace jej
 {
-        //These are positions for entity's pivot point
-        struct Vector2f
-        {
-            float x = 0.0f;
-            float y = 0.0f;
 
-            Vector2f(){};
-            Vector2f(const float p_x, const float p_y)
-            {
-                x = p_x;
-                y = p_y;
-            };
-        };
 
-        //These are entity's rotation angles in object coordinate system
-        struct Vector4f
-        {
-            float x = 0.0f;
-            float y = 0.0f;
-            float z = 0.0f;
-            float w = 0.0f;
-
-            Vector4f(){};
-            Vector4f(const float p_x, const float p_y, const float p_z, const float p_w)
-            {
-                x = p_x;
-                y = p_y;
-                z = p_z;
-                w = p_w;
-            };
-        };
-
-    class TransformComponent
-        :public Component
+    class TransformComponent : public Component
     {
 
     public:
-        //
+        
+        //Default constructor
         TransformComponent();
 
-        //
+        //Copy-constructor
+        TransformComponent(const Vector2f& p_position, const Vector2f& p_scale, const Vector4f& p_rotation);
+
+        //Destructor
         virtual ~TransformComponent();
 
+        //Variables
         Vector2f position;
         Vector2f scale;
         Vector4f rotation;
