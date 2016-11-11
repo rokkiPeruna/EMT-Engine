@@ -52,6 +52,30 @@
     <Filter Include="Header Files\Utility\Inl">
       <UniqueIdentifier>{8e1001f7-3e17-41a7-b9b4-858f5df4487f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\EntityComponentSystem">
+      <UniqueIdentifier>{1fd48ab7-3dec-489c-92a3-2333e612c6ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EntityComponentSystem\Entity">
+      <UniqueIdentifier>{5cc635b0-f1d4-4dc7-94de-9c4dce2179a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EntityComponentSystem\Components">
+      <UniqueIdentifier>{6ed0b98a-c0cf-4a49-8b63-18438aa17f31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EntityComponentSystem\Systems">
+      <UniqueIdentifier>{5bc94596-c33d-45d7-a9ef-84557a450cf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EntityComponentSystem">
+      <UniqueIdentifier>{6f5b3ff6-86df-40b8-9790-19d03d353a3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EntityComponentSystem\Components">
+      <UniqueIdentifier>{5159a42b-844b-4cd9-9727-54729b9c494c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EntityComponentSystem\Systems">
+      <UniqueIdentifier>{0ce6496a-235f-4e9c-bbaa-b08ca22322d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EntityComponentSystem\Entity">
+      <UniqueIdentifier>{134ab7b3-7d14-4347-b741-25b8e5f72adc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -83,6 +107,18 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Core\Settings.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\TransformComponent.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\Component.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Entity.cpp">
+      <Filter>Source Files\EntityComponentSystem\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\System.cpp">
+      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +154,18 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Window\Window.hpp">
       <Filter>Header Files\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Entity.hpp">
+      <Filter>Header Files\EntityComponentSystem\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\TransformComponent.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\Component.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\System.hpp">
+      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
