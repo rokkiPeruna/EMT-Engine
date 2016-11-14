@@ -9,23 +9,20 @@ namespace jej
     unsigned int Component::m_componentIDCounter = 0u;
     unsigned int Component::m_componentIDRemovedCounter = 0u;
 
-    Component::Component() :
+    Component::Component(const JEJ_COUNT p_parentID) :
         m_componentType(),
-        m_componentID(++m_componentIDCounter)
+        m_componentID(++m_componentIDCounter),
+        m_parentID(p_parentID)
     {
 
     }
 
     Component::Component(const Component& p_other) :
-        m_componentID(++m_componentIDCounter)
+        m_componentID(++m_componentIDCounter),
+        m_parentID(p_other.m_parentID)
     {
-
-    }
-
-    Component& Component::operator=(const Component& p_other)
-    {
-        m_componentID = ++m_componentIDCounter;
-        return *this;
+        //Think of some way to make sure parentId is correct
+        DebugBreak();
     }
 
     Component::~Component()
@@ -33,18 +30,5 @@ namespace jej
         ++m_componentIDRemovedCounter;
     }
     //
-
-    std::vector<unsigned int>& Component::getComponentIDsRef()
-    {
-        auto& scene = EngineObject::GetInstance().GetSceneRef();
-
-        auto* entities = scene->GetEntities();
-
-        for (auto itr : *entities)
-            if (this->m_componentID == itr->GetID())
-                return itr->m_componentIDs;
-    }
-
-
 
 }

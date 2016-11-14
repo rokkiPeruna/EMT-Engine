@@ -2,7 +2,8 @@
 #define JEJ_COMPONENT_HPP
 
 #include <Core/BaseStructs.hpp>
-#include <EntityComponentSys/Entity/Entity.hpp>
+
+//One does not simply #include <Core/Settings.hpp> here
 
 #include <string>
 #include <vector>
@@ -18,17 +19,18 @@ namespace jej
         friend class EngineObject;
 
         //For manipulating components
-        friend class Scene;
+        friend class Entity;
 
     public:
 
         //Constructor
-        Component();
+        Component(const JEJ_COUNT p_parentID);
 
-        //Copy-constructors
+        //Copy-constructor
         Component(const Component& p_other);
 
-        Component& operator=(const Component& p_other);
+        //Assignment operator removed
+        Component& operator=(const Component& p_other) = delete;
 
         //Destructor
         virtual ~Component();
@@ -39,19 +41,16 @@ namespace jej
         ComponentType m_componentType;
 
         //Who am I
-        unsigned int m_componentID;
+        const unsigned int m_componentID;
 
-        virtual std::vector<unsigned int>& getComponentIDsRef() final;
+        //Who the hell are you
+        const unsigned int m_parentID;
 
     private:
 
         static unsigned int m_componentIDCounter;
         static unsigned int m_componentIDRemovedCounter;
     };
-
-   
-
-#include <EntityComponentSys/Components/Inl/Component.inl>
 
 }
 

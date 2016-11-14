@@ -9,6 +9,7 @@
 #include <Utility/Messenger.hpp>
 #include <Window/Win32Window.hpp>
 
+#include <EntityComponentSys/Systems/TransformSystem.hpp>
 
 namespace jej //NAMESPACE jej
 {
@@ -53,6 +54,8 @@ namespace jej //NAMESPACE jej
     bool EngineObject::Initialize(const std::string& p_root, const WindowBaseInitData* p_data, const WindowOSInitData* p_osData)
     {
         auto& engine = GetInstance();
+
+        TransformSystem::GetInstance();
 
         settings::rootPath = p_root;
 

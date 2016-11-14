@@ -3,10 +3,24 @@
 
 namespace jej
 {
-    enum  ComponentType
+
+#ifdef JEJ_USE_MAX
+    typedef unsigned long long int JEJ_COUNT;
+#elif defined JEJ_USE_LARGE
+    typedef unsigned long int JEJ_COUNT;
+#elif defined JEJ_USE_MIN
+    typedef unsigned short int JEJ_COUNT;
+#else
+    typedef unsigned int JEJ_COUNT;
+#endif
+
+    enum class ComponentType : unsigned short int
     {
         //This is TransformComponent, it takes daadiidaa...
-        Transform
+        Failure,
+        Transform,
+        Render,
+        SizeOfThis
     };
 
     //Vector of two floats

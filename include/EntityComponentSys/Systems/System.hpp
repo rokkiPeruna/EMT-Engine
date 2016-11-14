@@ -2,16 +2,18 @@
 #define JEJ_SYSTEM_HPP
 
 //
-#include <tuple>
+#include <memory>
 #include <vector>
 //
 
 //
-#include <EntityComponentSys/Components/TransformComponent.hpp>
 //
 
 namespace jej
 {
+    //For m_components
+    class Component;
+
     class System
     {
 
@@ -24,11 +26,13 @@ namespace jej
         System();
 
         //Disabled copy-constructors
-        System(const System&) = delete;
-        System operator=(const System&) = delete;
+        //System(const System&) = delete;
+        //System operator=(const System&) = delete;
 
         //Destructor
         virtual ~System();
+
+        virtual void update(const float p_deltaTime) = 0;
 
     protected:
 

@@ -79,6 +79,12 @@
     <Filter Include="Header Files\Core\Inl">
       <UniqueIdentifier>{bee6a43c-7c88-417d-8e1c-f90e852cbcab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\EntityComponentSystem\Components\Inl">
+      <UniqueIdentifier>{56f0a8e4-aed6-44d8-b2a2-90bee01c35d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EntityComponentSystem\Entity\Inl">
+      <UniqueIdentifier>{3f1a8f78-088a-4bd9-8db1-db17e89d15a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -125,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Core\Scene.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\TransformSystem.cpp">
+      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +188,9 @@
     <ClInclude Include="..\..\include\Core\Scene.hpp">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\TransformSystem.hpp">
+      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\include\Utility\Inl\Messenger.inl">
@@ -189,6 +201,12 @@
     </None>
     <None Include="..\..\include\Core\Inl\Scene.inl">
       <Filter>Header Files\Core\Inl</Filter>
+    </None>
+    <None Include="..\..\include\EntityComponentSys\Components\Inl\Component.inl">
+      <Filter>Header Files\EntityComponentSystem\Components\Inl</Filter>
+    </None>
+    <None Include="..\..\include\EntityComponentSys\Entity\Inl\Entity.inl">
+      <Filter>Header Files\EntityComponentSystem\Entity\Inl</Filter>
     </None>
   </ItemGroup>
 </Project>

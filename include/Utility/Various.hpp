@@ -1,12 +1,18 @@
-#ifndef K_VARIOUS_HPP
-#define K_VARIOUS_HPP
+#ifndef JEJ_VARIOUS_HPP
+#define JEJ_VARIOUS_HPP
 
-namespace kerberos
+namespace jej
 {
     namespace various
     {
         
         //Temp for testing or other small stuff here
+
+
+
+        
+
+
 
     }
 }

@@ -6,6 +6,10 @@
 
 //For m_components
 #include <EntityComponentSys/Systems/System.hpp>
+#include <EntityComponentSys/Systems/TransformSystem.hpp>
+
+
+#include <Utility/Messenger.hpp>
 
 #include <memory>
 #include <vector>
@@ -23,28 +27,6 @@ namespace jej
         ~Scene();
 
         std::vector<std::shared_ptr<Entity>>* GetEntities();
-
-        //Components
-
-        //Add a component to the given entity
-        template<typename T, typename ... Args>
-        inline bool AddComponent(Entity& p_entity, Args ... p_args);
-
-        //Returns pointer to a component of desired type if present on the target entity, otherwise nullptr
-        template <typename T>
-        T* GetComponentPtr(Entity& p_entity);
-
-        //Returns pointer to a component of desired type if present on the target entity, otherwise nullptr
-        template <typename T>
-        const T* GetComponentPtr(const Entity& p_entity, const ComponentType p_compType);
-
-        //Check if the entity has a component of the given type
-        template <typename T>
-        bool HasComponent(const Entity& p_entity);
-
-        //Removes a component of the given type
-        template <typename T>
-        bool RemoveComponent(Entity& p_entity);
 
         //Entities
 
@@ -71,6 +53,12 @@ namespace jej
 
         template <typename T>
         std::vector<std::shared_ptr<T>>& _getComponentVectorFromSystem();
+
+        template <typename T>
+        T* _getComponentPtr(const unsigned int p_ID);
+
+        template <typename T>
+        bool _hasComponent(const unsigned int p_ID);
 
         std::vector<std::shared_ptr<Entity>> m_entities;
 
