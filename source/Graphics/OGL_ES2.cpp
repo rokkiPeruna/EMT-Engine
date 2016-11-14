@@ -12,7 +12,8 @@ namespace jej
         m_display(EGL_NO_DISPLAY),
         m_surface(EGL_NO_SURFACE)
     {
-        JEJ_ASSERT(_createContext(p_window, p_attributeList), "Context creation failed.");
+        const bool success = _createContext(p_window, p_attributeList);
+        JEJ_ASSERT(success, "Context creation failed.");
     };
     /////////////////////////////////
 

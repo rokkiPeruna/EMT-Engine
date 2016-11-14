@@ -1,4 +1,4 @@
-#include <EntityComponentSys/Entity.hpp>
+#include <EntityComponentSys/Entity/Entity.hpp>
 
 #include <EntityComponentSys/Systems/System.hpp>
 
@@ -12,7 +12,8 @@ namespace jej
 
     Entity::Entity(const std::string& p_name) :
         m_name(p_name),
-        m_entityID(++m_entityIDCounter)
+        m_entityID(++m_entityIDCounter),
+        userData(nullptr)
     {
 
     }
@@ -24,6 +25,9 @@ namespace jej
     }
     //
 
-
+    const unsigned int Entity::GetID() const
+    {
+        return m_entityID;
+    }
 
 }

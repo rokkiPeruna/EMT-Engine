@@ -1,5 +1,7 @@
 #include <EntityComponentSys/Components/Component.hpp>
 
+#include <Core/EngineObject.hpp>
+#include <Core/Scene.hpp>
 
 namespace jej
 {
@@ -9,15 +11,13 @@ namespace jej
 
     Component::Component() :
         m_componentType(),
-        m_componentID(++m_componentIDCounter),
-        m_parentEntityID()
+        m_componentID(++m_componentIDCounter)
     {
 
     }
 
-    Component::Component(const Component& p_other):
-        m_componentID(++m_componentIDCounter),
-        m_parentEntityID(p_other.m_parentEntityID)
+    Component::Component(const Component& p_other) :
+        m_componentID(++m_componentIDCounter)
     {
 
     }
@@ -25,7 +25,6 @@ namespace jej
     Component& Component::operator=(const Component& p_other)
     {
         m_componentID = ++m_componentIDCounter;
-        m_parentEntityID = p_other.m_parentEntityID;
         return *this;
     }
 
@@ -34,4 +33,18 @@ namespace jej
         ++m_componentIDRemovedCounter;
     }
     //
+
+    std::vector<unsigned int>& Component::getComponentIDsRef()
+    {
+        auto& scene = EngineObject::GetInstance().GetSceneRef();
+
+        auto* entities = scene->GetEntities();
+
+        for (auto itr : *entities)
+            if (this->m_componentID == itr->GetID())
+                return itr->m_componentIDs;
+    }
+
+
+
 }

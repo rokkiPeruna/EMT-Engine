@@ -1,1 +1,11 @@
 *.tlog
+*.sdf
+*.suo
+*.user
+*.log
+*.obj
+*.idb
+*.pdb
+*.lastbuildstate
+*.ilk
+*.cache

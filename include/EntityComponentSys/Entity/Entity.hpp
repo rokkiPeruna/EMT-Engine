@@ -11,15 +11,16 @@
 namespace jej
 {
 
-    class Component;
-
     class Entity
     {
         //For manipulating components
-        friend class UserSystem;
+        friend class Scene;
 
         //For debugging memory
         friend class EngineObject;
+
+        //For componentIDs
+        friend class Component;
 
     public:
         
@@ -30,6 +31,10 @@ namespace jej
 
         virtual ~Entity();
 
+        void* userData;
+
+        const unsigned int GetID() const;
+
     private:
 
         const std::string m_name;
@@ -39,11 +44,9 @@ namespace jej
         static unsigned int m_entityIDCounter;
         static unsigned int m_entityIDRemovedCounter;
 
-        std::vector<std::shared_ptr<Component>> m_components;
+        std::vector<unsigned int> m_componentIDs;
 
     };
-
-
 }
 
 #endif

@@ -8,7 +8,9 @@ namespace jej //NAMESPACE jej
 {
 
 	class Graphics;
+    class Scene;
 	class Window;
+
     struct WindowBaseInitData;
     struct WindowOSInitData;
 
@@ -44,12 +46,15 @@ namespace jej //NAMESPACE jej
 		void EngineUpdate();
 
 		std::shared_ptr<Graphics>& GetGraphicsRef();
-		std::shared_ptr<Window>& GetWindowRef();
+        std::shared_ptr<Scene>& GetSceneRef();
+        std::shared_ptr<Window>& GetWindowRef();
+        
 
 	private:
 
 		std::shared_ptr<Graphics> m_graphicsPtr;
-		std::shared_ptr<Window> m_windowPtr;
+        std::shared_ptr<Scene> m_currentScene;
+        std::shared_ptr<Window> m_windowPtr;
 
 	};
 

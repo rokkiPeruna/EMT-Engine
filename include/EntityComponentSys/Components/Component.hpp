@@ -2,8 +2,10 @@
 #define JEJ_COMPONENT_HPP
 
 #include <Core/BaseStructs.hpp>
+#include <EntityComponentSys/Entity/Entity.hpp>
 
 #include <string>
+#include <vector>
 
 namespace jej
 {
@@ -16,7 +18,7 @@ namespace jej
         friend class EngineObject;
 
         //For manipulating components
-        friend class UserSystem;
+        friend class Scene;
 
     public:
 
@@ -39,14 +41,18 @@ namespace jej
         //Who am I
         unsigned int m_componentID;
 
-        //Who are you
-        unsigned int m_parentEntityID;
+        virtual std::vector<unsigned int>& getComponentIDsRef() final;
 
     private:
 
         static unsigned int m_componentIDCounter;
         static unsigned int m_componentIDRemovedCounter;
     };
+
+   
+
+#include <EntityComponentSys/Components/Inl/Component.inl>
+
 }
 
 #endif

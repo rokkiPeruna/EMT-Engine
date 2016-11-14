@@ -76,8 +76,8 @@
     <Filter Include="Source Files\EntityComponentSystem\Entity">
       <UniqueIdentifier>{134ab7b3-7d14-4347-b741-25b8e5f72adc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\EntityComponentSystem\Systems\Inl">
-      <UniqueIdentifier>{cc1530c3-8f21-4551-a726-11fb1d4382f2}</UniqueIdentifier>
+    <Filter Include="Header Files\Core\Inl">
+      <UniqueIdentifier>{bee6a43c-7c88-417d-8e1c-f90e852cbcab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,14 +117,14 @@
     <ClCompile Include="..\..\source\EntityComponentSys\Components\Component.cpp">
       <Filter>Source Files\EntityComponentSystem\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\EntityComponentSys\Entity.cpp">
-      <Filter>Source Files\EntityComponentSystem\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\System.cpp">
       <Filter>Source Files\EntityComponentSystem\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\EntityComponentSys\Systems\UserSystem.cpp">
-      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
+    <ClCompile Include="..\..\source\EntityComponentSys\Entity\Entity.cpp">
+      <Filter>Source Files\EntityComponentSystem\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Core\Scene.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,9 +161,6 @@
     <ClInclude Include="..\..\include\Window\Window.hpp">
       <Filter>Header Files\Window</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\EntityComponentSys\Entity.hpp">
-      <Filter>Header Files\EntityComponentSystem\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\EntityComponentSys\Components\TransformComponent.hpp">
       <Filter>Header Files\EntityComponentSystem\Components</Filter>
     </ClInclude>
@@ -173,10 +170,13 @@
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\System.hpp">
       <Filter>Header Files\EntityComponentSystem\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\EntityComponentSys\Systems\UserSystem.hpp">
-      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\Core\BaseStructs.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Entity\Entity.hpp">
+      <Filter>Header Files\EntityComponentSystem\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Core\Scene.hpp">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
@@ -187,8 +187,8 @@
     <None Include="..\..\include\Utility\Inl\Random.inl">
       <Filter>Header Files\Utility\Inl</Filter>
     </None>
-    <None Include="..\..\include\EntityComponentSys\Systems\Inl\UserSystem.inl">
-      <Filter>Header Files\EntityComponentSystem\Systems\Inl</Filter>
+    <None Include="..\..\include\Core\Inl\Scene.inl">
+      <Filter>Header Files\Core\Inl</Filter>
     </None>
   </ItemGroup>
 </Project>

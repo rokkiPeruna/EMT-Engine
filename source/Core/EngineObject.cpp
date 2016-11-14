@@ -3,7 +3,7 @@
 #include <Core/EngineObject.hpp>
 
 #include <EntityComponentSys/Components/Component.hpp>
-#include <EntityComponentSys/Entity.hpp>
+#include <EntityComponentSys/Entity/Entity.hpp>
 #include <Graphics/OGL_ES2.hpp>
 #include <Utility/Assert.hpp>
 #include <Utility/Messenger.hpp>
@@ -78,6 +78,12 @@ namespace jej //NAMESPACE jej
     std::shared_ptr<Graphics>& EngineObject::GetGraphicsRef()
     {
         return m_graphicsPtr;
+    }
+    //////////////////////////////////////////
+
+    std::shared_ptr<Scene>& EngineObject::GetSceneRef()
+    {
+        return m_currentScene;
     }
     //////////////////////////////////////////
 
