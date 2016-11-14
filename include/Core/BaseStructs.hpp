@@ -3,10 +3,14 @@
 
 namespace jej
 {
-    enum  ComponentType
+    enum class ComponentType
     {
         //This is TransformComponent, it takes daadiidaa...
-        Transform
+        Transform,
+        Render,
+        Movement,
+        Shader,
+        Shape
     };
 
     //Vector of two floats

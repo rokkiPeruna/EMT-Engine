@@ -19,22 +19,18 @@ namespace jej
     class System
     {
 
-        //For modifying containers
-        friend class UserSystem;
-
-    private:
-
-        //Singleton constructor
+    public:
+        //Default constructor
         System();
 
-    public:
-        
         //Disabled copy-constructors
         System(const System&) = delete;
-        System operator=(const System&) = delete;
 
         //Destructor
         virtual ~System();
+
+
+        virtual void Update() = 0;
 
         //Static container for each sub system to scroll through
         static std::vector<std::shared_ptr<Entity>> m_entities;
