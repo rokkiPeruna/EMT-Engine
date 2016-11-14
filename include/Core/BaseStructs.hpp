@@ -9,6 +9,14 @@ namespace jej
         Transform
     };
 
+	enum class ShapeType
+	{
+		Circle,
+		Rectangle,
+		Convex,
+		Triangle
+	};
+
     //Vector of two floats
     struct Vector2f
     {
