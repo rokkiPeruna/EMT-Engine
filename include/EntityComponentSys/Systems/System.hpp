@@ -2,7 +2,7 @@
 #define JEJ_SYSTEM_HPP
 
 //
-#include <tuple>
+#include <memory>
 #include <vector>
 //
 
@@ -12,6 +12,10 @@
 
 namespace jej
 {
+    //
+    class Entity;
+    //
+
     class System
     {
 
@@ -32,6 +36,8 @@ namespace jej
         //Destructor
         virtual ~System();
 
+        //Static container for each sub system to scroll through
+        static std::vector<std::shared_ptr<Entity>> m_entities;
     };
 }
 
