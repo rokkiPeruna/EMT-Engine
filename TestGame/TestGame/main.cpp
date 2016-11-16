@@ -20,13 +20,13 @@ int main(int argc, char* argv[])
 
     auto* playeri = gameLevel.GetEntityPtr("player1");
 
-    playeri->AddComponent(jej::ComponentType::Transform,
+    playeri->AddComponent<jej::TransformComponent>(
         jej::Vector2f(3.f, 5.f),
         jej::Vector2f(1, 1),
         jej::Vector4f(9, 2, 50, 1));
 
 
-    auto* transvormi = playeri->GetComponentPtr<jej::TransformComponent>(jej::ComponentType::Transform);
+    auto* transvormi = playeri->GetComponentPtr<jej::TransformComponent>();
 
 
 

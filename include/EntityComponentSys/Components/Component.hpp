@@ -24,7 +24,7 @@ namespace jej
     public:
 
         //Constructor
-        Component(const JEJ_COUNT p_parentID);
+        Component();
 
         //Copy-constructor
         Component(const Component& p_other);
@@ -37,6 +37,8 @@ namespace jej
 
     protected:
 
+        void setParent(const JEJ_COUNT p_parentID);
+
         //What am I
         ComponentType m_componentType;
 
@@ -44,7 +46,7 @@ namespace jej
         const unsigned int m_componentID;
 
         //Who the hell are you
-        const unsigned int m_parentID;
+        unsigned int m_parentID;
 
     private:
 

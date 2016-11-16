@@ -14,6 +14,7 @@
 namespace jej //NAMESPACE jej
 {
     EngineObject::EngineObject() :
+        m_currentScene(nullptr),
         m_graphicsPtr(nullptr),
         m_windowPtr(nullptr)
     {
@@ -55,12 +56,20 @@ namespace jej //NAMESPACE jej
     {
         auto& engine = GetInstance();
 
-        TransformSystem::GetInstance();
+        //TODO
+        //Initialize all systems here
+        std::get<0>(engine.m_systems) = &TransformSystem::GetInstance();
 
-        settings::rootPath = p_root;
 
-        engine.m_windowPtr.reset(new Win32Window(p_data, p_osData));     //= std::make_shared<Win32Window>(new Win32Window(p_data, p_osData));
-        engine.m_graphicsPtr.reset(new OGL_ES2(engine.m_windowPtr, settings::attributeList)); // = std::make_shared<OGL_ES2>(new OGL_ES2(engine.m_windowPtr, settings::attributeList));
+        //Parse execution path
+        const unsigned int slashPos = p_root.find_last_of("/\\");
+        if (slashPos == std::string::npos)
+            Messenger::Add(Messenger::MessageType::Error, "Bad root: ", p_root);
+        settings::rootPath = p_root.substr(slashPos);
+
+        //Initialize window and graphics
+        engine.m_windowPtr.reset(new Win32Window(p_data, p_osData));
+        engine.m_graphicsPtr.reset(new OGL_ES2(engine.m_windowPtr, settings::attributeList));
 
         return true;
     }

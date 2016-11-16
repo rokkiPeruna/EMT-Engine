@@ -11,7 +11,7 @@ namespace jej
         //Parse error message
         auto slashPos = p_file.find_last_of("/\\");
 
-        std::string error = "File: " + p_file.substr(slashPos == std::string::npos ? 0 : slashPos + 1u);
+        std::string error = "File: " + p_file.substr(slashPos == std::string::npos ? 0 : slashPos + 1);
         error += "\nLine: " + std::to_string(p_line);
         error += "\n\n" + p_message;
 

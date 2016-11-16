@@ -37,8 +37,22 @@ namespace jej
 
         std::string rootPath = "";
 
-
     }
 
-
 }
+
+
+#ifdef _WIN32
+
+#include <Windows.h>
+#include <cstdlib>
+
+extern int main(int argc, char* argv[]);
+
+int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
+{
+    return main(__argc, __argv);
+}
+
+
+#endif

@@ -5,9 +5,14 @@
 #include <Utility/Messenger.hpp>
 
 
+#include <EntityComponentSys/Systems/TransformSystem.hpp>
+#include <EntityComponentSys/Components/TransformComponent.hpp>
+
 //
 #include <memory>
 #include <string>
+#include <tuple>
+#include <utility>
 #include <vector>
 //
 
@@ -28,6 +33,8 @@ namespace jej
 
     public:
 
+        
+
         Entity(const std::string& p_name = "");
 
         Entity(const Entity&) = delete;
@@ -39,29 +46,29 @@ namespace jej
 
         const unsigned int GetID() const;
 
-
         //Components
 
         //Add a component to the given entity
-        template<typename ... Args>
-        inline bool AddComponent(const ComponentType p_type, Args ... p_args);
+        template<typename T, typename ... Args>
+        bool AddComponent(Args ... p_args);
 
         //Returns pointer to a component of desired type if present on the target entity, otherwise nullptr
         template <typename T>
-        T* GetComponentPtr(const ComponentType p_type);
+        T* GetComponentPtr();
 
         //Returns pointer to a component of desired type if present on the target entity, otherwise nullptr
         template <typename T>
-        const T* GetComponentPtr(const ComponentType p_type) const;
+        const T* GetComponentPtr() const;
 
         //Returns true if the entity has a component of the given type
-        bool HasComponent(const ComponentType p_type);
-
+        template <typename T>
+        bool HasComponent();
 
         //Returns true if Component was successfully removed
-        bool RemoveComponent(const ComponentType p_type);
+        template <typename T>
+        bool RemoveComponent();
 
-        //Remove all components from the entity and from corresponding systems 
+        //Remove all components from the entity and from corresponding systems
         bool RemoveAllComponents();
 
     private:

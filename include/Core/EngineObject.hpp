@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <string>
+#include <tuple>
 
 namespace jej //NAMESPACE jej
 {
@@ -14,10 +15,15 @@ namespace jej //NAMESPACE jej
     struct WindowBaseInitData;
     struct WindowOSInitData;
 
+    class TransformSystem;
+
 	class EngineObject
 	{
 
         friend class Win32Window;
+        
+        //For accessing m_system
+        friend class Entity;
 
 	private:
 
@@ -52,8 +58,12 @@ namespace jej //NAMESPACE jej
 
 	private:
 
-		std::shared_ptr<Graphics> m_graphicsPtr;
+        //TODO Add all systems
+        //Pointer to each system, populated in Initialize
+        std::tuple<TransformSystem*> m_systems;
+
         std::shared_ptr<Scene> m_currentScene;
+		std::shared_ptr<Graphics> m_graphicsPtr;
         std::shared_ptr<Window> m_windowPtr;
 
 	};

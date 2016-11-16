@@ -9,10 +9,10 @@ namespace jej
     unsigned int Component::m_componentIDCounter = 0u;
     unsigned int Component::m_componentIDRemovedCounter = 0u;
 
-    Component::Component(const JEJ_COUNT p_parentID) :
-        m_componentType(),
+    Component::Component() :
+        m_componentType(ComponentType::Failure),
         m_componentID(++m_componentIDCounter),
-        m_parentID(p_parentID)
+        m_parentID(0u)
     {
 
     }
@@ -30,5 +30,11 @@ namespace jej
         ++m_componentIDRemovedCounter;
     }
     //
+
+    void Component::setParent(const JEJ_COUNT p_parentID)
+    {
+        m_parentID = p_parentID;
+    }
+
 
 }
