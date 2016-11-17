@@ -11,7 +11,7 @@ namespace jej
 
 #ifdef _DEBUG //If debug build
 
-#define ENABLE_ASSERTS
+#define JEJ_ENABLE_ASSERTS
 #define JEJ_DEBUG_MODE
 #define JEJ_DEBUG_LEVEL 4
 

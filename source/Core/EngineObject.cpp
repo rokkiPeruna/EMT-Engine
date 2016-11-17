@@ -41,7 +41,7 @@ namespace jej //NAMESPACE jej
         if (entityLeak != 0)
             Messenger::Add(Messenger::MessageType::Warning, "Amount of leaking components: ", entityLeak);
 
-        //TODO Write messenger contents to log file here
+        Messenger::WriteLog();
     }
     //////////////////////////////////////////
 
@@ -56,7 +56,7 @@ namespace jej //NAMESPACE jej
     {
         auto& engine = GetInstance();
 
-        //TODO
+        //TODO:
         //Initialize all systems here
         std::get<0>(engine.m_systems) = &TransformSystem::GetInstance();
 
@@ -65,7 +65,7 @@ namespace jej //NAMESPACE jej
         const unsigned int slashPos = p_root.find_last_of("/\\");
         if (slashPos == std::string::npos)
             Messenger::Add(Messenger::MessageType::Error, "Bad root: ", p_root);
-        settings::rootPath = p_root.substr(slashPos);
+        settings::rootPath = p_root.substr(0u, slashPos + 1u);
 
         //Initialize window and graphics
         engine.m_windowPtr.reset(new Win32Window(p_data, p_osData));

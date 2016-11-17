@@ -79,11 +79,23 @@
     <Filter Include="Header Files\Core\Inl">
       <UniqueIdentifier>{bee6a43c-7c88-417d-8e1c-f90e852cbcab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\EntityComponentSystem\Components\Inl">
-      <UniqueIdentifier>{56f0a8e4-aed6-44d8-b2a2-90bee01c35d9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\EntityComponentSystem\Entity\Inl">
       <UniqueIdentifier>{3f1a8f78-088a-4bd9-8db1-db17e89d15a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EntityComponentSystem\Systems\Inl">
+      <UniqueIdentifier>{ecd4a468-6265-4270-bb48-2532c048d437}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Windows">
+      <UniqueIdentifier>{5d53c2c3-438d-4869-af3e-aeec88e07c1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\FileHandler">
+      <UniqueIdentifier>{6e7495da-eb76-4cd7-b968-40982a2758ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Windows">
+      <UniqueIdentifier>{9691932a-b84e-4530-b504-ad197617d812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\FileHandler">
+      <UniqueIdentifier>{0f97224a-6daf-475e-99ab-55d83b05080f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +146,18 @@
     </ClCompile>
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\TransformSystem.cpp">
       <Filter>Source Files\EntityComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utility\FileHandler\FileHandler.cpp">
+      <Filter>Source Files\Utility\FileHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utility\FileHandler\FileHandlerAndroid.cpp">
+      <Filter>Source Files\Utility\FileHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utility\FileHandler\FileHandlerWin32.cpp">
+      <Filter>Source Files\Utility\FileHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utility\Windows\Windows.cpp">
+      <Filter>Source Files\Utility\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +215,18 @@
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\TransformSystem.hpp">
       <Filter>Header Files\EntityComponentSystem\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\Utility\Windows\Windows.hpp">
+      <Filter>Header Files\Utility\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Utility\FileHandler\FileHandler.hpp">
+      <Filter>Header Files\Utility\FileHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Utility\FileHandler\FileHandlerAndroid.hpp">
+      <Filter>Header Files\Utility\FileHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Utility\FileHandler\FileHandlerWin32.hpp">
+      <Filter>Header Files\Utility\FileHandler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\include\Utility\Inl\Messenger.inl">
@@ -202,11 +238,11 @@
     <None Include="..\..\include\Core\Inl\Scene.inl">
       <Filter>Header Files\Core\Inl</Filter>
     </None>
-    <None Include="..\..\include\EntityComponentSys\Components\Inl\Component.inl">
-      <Filter>Header Files\EntityComponentSystem\Components\Inl</Filter>
-    </None>
     <None Include="..\..\include\EntityComponentSys\Entity\Inl\Entity.inl">
       <Filter>Header Files\EntityComponentSystem\Entity\Inl</Filter>
+    </None>
+    <None Include="..\..\include\EntityComponentSys\Systems\Inl\System.inl">
+      <Filter>Header Files\EntityComponentSystem\Systems\Inl</Filter>
     </None>
   </ItemGroup>
 </Project>

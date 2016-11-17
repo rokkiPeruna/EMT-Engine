@@ -15,6 +15,9 @@ namespace jej
         //For modifying m_components
         friend class Entity;
 
+        //For modifying m_components
+        friend class System;
+
     private:
 
         TransformSystem();

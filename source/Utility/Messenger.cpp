@@ -1,5 +1,9 @@
-#include <Core/Settings.hpp>
 #include <Utility/Messenger.hpp>
+
+
+#include <Core/Settings.hpp>
+#include <Utility/FileHandler/FileHandlerWin32.hpp>
+#include <Utility/FileHandler/FileHandlerAndroid.hpp>
 
 
 namespace jej
@@ -74,5 +78,24 @@ namespace jej
         //std::vector<std::pair<std::string, MessageType>> next = {};
         //msg::mm.swap(next);
     }
+
+
+    bool Messenger::WriteLog(const std::string& name)
+    {
+        std::string fileName = name.empty() ? "log.txt" : name;
+
+#ifdef _WIN32
+        FileHandlerWin32 handler;
+#elif defined ANDROID
+        FileHandlerAndroid handler;
+#endif
+
+        for (auto i : m_messages)
+            std::copy(i.first.begin(), i.first.end(), std::back_inserter(handler.m_fileContents)); //Copy all messages to FileHandler for writing
+
+        return handler.Write(fileName);
+    }
+
+
 }
 

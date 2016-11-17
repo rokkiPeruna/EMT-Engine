@@ -1,7 +1,10 @@
 #include <Window/Win32Window.hpp>
 
 #include <Core/EngineObject.hpp>
+#include <Utility/Assert.hpp>
 #include <Utility/Messenger.hpp>
+#include <Utility/Windows/Windows.hpp>
+
 
 namespace jej//NAMESPACE jej STARTS
 {
@@ -85,7 +88,8 @@ namespace jej//NAMESPACE jej STARTS
 
     //Constructor for user given size, style, etc.
     Win32Window::Win32Window(const WindowBaseInitData* p_winBaseInitData, const WindowOSInitData* p_winOSInitData) :
-        Window()
+        Window(),
+        m_winOSInitData()
     {
         m_winBaseInitData = p_winBaseInitData != nullptr ? *p_winBaseInitData : WindowBaseInitData();
         m_winOSInitData = p_winOSInitData != nullptr ? *p_winOSInitData : WindowOSInitData();
@@ -102,8 +106,11 @@ namespace jej//NAMESPACE jej STARTS
 
         SetWindowLongPtr(m_winOSInitData.m_hWnd, GWL_USERDATA, (LONG)(LONG_PTR)this);
 
-        assert(m_winOSInitData.m_hWnd);
-
+        if (!m_winOSInitData.m_hWnd)
+        {
+            Messenger::Add(Messenger::MessageType::Error, "Window creation failed: ", getWinError());
+            JEJ_ASSERT(false, "Window creation failed.");
+        }
         m_isWinActive = true;
 
         ShowWindow(m_winOSInitData.m_hWnd, TRUE);
@@ -121,7 +128,7 @@ namespace jej//NAMESPACE jej STARTS
 
     ////Public methods///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    
+
     //Return Win32 native display
     EGLNativeDisplayType Win32Window::GetNativeDisplay() const
     {
@@ -204,11 +211,9 @@ namespace jej//NAMESPACE jej STARTS
         wc.lpszMenuName = LPCWSTR(m_winBaseInitData.nameMenu.c_str());
         wc.lpszClassName = LPCWSTR(m_winBaseInitData.nameApp.c_str());
 
-        Messenger::Add(Messenger::MessageType::Debug, "Window status before registration: ", GetLastError());
-
         if (!RegisterClassEx(&wc))
         {
-            Messenger::Add(Messenger::MessageType::Error, "Window status after registration: ", GetLastError());
+            Messenger::Add(Messenger::MessageType::Error, "Window registration failed: ", getWinError());
             return false;
         }
         return true;
@@ -232,10 +237,11 @@ namespace jej//NAMESPACE jej STARTS
             NULL
             );
 
-        Messenger::Add(Messenger::MessageType::Debug, "Window status after creation: ", GetLastError());
-
         if (!m_winOSInitData.m_hWnd)
+        {
+            Messenger::Add(Messenger::MessageType::Debug, "Window creation failed: ", getWinError());
             return false;
+        }
 
         return true;
     }

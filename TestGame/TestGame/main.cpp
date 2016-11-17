@@ -8,6 +8,8 @@
 
 #include <Utility/Random.hpp>
 
+#include <Utility/FileHandler/FileHandlerWin32.hpp>
+
 int main(int argc, char* argv[])
 {
     jej::EngineObject::Initialize(argv[0]);
@@ -30,12 +32,13 @@ int main(int argc, char* argv[])
 
 
 
-
    // editor.AddComponent<jej::TransformComponent>(player, jej::ComponentType::Transform,
    //     jej::Vector2f(3.f, 5.f),
    //     jej::Vector2f(1, 1),
    //     jej::Vector4f(9, 2, 50, 1));
 
+
+    game.EngineUpdate();
 
     
 

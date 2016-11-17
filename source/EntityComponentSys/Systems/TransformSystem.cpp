@@ -24,7 +24,7 @@ namespace jej
 
     void TransformSystem::update(const float deltaTime)
     {
-
+        auto& vekki = getComponentsRef<TransformComponent>();
     }
 
 }

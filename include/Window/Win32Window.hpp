@@ -7,7 +7,6 @@
 
 //Standard headers
 #include <Windows.h>
-#include <assert.h>
 /////////////////////////////////
 
 namespace jej//NAMESPACE jej STARTS

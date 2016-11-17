@@ -25,6 +25,9 @@ namespace jej //NAMESPACE jej
         //For accessing m_system
         friend class Entity;
 
+        //For accessing m_system
+        friend class System;
+
 	private:
 
 		//Constructor
