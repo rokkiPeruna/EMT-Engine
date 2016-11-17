@@ -6,9 +6,11 @@
 #include <External/OpenGL_ES2/EGL/egl.h>
 #include <External/OpenGL_ES2/GLES2/gl2.h>
 
+#include <EntityComponentSys/Components/Component.hpp>
+
 namespace jej
 {
-	class ShaderComponent
+	class ShaderComponent : public Component
 	{
 	public:
 
@@ -17,30 +19,33 @@ namespace jej
 			Fragment,
 			Vertex
 		};
-
+		// constructor for shader
 		ShaderComponent::ShaderComponent(const std::string& p_vertexShaderFilePath = "", const std::string& p_fragmentShaderPath = "");
 		ShaderComponent::~ShaderComponent();
 
-
-		void LinkShaders();
-		void AddAttribute(const std::string& p_attributeName);
-		void Use();
-		void Unuse();
+		// Set shader on use
+		void Bind();
 
 	private:
+		// Create shader
+		static GLuint _createShader(const std::string& p_fileSource, GLenum p_shaderType);
 
-		void _compileShaders(const std::string& p_filePath, EGLint p_shaderId);
-		bool _parseShader(const ShaderType type, const std::string& shader = std::string(""));
+		// Set default shader in use, or users own shader
+		bool _parseShader(const ShaderType type, const std::string& shader = nullptr);
 
-		std::string m_fragmentShader;
-		std::string m_vertexShader;
+		// Read shaders from shader files (TODO: possibly change from ifstream to our own)
+		std::string _readFile(const char* p_filePath);
 
-		EGLint m_programId;
-		EGLint m_vertexShaderId;
-		EGLint m_fragmentShaderId;
-		int m_numAttributes;
+		// Filepaths for shaders
+		std::string m_fragmentShaderFilePath;
+		std::string m_vertexShaderFilePath;
 
-
+		// Actual shader (vertex and fragment combined
+		GLuint m_program_ID;
+		
+		//Fragment and Vertex shaders
+		GLuint m_vertexShader_ID;
+		GLuint m_fragmentShader_ID;
 
 	};
 }
