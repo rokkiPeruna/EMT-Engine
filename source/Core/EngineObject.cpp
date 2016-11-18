@@ -57,9 +57,15 @@ namespace jej //NAMESPACE jej
     {
         auto& engine = GetInstance();
 
+        //Initialize window and graphics
+        engine.m_windowPtr.reset(new Win32Window(p_data, p_osData));
+        //engine.m_graphicsPtr.reset(new OGL_ES2(engine.m_windowPtr, settings::attributeList));
+
+        
+
         //TODO:
         //Initialize all systems here
-		std::get<0>(engine.m_systems) = &RenderSystem::GetInstance();
+        std::get<0>(engine.m_systems) = &RenderSystem::GetInstance();
         std::get<1>(engine.m_systems) = &TransformSystem::GetInstance();
 
 
@@ -69,9 +75,6 @@ namespace jej //NAMESPACE jej
             Messenger::Add(Messenger::MessageType::Error, "Bad root: ", p_root);
         settings::rootPath = p_root.substr(0u, slashPos + 1u);
 
-        //Initialize window and graphics
-        engine.m_windowPtr.reset(new Win32Window(p_data, p_osData));
-        engine.m_graphicsPtr.reset(new OGL_ES2(engine.m_windowPtr, settings::attributeList));
 
         return true;
     }
@@ -85,7 +88,10 @@ namespace jej //NAMESPACE jej
 
     void EngineObject::EngineUpdate()
     {
-        m_graphicsPtr->_updateBuffersAll();
+        //m_graphicsPtr->_updateBuffersAll();
+
+        m_windowPtr->UpdateWindowMessages();
+        RenderSystem::GetInstance().update(100.f);
     }
     //////////////////////////////////////////
 

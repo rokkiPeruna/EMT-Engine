@@ -134,7 +134,8 @@ namespace jej
 
     bool OGL_ES2::_draw()
     {
-        // TODO: add functionality
+        //
+
         return true;
     }
 

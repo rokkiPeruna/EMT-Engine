@@ -14,8 +14,8 @@ namespace jej//NAMESPACE jej STARTS
     //Win32 specific initializing data
     struct WindowOSInitData
     {
-        short int offsetX = 0;
-        short int offsetY = 0;
+        int offsetX;
+        int offsetY;
 
         HINSTANCE m_hInstance;
         HWND m_hWnd;
@@ -28,7 +28,7 @@ namespace jej//NAMESPACE jej STARTS
 
         RECT rectWin;
 
-        WindowOSInitData(){};
+        WindowOSInitData(): offsetX(0), offsetY(0){};
     };
 
     class Win32Window : public Window
