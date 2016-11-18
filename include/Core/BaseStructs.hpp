@@ -28,6 +28,7 @@ namespace jej
         Failure,
         Transform,
         Render,
+		Shader
         SizeOfThis
     };
     

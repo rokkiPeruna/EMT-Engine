@@ -11,7 +11,7 @@ namespace jej
     //Macros for _assertion
 
 #ifdef JEJ_ENABLE_ASSERTS
-
+	//Expresson is boolean, Message is string
 #define JEJ_ASSERT(expression, message) ::jej::_assertion((expression), __FILE__, __LINE__, (message))
 #define JEJ_ASSERT_EVAL(expression, message) JEJ_ASSERT((expression), (message))
 
