@@ -19,10 +19,11 @@ namespace jej
         m_winOffsetY(0),
         m_window(nullptr)
     {
-        m_window = EngineObject::GetInstance().GetWindowRef();
+        //Needs work
+        m_window.reset(EngineObject::GetInstance().GetWindowRef().get());
 
-        const bool success = _createContext(settings::attributeList);
-        JEJ_ASSERT(success, "Context creation failed.");
+        if (!_createContext(settings::attributeList))
+            JEJ_ASSERT(false, "Context creation failed.");
 
     }
     //
@@ -160,16 +161,13 @@ namespace jej
 
     void RenderSystem::_clearScreen()
     {
-        m_winWidth = m_window->GetWinData().sizeX;
-        m_winHeight = m_window->GetWinData().sizeY;
-
         //If using Win32, set window offsets
 #ifdef _WIN32
-        m_winOffsetX = m_window->GetWinOSData().offsetX;
-        m_winOffsetY = m_window->GetWinOSData().offsetY;
+        glViewport(m_window->GetWinOSData().offsetX, m_window->GetWinOSData().offsetY, m_window->GetWinData().sizeX, m_window->GetWinData().sizeY);
+#else
+        glViewport(0, 0, m_window->GetWinData().sizeX, m_window->GetWinData().sizeY);
 #endif
-        glViewport(m_winOffsetX, m_winOffsetY, 200, 200);
-        
+
         glClearColor(0.f, 0.f, 1.f, 0.5f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }

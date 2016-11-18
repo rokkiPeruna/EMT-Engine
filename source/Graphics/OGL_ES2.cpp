@@ -7,13 +7,13 @@
 namespace jej
 {
 
-    OGL_ES2::OGL_ES2(std::shared_ptr<Window>& p_window, const EGLint p_attributeList[]) :
+    OGL_ES2::OGL_ES2(const std::shared_ptr<Window>& p_window, const EGLint p_attributeList[]) :
         m_context(EGL_NO_CONTEXT),
         m_display(EGL_NO_DISPLAY),
         m_surface(EGL_NO_SURFACE)
     {
-        const bool success = _createContext(p_window, p_attributeList);
-        JEJ_ASSERT(success, "Context creation failed.");
+        if (_createContext(p_window, p_attributeList))
+            JEJ_ASSERT(false, "Context creation failed.");
     };
     /////////////////////////////////
 
@@ -26,7 +26,7 @@ namespace jej
 
 
 #ifdef _WIN32
-    bool OGL_ES2::_createContext(std::shared_ptr<Window>& p_window, const EGLint p_attributeList[])
+    bool OGL_ES2::_createContext(const std::shared_ptr<Window>& p_window, const EGLint p_attributeList[])
     {
         EGLint configs = 0;
         EGLint major = 0;
@@ -62,7 +62,7 @@ namespace jej
     /////////////////////////////////
 
 #elif defined ANDROID
-    bool OGL_ES2::_createContext(std::shared_ptr<Window> p_window&, const EGLint p_attributeList[], android_app* p_androidApplication)
+    bool OGL_ES2::_createContext(const std::shared_ptr<Window> p_window&, const EGLint p_attributeList[], android_app* p_androidApplication)
     {
 
         EGLint w, h, dummy, format;
@@ -165,4 +165,4 @@ namespace jej
     }
 
 
-    }
+}

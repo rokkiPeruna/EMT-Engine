@@ -14,8 +14,8 @@ namespace jej//NAMESPACE jej STARTS
     //Win32 specific initializing data
     struct WindowOSInitData
     {
-        int offsetX;
-        int offsetY;
+        short int offsetX = 0;
+        short int offsetY = 0;
 
         HINSTANCE m_hInstance;
         HWND m_hWnd;
@@ -24,11 +24,11 @@ namespace jej//NAMESPACE jej STARTS
         DWORD style = WS_OVERLAPPEDWINDOW | WS_VISIBLE;
         UINT classStyle = CS_HREDRAW | CS_VREDRAW;
         COLORREF backGroundColor = 0x00111111;
-        HBRUSH brush = CreateSolidBrush(backGroundColor);
+        HBRUSH brush = nullptr;
 
         RECT rectWin;
 
-        WindowOSInitData(): offsetX(0), offsetY(0){};
+        WindowOSInitData(){};
     };
 
     class Win32Window : public Window

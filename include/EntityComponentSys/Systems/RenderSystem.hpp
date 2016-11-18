@@ -61,10 +61,10 @@ namespace jej
     private:
         
         //Screen properties for OpenGL ES
-        unsigned int m_winWidth;
-        unsigned int m_winHeight;
-        unsigned int m_winOffsetX;
-        unsigned int m_winOffsetY;
+        short int m_winWidth;
+        short int m_winHeight;
+        short int m_winOffsetX;
+        short int m_winOffsetY;
 
         //Smart pointer to Window - singleton
         std::shared_ptr<Window> m_window;

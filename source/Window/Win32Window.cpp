@@ -3,7 +3,7 @@
 #include <Core/EngineObject.hpp>
 #include <Utility/Assert.hpp>
 #include <Utility/Messenger.hpp>
-#include <Utility/Windows/Windows.hpp>
+#include <Utility/Windows.hpp>
 #include <EntityComponentSys/Systems/RenderSystem.hpp>
 
 
@@ -36,8 +36,8 @@ namespace jej//NAMESPACE jej STARTS
             tmpOSData.offsetY = tmpOSData.rectWin.bottom;
 
             //Size = width & height
-            tmpWinData.sizeX = tmpOSData.rectWin.left - tmpOSData.rectWin.right;
-            tmpWinData.sizeY = tmpOSData.rectWin.top;
+            tmpWinData.sizeX = std::abs(tmpOSData.rectWin.left - tmpOSData.rectWin.right);
+            tmpWinData.sizeY = std::abs(tmpOSData.rectWin.top);
 
             //Render
             RenderSystem::GetInstance()._render();
@@ -47,24 +47,24 @@ namespace jej//NAMESPACE jej STARTS
 
         case WM_MOVE:
         {
-            Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
-            auto& tmpWinData = context->GetWinData();
-            auto& tmpOSData = context->GetWinOSData();
-
-
-            tmpOSData.offsetX = LOWORD(lparam);
-            tmpOSData.offsetY -= (HIWORD(lparam) - tmpWinData.sizeY);
+            //     Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
+            //     auto& tmpWinData = context->GetWinData();
+            //     auto& tmpOSData = context->GetWinOSData();
+            //
+            //
+            //     tmpOSData.offsetX = LOWORD(lparam);
+            //     tmpOSData.offsetY -= (HIWORD(lparam) - tmpWinData.sizeY);
 
             break;
         }
 
         case WM_SIZE:
         {
-            Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
-            auto& tmpWinData = context->GetWinData();
-
-            tmpWinData.sizeX = LOWORD(lparam);
-            tmpWinData.sizeY = HIWORD(lparam);
+            //    Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
+            //    auto& tmpWinData = context->GetWinData();
+            //
+            //    tmpWinData.sizeX = LOWORD(lparam);
+            //    tmpWinData.sizeY = HIWORD(lparam);
 
             break;
         }
@@ -90,11 +90,9 @@ namespace jej//NAMESPACE jej STARTS
     //Constructor for user given size, style, etc.
     Win32Window::Win32Window(const WindowBaseInitData* p_winBaseInitData, const WindowOSInitData* p_winOSInitData) :
         Window(),
-        m_winOSInitData()
+        m_winOSInitData(p_winOSInitData == nullptr ? WindowOSInitData() : *p_winOSInitData)
     {
-
-        m_winBaseInitData = p_winBaseInitData != nullptr ? *p_winBaseInitData : WindowBaseInitData();
-        m_winOSInitData = p_winOSInitData != nullptr ? *p_winOSInitData : WindowOSInitData();
+        m_winBaseInitData = p_winBaseInitData == nullptr ? WindowBaseInitData() : *p_winBaseInitData;
 
         m_winOSInitData.m_hInstance = GetModuleHandle(NULL);
         m_winOSInitData.brush = CreateSolidBrush(m_winOSInitData.backGroundColor);

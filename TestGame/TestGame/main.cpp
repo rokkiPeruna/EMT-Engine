@@ -8,7 +8,7 @@
 
 #include <Utility/Random.hpp>
 
-#include <Utility/FileHandler/FileHandlerWin32.hpp>
+#include <Utility/FileHandler.hpp>
 
 #include <EntityComponentSys/Components/ShaderComponent.hpp>
 
@@ -38,11 +38,10 @@ int main(int argc, char* argv[])
     //
     //transvormi->position.x += transvormi->position.x;
 
-    int i = 1;
-    while (i)
+    for (;;)
     {
-        game.EngineUpdate();
-        
+        //game.EngineUpdate();
+        break;
     }
 
     return 0;

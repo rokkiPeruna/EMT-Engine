@@ -1,28 +1,53 @@
+#include <Utility/FileHandler.hpp>
+
 #include <Core/Settings.hpp>
-#include <Utility/FileHandler/FileHandlerWin32.hpp>
-#include <Utility/Windows/Windows.hpp>
 
 namespace jej
 {
 
-    FileHandlerWin32::FileHandlerWin32() :
-        FileHandler(),
+#ifdef _WIN32
+
+    FileHandler::FileHandler() :
+        m_fileContents(),
         m_fileHandle(nullptr)
     {
 
     }
-    /////////////////////////////////
+
+#elif defined ANDROID
+
+    FileHandler::FileHandler(android_app* app) :
+        m_fileContents(),
+        m_app(new android_app(*(app)))
+    {
+
+    }
+
+#endif
 
 
-    FileHandlerWin32::~FileHandlerWin32()
+#ifdef _WIN32
+
+    FileHandler::~FileHandler()
     {
         if (m_fileHandle)
             CloseHandle(m_fileHandle);
     }
-    /////////////////////////////////
+
+#elif defined ANDROID
+
+    FileHandler::~FileHandler()
+    {
+        if (m_app)
+            delete m_app;
+    }
+
+#endif
 
 
-    bool FileHandlerWin32::Read(const std::string& name, const unsigned int length)
+#ifdef _WIN32
+
+    bool FileHandler::Read(const std::string& name, const unsigned int length)
     {
         if (!accessFile(name, false))
             return false;
@@ -60,10 +85,42 @@ namespace jej
 
         return true;
     }
-    /////////////////////////////////
 
+#elif defined ANDROID
 
-    bool FileHandlerWin32::Write(const std::string& name)
+    bool FileHandler::Read(const std::string& name, const unsigned int length)
+    {
+
+        AAsset* file = AAssetManager_open(m_app->activity->assetManager, name.c_str(), AASSET_MODE_BUFFER);
+
+        if (!file)
+        {
+            Messenger::Add(Messenger::MessageType::Error, "Failed to open file: ", name);
+            return false;
+        }
+
+        auto size = AAsset_getLength(file);
+        if (length != 0u && length <= size)
+            size = length;
+        if (length > size)
+            Messenger::Add(Messenger::MessageType::Warning, "File length too large:", length, "File size: ", size, "Suppressing");
+
+        m_fileContents.resize(size + 1u);
+        int result = AAsset_read(file, &m_fileContents[0], size);
+
+        if (result < 0)
+            Messenger::Add(Messenger::MessageType::Error, "Failed to read file: ", name);
+
+        AAsset_close(file);
+
+        return true;
+    }
+
+#endif
+
+#ifdef _WIN32
+
+    bool FileHandler::Write(const std::string& name)
     {
         if (!accessFile(name, true))
             return false;
@@ -92,10 +149,20 @@ namespace jej
         return true;
 
     }
-    /////////////////////////////////
+
+#elif defined ANDROID
+
+    bool FileHandler::Write(const std::string& name)
+    {
+
+    }
+
+#endif
 
 
-    bool FileHandlerWin32::accessFile(const std::string& name, const bool createFile)
+#ifdef _WIN32
+    
+    bool FileHandler::accessFile(const std::string& name, const bool createFile)
     {
         if (name.empty())
         {
@@ -123,6 +190,7 @@ namespace jej
         }
         return true;
     }
-    /////////////////////////////////
+
+#endif
 
 }

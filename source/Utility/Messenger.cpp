@@ -2,8 +2,7 @@
 
 
 #include <Core/Settings.hpp>
-#include <Utility/FileHandler/FileHandlerWin32.hpp>
-#include <Utility/FileHandler/FileHandlerAndroid.hpp>
+#include <Utility/FileHandler.hpp>
 
 
 namespace jej
@@ -23,7 +22,7 @@ namespace jej
 
         HANDLE debugHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
-        for (unsigned int i = 0u; i < mm.size(); ++i)
+        for (size_t i = 0u; i < mm.size(); ++i)
         {
             if (mm[i].second == MessageType::Error && JEJ_DEBUG_LEVEL > 0)
             {
@@ -56,7 +55,7 @@ namespace jej
 
 #elif defined ANDROID //Android messages
 
-        for (unsigned int i = 0u; i < mm.size(); ++i)
+        for (size_t i = 0u; i < mm.size(); ++i)
         {
             if (mm[i].second == MessageType::Error && JEJ_DEBUG_LEVEL > 0)
                 __android_log_assert(0, "jej", mm.first[i].c_str());
@@ -84,11 +83,7 @@ namespace jej
     {
         std::string fileName = name.empty() ? "log.txt" : name;
 
-#ifdef _WIN32
-        FileHandlerWin32 handler;
-#elif defined ANDROID
-        FileHandlerAndroid handler;
-#endif
+        FileHandler handler;
 
         for (auto i : m_messages)
             std::copy(i.first.begin(), i.first.end(), std::back_inserter(handler.m_fileContents)); //Copy all messages to FileHandler for writing
