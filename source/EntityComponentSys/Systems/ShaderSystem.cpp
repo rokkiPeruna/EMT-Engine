@@ -11,18 +11,21 @@ namespace jej
 	{
 
 	}
+	/////////////////////////
 
 	ShaderSystem::~ShaderSystem()
 	{
 
-
 	}
+	/////////////////////////
 
 	ShaderSystem& ShaderSystem::GetInstance()
 	{
 		static ShaderSystem system;
 		return system;
 	}
+	/////////////////////////
+
 
 	void ShaderSystem::_initialize(detail::ShaderData& p_sd)
 	{
@@ -36,19 +39,86 @@ namespace jej
 			Messenger::Add(Messenger::MessageType::Error, "Failed to parse fragment shader ");
 		}
 
-		_createShader(p_sd.m_program_ID, p_sd.m_vertexShaderFileName, p_sd.m_fragmentShaderFileName);
+		p_sd.m_program_ID = glCreateProgram();
+
+		GLuint vertexShader = _loadShader((p_sd.m_vertexShaderFileName), GL_VERTEX_SHADER, detail::ShaderType::vertex);
+		GLuint fragmentShader = _loadShader((p_sd.m_fragmentShaderFileName), GL_FRAGMENT_SHADER, detail::ShaderType::fragment);
+
+		glCompileShader(vertexShader);
+		glCompileShader(fragmentShader);
+
+		glAttachShader(p_sd.m_program_ID, vertexShader);
+		glAttachShader(p_sd.m_program_ID, fragmentShader);
+
+		_addAttribute(p_sd.m_program_ID, p_sd.m_numAttribute, "vPosition");
+		_addAttribute(p_sd.m_program_ID, p_sd.m_numAttribute, "vTexCoord");
+
+		glLinkProgram(p_sd.m_program_ID);
+
+		GLint isLinked = 0;
+
+		glGetProgramiv(p_sd.m_program_ID, GL_LINK_STATUS, (int*)&isLinked);
+		if (isLinked == GL_FALSE)
+		{
+			Messenger::Add(Messenger::MessageType::Error, "Failed to link program, shader creation failed ");
+
+			glDeleteProgram(p_sd.m_program_ID);
+
+			glDeleteShader(vertexShader);
+			glDeleteShader(fragmentShader);
+			return;
+		}
+
+		glDetachShader(p_sd.m_program_ID, vertexShader);
+		glDetachShader(p_sd.m_program_ID, fragmentShader);
+		glDeleteShader(vertexShader);
+		glDeleteShader(fragmentShader);
 
 	}
-
-	bool ShaderSystem::_createShader(GLuint& p_program, const std::string& p_VertexFileSoucre, const std::string& FragmentFileSoucre)
+	/////////////////////////
+	void ShaderSystem::_addAttribute(GLuint& m_program_ID, int p_numAttribute, const std::string& p_attributeName)
 	{
-		GLuint vertexShader = 0u;
-		GLuint fragmentShader = 0u;
-
-		//GL set shader
-
-
+		glBindAttribLocation(m_program_ID, p_numAttribute++, p_attributeName.c_str());
 	}
+	/////////////////////////
+
+	GLuint ShaderSystem::_loadShader(const std::string& p_shaderDataSource, const GLenum p_type, const detail::ShaderType p_shaderType)
+	{
+		GLuint shader;
+		GLint success = 0;
+
+		shader = glCreateShader(p_type);
+		if (shader == 0)
+		{
+			Messenger::Add(Messenger::MessageType::Error, "Failed to create " + p_type);
+		}
+
+		const char* shaderData = _readFile(p_shaderType, p_shaderDataSource).c_str();
+
+		glShaderSource(shader, 1, &shaderData, nullptr);
+
+		glCompileShader(shader);
+
+		glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+
+		if (success == GL_FALSE)
+		{
+			GLint maxLength = 0;
+			glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
+
+			std::vector<char> errorLog(maxLength);
+
+			glGetShaderInfoLog(shader, maxLength, &maxLength, &errorLog[0]);
+
+			glDeleteShader(shader);
+
+			Messenger::Add(Messenger::MessageType::Error, "Compile shaders failed " + shader);
+			return 0u;
+		}
+
+		return shader;
+	}
+	/////////////////////////
 
 	bool ShaderSystem::_parseShader(const detail::ShaderType p_type, std::string& p_shaderName)
 	{
@@ -71,11 +141,11 @@ namespace jej
 			return true;
 		}
 	}
+	/////////////////////////
 
 	std::string ShaderSystem::_readFile(const detail::ShaderType p_type, std::string p_filePath)
 	{
 		FileHandlerWin32 handler;
-
 
 		if (!handler.Read(p_filePath))
 		{
@@ -100,20 +170,23 @@ namespace jej
 		return str;
 
 	}
+	/////////////////////////
 
-	void Use()
+	void Use(const GLuint& p_program)
 	{
-		//	glUseProgram(m_program_ID);
+		glUseProgram(p_program);
 	}
-	void Unuse()
+	/////////////////////////
+
+	void Unuse(const GLuint& p_program)
 	{
-		//	glUseProgram(m_program_ID);
+		glUseProgram(p_program);
 	}
+	/////////////////////////
 
 	void ShaderSystem::update(const float p_deltaTime)
 	{
-
 	}
-
+	/////////////////////////
 
 }

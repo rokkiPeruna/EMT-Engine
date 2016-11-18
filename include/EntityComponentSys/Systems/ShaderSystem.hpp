@@ -31,18 +31,23 @@ namespace jej
 		// Initialize runs through other functions
 		void _initialize(detail::ShaderData& p_sd);
 
+		// Adds attribute to structs num attibute.
+		void _addAttribute(GLuint& p_program, int p_numAttribute ,const std::string& p_attributeName);
+
+		// Load shaders from file and compiles them as usable shader.
+		GLuint _loadShader(const std::string& p_shaderDataSource, const GLenum p_type, const detail::ShaderType p_shaderType);
+
 		// Check if user want's to include shaders
 		bool _parseShader(const detail::ShaderType p_type, std::string& p_shaderName);
 		
 		// Read actual shader files (no matter where they are)
 		std::string _readFile(const detail::ShaderType p_type ,std::string p_filePath);
 
-		// Actually create shaders and bind them as one
-		bool _createShader(GLuint& p_program ,const std::string& p_VertexFileSoucre, const std::string& FragmentFileSoucre);
+		// Enable shader
+		void Use(const GLuint& p_program);
 
-		void Use();
-
-		void Unuse();
+		// Disable shader
+		void Unuse(const GLuint& p_program);
 
 	public:
 

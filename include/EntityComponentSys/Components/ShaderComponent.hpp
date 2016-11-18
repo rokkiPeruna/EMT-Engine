@@ -28,7 +28,7 @@ namespace jej
 			std::string m_vertexShaderFileName;
 			std::string m_fragmentShaderFileName;
 
-			int amountOfAttributes;
+			int m_numAttribute;
 
 			ShaderData(){}
 		};
