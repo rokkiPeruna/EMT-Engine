@@ -49,6 +49,14 @@ namespace jej
 
 
 
+	enum class ShapeType
+	{
+		Circle,
+		Rectangle,
+		Convex,
+		Triangle
+	};
+
     //Vector of two floats
     struct Vector2f
     {
