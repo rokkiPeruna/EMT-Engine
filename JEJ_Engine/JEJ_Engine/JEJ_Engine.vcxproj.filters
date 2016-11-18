@@ -189,6 +189,9 @@
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\RenderSystem.cpp">
       <Filter>Source Files\EntityComponentSystem\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\ShaderSystem.cpp">
+      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Grafiikkamoottori_JEJ\include\Core\EngineObject.hpp">
@@ -279,6 +282,9 @@
       <Filter>Header Files\EntityComponentSystem\Components\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\RenderSystem.hpp">
+      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\ShaderSystem.hpp">
       <Filter>Header Files\EntityComponentSystem\Systems</Filter>
     </ClInclude>
   </ItemGroup>
