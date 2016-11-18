@@ -10,6 +10,7 @@
 //
 
 //
+#include <EntityComponentSys/Components/TransformComponent.hpp>
 //
 
 namespace jej
@@ -17,16 +18,20 @@ namespace jej
     //For m_components
     class Component;
 
+    //
+    class Entity;
+    //
+
     class System
     {
 
-        //For accessing m_components
-        friend class Scene;
-
+        //For modifying containers
+        friend class UserSystem;
+    private:
     public:
-        
-        //Constructor
+        //Default constructor
         System();
+        
 
         //Disabled copy-constructors
         //System(const System&) = delete;
@@ -35,11 +40,11 @@ namespace jej
         //Destructor
         virtual ~System();
 
-        virtual void update(const float p_deltaTime) = 0;
 
-    protected:
+        virtual void Update() = 0;
 
-        //Overloaded
+        //Static container for each sub system to scroll through
+        static std::vector<std::shared_ptr<Entity>> m_entities;
         std::vector<std::shared_ptr<Component>> m_components;
 
         //Get component vector reference of desired type

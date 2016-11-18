@@ -46,24 +46,24 @@ namespace jej//NAMESPACE jej STARTS
 
         case WM_MOVE:
         {
-            //Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
-            //auto& tmpWinData = context->GetWinData();
-            //auto& tmpOSData = context->GetWinOSData();
+            Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
+            auto& tmpWinData = context->GetWinData();
+            auto& tmpOSData = context->GetWinOSData();
 
 
-            //tmpOSData.offsetX = LOWORD(lparam);
-            //tmpOSData.offsetY -= (HIWORD(lparam) - tmpWinData.sizeY);
+            tmpOSData.offsetX = LOWORD(lparam);
+            tmpOSData.offsetY -= (HIWORD(lparam) - tmpWinData.sizeY);
 
             break;
         }
 
         case WM_SIZE:
         {
-            //Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
-            //auto& tmpWinData = context->GetWinData();
+            Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
+            auto& tmpWinData = context->GetWinData();
 
-            //tmpWinData.sizeX = LOWORD(lparam);
-            //tmpWinData.sizeY = HIWORD(lparam);
+            tmpWinData.sizeX = LOWORD(lparam);
+            tmpWinData.sizeY = HIWORD(lparam);
 
             break;
         }

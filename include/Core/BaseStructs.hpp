@@ -30,6 +30,9 @@ namespace jej
         Render,
 		Shader
         SizeOfThis
+        Movement,
+        Shader,
+        Shape
     };
     
 
