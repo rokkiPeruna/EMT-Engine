@@ -11,6 +11,7 @@ namespace jej
 	class ShaderComponent;
 	class ShapeComponent;
 	class TransformComponent;
+    class SpriteComponent;
 
 
 #ifdef JEJ_USE_MAX
@@ -31,7 +32,8 @@ namespace jej
         Transform,
         Render,
 		Shader,
-        Shape
+        Shape,
+		Sprite
     };
     
 
@@ -65,7 +67,11 @@ namespace jej
         static const unsigned short int index = 1u;
     };
 
-	
+    template <>
+    struct ComponentHelper<SpriteComponent>
+    {
+        static const unsigned short int index = 2u;
+    };
 
 
 

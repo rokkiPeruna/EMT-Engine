@@ -11,6 +11,7 @@
 
 #include <EntityComponentSys/Systems/RenderSystem.hpp>
 #include <EntityComponentSys/Systems/TransformSystem.hpp>
+#include <EntityComponentSys/Systems/SpriteSystem.hpp>
 
 namespace jej //NAMESPACE jej
 {
@@ -61,6 +62,7 @@ namespace jej //NAMESPACE jej
         //Initialize all systems here
 		std::get<0>(engine.m_systems) = &RenderSystem::GetInstance();
         std::get<1>(engine.m_systems) = &TransformSystem::GetInstance();
+        std::get<2>(engine.m_systems) = &SpriteSystem::GetInstance();
 
 
         //Parse execution path

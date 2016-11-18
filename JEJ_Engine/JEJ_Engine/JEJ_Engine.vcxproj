@@ -100,9 +100,11 @@
     <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Convex.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Rectangle.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Triangle.cpp" />
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\SpriteComponent.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\TransformComponent.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Entity\Entity.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\RenderSystem.cpp" />
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\SpriteSystem.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\System.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\TransformSystem.cpp" />
     <ClCompile Include="..\..\source\Graphics\Graphics.cpp" />
@@ -130,9 +132,11 @@
     <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Convex.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Rectangle.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Triangle.hpp" />
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\SpriteComponent.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\TransformComponent.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Entity\Entity.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\RenderSystem.hpp" />
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\SpriteSystem.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\System.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\TransformSystem.hpp" />
     <ClInclude Include="..\..\include\Graphics\Graphics.hpp" />
