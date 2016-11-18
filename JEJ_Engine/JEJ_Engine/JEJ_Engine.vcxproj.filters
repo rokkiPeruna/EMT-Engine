@@ -97,6 +97,12 @@
     <Filter Include="Source Files\Utility\FileHandler">
       <UniqueIdentifier>{0f97224a-6daf-475e-99ab-55d83b05080f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\EntityComponentSystem\Components\Shapes">
+      <UniqueIdentifier>{a77642b5-53fc-49b4-a905-f63de5802804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EntityComponentSystem\Components\Shapes">
+      <UniqueIdentifier>{cf14b7f1-4a8f-4f47-9961-4fdaedf12c54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -158,6 +164,30 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Utility\Windows\Windows.cpp">
       <Filter>Source Files\Utility\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\RenderComponent.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\ShaderComponent.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\ShapeComponent.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Circle.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Convex.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Rectangle.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Triangle.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\RenderSystem.cpp">
+      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +256,30 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Utility\FileHandler\FileHandlerWin32.hpp">
       <Filter>Header Files\Utility\FileHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\RenderComponent.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\ShaderComponent.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\ShapeComponent.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Circle.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Convex.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Rectangle.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Triangle.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\RenderSystem.hpp">
+      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -27,24 +27,19 @@ namespace jej
 
         //For modifying containers
         friend class UserSystem;
-    private:
+
     public:
-        //Default constructor
+        
+		//Default constructor
         System();
         
-
-        //Disabled copy-constructors
-        //System(const System&) = delete;
-        //System operator=(const System&) = delete;
-
         //Destructor
         virtual ~System();
 
+		//Update
+        virtual void update(const float p_deltaTime) = 0;
 
-        virtual void Update() = 0;
-
-        //Static container for each sub system to scroll through
-        static std::vector<std::shared_ptr<Entity>> m_entities;
+		//Overloaded
         std::vector<std::shared_ptr<Component>> m_components;
 
         //Get component vector reference of desired type

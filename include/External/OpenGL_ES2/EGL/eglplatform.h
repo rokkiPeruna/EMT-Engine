@@ -37,7 +37,8 @@
 
 // AMD commented out this include so WinCE would build
 //#include <sys/types.h>
-#include <KHR/khrplatform.h>
+//#include <KHR/khrplatform.h>
+#include <External/OpenGL_ES2/KHR/khrplatform.h>
 
 /* Macros used in EGL function prototype declarations.
  *

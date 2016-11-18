@@ -16,13 +16,19 @@ namespace jej
     class RenderComponent;
     //
 
-    class RenderSystem
-        :public System
+    class RenderSystem : public System
     {
 
+		//For manipulating m_components
+		friend class EngineObject;
+		friend class Entity;
+
     private:
+
         //Constructor is private for singleton
         RenderSystem();
+
+		static std::vector<std::shared_ptr<RenderComponent>> m_components;
 
     public:
 
@@ -36,12 +42,12 @@ namespace jej
         //Create instance of class
         static RenderSystem& GetInstance();
 
-        //This renders and draws every RenderComponent
-        void Update();
+		
 
     protected:
 
-        std::vector<std::shared_ptr<RenderComponent>> m_components;
+		//This renders and draws every RenderComponent
+		void update(const float p_deltaTime) override;
 
         std::shared_ptr<Window> m_window;
     };

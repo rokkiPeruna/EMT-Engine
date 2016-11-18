@@ -3,7 +3,8 @@
 
 /* $Revision: #2 $ on $Date: 2011/02/16 $ */
 
-#include <GLES2/gl2platform.h>
+//#include <GLES2/gl2platform.h>
+#include <External/OpenGL_ES2/GLES2/gl2platform.h>
 
 #ifdef __cplusplus
 extern "C" {

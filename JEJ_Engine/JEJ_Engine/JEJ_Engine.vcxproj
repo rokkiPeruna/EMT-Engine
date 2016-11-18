@@ -53,7 +53,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\include;$(SolutionDir)..\include\External;$(SolutionDir)..\include\External\OpenAL;$(SolutionDir)..\include\External\OpenGL_ES2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include;$(SolutionDir)..\include\External\OpenGL_ES2;$(SolutionDir)..\include\External\OpenAL;$(SolutionDir)..\include\External\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -73,7 +73,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\include;$(SolutionDir)..\include\External;$(SolutionDir)..\include\External\OpenAL;$(SolutionDir)..\include\External\OpenGL_ES2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include;$(SolutionDir)..\include\External\OpenGL_ES2;$(SolutionDir)..\include\External\OpenAL;$(SolutionDir)..\include\External\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -93,8 +93,16 @@
     <ClCompile Include="..\..\source\Core\Scene.cpp" />
     <ClCompile Include="..\..\source\Core\Settings.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\Component.cpp" />
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\RenderComponent.cpp" />
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\ShaderComponent.cpp" />
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\ShapeComponent.cpp" />
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Circle.cpp" />
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Convex.cpp" />
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Rectangle.cpp" />
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Triangle.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\TransformComponent.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Entity\Entity.cpp" />
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\RenderSystem.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\System.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\TransformSystem.cpp" />
     <ClCompile Include="..\..\source\Graphics\Graphics.cpp" />
@@ -115,8 +123,16 @@
     <ClInclude Include="..\..\include\Core\Scene.hpp" />
     <ClInclude Include="..\..\include\Core\Settings.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\Component.hpp" />
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\RenderComponent.hpp" />
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\ShaderComponent.hpp" />
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\ShapeComponent.hpp" />
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Circle.hpp" />
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Convex.hpp" />
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Rectangle.hpp" />
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Triangle.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\TransformComponent.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Entity\Entity.hpp" />
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\RenderSystem.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\System.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\TransformSystem.hpp" />
     <ClInclude Include="..\..\include\Graphics\Graphics.hpp" />

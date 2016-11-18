@@ -10,43 +10,35 @@
 
 #include <Utility/FileHandler/FileHandlerWin32.hpp>
 
+#include <EntityComponentSys/Components/ShaderComponent.hpp>
+
 int main(int argc, char* argv[])
 {
-    jej::EngineObject::Initialize(argv[0]);
-    auto& game = jej::EngineObject::GetInstance();
+	jej::EngineObject::Initialize(argv[0]);
+	auto& game = jej::EngineObject::GetInstance();
 
-    jej::Scene gameLevel;
+	jej::Scene gameLevel;
 
-    gameLevel.AddEntity("player1");
-
-
-    auto* playeri = gameLevel.GetEntityPtr("player1");
-
-    playeri->AddComponent<jej::TransformComponent>(
-        jej::Vector2f(3.f, 5.f),
-        jej::Vector2f(1, 1),
-        jej::Vector4f(9, 2, 50, 1));
+	gameLevel.AddEntity("player1");
 
 
-    auto* transvormi = playeri->GetComponentPtr<jej::TransformComponent>();
+	auto* playeri = gameLevel.GetEntityPtr("player1");
+
+	playeri->AddComponent<jej::TransformComponent>(
+		jej::Vector2f(3.f, 5.f),
+		jej::Vector2f(1, 1),
+		jej::Vector4f(9, 2, 50, 1));
 
 
+//	playeri->AddComponent<jej::ShaderComponent>();
 
-   // editor.AddComponent<jej::TransformComponent>(player, jej::ComponentType::Transform,
-   //     jej::Vector2f(3.f, 5.f),
-   //     jej::Vector2f(1, 1),
-   //     jej::Vector4f(9, 2, 50, 1));
+	auto* transvormi = playeri->GetComponentPtr<jej::TransformComponent>();
 
+	bool on = playeri->HasComponent<jej::TransformComponent>();
 
-    game.EngineUpdate();
+	transvormi->position.x += transvormi->position.x;
 
-    
+	game.EngineUpdate();
 
-    //bool on = editor.HasComponent(player, jej::ComponentType::Transform);
-
-    //auto transvormi = editor.GetComponentPtr<jej::TransformComponent>(player, jej::ComponentType::Transform);
-
-    //transvormi->position.x += transvormi->position.x;
-
-    return 0;
+	return 0;
 }

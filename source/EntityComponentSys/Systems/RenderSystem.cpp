@@ -23,12 +23,8 @@ namespace jej
     }
     //
 
-    void RenderSystem::Update()
+    void RenderSystem::update(const float p_deltaTime)
     {
-        for (auto const& renderComp : m_components)
-        {
-            //TODO: Everything
-            
-        }
+
     }
 }

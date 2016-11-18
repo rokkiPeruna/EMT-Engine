@@ -9,6 +9,7 @@
 #include <Utility/Messenger.hpp>
 #include <Window/Win32Window.hpp>
 
+#include <EntityComponentSys/Systems/RenderSystem.hpp>
 #include <EntityComponentSys/Systems/TransformSystem.hpp>
 
 namespace jej //NAMESPACE jej
@@ -58,7 +59,8 @@ namespace jej //NAMESPACE jej
 
         //TODO:
         //Initialize all systems here
-        std::get<0>(engine.m_systems) = &TransformSystem::GetInstance();
+		std::get<0>(engine.m_systems) = &RenderSystem::GetInstance();
+        std::get<1>(engine.m_systems) = &TransformSystem::GetInstance();
 
 
         //Parse execution path

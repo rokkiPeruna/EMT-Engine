@@ -18,7 +18,7 @@
  * by filing a bug against product "OpenGL-ES" component "Registry".
  */
 
-#include <KHR/khrplatform.h>
+#include <External/OpenGL_ES2/KHR/khrplatform.h>
 
 
 #if (defined(_WIN32) || defined(__VC32__)) && !defined(_WIN32_WCE) /* Win32 */

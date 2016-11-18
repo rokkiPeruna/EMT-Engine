@@ -7,8 +7,10 @@ namespace jej
 {
     
     //For ComponentHelper
-    class TransformComponent;
-
+	class RenderComponent;
+	class ShaderComponent;
+	class ShapeComponent;
+	class TransformComponent;
 
 
 #ifdef JEJ_USE_MAX
@@ -28,10 +30,7 @@ namespace jej
         Failure,
         Transform,
         Render,
-		Shader
-        SizeOfThis
-        Movement,
-        Shader,
+		Shader,
         Shape
     };
     
@@ -41,11 +40,33 @@ namespace jej
     template <typename T>
     struct ComponentHelper{};
 
+	template <>
+	struct ComponentHelper<RenderComponent>
+	{
+		static const unsigned short int index = 0u;
+	};
+
+
+	/*template <>
+	struct ComponentHelper<ShaderComponent>
+	{
+		static const unsigned short int index = 3u;
+	};
+
+	template <>
+	struct ComponentHelper<ShapeComponent>
+	{
+		static const unsigned short int index = 2u;
+	};*/
+
     template <>
     struct ComponentHelper<TransformComponent>
     {
-        static const unsigned short int index = 0u;
+        static const unsigned short int index = 1u;
     };
+
+	
+
 
 
 

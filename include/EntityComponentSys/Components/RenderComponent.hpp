@@ -19,12 +19,11 @@ namespace jej
 
     //RenderComponent class is basically wrapper for other components that are needed
     //for displaying drawable entities on screen
-    class RenderComponent
-        :public Component
+    class RenderComponent : public Component
     {
         //Friending RenderSystem so it can access key values for rendering
         //through shared pointers in render components
-        friend RenderSystem;
+        friend class RenderSystem;
 
     public:
         //Default constructor

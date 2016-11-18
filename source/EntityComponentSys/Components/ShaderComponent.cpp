@@ -9,7 +9,7 @@
 
 namespace jej
 {
-	ShaderComponent::ShaderComponent(const std::string& p_vertexShaderFilePath = "", const std::string& p_fragmentShaderPath = "") :
+	ShaderComponent::ShaderComponent(const std::string& p_vertexShaderFilePath, const std::string& p_fragmentShaderPath) :
 	Component(),
 	m_vertexShaderFilePath(p_vertexShaderFilePath),
 	m_fragmentShaderFilePath(p_fragmentShaderPath),
@@ -22,11 +22,11 @@ namespace jej
 		m_program_ID = glCreateProgram();
 
 		// Check if there is user implemented shader, otherwise use default shaders
-		if (!_parseShader(ShaderType::Vertex, m_vertexShaderFilePath));
+		if (!_parseShader(ShaderType::Vertex, m_vertexShaderFilePath))
 		{
 			Messenger::Add(Messenger::MessageType::Error, "Failed to parse vertex shader");
 		}
-		if (!_parseShader(ShaderType::Fragment, m_fragmentShaderFilePath));
+		if (!_parseShader(ShaderType::Fragment, m_fragmentShaderFilePath))
 		{
 			Messenger::Add(Messenger::MessageType::Error, "Failed to parse fragment shader");
 		}
@@ -63,7 +63,7 @@ namespace jej
 		glUseProgram(m_program_ID);
 	}
 
-	static GLuint _createShader(const std::string& p_fileSource, GLenum p_shaderType)
+	GLuint ShaderComponent::_createShader(const std::string& p_fileSource, GLenum p_shaderType)
 	{
 		GLuint shader = glCreateShader(p_shaderType);
 
@@ -105,18 +105,13 @@ namespace jej
 		std::string ShaderName = settings::rootPath + "Resources/Shaders";
 
 		if (type == ShaderType::Fragment)
-		{
 			ShaderName += "FragmentShader.frag";
-		}
 		else if (type == ShaderType::Vertex)
-		{
 			ShaderName += "VertexShader.vert";
-		}
 		else
-		{
 			return false;
-		}
-
+		
+		return true;
 	}
 
 

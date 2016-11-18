@@ -3,7 +3,9 @@
 
 #include <string>
 
-#include <External/OpenGL_ES2/EGL/egl.h>
+
+//#include <External\OpenGL_ES2\EGL\egl.h>
+#include <External/OpenGL_ES2/EGL/eglplatform.h>
 #include <External/OpenGL_ES2/GLES2/gl2.h>
 
 #include <EntityComponentSys/Components/Component.hpp>
