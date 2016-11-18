@@ -23,13 +23,13 @@ namespace jej//NAMESPACE jej STARTS
 
     struct WindowBaseInitData
     {
-        short int sizeX = 200;
-        short int sizeY = 200;
+        unsigned int sizeX;
+        unsigned int sizeY;
         std::wstring nameApp = L"appName";
         std::wstring nameMenu = L"menuName";
         std::wstring nameWindow = L"windowName";
 
-        WindowBaseInitData(){};
+        WindowBaseInitData(): sizeX(200), sizeY(200){};
     };
     /////////////////////////////////
 

@@ -9,6 +9,10 @@
 #include <memory>
 //
 
+//
+#include <EGL/egl.h>
+//
+
 namespace jej
 {
     //Forward declarating Window-class etc.
@@ -16,12 +20,21 @@ namespace jej
     class RenderComponent;
     //
 
+    namespace detail
+    {
+        struct _VBO
+        {
+
+        };
+    }
+
     class RenderSystem : public System
     {
 
 		//For manipulating m_components
 		friend class EngineObject;
 		friend class Entity;
+        
 
     private:
 
@@ -42,14 +55,47 @@ namespace jej
         //Create instance of class
         static RenderSystem& GetInstance();
 
+        void _render();
 		
 
-    protected:
+    private:
+        
+        //Screen properties for OpenGL ES
+        unsigned int m_winWidth;
+        unsigned int m_winHeight;
+        unsigned int m_winOffsetX;
+        unsigned int m_winOffsetY;
 
-		//This renders and draws every RenderComponent
+        //Smart pointer to Window - singleton
+        std::shared_ptr<Window> m_window;
+
+
+
+		//This renders and draws every RenderComponent by calling priv methods
 		void update(const float p_deltaTime) override;
 
-        std::shared_ptr<Window> m_window;
+        //
+
+        //
+        void _clearScreen();
+
+        //
+        bool _swapBuffers();
+
+        //
+        bool _updateBuffers();
+
+
+        //////////////////////////////
+        //Methods and variables for OpenGL ES initialization
+        EGLContext m_context;
+        EGLDisplay m_display;
+        EGLSurface m_surface;
+
+        bool _createContext(const EGLint p_attributeList[]);
+
+        //Vertex buffer objects for various different types
+
     };
 }
 

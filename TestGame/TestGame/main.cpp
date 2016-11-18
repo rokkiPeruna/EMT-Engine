@@ -14,31 +14,36 @@
 
 int main(int argc, char* argv[])
 {
-	jej::EngineObject::Initialize(argv[0]);
-	auto& game = jej::EngineObject::GetInstance();
+    jej::EngineObject::Initialize(argv[0]);
+    auto& game = jej::EngineObject::GetInstance();
 
-	jej::Scene gameLevel;
+    jej::Scene gameLevel;
 
-	gameLevel.AddEntity("player1");
-
-
-	auto* playeri = gameLevel.GetEntityPtr("player1");
-
-	playeri->AddComponent<jej::TransformComponent>(
-		jej::Vector2f(3.f, 5.f),
-		jej::Vector2f(1, 1),
-		jej::Vector4f(9, 2, 50, 1));
+    gameLevel.AddEntity("player1");
 
 
-//	playeri->AddComponent<jej::ShaderComponent>();
+    auto* playeri = gameLevel.GetEntityPtr("player1");
 
-	auto* transvormi = playeri->GetComponentPtr<jej::TransformComponent>();
+    playeri->AddComponent<jej::TransformComponent>(
+        jej::Vector2f(3.f, 5.f),
+        jej::Vector2f(1, 1),
+        jej::Vector4f(9, 2, 50, 1));
 
-	bool on = playeri->HasComponent<jej::TransformComponent>();
 
-	transvormi->position.x += transvormi->position.x;
+    //	playeri->AddComponent<jej::ShaderComponent>();
 
-	game.EngineUpdate();
+    //auto* transvormi = playeri->GetComponentPtr<jej::TransformComponent>();
+    //
+    //bool on = playeri->HasComponent<jej::TransformComponent>();
+    //
+    //transvormi->position.x += transvormi->position.x;
 
-	return 0;
+    int i = 1;
+    while (i)
+    {
+        game.EngineUpdate();
+        
+    }
+
+    return 0;
 }

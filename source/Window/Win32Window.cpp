@@ -4,6 +4,7 @@
 #include <Utility/Assert.hpp>
 #include <Utility/Messenger.hpp>
 #include <Utility/Windows/Windows.hpp>
+#include <EntityComponentSys/Systems/RenderSystem.hpp>
 
 
 namespace jej//NAMESPACE jej STARTS
@@ -39,7 +40,7 @@ namespace jej//NAMESPACE jej STARTS
             tmpWinData.sizeY = tmpOSData.rectWin.top;
 
             //Render
-            EngineObject::GetInstance().EngineDraw();
+            RenderSystem::GetInstance()._render();
 
             break;
         }
@@ -91,6 +92,7 @@ namespace jej//NAMESPACE jej STARTS
         Window(),
         m_winOSInitData()
     {
+
         m_winBaseInitData = p_winBaseInitData != nullptr ? *p_winBaseInitData : WindowBaseInitData();
         m_winOSInitData = p_winOSInitData != nullptr ? *p_winOSInitData : WindowOSInitData();
 
