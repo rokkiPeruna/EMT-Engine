@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\include\Core\Inl\Scene.inl" />
+    <None Include="..\..\include\EntityComponentSys\Components\Inl\RenderComponent.inl" />
     <None Include="..\..\include\EntityComponentSys\Entity\Inl\Entity.inl" />
     <None Include="..\..\include\EntityComponentSys\Systems\Inl\System.inl" />
     <None Include="..\..\include\Utility\Inl\Messenger.inl" />

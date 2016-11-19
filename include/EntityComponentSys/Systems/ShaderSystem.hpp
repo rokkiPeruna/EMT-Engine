@@ -22,17 +22,11 @@ namespace jej
 
 	private:
 
-
-
-		ShaderSystem();
-
-		static std::vector<std::shared_ptr<ShaderComponent>> m_components;
+        static GLuint vertexPosIndex;
+        static GLuint textureCoordIndex;
 
 		// Initialize runs through other functions
 		void _initialize(detail::ShaderData& p_sd);
-
-		// Adds attribute to structs num attibute.
-		void _addAttribute(GLuint& p_program, int p_numAttribute ,const std::string& p_attributeName);
 
 		// Load shaders from file and compiles them as usable shader.
 		GLuint _loadShader(const std::string& p_shaderDataSource, const GLenum p_type, const detail::ShaderType p_shaderType);
@@ -49,20 +43,27 @@ namespace jej
 		// Disable shader
 		void Unuse(const GLuint& p_program);
 
+        //Singleton constructor
+        ShaderSystem();
+
 	public:
 
-
+        //Disabled copy-constructors
 		ShaderSystem(const ShaderSystem&) = delete;
 		ShaderSystem operator=(const ShaderSystem&) = delete;
 
+        //Destructor
 		~ShaderSystem();
 
+        //Returns instance
 		static ShaderSystem& GetInstance();
 
 
 	protected:
 
-		void update(const float p_deltaTime);
+        static std::vector<std::shared_ptr<ShaderComponent>> m_components;
+
+		void _update(const float p_deltaTime);
 
 
 	};

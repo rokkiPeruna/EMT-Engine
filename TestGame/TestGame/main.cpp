@@ -29,8 +29,10 @@ int main(int argc, char* argv[])
         jej::Vector2f(1, 1),
         jej::Vector4f(9, 2, 50, 1));
 
+    auto& shaderRef = playeri->AddComponent<jej::ShaderComponent>("FragmentShaderTexture.frag");
+    auto* shaderPtr = playeri->GetComponentPtr<jej::ShaderComponent>();
 
-    //	playeri->AddComponent<jej::ShaderComponent>();
+    auto& renderRef = playeri->AddComponent<jej::RenderComponent>();
 
     //auto* transvormi = playeri->GetComponentPtr<jej::TransformComponent>();
     //
@@ -40,7 +42,7 @@ int main(int argc, char* argv[])
 
     for (;;)
     {
-        //game.EngineUpdate();
+        game.EngineUpdate();
         break;
     }
 

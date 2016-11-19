@@ -9,46 +9,55 @@
 
 namespace jej
 {
-	namespace detail
-	{
-		enum class ShaderType
-		{
-			vertex,
-			fragment
-		};
+    namespace detail
+    {
+        enum class ShaderType
+        {
+            Fragment,
+            Vertex
+        };
 
-		struct ShaderData
-		{
-			// Actual shader (vertex and fragment combined
-			unsigned int m_program_ID;
+        struct ShaderData
+        {
+            // Actual shader (vertex and fragment combined)
+            unsigned int programID = 0u;
 
-			ShaderType m_type;
+            ShaderType type;
 
-			// Filepaths for shaders
-			std::string m_vertexShaderFileName;
-			std::string m_fragmentShaderFileName;
+            //File names for shaders
+            std::string vertexShaderFileName;
+            std::string fragmentShaderFileName;
 
-			int m_numAttribute;
+            //For detaching && deleting
+            unsigned int fragmentShaderID = 0u;
+            unsigned int vertexShaderID = 0u;
 
-			ShaderData(){}
-		};
-	}
-	class ShaderComponent : public Component
-	{
-	public:
+            ShaderData(){};
+        };
+    }
 
+    class ShaderComponent : public Component
+    {
 
-		// constructor for shader
-		ShaderComponent::ShaderComponent(const std::string& p_vertexShaderFileName = "", const std::string& p_fragmentShaderFileName = "");
-		ShaderComponent::~ShaderComponent();
+        //For deleting shaders
+        friend class ShaderSystem;
 
-	private:
-		
-		detail::ShaderData m_shaderData;
+    public:
 
 
+        //Constructor
+        ShaderComponent::ShaderComponent(const Entity& entity, const std::string& p_vertexShaderFileName = "", const std::string& p_fragmentShaderFileName = "");
 
-	};
+        //Destructor
+        ShaderComponent::~ShaderComponent();
+
+    private:
+
+        detail::ShaderData m_shaderData;
+
+
+
+    };
 
 }
 

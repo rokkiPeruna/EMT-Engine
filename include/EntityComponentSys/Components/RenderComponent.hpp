@@ -6,6 +6,13 @@
 #include <EntityComponentSys/Components/Component.hpp>
 //
 
+#include <EntityComponentSys/Components/ShaderComponent.hpp>
+#include <EntityComponentSys/Components/ShapeComponent.hpp>
+#include <EntityComponentSys/Components/TransformComponent.hpp>
+
+#include <Utility/Assert.hpp>
+#include <Utility/Messenger.hpp>
+
 //
 #include <memory>
 
@@ -27,21 +34,15 @@ namespace jej
 
     public:
         //Default constructor
-        RenderComponent();
+        //RenderComponent();
 
-        //Constructor for user given ShaderComponent, default initializes
-        //TransformComponent and ShapeComponent
-        RenderComponent(const std::shared_ptr<ShaderComponent>& p_shaderComp);
-
-        //Constructor for user given ShaderComponent and ShapeComponent,
-        //default initializes ShapeComponent
-        RenderComponent(const std::shared_ptr<ShaderComponent>& p_shaderComp,
-            const std::shared_ptr<ShapeComponent>& p_shapeComp);
-
-        //Constructor for user given ShaderComponent, ShapeComponent and TransformComponent
-        RenderComponent(const std::shared_ptr<ShaderComponent>& p_shaderComp,
-            const std::shared_ptr<ShapeComponent>& p_shapeComp,
-            const std::shared_ptr<TransformComponent>& p_transformComp);
+        //Constructor for RenderComponent, default-initializes components that were not given
+        //Arguments: (order does not matter)
+        //ShaderComponent
+        //ShapeComponent
+        //TransformComponent
+        template <typename ... Args>
+        RenderComponent(const Entity& entity, const Args& ... args);
 
         //Destructor
         ~RenderComponent();
@@ -53,10 +54,19 @@ namespace jej
 
     private:
 
+        template <typename T>
+        void _addComponent(const T& t);
+
+        template <typename T, typename ... Args>
+        void _addComponent(const T& t, const Args& ... args);
+
         std::shared_ptr<ShaderComponent> m_shaderComp;
         std::shared_ptr<ShapeComponent> m_shapeComp;
         std::shared_ptr<TransformComponent> m_transformComp;
     };
+
+#include <EntityComponentSys/Components/Inl/RenderComponent.inl>
+
 }
 
 

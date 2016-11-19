@@ -22,17 +22,20 @@ namespace jej
 
         TransformSystem();
 
-        static std::vector<std::shared_ptr<TransformComponent>> m_components;
-
     public:
 
         static TransformSystem& GetInstance();
 
+        TransformSystem(const TransformSystem&) = delete;
+        TransformSystem operator=(const TransformSystem&) = delete;
+
         virtual ~TransformSystem();
 
-        void update(const float deltaTime) override;
+    protected:
 
-        
+        void _update(const float deltaTime) override;
+
+        static std::vector<std::shared_ptr<TransformComponent>> m_components;
 
         
 

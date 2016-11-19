@@ -15,7 +15,9 @@ namespace jej //NAMESPACE jej
     struct WindowBaseInitData;
     struct WindowOSInitData;
 
+    //For m_systems tuple
 	class RenderSystem;
+    class ShaderSystem;
     class TransformSystem;
 
 	class EngineObject
@@ -64,7 +66,7 @@ namespace jej //NAMESPACE jej
 
         //TODO Add all systems
         //Pointer to each system, populated in Initialize
-        std::tuple<RenderSystem*, TransformSystem*> m_systems;
+        std::tuple<RenderSystem*, ShaderSystem*, TransformSystem*> m_systems;
 
         std::shared_ptr<Scene> m_currentScene;
 		std::shared_ptr<Graphics> m_graphicsPtr;

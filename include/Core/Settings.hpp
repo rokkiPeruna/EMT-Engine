@@ -1,6 +1,6 @@
-#include <OpenGL_ES2/EGL/egl.h>
-#include <OpenGL_ES2/EGL/eglplatform.h>
-#include <OpenGL_ES2/GLES2/gl2platform.h>
+#include <External/OpenGL_ES2/EGL/egl.h>
+#include <External/OpenGL_ES2/EGL/eglplatform.h>
+#include <External/OpenGL_ES2/GLES2/gl2platform.h>
 
 #include <string>
 

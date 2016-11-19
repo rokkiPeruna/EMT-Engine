@@ -10,21 +10,22 @@
 
 namespace jej
 {
-	ShaderComponent::ShaderComponent(const std::string& p_vertexShaderFileName, const std::string& p_fragmentShaderFileName) :
-	Component()
-	{
-		m_componentType = ComponentType::Shader;
-		
-		m_shaderData.m_vertexShaderFileName = p_vertexShaderFileName;
-		m_shaderData.m_fragmentShaderFileName = p_fragmentShaderFileName;
+    ShaderComponent::ShaderComponent(const Entity& entity, const std::string& p_fragmentShaderFileName, const std::string& p_vertexShaderFileName) :
+        Component(),
+        m_shaderData()
+    {
+        m_componentType = ComponentType::Shader;
 
-		ShaderSystem::GetInstance()._initialize(m_shaderData);
+        m_shaderData.fragmentShaderFileName = p_fragmentShaderFileName;
+        m_shaderData.vertexShaderFileName = p_vertexShaderFileName;
 
-	}
+        ShaderSystem::GetInstance()._initialize(m_shaderData);
 
-	ShaderComponent::~ShaderComponent()
-	{
+    }
 
-	}
+    ShaderComponent::~ShaderComponent()
+    {
+
+    }
 
 }

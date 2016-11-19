@@ -11,6 +11,9 @@
 
 namespace jej
 {
+    std::vector<std::shared_ptr<RenderComponent>> RenderSystem::m_components = {};
+
+
     RenderSystem::RenderSystem() :
         System(),
         m_winWidth(0),
@@ -19,43 +22,48 @@ namespace jej
         m_winOffsetY(0),
         m_window(nullptr)
     {
-        //Needs work
-        m_window.reset(EngineObject::GetInstance().GetWindowRef().get());
+
+#ifdef _WIN32
+        m_window = std::static_pointer_cast<Win32Window>(EngineObject::GetInstance().GetWindowRef());
+#elif defined ANDROID
+        m_window = std::static_pointer_cast<AndroidWindow>(EngineObject::GetInstance().GetWindowRef());
+#endif
 
         if (!_createContext(settings::attributeList))
             JEJ_ASSERT(false, "Context creation failed.");
 
     }
-    //
+    //////////////////////////////////////////
 
     RenderSystem::~RenderSystem()
     {
 
     }
-    //
+    //////////////////////////////////////////
 
     RenderSystem& RenderSystem::GetInstance()
     {
         static RenderSystem system;
         return system;
     }
-    //
+    //////////////////////////////////////////
 
-    void RenderSystem::update(const float p_deltaTime)
+    void RenderSystem::_update(const float p_deltaTime)
     {
         //_render();
         _swapBuffers();
 
         _updateBuffers();
     }
-
+    //////////////////////////////////////////
 
     void RenderSystem::_render()
     {
         _clearScreen();
         return;
     }
-    //
+    //////////////////////////////////////////
+
     bool RenderSystem::_createContext(const EGLint p_attributeList[])
     {
 #ifdef _WIN32
@@ -155,9 +163,11 @@ namespace jej
 
         win->setApplication(std::make_unique<Application>(reinterpret_cast<Graphics*>(this)));
 
-#endif
         return true;
+#endif
+        
     }
+    //////////////////////////////////////////
 
     void RenderSystem::_clearScreen()
     {
@@ -171,7 +181,7 @@ namespace jej
         glClearColor(0.f, 0.f, 1.f, 0.5f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
-    //
+    //////////////////////////////////////////
 
 
     bool RenderSystem::_swapBuffers()
@@ -179,11 +189,12 @@ namespace jej
         bool success = eglSwapBuffers(m_window->GetNativeDisplay(), m_window->GetNativeWindow());
         return success;
     }
+    //////////////////////////////////////////
 
     bool RenderSystem::_updateBuffers()
     {
         return true;
 
     }
-    //
+    //////////////////////////////////////////
 }

@@ -10,7 +10,7 @@
 //
 
 //
-#include <EGL/egl.h>
+#include <External/OpenGL_ES2/EGL/egl.h>
 //
 
 namespace jej
@@ -41,8 +41,6 @@ namespace jej
         //Constructor is private for singleton
         RenderSystem();
 
-		static std::vector<std::shared_ptr<RenderComponent>> m_components;
-
     public:
 
         //Disabled copy-constructors
@@ -57,7 +55,6 @@ namespace jej
 
         void _render();
 		
-
     private:
         
         //Screen properties for OpenGL ES
@@ -68,11 +65,6 @@ namespace jej
 
         //Smart pointer to Window - singleton
         std::shared_ptr<Window> m_window;
-
-
-
-		//This renders and draws every RenderComponent by calling priv methods
-		void update(const float p_deltaTime) override;
 
         //
 
@@ -95,6 +87,13 @@ namespace jej
         bool _createContext(const EGLint p_attributeList[]);
 
         //Vertex buffer objects for various different types
+
+    protected:
+
+        //This renders and draws every RenderComponent by calling priv methods
+        void _update(const float p_deltaTime) override;
+
+        static std::vector<std::shared_ptr<RenderComponent>> m_components;
 
     };
 }

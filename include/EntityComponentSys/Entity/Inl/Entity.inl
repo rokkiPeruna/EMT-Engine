@@ -1,18 +1,19 @@
+
 template<typename T, typename ... Args>
-bool Entity::AddComponent(Args ... p_args)
+T& Entity::AddComponent(Args ... p_args)
 {
     if (HasComponent<T>())
     {
         Messenger::Add(Messenger::MessageType::Error, "Entity: ", m_name, "ID: ", m_entityID, " already has a component");
-        return false;   //Component of this type already linked to the entity
+        return *GetComponentPtr<T>();   //Component of this type already linked to the entity
     }
 
     auto& components = std::get<ComponentHelper<T>::index>(EngineObject::GetInstance().m_systems)->m_components;    //Get m_components from correct system
-    components.emplace_back(std::make_shared<T>(std::forward<Args>(p_args)...));    //Create component
+    components.emplace_back(std::make_shared<T>(*this, std::forward<Args>(p_args)...));    //Create component
     components.back()->setParent(m_entityID);   //Parent the newborn component to this entity
     m_componentIDs.emplace_back(Component::m_componentIDCounter - 1u);  //Take responsibility of the component
 
-    return true;
+    return *components.back().get();
 }
 
 

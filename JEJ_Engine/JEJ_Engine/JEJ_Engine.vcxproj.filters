@@ -91,6 +91,9 @@
     <Filter Include="Source Files\EntityComponentSystem\Components\Shapes">
       <UniqueIdentifier>{cf14b7f1-4a8f-4f47-9961-4fdaedf12c54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\EntityComponentSystem\Components\Inl">
+      <UniqueIdentifier>{d0731e5c-e411-431e-8ded-435de79d922e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -170,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Utility\Windows.cpp">
       <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\ShaderSystem.cpp">
+      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -257,6 +263,9 @@
     <ClInclude Include="..\..\include\Utility\Windows.hpp">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\ShaderSystem.hpp">
+      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\include\Utility\Inl\Messenger.inl">
@@ -273,6 +282,9 @@
     </None>
     <None Include="..\..\include\EntityComponentSys\Systems\Inl\System.inl">
       <Filter>Header Files\EntityComponentSystem\Systems\Inl</Filter>
+    </None>
+    <None Include="..\..\include\EntityComponentSys\Components\Inl\RenderComponent.inl">
+      <Filter>Header Files\EntityComponentSystem\Components\Inl</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -1,17 +1,11 @@
 #ifndef JEJ_FILEHANDLER_HPP
 #define JEJ_FILEHANDLER_HPP
 
-#include <Utility/Messenger.hpp>
-
 #ifdef _WIN32
-
 #include <Utility/Windows.hpp>
 #include <Windows.h>
-
 #elif defined ANDROID
-
 #include <android_native_app_glue.h>
-
 #endif
 
 #include <vector>

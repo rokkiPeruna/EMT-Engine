@@ -5,8 +5,12 @@
 #include <Utility/Messenger.hpp>
 
 
-#include <EntityComponentSys/Systems/TransformSystem.hpp>
+#include <EntityComponentSys/Components/RenderComponent.hpp>
+#include <EntityComponentSys/Components/ShaderComponent.hpp>
 #include <EntityComponentSys/Components/TransformComponent.hpp>
+#include <EntityComponentSys/Systems/RenderSystem.hpp>
+#include <EntityComponentSys/Systems/ShaderSystem.hpp>
+#include <EntityComponentSys/Systems/TransformSystem.hpp>
 
 //
 #include <memory>
@@ -50,7 +54,7 @@ namespace jej
 
         //Add a component to the given entity
         template<typename T, typename ... Args>
-        bool AddComponent(Args ... p_args);
+        T& AddComponent(Args ... p_args);
 
         //Returns pointer to a component of desired type if present on the target entity, otherwise nullptr
         template <typename T>

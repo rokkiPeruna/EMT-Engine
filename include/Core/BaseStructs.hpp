@@ -1,16 +1,16 @@
 #ifndef JEJ_BASESTRUCTS_HPP
 #define JEJ_BASESTRUCTS_HPP
 
-
+#include <Utility/Assert.hpp>
 
 namespace jej
 {
-    
+
     //For ComponentHelper
-	class RenderComponent;
-	class ShaderComponent;
-	class ShapeComponent;
-	class TransformComponent;
+    class RenderComponent;
+    class ShaderComponent;
+    class ShapeComponent;
+    class TransformComponent;
 
 
 #ifdef JEJ_USE_MAX
@@ -30,53 +30,59 @@ namespace jej
         Failure,
         Transform,
         Render,
-		Shader,
+        Shader,
         Shape
     };
-    
+
 
     //TODO: Specialize all components here with increasing indices
 
     template <typename T>
-    struct ComponentHelper{};
+    struct ComponentHelper
+    {
+        ComponentHelper<T>(){ JEJ_ASSERT(false, "Invalid ComponentHelper type"); };
+    };
 
-	template <>
-	struct ComponentHelper<RenderComponent>
-	{
-		static const unsigned short int index = 0u;
-	};
+    template <>
+    struct ComponentHelper<RenderComponent>
+    {
+        static const unsigned short int index = 0u;
+        ComponentHelper<RenderComponent>(){};
+    };
 
+    template <>
+    struct ComponentHelper<ShaderComponent>
+    {
+        static const unsigned short int index = 1u;
+        ComponentHelper<ShaderComponent>(){};
+    };
 
-	/*template <>
-	struct ComponentHelper<ShaderComponent>
-	{
-		static const unsigned short int index = 3u;
-	};
-
-	template <>
-	struct ComponentHelper<ShapeComponent>
-	{
-		static const unsigned short int index = 2u;
-	};*/
+    /*template <>
+    struct ComponentHelper<ShapeComponent>
+    {
+        static const unsigned short int index = 2u;
+        ComponentHelper<ShapeComponent>(){};
+    };*/
 
     template <>
     struct ComponentHelper<TransformComponent>
     {
-        static const unsigned short int index = 1u;
+        static const unsigned short int index = 2u;
+        ComponentHelper<TransformComponent>(){};
     };
 
-	
 
 
 
 
-	enum class ShapeType
-	{
-		Circle,
-		Rectangle,
-		Convex,
-		Triangle
-	};
+
+    enum class ShapeType
+    {
+        Circle,
+        Rectangle,
+        Convex,
+        Triangle
+    };
 
     //Vector of two floats
     struct Vector2f

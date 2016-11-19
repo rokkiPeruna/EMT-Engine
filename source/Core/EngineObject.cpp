@@ -4,13 +4,20 @@
 
 #include <EntityComponentSys/Components/Component.hpp>
 #include <EntityComponentSys/Entity/Entity.hpp>
+#include <EntityComponentSys/Systems/RenderSystem.hpp>
+#include <EntityComponentSys/Systems/ShaderSystem.hpp>
+#include <EntityComponentSys/Systems/TransformSystem.hpp>
 #include <Graphics/OGL_ES2.hpp>
 #include <Utility/Assert.hpp>
 #include <Utility/Messenger.hpp>
-#include <Window/Win32Window.hpp>
 
-#include <EntityComponentSys/Systems/RenderSystem.hpp>
-#include <EntityComponentSys/Systems/TransformSystem.hpp>
+
+#ifdef _WIN32
+#include <Window/Win32Window.hpp>
+#elif defined ANDROID
+#include <Window/AndroidWindow.hpp>
+#endif
+
 
 namespace jej //NAMESPACE jej
 {
@@ -57,24 +64,30 @@ namespace jej //NAMESPACE jej
     {
         auto& engine = GetInstance();
 
-        //Initialize window and graphics
+        //Initialize window
+#ifdef _WIN32
         engine.m_windowPtr.reset(new Win32Window(p_data, p_osData));
-        //engine.m_graphicsPtr.reset(new OGL_ES2(engine.m_windowPtr, settings::attributeList));
-
-        
+#elif defined ANDROID
+        engine.m_windowPtr.reset(new AndroidWindow(p_data, p_osData));
+#endif
 
         //TODO:
         //Initialize all systems here
         std::get<0>(engine.m_systems) = &RenderSystem::GetInstance();
-        std::get<1>(engine.m_systems) = &TransformSystem::GetInstance();
+        std::get<1>(engine.m_systems) = &ShaderSystem::GetInstance();
+        std::get<2>(engine.m_systems) = &TransformSystem::GetInstance();
 
 
         //Parse execution path
         const unsigned int slashPos = p_root.find_last_of("/\\");
         if (slashPos == std::string::npos)
-            Messenger::Add(Messenger::MessageType::Error, "Bad root: ", p_root);
-        settings::rootPath = p_root.substr(0u, slashPos + 1u);
+        {
+            Messenger::Add(Messenger::MessageType::Error, "Bad root: ", p_root, "Requires argv[0]");
+            return false;
+        }
 
+
+        settings::rootPath = p_root.substr(0u, slashPos + 1u);
 
         return true;
     }
@@ -91,7 +104,7 @@ namespace jej //NAMESPACE jej
         //m_graphicsPtr->_updateBuffersAll();
 
         m_windowPtr->UpdateWindowMessages();
-        RenderSystem::GetInstance().update(100.f);
+        RenderSystem::GetInstance()._update(100.f);
     }
     //////////////////////////////////////////
 

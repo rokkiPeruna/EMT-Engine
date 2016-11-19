@@ -36,17 +36,17 @@ namespace jej
         //Destructor
         virtual ~System();
 
-		//Update
-        virtual void update(const float p_deltaTime) = 0;
+protected:
 
-		//Overloaded
-        std::vector<std::shared_ptr<Component>> m_components;
+    //Update
+    virtual void _update(const float p_deltaTime) = 0;
 
-        //Get component vector reference of desired type
-        template <typename T>
-        std::vector<std::shared_ptr<T>>& getComponentsRef();
+    //Overloaded
+    //std::vector<std::shared_ptr<Component>> m_components;
 
-
+    //Get component vector reference of desired type
+    template <typename T>
+    std::vector<std::shared_ptr<T>>& getComponentsRef();
 
     };
 

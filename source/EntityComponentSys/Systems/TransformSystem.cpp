@@ -10,21 +10,25 @@ namespace jej
     {
 
     }
+    //////////////////////////////////////////
 
     TransformSystem& TransformSystem::GetInstance()
     {
         static TransformSystem system;
         return system;
     }
+    //////////////////////////////////////////
 
     TransformSystem::~TransformSystem()
     {
 
     }
+    //////////////////////////////////////////
 
-    void TransformSystem::update(const float deltaTime)
+    void TransformSystem::_update(const float deltaTime)
     {
-        auto& vekki = getComponentsRef<TransformComponent>();
+
     }
+    //////////////////////////////////////////
 
 }
