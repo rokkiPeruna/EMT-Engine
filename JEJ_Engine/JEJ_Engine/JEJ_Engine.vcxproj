@@ -103,6 +103,7 @@
     <ClCompile Include="..\..\source\EntityComponentSys\Components\TransformComponent.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Entity\Entity.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\RenderSystem.cpp" />
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\ShaderSystem.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\System.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\TransformSystem.cpp" />
     <ClCompile Include="..\..\source\Graphics\Graphics.cpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="..\..\include\EntityComponentSys\Components\TransformComponent.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Entity\Entity.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\RenderSystem.hpp" />
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\ShaderSystem.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\System.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\TransformSystem.hpp" />
     <ClInclude Include="..\..\include\Graphics\Graphics.hpp" />
