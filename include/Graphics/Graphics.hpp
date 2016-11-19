@@ -5,10 +5,12 @@
 #include <OpenGL_ES2/EGL/eglplatform.h>
 #include <OpenGL_ES2/GLES2/gl2platform.h>
 
+#include <memory>
+
 /////////////////////////////////
 namespace jej //NAMESPACE jej
 {
-    class Graphics
+    class Graphics : public std::enable_shared_from_this<Graphics>
     {
     public:
 

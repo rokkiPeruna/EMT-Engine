@@ -17,18 +17,21 @@ namespace jej
         friend class System;
 
     private:
-        //Singleton Constructor
+        
+        //Singleton constructor
         SpriteSystem();
 
     public:
+        
         //Destructor
         virtual ~SpriteSystem();
-        //Get Instance
+        
+        //Get instance
         static SpriteSystem& GetInstance();
 
     protected:
         std::vector<std::shared_ptr<SpriteComponent>>m_components;
-        void update(const float p_deltaTime) override;
+        void _update(const float p_deltaTime) override;
 
     };
 }

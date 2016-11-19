@@ -7,19 +7,23 @@
 namespace jej
 {
 
-	class ShapeComponent:public Component
-	{
-	protected:
-		ShapeType m_shapeType;
+    class ShapeComponent : public Component
+    {
 
-	public:
-		//Constructor
-		ShapeComponent();
+    public:
+        //Constructor
+        ShapeComponent();
 
-		//Destructor
-		virtual ~ShapeComponent();
+        //Destructor
+        virtual ~ShapeComponent();
 
-	};
+
+
+    protected:
+
+        ShapeType m_shapeType;
+
+    };
 
 }
 

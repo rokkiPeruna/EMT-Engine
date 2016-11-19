@@ -5,8 +5,7 @@ m_shaderComp(nullptr),
 m_shapeComp(nullptr),
 m_transformComp(nullptr)
 {
-    if (sizeof...(args) > 0)
-        _addComponent(args...);
+    _addComponent(args...);
 
     if (!m_shaderComp)
         m_shaderComp.reset(new ShaderComponent());
@@ -15,13 +14,16 @@ m_transformComp(nullptr)
     if (!m_transformComp)
         m_transformComp.reset(new TransformComponent());
 
-    JEJ_ASSERT(m_shaderComp, "ShaderComponent not initialized.");
-    JEJ_ASSERT(m_shapeComp, "ShapeComponent not initialized.");
-    JEJ_ASSERT(m_transformComp, "TransformComponent not initialized.");
+
+    JEJ_ASSERT(m_shaderComp.get() != nullptr, "ShaderComponent not initialized.");
+    JEJ_ASSERT(m_shapeComp.get() != nullptr, "ShapeComponent not initialized.");
+    JEJ_ASSERT(m_transformComp.get() != nullptr, "TransformComponent not initialized.");
+
+    m_componentType = ComponentType::Render;
 }
 
 template <typename T>
-void RenderComponent::_addComponent(const T& t)
+void RenderComponent::_addComponentImpl(const T& t)
 {
     if (T == std::shared_ptr<ShaderComponent> && m_shaderComp == nullptr)
     {
@@ -42,7 +44,20 @@ void RenderComponent::_addComponent(const T& t)
 }
 
 template <typename T, typename ... Args>
-void RenderComponent::_addComponent(const T& t, const Args& ... args)
+void RenderComponent::_addComponentHelper(const T& t, const Args& ... args)
 {
-    _addComponent(args...);
+    _addComponentImpl<T>(t);
+    _addComponent<Args...>(args...);
+}
+
+template <typename ... Args>
+void RenderComponent::_addComponent(const Args& ... args)
+{
+    _addComponentHelper<Args...>(args...);
+}
+
+template <>
+void RenderComponent::_addComponent<>()
+{
+
 }

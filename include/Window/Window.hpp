@@ -12,6 +12,7 @@
 /////////////////////////////////
 
 //Standard headers
+#include <memory>
 #include <string>
 /////////////////////////////////
 
@@ -35,7 +36,7 @@ namespace jej//NAMESPACE jej STARTS
 
     //This is a baseclass for various OS windows, e.g. Win32, Android, etc.
     //Pure virtual class
-    class Window
+    class Window : public std::enable_shared_from_this<Window>
     {
 
         //Public methods and variables

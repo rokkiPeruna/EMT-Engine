@@ -21,7 +21,7 @@ namespace jej
 		return instance;
 	}
 
-    void SpriteSystem::update(const float p_deltaTime)
+    void SpriteSystem::_update(const float p_deltaTime)
     {
 
     }

@@ -5,22 +5,22 @@
 
 namespace jej
 {
-	class Convex:ShapeComponent
-	{
-	private:
-		unsigned int m_pointCount;
-		Vector2f *m_points;
+    class Convex : ShapeComponent
+    {
+    private:
+        unsigned int m_pointCount;
+        Vector2f *m_points;
 
-	public:
+    public:
 
-		Convex();
+        Convex();
 
-		//Constructor
-		Convex(const unsigned int p_pointCount, Vector2f*p_points);
+        //Constructor
+        Convex(const unsigned int p_pointCount, Vector2f*p_points);
 
-		//Destructor
-		virtual ~Convex();
-	};
+        //Destructor
+        virtual ~Convex();
+    };
 
 
 }

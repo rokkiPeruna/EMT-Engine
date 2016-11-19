@@ -6,21 +6,21 @@
 namespace jej
 {
 
-	class Triangle:ShapeComponent
-	{
-	private:
-		Vector2f m_points[3];
+    class Triangle : ShapeComponent
+    {
+    private:
+        Vector2f m_points[3];
 
-	public:
+    public:
 
-		Triangle();
+        Triangle();
 
-		//Constructor
-		Triangle(const Vector2f p_points[3]);
+        //Constructor
+        Triangle(const Vector2f p_points[3]);
 
-		//Destructor
-		virtual ~Triangle();
-	};
+        //Destructor
+        virtual ~Triangle();
+    };
 
 }
 

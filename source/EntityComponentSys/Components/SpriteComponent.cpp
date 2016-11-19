@@ -1,5 +1,5 @@
 #include <EntityComponentSys/Components/SpriteComponent.hpp>
-#include <Utility/FileHandler/FileHandlerWin32.hpp>
+#include <Utility/FileHandler.hpp>
 #include <Utility/Messenger.hpp>
 
 namespace jej
@@ -14,7 +14,7 @@ namespace jej
         m_componentType = ComponentType::Sprite;
 
 
-        FileHandlerWin32 handler;
+        FileHandler handler;
         if (handler.Read(p_name))
         {
             m_data.assign(handler.m_fileContents.begin(), handler.m_fileContents.end());

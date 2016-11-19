@@ -10,6 +10,7 @@ namespace jej
     class RenderComponent;
     class ShaderComponent;
     class ShapeComponent;
+    class SpriteComponent;
     class TransformComponent;
 
 
@@ -28,10 +29,11 @@ namespace jej
     enum class ComponentType : unsigned short int
     {
         Failure,
-        Transform,
         Render,
         Shader,
-        Shape
+        Shape,
+        Sprite,
+        Transform
     };
 
 
@@ -40,7 +42,7 @@ namespace jej
     template <typename T>
     struct ComponentHelper
     {
-        ComponentHelper<T>(){ JEJ_ASSERT(false, "Invalid ComponentHelper type"); };
+        ComponentHelper<T>(){ static_assert(false, "Invalid ComponentHelper type."); };
     };
 
     template <>
@@ -57,24 +59,28 @@ namespace jej
         ComponentHelper<ShaderComponent>(){};
     };
 
-    /*template <>
+    template <>
     struct ComponentHelper<ShapeComponent>
     {
         static const unsigned short int index = 2u;
         ComponentHelper<ShapeComponent>(){};
-    };*/
+    };
+
+    template <>
+    struct ComponentHelper<SpriteComponent>
+    {
+        static const unsigned short int index = 3u;
+        ComponentHelper<SpriteComponent>(){};
+    };
 
     template <>
     struct ComponentHelper<TransformComponent>
     {
-        static const unsigned short int index = 2u;
+        static const unsigned short int index = 4u;
         ComponentHelper<TransformComponent>(){};
     };
 
-
-
-
-
+    
 
     enum class ShapeType
     {

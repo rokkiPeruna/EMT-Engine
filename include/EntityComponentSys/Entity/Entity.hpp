@@ -7,15 +7,20 @@
 
 #include <EntityComponentSys/Components/RenderComponent.hpp>
 #include <EntityComponentSys/Components/ShaderComponent.hpp>
+#include <EntityComponentSys/Components/ShapeComponent.hpp>
+#include <EntityComponentSys/Components/SpriteComponent.hpp>
 #include <EntityComponentSys/Components/TransformComponent.hpp>
 #include <EntityComponentSys/Systems/RenderSystem.hpp>
 #include <EntityComponentSys/Systems/ShaderSystem.hpp>
+#include <EntityComponentSys/Systems/ShapeSystem.hpp>
+#include <EntityComponentSys/Systems/SpriteSystem.hpp>
 #include <EntityComponentSys/Systems/TransformSystem.hpp>
 
 //
 #include <memory>
 #include <string>
 #include <tuple>
+#include <type_traits>
 #include <utility>
 #include <vector>
 //
@@ -23,6 +28,67 @@
 
 namespace jej
 {
+
+    //namespace detail
+    //{
+
+    //    template <typename T>
+    //    struct ComponentFactory
+    //    {
+    //        template <typename ... Args>
+    //        static T& Create(Entity&, std::vector<std::shared_ptr<T>>& components, Args... p_args)
+    //        {
+    //            components.emplace_back(std::make_shared<T>(std::forward<Args>(p_args)...));    //Create component
+    //            return *components.back().get();
+    //        };
+
+    //        ComponentFactory<T>(){};
+
+    //    };
+
+    //    template <>
+    //    struct ComponentFactory<RenderComponent>
+    //    {
+    //        template <typename ... Args>
+    //        static RenderComponent& CreateImpl(Entity& entity, std::vector<std::shared_ptr<RenderComponent>>& components, Args... p_args)
+    //        {
+    //            components.emplace_back(std::make_shared<RenderComponent>(entity, std::forward<Args>(p_args)...));    //Create component
+    //            return *components.back().get();
+    //        };
+
+    //        ComponentFactory<RenderComponent>(){};
+    //    };
+
+    //    template <>
+    //    struct ComponentFactory<RenderComponent>
+    //    {
+    //        template <typename ... Args>
+    //        static RenderComponent& CreateHelp(Entity& entity, std::vector<std::shared_ptr<RenderComponent>>& components, Args... p_args)
+    //        {
+    //            CreateImpl<RenderComponent>(entity, components);
+    //            Create<Args...>(entity, components, p_args);
+    //        }
+    //    };
+
+    //    template <>
+    //    struct ComponentFactory<RenderComponent>
+    //    {
+    //        template <typename ... Args>
+    //        static RenderComponent& Create<>(Entity& entity, std::vector<std::shared_ptr<RenderComponent>>& components, Args... p_args)
+    //        {
+    //            CreateHelp<Args...>(entity, components, p_args);
+    //        };
+
+    //    };
+
+    //    template <>
+    //    struct ComponentFactory<RenderComponent>
+    //    {
+    //        template <>
+    //        static RenderComponent& Create<>(Entity&){};
+
+    //    };
+    //}
 
     class Entity
     {
@@ -37,7 +103,7 @@ namespace jej
 
     public:
 
-        
+
 
         Entity(const std::string& p_name = "");
 

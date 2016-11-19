@@ -5,21 +5,21 @@
 
 namespace jej
 {
-	class Circle:ShapeComponent
-	{
-	private:
-		float m_radius;
+    class Circle : ShapeComponent
+    {
+    private:
+        float m_radius;
 
-	public:
+    public:
 
-		Circle();
+        Circle();
 
-		//Constructor
-		Circle(const float radius);
+        //Constructor
+        Circle(const float radius);
 
-		//Destructor
-		virtual ~Circle();
-	};
+        //Destructor
+        virtual ~Circle();
+    };
 
 
 }

@@ -17,10 +17,10 @@ namespace jej
     public:
         
         //Default constructor
-        TransformComponent(const Entity& entity);
+        TransformComponent();
 
         //Copy-constructor
-        TransformComponent(const Entity& entity, const Vector2f& p_position, const Vector2f& p_scale, const Vector4f& p_rotation);
+        TransformComponent(const Vector2f& p_position, const Vector2f& p_scale, const Vector4f& p_rotation);
 
         //Destructor
         virtual ~TransformComponent();

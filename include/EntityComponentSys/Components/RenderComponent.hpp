@@ -54,16 +54,53 @@ namespace jej
 
     private:
 
+        
+
         template <typename T>
-        void _addComponent(const T& t);
+        void _addComponentImpl(const T& t);
 
         template <typename T, typename ... Args>
-        void _addComponent(const T& t, const Args& ... args);
+        void _addComponentHelper(const T& t, const Args& ... args);
+
+        template <typename ... Args>
+        void _addComponent(const Args& ... args);
+
+        template <>
+        void _addComponent();
 
         std::shared_ptr<ShaderComponent> m_shaderComp;
         std::shared_ptr<ShapeComponent> m_shapeComp;
         std::shared_ptr<TransformComponent> m_transformComp;
     };
+
+
+    //template<typename T>
+    //void loadBrush_sub_impl()
+    //{
+    //    // do some work here
+    //}
+
+    //template<typename... Targs>
+    //void loadBrush_sub();
+
+    //template<typename T, typename... V>
+    //void loadBrush_sub_helper()
+    //{
+    //    loadBrush_sub_impl<T>();
+    //    loadBrush_sub<V...>();
+    //}
+
+    //template<typename... Targs>
+    //void loadBrush_sub()
+    //{
+    //    loadBrush_sub_helper<Targs...>();
+    //}
+
+    //template<>
+    //void loadBrush_sub<>()
+    //{
+    //}
+
 
 #include <EntityComponentSys/Components/Inl/RenderComponent.inl>
 

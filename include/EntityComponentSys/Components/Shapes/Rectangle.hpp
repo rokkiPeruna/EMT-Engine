@@ -6,21 +6,21 @@
 namespace jej
 {
 
-	class Rectangle :ShapeComponent
-	{
-	private:
-		Vector2f m_extents;
+    class Rectangle : ShapeComponent
+    {
+    private:
+        Vector2f m_extents;
 
-	public:
+    public:
 
-		Rectangle();
+        Rectangle();
 
-		//Constructor
-		Rectangle(const Vector2f extents);
+        //Constructor
+        Rectangle(const Vector2f extents);
 
-		//Destructor
-		virtual ~Rectangle();
-	};
+        //Destructor
+        virtual ~Rectangle();
+    };
 
 }
 
