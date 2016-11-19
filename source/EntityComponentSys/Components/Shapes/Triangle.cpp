@@ -1,4 +1,4 @@
-#include <EntityComponentSys\Components\Shapes\Triangle.hpp>
+#include <EntityComponentSys/Components/Shapes/Triangle.hpp>
 
 namespace jej
 {
