@@ -12,7 +12,7 @@ namespace jej
 
     public:
         //Constructor
-        ShapeComponent();
+        ShapeComponent(Entity& entity);
 
         //Destructor
         virtual ~ShapeComponent();

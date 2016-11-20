@@ -3,15 +3,15 @@
 namespace jej
 {
 
-	ShapeComponent::ShapeComponent():
-        Component()
-	{
+    ShapeComponent::ShapeComponent(Entity& entity) :
+        Component(entity)
+    {
         m_componentType = ComponentType::Shape;
-	}
+    }
 
-	ShapeComponent::~ShapeComponent()
-	{
+    ShapeComponent::~ShapeComponent()
+    {
 
-	}
+    }
 
 }

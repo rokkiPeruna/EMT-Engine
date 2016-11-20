@@ -33,6 +33,9 @@ namespace jej //NAMESPACE jej
         //For accessing m_system
         friend class System;
 
+        //For adding components to RenderComponents m_shader, m_shape, m_transform
+        friend class RenderComponent;
+
 	private:
 
 		//Constructor
@@ -52,6 +55,9 @@ namespace jej //NAMESPACE jej
 
 		//Destructor
 		~EngineObject();
+
+        //Set m_scene 
+        void SetCurrentScene(const Scene& p_scene);
 
 		//Draw everything
 		void EngineDraw();

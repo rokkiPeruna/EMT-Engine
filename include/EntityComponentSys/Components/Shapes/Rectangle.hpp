@@ -13,10 +13,11 @@ namespace jej
 
     public:
 
-        Rectangle();
+        //Default constructor
+        Rectangle(Entity& entity);
 
         //Constructor
-        Rectangle(const Vector2f extents);
+        Rectangle(Entity& entity, const Vector2f extents);
 
         //Destructor
         virtual ~Rectangle();

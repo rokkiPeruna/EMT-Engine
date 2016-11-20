@@ -101,6 +101,9 @@ namespace jej
         //For componentIDs
         friend class Component;
 
+        //For adding to m_componentIDs
+        friend class RenderComponent;
+
     public:
 
 
@@ -114,7 +117,7 @@ namespace jej
 
         void* userData;
 
-        const unsigned int GetID() const;
+        const JEJ_COUNT GetID() const;
 
         //Components
 

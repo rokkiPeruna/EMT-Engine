@@ -12,10 +12,11 @@ namespace jej
 
     public:
 
-        Circle();
+        //Default constructor
+        Circle(Entity& entity);
 
         //Constructor
-        Circle(const float radius);
+        Circle(Entity& entity, const float radius);
 
         //Destructor
         virtual ~Circle();

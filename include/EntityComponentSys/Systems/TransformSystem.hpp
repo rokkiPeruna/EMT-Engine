@@ -12,11 +12,10 @@ namespace jej
     class TransformSystem : public System
     {
 
-        //For modifying m_components
+        //For accessing m_components
         friend class Entity;
-
-        //For modifying m_components
         friend class System;
+        friend class RenderComponent;
 
     private:
 
@@ -37,7 +36,7 @@ namespace jej
 
         static std::vector<std::shared_ptr<TransformComponent>> m_components;
 
-        
+
 
     };
 

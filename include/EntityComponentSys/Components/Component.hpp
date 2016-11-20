@@ -21,10 +21,13 @@ namespace jej
         //For manipulating components
         friend class Entity;
 
+        //
+        friend class RenderComponent;
+
     public:
 
         //Constructor
-        Component();
+        Component(Entity& entity);
 
         //Copy-constructor
         Component(const Component& p_other);
@@ -39,13 +42,13 @@ namespace jej
 
         void setParent(const JEJ_COUNT p_parentID);
 
-        //What am I
+        //Type of this
         ComponentType m_componentType;
 
-        //Who am I
+        //ID of this
         const unsigned int m_componentID;
 
-        //Who the hell are you
+        //ID of the entity that owns this
         unsigned int m_parentID;
 
     private:

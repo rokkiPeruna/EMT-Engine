@@ -31,7 +31,7 @@ namespace jej
         //Entities
 
         //Add a component to the given entity
-        bool AddEntity(const std::string& p_name = "");
+        Entity& AddEntity(const std::string& p_name = "");
 
         //Returns pointer to a component of desired type if present on the target entity, otherwise nullptr
         Entity* GetEntityPtr(const std::string& p_name);

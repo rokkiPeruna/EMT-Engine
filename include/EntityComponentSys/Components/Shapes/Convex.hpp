@@ -13,10 +13,11 @@ namespace jej
 
     public:
 
-        Convex();
+        //Default constructor
+        Convex(Entity& entity);
 
         //Constructor
-        Convex(const unsigned int p_pointCount, Vector2f*p_points);
+        Convex(Entity& entity, const unsigned int p_pointCount, Vector2f*p_points);
 
         //Destructor
         virtual ~Convex();

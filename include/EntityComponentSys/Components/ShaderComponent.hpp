@@ -46,7 +46,7 @@ namespace jej
 
 
         //Constructor
-        ShaderComponent::ShaderComponent(const std::string& p_vertexShaderFileName = "", const std::string& p_fragmentShaderFileName = "");
+        ShaderComponent::ShaderComponent(Entity& entity, const std::string& p_vertexShaderFileName = "", const std::string& p_fragmentShaderFileName = "");
 
         //Destructor
         ShaderComponent::~ShaderComponent();

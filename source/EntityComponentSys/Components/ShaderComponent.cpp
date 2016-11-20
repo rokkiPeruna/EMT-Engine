@@ -10,8 +10,8 @@
 
 namespace jej
 {
-    ShaderComponent::ShaderComponent(const std::string& p_fragmentShaderFileName, const std::string& p_vertexShaderFileName) :
-        Component(),
+    ShaderComponent::ShaderComponent(Entity& entity, const std::string& p_fragmentShaderFileName, const std::string& p_vertexShaderFileName) :
+        Component(entity),
         m_shaderData()
     {
         m_componentType = ComponentType::Shader;

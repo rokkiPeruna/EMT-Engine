@@ -28,7 +28,7 @@ namespace jej
     }
     //
 
-    const unsigned int Entity::GetID() const
+    const JEJ_COUNT Entity::GetID() const
     {
         return m_entityID;
     }
@@ -39,7 +39,8 @@ namespace jej
         //TODO: Call remove on all types
         RemoveComponent<RenderComponent>();
         RemoveComponent<ShaderComponent>();
-        //RemoveComponent<ShapeComponent>();
+        RemoveComponent<ShapeComponent>();
+        RemoveComponent<SpriteComponent>();
         RemoveComponent<TransformComponent>();
 
 

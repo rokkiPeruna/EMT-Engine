@@ -19,6 +19,7 @@ namespace jej
 		friend class EngineObject;
 		friend class Entity;
 		friend class ShaderComponent;
+        friend class RenderComponent;
 
 	private:
 

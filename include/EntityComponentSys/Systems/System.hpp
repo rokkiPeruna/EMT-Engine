@@ -26,7 +26,7 @@ namespace jej
     {
 
         //For modifying containers
-        friend class UserSystem;
+        friend class RenderComponent;
 
     public:
         
@@ -46,7 +46,7 @@ protected:
 
     //Get component vector reference of desired type
     template <typename T>
-    std::vector<std::shared_ptr<T>>& getComponentsRef();
+    std::vector<std::shared_ptr<T>>& _getComponentsRef();
 
     };
 

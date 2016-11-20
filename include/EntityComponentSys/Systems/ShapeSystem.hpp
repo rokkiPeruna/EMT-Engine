@@ -10,6 +10,9 @@ namespace jej
 
     class ShapeSystem : public System
     {
+        //For accessing m_components
+        friend class Entity;
+        friend class RenderComponent;
 
     private:
 

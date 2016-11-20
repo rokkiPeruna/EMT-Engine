@@ -95,6 +95,14 @@ namespace jej //NAMESPACE jej
     }
     //////////////////////////////////////////
 
+    void EngineObject::SetCurrentScene(const Scene& p_scene)
+    {
+        //Doesn't work in future
+        DebugBreak();
+        m_currentScene = std::make_shared<Scene>(p_scene);
+    }
+    //////////////////////////////////////////
+
     void EngineObject::EngineDraw()
     {
         m_graphicsPtr->_drawAll();

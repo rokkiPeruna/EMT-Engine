@@ -3,8 +3,8 @@
 namespace jej
 {
 
-    Convex::Convex() :
-        ShapeComponent(),
+    Convex::Convex(Entity& entity) :
+        ShapeComponent(entity),
         m_pointCount(5u)
     {
         Vector2f points[5u] =
@@ -19,8 +19,8 @@ namespace jej
         m_shapeType = ShapeType::Convex;
     }
 
-    Convex::Convex(const unsigned int p_pointCount, Vector2f*p_points) :
-        ShapeComponent(),
+    Convex::Convex(Entity& entity, const unsigned int p_pointCount, Vector2f*p_points) :
+        ShapeComponent(entity),
         m_pointCount(p_pointCount)
     {
         m_shapeType = ShapeType::Convex;

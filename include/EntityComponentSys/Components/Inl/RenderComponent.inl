@@ -1,18 +1,27 @@
 template <typename ... Args>
-RenderComponent::RenderComponent(const Entity& entity, const Args& ... args) :
-Component(),
+RenderComponent::RenderComponent(Entity& entity, const Args& ... args) :
+Component(entity),
 m_shaderComp(nullptr),
 m_shapeComp(nullptr),
 m_transformComp(nullptr)
 {
-    _addComponent(args...);
+    //Add components from args
+    //TAKES THE COMPONENTS IN AS RAW OBJECTS
+    _addComponent(entity, args...);
 
+    //Create default components
     if (!m_shaderComp)
-        m_shaderComp.reset(new ShaderComponent());
+    {
+        _createDefault<ShaderComponent>(entity, m_shaderComp);
+    }
     if (!m_shapeComp)
-        m_shapeComp.reset(new ShapeComponent());
+    {
+        _createDefault<ShapeComponent>(entity, m_shapeComp);
+    }
     if (!m_transformComp)
-        m_transformComp.reset(new TransformComponent());
+    {
+        _createDefault<TransformComponent>(entity, m_transformComp);
+    }
 
 
     JEJ_ASSERT(m_shaderComp.get() != nullptr, "ShaderComponent not initialized.");
@@ -21,43 +30,144 @@ m_transformComp(nullptr)
 
     m_componentType = ComponentType::Render;
 }
+//////////////////////////////////////////
 
 template <typename T>
-void RenderComponent::_addComponentImpl(const T& t)
+void RenderComponent::_createDefault(Entity& p_entity, std::shared_ptr<T>& p_ptr)
 {
-    if (T == std::shared_ptr<ShaderComponent> && m_shaderComp == nullptr)
+    auto& components = std::get<ComponentHelper<T>::index>(EngineObject::GetInstance().m_systems)->m_components;
+
+    for (auto itr : components)
     {
-        m_shaderComp = std::static_pointer_cast<ShaderComponent>(t);
+        if (itr->m_parentID == p_entity.m_entityID)
+        {
+            //Entity has a component of type T already bound to it
+            p_ptr = itr;
+            return;
+        }
     }
-    else if (T == std::shared_ptr<ShapeComponent> && m_shapeComp == nullptr)
+    
+    //Entity does not have a component of type T, create it
+    components.emplace_back(std::make_shared<T>(p_entity));
+    p_ptr = components.back();
+}
+//////////////////////////////////////////
+
+
+template <typename T>
+void RenderComponent::_addComponentTrue(Entity& entity, const T& t)
+{
+    //Check if the entity has a component of type T
+    for (auto itr : std::get<ComponentHelper<T>::index>(EngineObject::GetInstance().m_systems)->m_components)
     {
-        m_shapeComp = std::static_pointer_cast<ShapeComponent>(t);
+        if (itr->m_parentID == entity.m_entityID)
+        {
+            break;
+        }
     }
-    else if (T == std::shared_ptr<TransformComponent> && m_transformComp == nullptr)
+
+    //Parent entity of 't' IS NOT same as given entity
+    if (&entity != EngineObject::GetInstance().GetSceneRef()->GetEntityPtr(t.m_parentID))
     {
-        m_transformComp = std::static_pointer_cast<TransformComponent>(t);
+        Messenger::Add(Messenger::MessageType::Debug,
+            "RenderComponent: Given component is not parented to given entity.",
+            "This might cause undefined behaviour",
+            "Entity gets the component added to itself, but the component keeps its old parent.");
+
+        //Add a notation of the component to the entity
+        //Now two entities might share same component
+        entity.m_componentIDs.emplace_back(t.m_componentID);
+
+        //Do we want to create copies of the entities
+        //Messenger::Add(Messenger::MessageType::Debug, "RenderComponent: Given component is not parented to given entity.", "Creating a copy of given component");
+        //std::get<ComponentHelper<T>::index>(EngineObject::GetInstance().m_systems)->emplace_back();
     }
+#ifdef JEJ_DEBUG_MODE
     else
     {
-        Messenger::Add(Messenger::MessageType::Error, "RenderComponent: Bad argument");
+        Messenger::Add(Messenger::MessageType::Debug, "RenderComponent: Component is already parented to given entity.");
     }
+#endif
+    return;
 }
+//////////////////////////////////////////
 
-template <typename T, typename ... Args>
-void RenderComponent::_addComponentHelper(const T& t, const Args& ... args)
-{
-    _addComponentImpl<T>(t);
-    _addComponent<Args...>(args...);
-}
 
-template <typename ... Args>
-void RenderComponent::_addComponent(const Args& ... args)
+template <typename T>
+void RenderComponent::_addComponentImpl(Entity&, const T&)
 {
-    _addComponentHelper<Args...>(args...);
+    static_assert(false, "RenderComponent: Bad argument type");
 }
+//////////////////////////////////////////
+
 
 template <>
-void RenderComponent::_addComponent<>()
+void RenderComponent::_addComponentImpl<ShaderComponent>(Entity& entity, const ShaderComponent& t)
+{
+    //If several ShaderComponents have been passed
+    if (m_shaderComp)
+    {
+        Messenger::Add(Messenger::MessageType::Error, "RenderComponent: ShaderComponent already bound, bypassing.");
+        JEJ_ASSERT(false, "RenderComponent: ShaderComponent already bound.");
+        return;
+    }
+    _addComponentTrue<ShaderComponent>(entity, t);
+}
+//////////////////////////////////////////
+
+
+template <>
+void RenderComponent::_addComponentImpl<ShapeComponent>(Entity& entity, const ShapeComponent& t)
+{
+    //If several ShapeComponents have been passed
+    if (m_shapeComp)
+    {
+        Messenger::Add(Messenger::MessageType::Error, "RenderComponent: ShapeComponent already bound, bypassing.");
+        JEJ_ASSERT(false, "RenderComponent: ShapeComponent already bound.");
+        return;
+    }
+    _addComponentTrue<ShapeComponent>(entity, t);
+}
+//////////////////////////////////////////
+
+
+template <>
+void RenderComponent::_addComponentImpl<TransformComponent>(Entity& entity, const TransformComponent& t)
+{
+    //If several ShaderComponents have been passed
+    if (m_transformComp)
+    {
+        Messenger::Add(Messenger::MessageType::Error, "RenderComponent: TransformComponent already bound, bypassing.");
+        JEJ_ASSERT(false, "RenderComponent: TransformComponent already bound.");
+        return;
+    }
+    _addComponentTrue<TransformComponent>(entity, t);
+}
+//////////////////////////////////////////
+
+
+template <typename T, typename ... Args>
+void RenderComponent::_addComponentHelper(Entity& entity, const T& t, const Args& ... args)
+{
+    static_assert(std::is_base_of<Component, T>::value, "Tried to add a component to RenderComponent that does not inherit from Component");
+    _addComponentImpl<T>(entity, t);
+    _addComponent<Args...>(entity, args...);
+}
+//////////////////////////////////////////
+
+
+template <typename ... Args>
+void RenderComponent::_addComponent(Entity& entity, const Args& ... args)
+{
+    _addComponentHelper<Args...>(entity, args...);
+}
+//////////////////////////////////////////
+
+
+template <>
+void RenderComponent::_addComponent<>(Entity&)
 {
 
 }
+//////////////////////////////////////////
+

@@ -21,10 +21,10 @@ namespace jej
         return &m_entities;
     }
 
-    bool Scene::AddEntity(const std::string& p_name)
+    Entity& Scene::AddEntity(const std::string& p_name)
     {
         m_entities.emplace_back(std::make_shared<Entity>(p_name));
-        return true;
+        return *m_entities.back().get();
     }
 
     Entity* Scene::GetEntityPtr(const std::string& p_name)

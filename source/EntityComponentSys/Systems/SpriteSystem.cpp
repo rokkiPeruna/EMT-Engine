@@ -3,9 +3,10 @@
 namespace jej
 {
 
+    std::vector<std::shared_ptr<SpriteComponent>> SpriteSystem::m_components = {};
+
 	SpriteSystem::SpriteSystem():
-		System(),
-		m_components()
+		System()
 	{
 
 	}

@@ -19,15 +19,46 @@ int main(int argc, char* argv[])
 
     jej::Scene gameLevel;
 
+    game.SetCurrentScene(gameLevel);
+
     gameLevel.AddEntity("player1");
+
+
+
+    {
+
+        auto& box = gameLevel.AddEntity("boxToCopy");
+        auto& transform = box.AddComponent<jej::TransformComponent>(
+            jej::Vector2f(1.f, 2.f),
+            jej::Vector2f(3.f, 4.f),
+            jej::Vector4f(5.f, 6.f, 7.f, 8.f)
+            );
+
+        std::vector<jej::Entity*> myTower;
+
+        for (unsigned int i = 0u; i < 10u; ++i)
+        {
+            myTower.emplace_back(&gameLevel.AddEntity());
+            myTower.back()->AddComponent<jej::RenderComponent>(*box.GetComponentPtr<jej::TransformComponent>());
+            myTower.back()->GetComponentPtr<jej::TransformComponent>()->position.x += i + 1u;
+        }
+
+
+
+
+
+
+    }
+
+
 
 
     auto* playeri = gameLevel.GetEntityPtr("player1");
 
     playeri->AddComponent<jej::TransformComponent>(
         jej::Vector2f(3.f, 5.f),
-        jej::Vector2f(1, 1),
-        jej::Vector4f(9, 2, 50, 1));
+        jej::Vector2f(1.f, 1.f),
+        jej::Vector4f(9.f, 2.f, 50.f, 1.f));
 
     auto& shaderRef = playeri->AddComponent<jej::ShaderComponent>("FragmentShaderTexture.frag");
     auto* shaderPtr = playeri->GetComponentPtr<jej::ShaderComponent>();
@@ -39,6 +70,7 @@ int main(int argc, char* argv[])
     //bool on = playeri->HasComponent<jej::TransformComponent>();
     //
     //transvormi->position.x += transvormi->position.x;
+
 
     for (;;)
     {

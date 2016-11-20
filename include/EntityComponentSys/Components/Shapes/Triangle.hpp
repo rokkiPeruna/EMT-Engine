@@ -13,10 +13,11 @@ namespace jej
 
     public:
 
-        Triangle();
+        //Default constructor
+        Triangle(Entity& entity);
 
         //Constructor
-        Triangle(const Vector2f p_points[3]);
+        Triangle(Entity& entity, const Vector2f p_points[3]);
 
         //Destructor
         virtual ~Triangle();

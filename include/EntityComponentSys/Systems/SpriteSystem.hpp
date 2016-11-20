@@ -30,7 +30,7 @@ namespace jej
         static SpriteSystem& GetInstance();
 
     protected:
-        std::vector<std::shared_ptr<SpriteComponent>>m_components;
+        static std::vector<std::shared_ptr<SpriteComponent>> m_components;
         void _update(const float p_deltaTime) override;
 
     };
