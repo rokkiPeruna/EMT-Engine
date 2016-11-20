@@ -2,6 +2,8 @@
 
 #include <Core/EngineObject.hpp>
 
+#include <IO_Manager/InputManagerImpl.hpp>
+
 #include <EntityComponentSys/Components/Component.hpp>
 #include <EntityComponentSys/Entity/Entity.hpp>
 #include <EntityComponentSys/Systems/RenderSystem.hpp>
@@ -72,7 +74,9 @@ namespace jej //NAMESPACE jej
 #endif
 
         //TODO:
-        //Initialize all systems here
+        //Initialize all systems and managers here
+		InputManager::GetInstance();
+
         std::get<0>(engine.m_systems) = &RenderSystem::GetInstance();
         std::get<1>(engine.m_systems) = &ShaderSystem::GetInstance();
         std::get<2>(engine.m_systems) = &ShapeSystem::GetInstance();
@@ -105,7 +109,11 @@ namespace jej //NAMESPACE jej
     {
         //m_graphicsPtr->_updateBuffersAll();
 
+		InputManager::GetInstance().Update();
+
         m_windowPtr->UpdateWindowMessages();
+
+
         RenderSystem::GetInstance()._update(100.f);
     }
     //////////////////////////////////////////

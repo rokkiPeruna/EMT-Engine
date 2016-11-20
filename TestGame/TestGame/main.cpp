@@ -12,6 +12,10 @@
 
 #include <EntityComponentSys/Components/ShaderComponent.hpp>
 
+#include <IO_Manager/Win32/Mouse.hpp>
+#include <IO_Manager/Win32/Keyboard.hpp>
+#include <IO_Manager/Win32/InputManager.hpp>
+
 int main(int argc, char* argv[])
 {
     jej::EngineObject::Initialize(argv[0]);
@@ -40,10 +44,14 @@ int main(int argc, char* argv[])
     //
     //transvormi->position.x += transvormi->position.x;
 
-    for (;;)
+	auto& mouse = jej::Mouse::GetInstance();
+	auto& keyboard = jej::Keyboard::GetInstance();
+
+    while(true)
     {
         game.EngineUpdate();
-        break;
+		//std::cout << mouse.GetMousePosition().x << "   " << mouse.GetMousePosition().y << std::endl;
+		
     }
 
     return 0;
