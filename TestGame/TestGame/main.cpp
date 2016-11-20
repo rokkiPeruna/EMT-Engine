@@ -19,13 +19,13 @@ int main(int argc, char* argv[])
 
     jej::Scene gameLevel;
 
-    game.SetCurrentScene(gameLevel);
+    //game.SetCurrentScene(gameLevel);
 
     gameLevel.AddEntity("player1");
 
 
 
-    {
+    /*{
 
         auto& box = gameLevel.AddEntity("boxToCopy");
         auto& transform = box.AddComponent<jej::TransformComponent>(
@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
 
 
 
-    }
+    }*/
 
 
 
