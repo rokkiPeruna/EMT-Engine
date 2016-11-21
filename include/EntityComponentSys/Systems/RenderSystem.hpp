@@ -7,6 +7,7 @@
 
 //
 #include <memory>
+#include <assert.h>
 //
 
 //
@@ -34,6 +35,7 @@ namespace jej
 		//For manipulating m_components
 		friend class EngineObject;
 		friend class Entity;
+        friend LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
         
 
     private:
@@ -55,18 +57,22 @@ namespace jej
 
         void _render();
 		
+
     private:
         
         //Screen properties for OpenGL ES
-        short int m_winWidth;
-        short int m_winHeight;
-        short int m_winOffsetX;
-        short int m_winOffsetY;
+        unsigned int m_winWidth;
+        unsigned int m_winHeight;
+        unsigned int m_winOffsetX;
+        unsigned int m_winOffsetY;
 
         //Smart pointer to Window - singleton
         std::shared_ptr<Window> m_window;
 
         //
+
+        //This renders and draws every RenderComponent by calling priv methods
+        void _update(const float p_deltaTime) override;
 
         //
         void _clearScreen();
@@ -87,11 +93,7 @@ namespace jej
         bool _createContext(const EGLint p_attributeList[]);
 
         //Vertex buffer objects for various different types
-
-    protected:
-
-        //This renders and draws every RenderComponent by calling priv methods
-        void _update(const float p_deltaTime) override;
+        //TODO: Add buffers
 
         static std::vector<std::shared_ptr<RenderComponent>> m_components;
 

@@ -59,9 +59,6 @@ namespace jej //NAMESPACE jej
         //Set m_scene 
         void SetCurrentScene(const Scene& p_scene);
 
-		//Draw everything
-		void EngineDraw();
-
 		//Mother of all updates
 		void EngineUpdate();
 
@@ -77,7 +74,6 @@ namespace jej //NAMESPACE jej
         std::tuple<RenderSystem*, ShaderSystem*, ShapeSystem*, SpriteSystem*, TransformSystem*> m_systems;
 
         std::shared_ptr<Scene> m_currentScene;
-		std::shared_ptr<Graphics> m_graphicsPtr;
         std::shared_ptr<Window> m_windowPtr;
 
 	};

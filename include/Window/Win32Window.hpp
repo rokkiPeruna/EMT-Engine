@@ -14,10 +14,10 @@
 namespace jej//NAMESPACE jej STARTS
 {
     //Win32 specific initializing data
-    struct WindowOSInitData
+    static struct WindowOSInitData
     {
-        short int offsetX = 0;
-        short int offsetY = 0;
+        int offsetX = 600;
+        int offsetY = 600;
 
         HINSTANCE m_hInstance;
         HWND m_hWnd;
@@ -51,8 +51,6 @@ namespace jej//NAMESPACE jej STARTS
 
         //Destructor
         virtual ~Win32Window();
-
-		//LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
 
 
         //inherited methods override/////////////////////////////////

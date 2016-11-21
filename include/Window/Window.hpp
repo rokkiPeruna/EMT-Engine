@@ -22,10 +22,10 @@ namespace jej//NAMESPACE jej STARTS
     //Forward declaration for OS specific data struct
     struct WindowOSInitData;
 
-    struct WindowBaseInitData
+    static struct WindowBaseInitData
     {
-        short int sizeX = 200u;
-        short int sizeY = 200u;
+        int sizeX = 400u;
+        int sizeY = 250u;
         std::wstring nameApp = L"appName";
         std::wstring nameMenu = L"menuName";
         std::wstring nameWindow = L"windowName";

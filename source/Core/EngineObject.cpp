@@ -25,7 +25,6 @@ namespace jej //NAMESPACE jej
 {
     EngineObject::EngineObject() :
         m_currentScene(nullptr),
-        m_graphicsPtr(nullptr),
         m_windowPtr(nullptr)
     {
 
@@ -107,28 +106,17 @@ namespace jej //NAMESPACE jej
     }
     //////////////////////////////////////////
 
-    void EngineObject::EngineDraw()
-    {
-        m_graphicsPtr->_drawAll();
-    }
-    //////////////////////////////////////////
-
     void EngineObject::EngineUpdate()
     {
-        //m_graphicsPtr->_updateBuffersAll();
+        //RenderSystem::GetInstance()._update(100.f);
 
-		InputManager::GetInstance().Update();
+		InputManager::GetInstance().Update();//TODO: Change to ._update() for consistency
 
+        //This calls also RenderSystem's _update() - function in WM_PAINT
+        
         m_windowPtr->UpdateWindowMessages();
+        
 
-
-        RenderSystem::GetInstance()._update(100.f);
-    }
-    //////////////////////////////////////////
-
-    std::shared_ptr<Graphics>& EngineObject::GetGraphicsRef()
-    {
-        return m_graphicsPtr;
     }
     //////////////////////////////////////////
 

@@ -160,9 +160,7 @@ namespace jej
 		case Keyboard::Key::F15:        vkey = VK_F15;					break;
 		case Keyboard::Key::Pause:      vkey = VK_PAUSE;				break;
 		}
-
-		//TODO: Remove this cout and <string>
-		std::cout << vkey << std::endl;
+	
 		//Mask vkey and hexadec 8000, return true if not zero
 		return (GetAsyncKeyState(vkey) & 0x8000) != 0;
 	}
