@@ -23,12 +23,12 @@ namespace jej
 
 	private:
 
-        static GLuint vertexPosIndex;
-        static GLuint textureCoordIndex;
-
 		// Initialize runs through other functions
 		void _initialize(detail::ShaderData& p_sd);
 
+		// bind attributes?
+		void _bindAttributes(GLuint p_program, const unsigned int p_numAttributes, const std::string& p_attributeName);
+		
 		// Load shaders from file and compiles them as usable shader.
 		GLuint _loadShader(const std::string& p_shaderDataSource, const GLenum p_type, const detail::ShaderType p_shaderType);
 
@@ -37,6 +37,7 @@ namespace jej
 		
 		// Read actual shader files (no matter where they are)
 		std::string _readFile(const detail::ShaderType p_type ,std::string p_filePath);
+
 
 		// Enable shader
 		void Use(const GLuint& p_program);

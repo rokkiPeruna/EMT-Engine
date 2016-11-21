@@ -32,6 +32,8 @@ namespace jej
             unsigned int fragmentShaderID = 0u;
             unsigned int vertexShaderID = 0u;
 
+			unsigned int numAttribs = 0;
+
             ShaderData(){};
         };
     }
