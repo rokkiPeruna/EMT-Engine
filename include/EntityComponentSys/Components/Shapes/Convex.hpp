@@ -5,11 +5,10 @@
 
 namespace jej
 {
-    class Convex : ShapeComponent
+    class Convex : public ShapeComponent
     {
     private:
-        unsigned int m_pointCount;
-        Vector2f *m_points;
+		void _load(const std::vector<float>& p_points);
 
     public:
 
@@ -17,10 +16,12 @@ namespace jej
         Convex(Entity& entity);
 
         //Constructor
-        Convex(Entity& entity, const unsigned int p_pointCount, Vector2f*p_points);
+		Convex(Entity& entity, const std::vector<float>& p_points);
 
         //Destructor
         virtual ~Convex();
+
+		bool Transform(const std::vector<float>& p_newPoints) override;
     };
 
 

@@ -6,10 +6,10 @@
 namespace jej
 {
 
-    class Triangle : ShapeComponent
+    class Triangle : public ShapeComponent
     {
     private:
-        Vector2f m_points[3];
+		void _load(const float (&p_points)[6]);
 
     public:
 
@@ -17,10 +17,12 @@ namespace jej
         Triangle(Entity& entity);
 
         //Constructor
-        Triangle(Entity& entity, const Vector2f p_points[3]);
+        Triangle(Entity& entity, const float (&p_points)[6]);
 
         //Destructor
         virtual ~Triangle();
+
+		bool Transform(const std::vector<float>& p_newPoints) override;
     };
 
 }

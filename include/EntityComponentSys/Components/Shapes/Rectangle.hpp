@@ -6,10 +6,10 @@
 namespace jej
 {
 
-    class Rectangle : ShapeComponent
+    class Rectangle : public ShapeComponent
     {
     private:
-        Vector2f m_extents;
+		void _load(const float x, const float y);
 
     public:
 
@@ -17,10 +17,12 @@ namespace jej
         Rectangle(Entity& entity);
 
         //Constructor
-        Rectangle(Entity& entity, const Vector2f extents);
+		Rectangle(Entity& entity, const float x, const float y);
 
         //Destructor
         virtual ~Rectangle();
+
+		bool Transform(const std::vector<float>& p_newPoints) override;
     };
 
 }

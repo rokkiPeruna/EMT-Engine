@@ -17,13 +17,15 @@ namespace jej
         //Destructor
         virtual ~ShapeComponent();
 
-
+		virtual bool Transform(const std::vector<float>& p_newPoints) = 0;
 
     protected:
 
         ShapeType m_shapeType;
 
-    };
+		std::vector<Vector2f> m_points;
+   
+	};
 
 }
 
