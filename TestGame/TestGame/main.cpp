@@ -12,6 +12,10 @@
 
 #include <EntityComponentSys/Components/ShaderComponent.hpp>
 
+#include <IO_Manager/Win32/Mouse.hpp>
+#include <IO_Manager/Win32/Keyboard.hpp>
+#include <IO_Manager/Win32/InputManager.hpp>
+
 int main(int argc, char* argv[])
 {
     jej::EngineObject::Initialize(argv[0]);
@@ -19,46 +23,15 @@ int main(int argc, char* argv[])
 
     jej::Scene gameLevel;
 
-    //game.SetCurrentScene(gameLevel);
-
     gameLevel.AddEntity("player1");
-
-
-
-    /*{
-
-        auto& box = gameLevel.AddEntity("boxToCopy");
-        auto& transform = box.AddComponent<jej::TransformComponent>(
-            jej::Vector2f(1.f, 2.f),
-            jej::Vector2f(3.f, 4.f),
-            jej::Vector4f(5.f, 6.f, 7.f, 8.f)
-            );
-
-        std::vector<jej::Entity*> myTower;
-
-        for (unsigned int i = 0u; i < 10u; ++i)
-        {
-            myTower.emplace_back(&gameLevel.AddEntity());
-            myTower.back()->AddComponent<jej::RenderComponent>(*box.GetComponentPtr<jej::TransformComponent>());
-            myTower.back()->GetComponentPtr<jej::TransformComponent>()->position.x += i + 1u;
-        }
-
-
-
-
-
-
-    }*/
-
-
 
 
     auto* playeri = gameLevel.GetEntityPtr("player1");
 
     playeri->AddComponent<jej::TransformComponent>(
         jej::Vector2f(3.f, 5.f),
-        jej::Vector2f(1.f, 1.f),
-        jej::Vector4f(9.f, 2.f, 50.f, 1.f));
+        jej::Vector2f(1, 1),
+        jej::Vector4f(9, 2, 50, 1));
 
     auto& shaderRef = playeri->AddComponent<jej::ShaderComponent>("FragmentShaderTexture.frag");
     auto* shaderPtr = playeri->GetComponentPtr<jej::ShaderComponent>();
@@ -71,11 +44,14 @@ int main(int argc, char* argv[])
     //
     //transvormi->position.x += transvormi->position.x;
 
+	auto& mouse = jej::Mouse::GetInstance();
+	auto& keyboard = jej::Keyboard::GetInstance();
 
-    for (;;)
+    while(true)
     {
         game.EngineUpdate();
-        break;
+		//std::cout << mouse.GetMousePosition().x << "   " << mouse.GetMousePosition().y << std::endl;
+		
     }
 
     return 0;

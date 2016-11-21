@@ -3,6 +3,8 @@
 
 //Engine headers
 #include <Window/Window.hpp>
+#include <IO_Manager/Win32/Keyboard.hpp>
+#include <IO_Manager/Win32/Mouse.hpp>
 /////////////////////////////////
 
 //Standard headers
@@ -33,6 +35,7 @@ namespace jej//NAMESPACE jej STARTS
 
     class Win32Window : public Window
     {
+		friend LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
 
     public:
 
@@ -49,8 +52,10 @@ namespace jej//NAMESPACE jej STARTS
         //Destructor
         virtual ~Win32Window();
 
+		//LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
 
-        //Pure virtual methods/////////////////////////////////
+
+        //inherited methods override/////////////////////////////////
 
         //Returns native display type
         virtual EGLNativeDisplayType GetNativeDisplay() const override;
@@ -74,6 +79,8 @@ namespace jej//NAMESPACE jej STARTS
         //Set window's OS specific init data
         virtual void SetWinOSData(const WindowOSInitData&) override;
 
+		//Change virtual keyboard codes coming from Win32 to jej::Keyboard values
+		static Keyboard::Key _virtualKeyCodeToJejKeycode(WPARAM p_keycode, LPARAM p_flags);
 
     private:
 
@@ -83,6 +90,7 @@ namespace jej//NAMESPACE jej STARTS
 
         //Win32 specific init data
         WindowOSInitData m_winOSInitData;
+
 
     };
 }//NAMESPACE jej ENDS

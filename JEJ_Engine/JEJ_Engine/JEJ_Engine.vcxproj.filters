@@ -94,6 +94,21 @@
     <Filter Include="Header Files\EntityComponentSystem\Components\Inl">
       <UniqueIdentifier>{d0731e5c-e411-431e-8ded-435de79d922e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\IO_Manager">
+      <UniqueIdentifier>{5bb9a354-83e5-4423-b37d-9a9aeebb3b00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\IO_Manager\Android">
+      <UniqueIdentifier>{001054ca-e904-481b-8564-a5d9d2f8df9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\IO_Manager\Win32">
+      <UniqueIdentifier>{32f018f3-4c0e-4062-9ce2-edc7fca1da10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IO_Manager">
+      <UniqueIdentifier>{429a6f4d-7341-4b22-8886-df04530f2f82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IO_Manager\Win32">
+      <UniqueIdentifier>{ae9a3537-1c26-48c7-a151-7362ff17fe5b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -185,6 +200,15 @@
     </ClCompile>
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\ShapeSystem.cpp">
       <Filter>Source Files\EntityComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\IO_Manager\Win32\InputManager.cpp">
+      <Filter>Source Files\IO_Manager\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\IO_Manager\Win32\Keyboard.cpp">
+      <Filter>Source Files\IO_Manager\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\IO_Manager\Win32\Mouse.cpp">
+      <Filter>Source Files\IO_Manager\Win32</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +307,21 @@
     </ClInclude>
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\ShapeSystem.hpp">
       <Filter>Header Files\EntityComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\IO_Manager\InputManagerImpl.hpp">
+      <Filter>Header Files\IO_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\IO_Manager\Android\InputManager.hpp">
+      <Filter>Header Files\IO_Manager\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\IO_Manager\Win32\InputManager.hpp">
+      <Filter>Header Files\IO_Manager\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\IO_Manager\Win32\Keyboard.hpp">
+      <Filter>Header Files\IO_Manager\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\IO_Manager\Win32\Mouse.hpp">
+      <Filter>Header Files\IO_Manager\Win32</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
