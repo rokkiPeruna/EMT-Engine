@@ -14,7 +14,7 @@
 namespace jej//NAMESPACE jej STARTS
 {
     //Win32 specific initializing data
-    static struct WindowOSInitData
+    struct WindowOSInitData
     {
         int offsetX = 600;
         int offsetY = 600;

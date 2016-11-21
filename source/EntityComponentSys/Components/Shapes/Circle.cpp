@@ -5,16 +5,16 @@
 namespace jej
 {
 
-    Circle::Circle(Entity& entity) :
-        ShapeComponent(entity)
+    Circle::Circle() :
+        Shape()
     {
         m_shapeType = ShapeType::Circle;
 
 		_load(2.f, 15u);
     }
 
-    Circle::Circle(Entity& entity, const float radius, const unsigned int accuracy) :
-        ShapeComponent(entity)
+    Circle::Circle(const float radius, const unsigned int accuracy) :
+        Shape()
     {
         m_shapeType = ShapeType::Circle;
 
@@ -45,7 +45,7 @@ namespace jej
 		}
 	}
 
-	bool Circle::Transform(const std::vector<float>& p_newPoints)
+	/*bool Circle::Transform(const std::vector<float>& p_newPoints)
 	{
 		if (m_points.size() != p_newPoints.size() * 0.5f)
 			return false;
@@ -54,6 +54,6 @@ namespace jej
 			m_points[i] = { p_newPoints[i + 1 * i], p_newPoints[(i + 1) + 1 * i] };
 
 		return true;
-	}
+	}*/
 
 }

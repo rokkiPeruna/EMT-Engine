@@ -3,8 +3,8 @@
 namespace jej
 {
 
-    Convex::Convex(Entity& entity) :
-        ShapeComponent(entity)
+    Convex::Convex() :
+        Shape()
     {
         std::vector<float> points =
         {
@@ -20,8 +20,8 @@ namespace jej
 		_load(points);
     }
 
-	Convex::Convex(Entity& entity, const std::vector<float>& p_points) :
-        ShapeComponent(entity)
+	Convex::Convex(const std::vector<float>& p_points) :
+        Shape()
     {
         m_shapeType = ShapeType::Convex;
      
@@ -43,7 +43,7 @@ namespace jej
 		for (unsigned int i = 0u; i < p_points.size() * 0.5f; ++i)
 			m_points.emplace_back(p_points[i + 1 * i], p_points[(i + 1) + 1 * i]);
 	}
-
+/*
 	bool Convex::Transform(const std::vector<float>& p_newPoints)
 	{
 		if (m_points.size() != p_newPoints.size() * 0.5f)
@@ -53,5 +53,5 @@ namespace jej
 			m_points[i] = { p_newPoints[i + 1 * i], p_newPoints[(i + 1) + 1 * i] };
 
 		return true;
-	}
+	}*/
 }

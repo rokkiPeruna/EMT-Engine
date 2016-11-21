@@ -5,14 +5,16 @@ namespace jej
 
     ShapeComponent::ShapeComponent(Entity& entity) :
         Component(entity),
-		m_points()
+        m_shapes()
     {
         m_componentType = ComponentType::Shape;
     }
+
 
     ShapeComponent::~ShapeComponent()
     {
 
     }
+
 
 }

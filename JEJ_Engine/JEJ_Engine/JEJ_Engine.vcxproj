@@ -99,6 +99,7 @@
     <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Circle.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Convex.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Rectangle.cpp" />
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Shape.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Triangle.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\SpriteComponent.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\TransformComponent.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Circle.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Convex.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Rectangle.hpp" />
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Shape.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Triangle.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\SpriteComponent.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\TransformComponent.hpp" />
@@ -164,6 +166,7 @@
   <ItemGroup>
     <None Include="..\..\include\Core\Inl\Scene.inl" />
     <None Include="..\..\include\EntityComponentSys\Components\Inl\RenderComponent.inl" />
+    <None Include="..\..\include\EntityComponentSys\Components\Inl\ShapeComponent.inl" />
     <None Include="..\..\include\EntityComponentSys\Entity\Inl\Entity.inl" />
     <None Include="..\..\include\EntityComponentSys\Systems\Inl\System.inl" />
     <None Include="..\..\include\Utility\Inl\Messenger.inl" />

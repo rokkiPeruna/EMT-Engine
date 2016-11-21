@@ -22,7 +22,7 @@ namespace jej//NAMESPACE jej STARTS
     //Forward declaration for OS specific data struct
     struct WindowOSInitData;
 
-    static struct WindowBaseInitData
+    struct WindowBaseInitData
     {
         int sizeX = 400u;
         int sizeY = 250u;

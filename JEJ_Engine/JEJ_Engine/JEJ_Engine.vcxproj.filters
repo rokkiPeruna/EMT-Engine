@@ -210,6 +210,9 @@
     <ClCompile Include="..\..\source\IO_Manager\Win32\Mouse.cpp">
       <Filter>Source Files\IO_Manager\Win32</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Shape.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components\Shapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Grafiikkamoottori_JEJ\include\Core\EngineObject.hpp">
@@ -323,6 +326,9 @@
     <ClInclude Include="..\..\include\IO_Manager\Win32\Mouse.hpp">
       <Filter>Header Files\IO_Manager\Win32</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Shape.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components\Shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\include\Utility\Inl\Messenger.inl">
@@ -341,6 +347,9 @@
       <Filter>Header Files\EntityComponentSystem\Systems\Inl</Filter>
     </None>
     <None Include="..\..\include\EntityComponentSys\Components\Inl\RenderComponent.inl">
+      <Filter>Header Files\EntityComponentSystem\Components\Inl</Filter>
+    </None>
+    <None Include="..\..\include\EntityComponentSys\Components\Inl\ShapeComponent.inl">
       <Filter>Header Files\EntityComponentSystem\Components\Inl</Filter>
     </None>
   </ItemGroup>

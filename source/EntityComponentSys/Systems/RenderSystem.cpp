@@ -127,7 +127,7 @@ namespace jej
     {
         for (auto& it : m_components)
         {
-        
+            break;
         }
 
         return true;

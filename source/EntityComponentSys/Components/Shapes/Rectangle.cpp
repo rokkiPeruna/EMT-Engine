@@ -3,16 +3,16 @@
 namespace jej
 {
 
-    Rectangle::Rectangle(Entity& entity) :
-        ShapeComponent(entity)
+    Rectangle::Rectangle() :
+        Shape()
     {
         m_shapeType = ShapeType::Rectangle;
 
 		_load(3.f, 2.f);
     }
 
-	Rectangle::Rectangle(Entity& entity, const float x, const float y) :
-        ShapeComponent(entity)
+	Rectangle::Rectangle(const float x, const float y) :
+        Shape()
     {
         m_shapeType = ShapeType::Rectangle;
 
@@ -33,7 +33,7 @@ namespace jej
 		m_points.emplace_back(-x, -y);
 		m_points.emplace_back(x, -y);
 	}
-
+/*
 	bool Rectangle::Transform(const std::vector<float>& p_newPoints)
 	{
 		if (m_points.size() != p_newPoints.size() * 0.5f)
@@ -43,6 +43,6 @@ namespace jej
 			m_points[i] = { p_newPoints[i + 1 * i], p_newPoints[(i + 1) + 1 * i] };
 
 		return true;
-	}
+	}*/
 
 }

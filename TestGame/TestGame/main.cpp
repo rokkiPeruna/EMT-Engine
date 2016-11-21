@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
 	auto& mouse = jej::Mouse::GetInstance();
 	auto& keyboard = jej::Keyboard::GetInstance();
 
-    while(true)
+    for (;;)
     {
         game.EngineUpdate();
 		//std::cout << mouse.GetMousePosition().x << "   " << mouse.GetMousePosition().y << std::endl;

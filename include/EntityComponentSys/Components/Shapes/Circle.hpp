@@ -1,28 +1,29 @@
 #ifndef JEJ_CIRCLE_HPP
 #define JEJ_CIRCLE_HPP
 
-#include <EntityComponentSys/Components/ShapeComponent.hpp>
+#include <EntityComponentSys/Components/Shapes/Shape.hpp>
 
 namespace jej
 {
-    class Circle : public ShapeComponent
+    class Circle : public Shape
     {
 
     public:
 
         //Default constructor
-        Circle(Entity& entity);
+        Circle();
 
         //Constructor
-        Circle(Entity& entity, const float radius, const unsigned int accuracy);
+        Circle(const float radius, const unsigned int accuracy);
 
         //Destructor
         virtual ~Circle();
 
-		bool Transform(const std::vector<float>& p_newPoints) override;
+		//bool Transform(const std::vector<float>& p_newPoints) override;
 
 	private:
-		void _load(const float radius, const unsigned int accuracy);
+		
+        void _load(const float radius, const unsigned int accuracy);
     };
 
 

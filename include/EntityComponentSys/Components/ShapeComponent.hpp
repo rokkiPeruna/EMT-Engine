@@ -2,30 +2,44 @@
 #define JEJ_SHAPE_COMPONENT_HPP
 
 #include <EntityComponentSys/Components/Component.hpp>
-#include <Core/BaseStructs.hpp>
+#include <EntityComponentSys/Components/Shapes/Shape.hpp>
+
+//#include <EntityComponentSys/Components/Shapes/Circle.hpp>
+//#include <EntityComponentSys/Components/Shapes/Convex.hpp>
+//#include <EntityComponentSys/Components/Shapes/Rectangle.hpp>
+//#include <EntityComponentSys/Components/Shapes/Triangle.hpp>
+
+#include <memory>
 
 namespace jej
 {
+    class Circle;
 
     class ShapeComponent : public Component
     {
 
+        
+
     public:
+
         //Constructor
         ShapeComponent(Entity& entity);
 
         //Destructor
         virtual ~ShapeComponent();
 
-		virtual bool Transform(const std::vector<float>& p_newPoints) = 0;
+        //Add a shape to this component
+        template <typename T, typename ... Args>
+        T& AddShape(const ShapeType p_type, const Args& ... p_args);
 
-    protected:
 
-        ShapeType m_shapeType;
+    private:
 
-		std::vector<Vector2f> m_points;
+        std::vector<std::shared_ptr<Shape>> m_shapes;
    
 	};
+
+#include <EntityComponentSys/Components/Inl/ShapeComponent.inl>
 
 }
 

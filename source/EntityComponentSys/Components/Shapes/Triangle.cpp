@@ -3,16 +3,16 @@
 namespace jej
 {
 
-	Triangle::Triangle(Entity& entity) :
-		ShapeComponent(entity)
+	Triangle::Triangle() :
+		Shape()
 	{
 		m_shapeType = ShapeType::Triangle;
 
 		_load({0.f, 2.f, -2.f, -1.f, 2.f, -1.f});
 	}
 
-	Triangle::Triangle(Entity& entity, const float(&p_points)[6]) :
-		ShapeComponent(entity)
+	Triangle::Triangle(const float(&p_points)[6]) :
+        Shape()
 	{
 		m_shapeType = ShapeType::Triangle;
 
@@ -31,7 +31,7 @@ namespace jej
 		for (char i = 0; i < 3; ++i)
 			m_points.emplace_back(p_points[i + 1 * i], p_points[(i + 1) + 1 * i]);
 	}
-
+/*
 	bool Triangle::Transform(const std::vector<float>& p_newPoints)
 	{
 		if (m_points.size() != p_newPoints.size() * 0.5f)
@@ -42,5 +42,5 @@ namespace jej
 
 		return true;
 	}
-
+*/
 }

@@ -6,23 +6,28 @@
 namespace jej
 {
 
-    class Rectangle : public ShapeComponent
+    class Rectangle : public Shape
     {
-    private:
-		void _load(const float x, const float y);
+
 
     public:
 
         //Default constructor
-        Rectangle(Entity& entity);
+        Rectangle();
 
         //Constructor
-		Rectangle(Entity& entity, const float x, const float y);
+        Rectangle(const float x, const float y);
 
         //Destructor
         virtual ~Rectangle();
 
-		bool Transform(const std::vector<float>& p_newPoints) override;
+        //bool Transform(const std::vector<float>& p_newPoints) override;
+
+
+    private:
+
+        void _load(const float x, const float y);
+
     };
 
 }
