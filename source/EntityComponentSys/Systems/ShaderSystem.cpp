@@ -8,8 +8,7 @@
 namespace jej
 {
     std::vector<std::shared_ptr<ShaderComponent>> ShaderSystem::m_components = {};
-    GLuint ShaderSystem::vertexPosIndex = 0u;
-    GLuint ShaderSystem::textureCoordIndex = 1u;
+
 
 
     ShaderSystem::ShaderSystem()
@@ -69,8 +68,12 @@ namespace jej
         glAttachShader(p_sd.programID, fragmentShader);
         glAttachShader(p_sd.programID, vertexShader);
 
-        glBindAttribLocation(p_sd.programID, vertexPosIndex, "vPosition");
-        glBindAttribLocation(p_sd.programID, textureCoordIndex, "vTexCoord");
+        //glBindAttribLocation(p_sd.programID, vertexPosIndex, "vPosition");
+        //glBindAttribLocation(p_sd.programID, textureCoordIndex, "vTexCoord");
+
+		_bindAttributes(p_sd.programID, p_sd.numAttribs, "vPosition");
+		_bindAttributes(p_sd.programID, ++p_sd.numAttribs, "vTexCoord");
+
 
         glLinkProgram(p_sd.programID);
 
@@ -93,6 +96,14 @@ namespace jej
         p_sd.vertexShaderID = fragmentShader;
     }
     //////////////////////////////////////////
+
+	void ShaderSystem::_bindAttributes(GLuint p_program, const unsigned int p_numAttributes, const std::string& p_attributeName)
+	{
+		glBindAttribLocation(p_program, p_numAttributes, p_attributeName.c_str());
+	}
+	//////////////////////////////////////////
+
+
 
     GLuint ShaderSystem::_loadShader(const std::string& p_shaderDataSource, const GLenum p_type, const detail::ShaderType p_shaderType)
     {
@@ -128,6 +139,7 @@ namespace jej
     }
     //////////////////////////////////////////
 
+
     bool ShaderSystem::_parseShader(const detail::ShaderType p_type, std::string& p_shaderName)
     {
         std::string path = "Shaders/";
@@ -142,7 +154,7 @@ namespace jej
             switch (p_type)
             {
             case detail::ShaderType::Fragment:
-                p_shaderName = path + "FragmentShader.frag";
+                p_shaderName = path + "FragmentShaderTexture.frag";
                 return true;
 
             case detail::ShaderType::Vertex:
