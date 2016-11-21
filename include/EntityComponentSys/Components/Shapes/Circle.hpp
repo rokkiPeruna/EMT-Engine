@@ -5,10 +5,8 @@
 
 namespace jej
 {
-    class Circle : ShapeComponent
+    class Circle : public ShapeComponent
     {
-    private:
-        float m_radius;
 
     public:
 
@@ -16,10 +14,15 @@ namespace jej
         Circle(Entity& entity);
 
         //Constructor
-        Circle(Entity& entity, const float radius);
+        Circle(Entity& entity, const float radius, const unsigned int accuracy);
 
         //Destructor
         virtual ~Circle();
+
+		bool Transform(const std::vector<float>& p_newPoints) override;
+
+	private:
+		void _load(const float radius, const unsigned int accuracy);
     };
 
 
