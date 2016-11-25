@@ -24,13 +24,21 @@ namespace jej
 
         //Set new points
         //Point count (vector size) must match
-        bool SetPoints(const std::vector<float>& p_newPoints);
+        bool SetPoints(const std::vector<Vector2f>& p_newPoints);
+
+        unsigned int GetID() const;
 
     protected:
 
         ShapeType m_shapeType;
         
         std::vector<Vector2f> m_points;
+
+        unsigned int m_ID;
+        static int m_ShapeIDCounter;
+        static int m_RemovedShapeIDCounter;
+
+        virtual void _update(const float p_deltaTime) = 0;
 
     private:
 

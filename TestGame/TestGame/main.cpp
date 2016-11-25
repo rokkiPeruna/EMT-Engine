@@ -2,6 +2,7 @@
 #include <Core/EngineObject.hpp>
 #include <EntityComponentSys/Entity/Entity.hpp>
 #include <EntityComponentSys/Components/TransformComponent.hpp>
+#include <EntityComponentSys/Components/Shapes/Circle.hpp>
 
 #include <EntityComponentSys/Systems/System.hpp>
 #include <Core/Scene.hpp>
@@ -27,7 +28,7 @@ int main(int argc, char* argv[])
 
 
     auto* playeri = gameLevel.GetEntityPtr("player1");
-
+    /*
     playeri->AddComponent<jej::TransformComponent>(
         jej::Vector2f(3.f, 5.f),
         jej::Vector2f(1, 1),
@@ -53,6 +54,15 @@ int main(int argc, char* argv[])
 		//std::cout << mouse.GetMousePosition().x << "   " << mouse.GetMousePosition().y << std::endl;
 		
     }
+    */
+
+    auto& muoto = playeri->AddComponent<jej::ShapeComponent>();
+    auto* ympyra = muoto.AddShape<jej::Circle>();
+
+    auto ID = ympyra->GetID();
+    auto points = ympyra->GetPoints();
+
+    auto* kolmio = muoto.AddShape<jej::Triangle>();
 
     return 0;
 }

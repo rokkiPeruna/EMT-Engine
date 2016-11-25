@@ -1,5 +1,5 @@
 
-template <typename T, typename ... Args>
+/*template <typename T, typename ... Args>
 T& ShapeComponent::AddShape(const ShapeType p_type, const Args& ... p_args)
 {
 
@@ -31,3 +31,15 @@ T& ShapeComponent::AddShape(const ShapeType p_type, const Args& ... p_args)
     }
 
 }
+*/
+
+
+template <typename T>
+T* ShapeComponent::AddShape()
+{
+
+    m_shapes.emplace_back(std::make_shared<T>());
+    return dynamic_cast<T*>(m_shapes.back().get());
+
+}
+

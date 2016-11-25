@@ -43,15 +43,9 @@ namespace jej
 		for (unsigned int i = 0u; i < p_points.size() * 0.5f; ++i)
 			m_points.emplace_back(p_points[i + 1 * i], p_points[(i + 1) + 1 * i]);
 	}
-/*
-	bool Convex::Transform(const std::vector<float>& p_newPoints)
-	{
-		if (m_points.size() != p_newPoints.size() * 0.5f)
-			return false;
 
-		for (unsigned int i = 0; i < m_points.size(); ++i)
-			m_points[i] = { p_newPoints[i + 1 * i], p_newPoints[(i + 1) + 1 * i] };
+    void Convex::_update(const float p_deltaTime)
+    {
 
-		return true;
-	}*/
+    }
 }

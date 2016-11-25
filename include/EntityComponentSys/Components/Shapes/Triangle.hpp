@@ -21,7 +21,9 @@ namespace jej
         //Destructor
         virtual ~Triangle();
 
-        //bool Transform(const std::vector<float>& p_newPoints) override;
+    protected:
+
+        void _update(const float p_deltaTime) override;
 
     private:
 
