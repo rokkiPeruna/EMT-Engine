@@ -12,6 +12,7 @@
 
 //
 #include <External/OpenGL_ES2/EGL/egl.h>
+#include <External/OpenGL_ES2/GLES2/gl2.h>
 //
 
 namespace jej
@@ -19,6 +20,9 @@ namespace jej
     //Forward declarating Window-class etc.
     class Window;
     class RenderComponent;
+    class ShaderComponent;
+    class ShapeComponent;
+    class SpriteComponent;
     //
 
     namespace detail
@@ -37,6 +41,8 @@ namespace jej
 		friend class Entity;
         friend LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
         
+        
+
 
     private:
 
@@ -69,9 +75,12 @@ namespace jej
         //Smart pointer to Window - singleton
         std::shared_ptr<Window> m_window;
 
-        //
+        //Vector containing draw data for each to-draw entity
+        std::vector<DrawableData> m_myDrawables;
 
         //This renders and draws every RenderComponent by calling priv methods
+        void _createBuffers();
+
         void _update(const float p_deltaTime) override;
 
         //
@@ -83,6 +92,11 @@ namespace jej
         //
         bool _updateBuffers();
 
+        //
+        void _useShader(ShaderComponent& shaderComp);
+
+        //
+        void _unUseShader(ShaderComponent& shaderComp);
 
         //////////////////////////////
         //Methods and variables for OpenGL ES initialization
@@ -94,6 +108,7 @@ namespace jej
 
         //Vertex buffer objects for various different types
         //TODO: Add buffers
+
 
         static std::vector<std::shared_ptr<RenderComponent>> m_components;
 

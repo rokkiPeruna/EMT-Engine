@@ -10,6 +10,9 @@ namespace jej
 
     class Shape
     {
+        //ShapeComponent must have access to m_points
+        friend class ShapeComponent;
+        //TODO: remove friend class RenderComponent;
 
     public:
 
@@ -20,7 +23,7 @@ namespace jej
         ~Shape();
 
         //Return m_points
-        std::vector<Vector2f> GetPoints() const;
+        std::vector<Vector2f> GetPoints() {return m_points;} const
 
         //Set new points
         //Point count (vector size) must match
