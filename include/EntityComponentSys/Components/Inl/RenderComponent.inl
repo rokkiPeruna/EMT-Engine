@@ -28,19 +28,6 @@ m_transformComp(nullptr)
     JEJ_ASSERT(m_shapeComp.get() != nullptr, "ShapeComponent not initialized.");
     JEJ_ASSERT(m_transformComp.get() != nullptr, "TransformComponent not initialized.");
 
-    //Get shape component's vertices
-    for (const auto& shapes_itr : m_shapeComp->m_shapes)
-    {
-        for (const auto& points_itr : shapes_itr->m_points)
-        {
-            m_myDrawData.vertices.emplace_back(0);
-            m_myDrawData.vertices.back(points_itr);
-        }
-    }
-    //Get shape's indices
-    for (const auto& )
-    
-    
     //Assign component type
     m_componentType = ComponentType::Render;
 }

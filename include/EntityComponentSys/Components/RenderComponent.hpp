@@ -1,6 +1,8 @@
 #ifndef JEJ_RENDER_COMPONENT_HPP
 #define JEJ_RENDER_COMPONENT_HPP
 
+//
+#include <External/OpenGL_ES2/GLES2/gl2.h>
 
 //
 #include <EntityComponentSys/Components/Component.hpp>
@@ -29,16 +31,20 @@ namespace jej
         struct DrawableData
         {
             //DrawableType type = DrawableType::Triangle;
-            unsigned int handle = 0u;
+            GLuint shaderProgID = 0u;
             std::vector<GLushort> indices;
             std::vector<GLfloat> vertices;
             std::vector<GLuint> vertexBufferObjects;
             std::vector<GLfloat> colours;
             std::vector<GLfloat> textureCoords;
-            GLint indexBuffer;
+            GLint indicesBuffer;
             GLint vertexPosBuffer;
             GLint texCoordBuffer;
             void* userData = nullptr;
+
+			//TODO: Add more attribute members as they increase
+			GLuint vertexPositionIndex;
+			GLuint textureCoordIndex;
         };
     }
     //Forward declarations
@@ -119,7 +125,7 @@ namespace jej
         std::shared_ptr<ShapeComponent> m_shapeComp;
         std::shared_ptr<TransformComponent> m_transformComp;
 
-        //Object's vertex buffer object ID
+        //Struct that holds all data for drawing, see jej::detail::DrawableData for more info
         detail::DrawableData m_myDrawData;
     };
 

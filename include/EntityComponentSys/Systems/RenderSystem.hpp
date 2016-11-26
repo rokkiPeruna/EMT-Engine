@@ -12,7 +12,7 @@
 
 //
 #include <External/OpenGL_ES2/EGL/egl.h>
-#include <External/OpenGL_ES2/GLES2/gl2.h>
+//#include <External/OpenGL_ES2/GLES2/gl2.h>
 //
 
 namespace jej
@@ -39,10 +39,10 @@ namespace jej
 		//For manipulating m_components
 		friend class EngineObject;
 		friend class Entity;
+
+		//For allowing Win32 event handler to call _update() in WM_PAINT
         friend LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
         
-        
-
 
     private:
 
@@ -75,28 +75,31 @@ namespace jej
         //Smart pointer to Window - singleton
         std::shared_ptr<Window> m_window;
 
-        //Vector containing draw data for each to-draw entity
-        std::vector<DrawableData> m_myDrawables;
+        //Method for initializing RenderComponent's draw data
+		void _createBuffersForRenderComponentDrawData(RenderComponent& p_rendComp);
 
-        //This renders and draws every RenderComponent by calling priv methods
-        void _createBuffers();
-
+		//This system's update, empty currently //TODO: Change comment after adding code
         void _update(const float p_deltaTime) override;
 
         //
-        void _clearScreen();
+        void _clearScreen() const;
 
         //
-        bool _swapBuffers();
+        bool _swapBuffers() const;
 
         //
-        bool _updateBuffers();
+		bool _drawAllBuffers();
 
         //
-        void _useShader(ShaderComponent& shaderComp);
+        void _useShader(const ShaderComponent& shaderComp) const;
 
         //
-        void _unUseShader(ShaderComponent& shaderComp);
+        void _unUseShader(const ShaderComponent& shaderComp) const;
+
+		//
+		void _bindTexture() const;
+
+
 
         //////////////////////////////
         //Methods and variables for OpenGL ES initialization
@@ -104,12 +107,10 @@ namespace jej
         EGLDisplay m_display;
         EGLSurface m_surface;
 
+		//Initialize Open GL ES 2.0
         bool _createContext(const EGLint p_attributeList[]);
 
-        //Vertex buffer objects for various different types
-        //TODO: Add buffers
-
-
+		//Holds shared pointers to all RenderComponents
         static std::vector<std::shared_ptr<RenderComponent>> m_components;
 
     };

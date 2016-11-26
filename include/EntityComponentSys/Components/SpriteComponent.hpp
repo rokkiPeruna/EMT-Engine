@@ -13,6 +13,7 @@ namespace jej
 	class SpriteComponent:public Component
     {
         friend class SpriteSystem;
+		friend class RenderSystem;
 
 	public:
         //Constructor
