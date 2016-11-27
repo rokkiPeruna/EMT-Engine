@@ -85,12 +85,6 @@
     <Filter Include="Header Files\EntityComponentSystem\Systems\Inl">
       <UniqueIdentifier>{ecd4a468-6265-4270-bb48-2532c048d437}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\EntityComponentSystem\Components\Shapes">
-      <UniqueIdentifier>{a77642b5-53fc-49b4-a905-f63de5802804}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\EntityComponentSystem\Components\Shapes">
-      <UniqueIdentifier>{cf14b7f1-4a8f-4f47-9961-4fdaedf12c54}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\EntityComponentSystem\Components\Inl">
       <UniqueIdentifier>{d0731e5c-e411-431e-8ded-435de79d922e}</UniqueIdentifier>
     </Filter>
@@ -108,6 +102,9 @@
     </Filter>
     <Filter Include="Source Files\IO_Manager\Win32">
       <UniqueIdentifier>{ae9a3537-1c26-48c7-a151-7362ff17fe5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Texture\Inl">
+      <UniqueIdentifier>{84d7adf3-c036-49e7-b653-2a717b6fd9fa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -168,18 +165,6 @@
     <ClCompile Include="..\..\source\EntityComponentSys\Components\ShapeComponent.cpp">
       <Filter>Source Files\EntityComponentSystem\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Circle.cpp">
-      <Filter>Source Files\EntityComponentSystem\Components\Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Convex.cpp">
-      <Filter>Source Files\EntityComponentSystem\Components\Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Rectangle.cpp">
-      <Filter>Source Files\EntityComponentSystem\Components\Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Triangle.cpp">
-      <Filter>Source Files\EntityComponentSystem\Components\Shapes</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\RenderSystem.cpp">
       <Filter>Source Files\EntityComponentSystem\Systems</Filter>
     </ClCompile>
@@ -210,8 +195,8 @@
     <ClCompile Include="..\..\source\IO_Manager\Win32\Mouse.cpp">
       <Filter>Source Files\IO_Manager\Win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Shape.cpp">
-      <Filter>Source Files\EntityComponentSystem\Components\Shapes</Filter>
+    <ClCompile Include="..\..\source\Texture\Shape.cpp">
+      <Filter>Source Files\Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,18 +263,6 @@
     <ClInclude Include="..\..\include\EntityComponentSys\Components\ShapeComponent.hpp">
       <Filter>Header Files\EntityComponentSystem\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Circle.hpp">
-      <Filter>Header Files\EntityComponentSystem\Components\Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Convex.hpp">
-      <Filter>Header Files\EntityComponentSystem\Components\Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Rectangle.hpp">
-      <Filter>Header Files\EntityComponentSystem\Components\Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Triangle.hpp">
-      <Filter>Header Files\EntityComponentSystem\Components\Shapes</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\RenderSystem.hpp">
       <Filter>Header Files\EntityComponentSystem\Systems</Filter>
     </ClInclude>
@@ -326,8 +299,8 @@
     <ClInclude Include="..\..\include\IO_Manager\Win32\Mouse.hpp">
       <Filter>Header Files\IO_Manager\Win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Shape.hpp">
-      <Filter>Header Files\EntityComponentSystem\Components\Shapes</Filter>
+    <ClInclude Include="..\..\include\Texture\Shape.hpp">
+      <Filter>Header Files\Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -348,6 +321,9 @@
     </None>
     <None Include="..\..\include\EntityComponentSys\Components\Inl\ShapeComponent.inl">
       <Filter>Header Files\EntityComponentSystem\Components\Inl</Filter>
+    </None>
+    <None Include="..\..\include\Texture\Inl\Shape.inl">
+      <Filter>Header Files\Texture\Inl</Filter>
     </None>
   </ItemGroup>
 </Project>

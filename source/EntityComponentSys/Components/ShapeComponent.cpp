@@ -3,8 +3,8 @@
 namespace jej
 {
 
-    ShapeComponent::ShapeComponent(Entity* entity, const Vector4i& p_color) :
-        Component(entity),
+    ShapeComponent::ShapeComponent(Entity* p_entity, const Vector4i& p_color) :
+        Component(p_entity),
         ColorRGBA(p_color),
 		m_shapes{}
     {
@@ -17,5 +17,16 @@ namespace jej
 
     }
 
+    bool ShapeComponent::RemoveShape(const unsigned int p_ID)
+    {
+        for (unsigned int i = 0; i < m_shapes.size(); ++i)
+        
+            if (m_shapes[i]->GetID() == p_ID)
+            {
+                m_shapes.erase(m_shapes.begin() + i);
+                return true;
+            }
+        return false;
+    }
 
 }

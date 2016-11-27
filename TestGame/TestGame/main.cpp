@@ -53,12 +53,12 @@ int main(int argc, char* argv[])
  //       jej::Vector4f(0, 0, 0, 0)		//Rotation x, y, z, w
 	//	);		
 	//Adding
-	myCharacter.AddComponent<jej::TransformComponent>(jej::TransformComponent(
+	myCharacter.AddComponent<jej::TransformComponent>(
 		&myCharacter,					//Tell component that this is its owner
 		jej::Vector2f(0.f, 0.f),		//Position, we start at center of the screen
 		jej::Vector2f(1, 1),			//Scale in x, y - axises
 		jej::Vector4f(0, 0, 0, 0)		//Rotation x, y, z, w
-		));
+		);
 		
 
 	//Next we create ShaderComponent and add it to our entity so it can be drawn
@@ -68,11 +68,11 @@ int main(int argc, char* argv[])
 	//	"FragmentShader.frag"			//Second we guve fragment shader name and file extencion
 	//	);
 
-	myCharacter.AddComponent<jej::ShaderComponent>(jej::ShaderComponent(
+	myCharacter.AddComponent<jej::ShaderComponent>(
 		&myCharacter					//Tell component that this is its owner
 		//"FragmentShader.frag",			//First we must give vertex shader name and file extension
 		//"VertexShader.vert"			//Second we guve fragment shader name and file extencion
-		));
+		);
 
 
 
@@ -86,10 +86,13 @@ int main(int argc, char* argv[])
 	//	jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
 	//	);
 
-	myCharacter.AddComponent<jej::ShapeComponent>(jej::ShapeComponent(
-		&myCharacter,					//Tell component that this is its owner
-		jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
-		));
+	auto& kek = myCharacter.AddComponent<jej::ShapeComponent>(
+		&myCharacter					//Tell component that this is its owner
+		//jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
+		);
+
+    auto& tri = kek.AddShape();
+    
 
 	//Now that our ShapeComponent is added to our character, let's add some shape to the ShapeComponent.
 	//First we make alias of our character's ShapeComponent for ease of use
@@ -128,9 +131,20 @@ int main(int argc, char* argv[])
 
 	////Adding
 	//myCharacter.AddComponent<jej::RenderComponent>(myRenderComp);
-		
 	
 
+
+    //Don't try setting components to other entities other than the one calling the function
+
+    auto& rend = myCharacter.AddComponent<jej::RenderComponent>(&myCharacter);
+
+    //auto& ent = myScene.AddEntity("qwerty");
+    //ent.AddComponent<jej::RenderComponent>(&myCharacter);
+    //myCharacter.~Entity();
+
+
+
+    auto perkele = jej::EngineObject::GetInstance()._getAllCompIDs();
     
 
 	auto& mouse = jej::Mouse::GetInstance();

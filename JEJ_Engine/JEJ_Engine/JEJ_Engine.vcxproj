@@ -96,11 +96,6 @@
     <ClCompile Include="..\..\source\EntityComponentSys\Components\RenderComponent.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\ShaderComponent.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\ShapeComponent.cpp" />
-    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Circle.cpp" />
-    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Convex.cpp" />
-    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Rectangle.cpp" />
-    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Shape.cpp" />
-    <ClCompile Include="..\..\source\EntityComponentSys\Components\Shapes\Triangle.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\SpriteComponent.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\TransformComponent.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Entity\Entity.cpp" />
@@ -115,6 +110,7 @@
     <ClCompile Include="..\..\source\IO_Manager\Win32\InputManager.cpp" />
     <ClCompile Include="..\..\source\IO_Manager\Win32\Keyboard.cpp" />
     <ClCompile Include="..\..\source\IO_Manager\Win32\Mouse.cpp" />
+    <ClCompile Include="..\..\source\Texture\Shape.cpp" />
     <ClCompile Include="..\..\source\Utility\Assert.cpp" />
     <ClCompile Include="..\..\source\Utility\FileHandler.cpp" />
     <ClCompile Include="..\..\source\Utility\Messenger.cpp" />
@@ -132,11 +128,6 @@
     <ClInclude Include="..\..\include\EntityComponentSys\Components\RenderComponent.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\ShaderComponent.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\ShapeComponent.hpp" />
-    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Circle.hpp" />
-    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Convex.hpp" />
-    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Rectangle.hpp" />
-    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Shape.hpp" />
-    <ClInclude Include="..\..\include\EntityComponentSys\Components\Shapes\Triangle.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\SpriteComponent.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\TransformComponent.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Entity\Entity.hpp" />
@@ -153,6 +144,7 @@
     <ClInclude Include="..\..\include\IO_Manager\Win32\InputManager.hpp" />
     <ClInclude Include="..\..\include\IO_Manager\Win32\Keyboard.hpp" />
     <ClInclude Include="..\..\include\IO_Manager\Win32\Mouse.hpp" />
+    <ClInclude Include="..\..\include\Texture\Shape.hpp" />
     <ClInclude Include="..\..\include\Utility\Assert.hpp" />
     <ClInclude Include="..\..\include\Utility\FileHandler.hpp" />
     <ClInclude Include="..\..\include\Utility\Messenger.hpp" />
@@ -168,6 +160,7 @@
     <None Include="..\..\include\EntityComponentSys\Components\Inl\ShapeComponent.inl" />
     <None Include="..\..\include\EntityComponentSys\Entity\Inl\Entity.inl" />
     <None Include="..\..\include\EntityComponentSys\Systems\Inl\System.inl" />
+    <None Include="..\..\include\Texture\Inl\Shape.inl" />
     <None Include="..\..\include\Utility\Inl\Messenger.inl" />
     <None Include="..\..\include\Utility\Inl\Random.inl" />
   </ItemGroup>

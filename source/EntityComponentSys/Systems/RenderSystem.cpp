@@ -240,7 +240,7 @@ namespace jej
         glUseProgram(shaderComp.m_shaderData.programID);
         if (shaderComp.m_shaderData.numAttribs)
         {
-            for (int i = 0; i < shaderComp.m_shaderData.numAttribs; i++)
+            for (unsigned int i = 0u; i < shaderComp.m_shaderData.numAttribs; i++)
             {
                 glEnableVertexAttribArray(i);
             }
@@ -262,7 +262,7 @@ namespace jej
         glUseProgram(0);
         if (shaderComp.m_shaderData.numAttribs)
         {
-            for (int i = 0; i < shaderComp.m_shaderData.numAttribs; i++)
+            for (unsigned int i = 0u; i < shaderComp.m_shaderData.numAttribs; i++)
             {
                 glDisableVertexAttribArray(i);
             }

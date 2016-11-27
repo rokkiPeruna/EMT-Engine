@@ -14,6 +14,7 @@ namespace jej
 
         //For accessing m_components
         friend class Entity;
+        friend class EngineObject;
         friend class System;
         friend class RenderComponent;
 

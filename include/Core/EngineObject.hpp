@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include <tuple>
+#include <vector>
 
 namespace jej //NAMESPACE jej
 {
@@ -67,7 +68,13 @@ namespace jej //NAMESPACE jej
         std::shared_ptr<Window>& GetWindowRef();
         
 
-	private:
+	
+
+//#ifdef JEJ_DEBUG_MODE
+        std::vector<unsigned int> _getAllCompIDs() const;
+//#endif
+
+    private:
 
         //TODO Add all systems
         //Pointer to each system, populated in Initialize

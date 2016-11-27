@@ -12,8 +12,7 @@ namespace jej
 
         //For modifying m_components
         friend class Entity;
-
-        //For modifying m_components
+        friend class EngineObject;
         friend class System;
 
     private:

@@ -33,6 +33,7 @@ namespace jej //NAMESPACE jej
 
     EngineObject::~EngineObject()
     {
+
         //Zero if everything is ok.
         //Positive if something is not removed
         //Negative if something is removed too much
@@ -74,7 +75,7 @@ namespace jej //NAMESPACE jej
 
         //TODO:
         //Initialize all systems and managers here
-		InputManager::GetInstance();
+        InputManager::GetInstance();
 
         std::get<0>(engine.m_systems) = &RenderSystem::GetInstance();
         std::get<1>(engine.m_systems) = &ShaderSystem::GetInstance();
@@ -110,12 +111,12 @@ namespace jej //NAMESPACE jej
     {
         //RenderSystem::GetInstance()._update(100.f);
 
-		InputManager::GetInstance().Update();//TODO: Change to ._update() for consistency
+        InputManager::GetInstance().Update();//TODO: Change to ._update() for consistency
 
         //This calls also RenderSystem's _update() - function in WM_PAINT
-        
+
         m_windowPtr->UpdateWindowMessages();
-        
+
 
     }
     //////////////////////////////////////////
@@ -132,5 +133,41 @@ namespace jej //NAMESPACE jej
     }
     //////////////////////////////////////////
 
+    //#ifdef JEJ_DEBUG_MODE
+    std::vector<unsigned int> EngineObject::_getAllCompIDs() const
+    {
+        std::vector<unsigned int> IDs;
+        IDs.reserve(Component::m_componentIDCounter);
+
+        for (const auto& itr : std::get<ComponentHelper<RenderComponent>::index>(m_systems)->m_components)
+        {
+            unsigned int id = itr->m_componentID;
+            IDs.emplace_back(id);
+        }
+        for (const auto& itr : std::get<ComponentHelper<ShaderComponent>::index>(m_systems)->m_components)
+        {
+            unsigned int id = itr->m_componentID;
+            IDs.emplace_back(id);
+        }
+        for (const auto& itr : std::get<ComponentHelper<ShapeComponent>::index>(m_systems)->m_components)
+        {
+            unsigned int id = itr->m_componentID;
+            IDs.emplace_back(id);
+        }
+        for (const auto& itr : std::get<ComponentHelper<SpriteComponent>::index>(m_systems)->m_components)
+        {
+            unsigned int id = itr->m_componentID;
+            IDs.emplace_back(id);
+        }
+        for (const auto& itr : std::get<ComponentHelper<TransformComponent>::index>(m_systems)->m_components)
+        {
+            unsigned int id = itr->m_componentID;
+            IDs.emplace_back(id);
+        }
+
+        return IDs;
+    }
+    //////////////////////////////////////////
+    //#endif
 
 } //NAMESPACE jej
