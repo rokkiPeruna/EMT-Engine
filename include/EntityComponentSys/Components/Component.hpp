@@ -27,7 +27,7 @@ namespace jej
     public:
 
         //Constructor
-        Component(Entity& entity);
+        Component(Entity* entity);
 
         //Copy-constructor
         Component(const Component& p_other);

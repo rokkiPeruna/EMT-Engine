@@ -5,7 +5,7 @@
 namespace jej
 {
 
-    SpriteComponent::SpriteComponent(Entity& entity, const std::string& p_name, const Vector2f& p_sizeOne, const unsigned int p_count, const unsigned int p_startImage) :
+    SpriteComponent::SpriteComponent(Entity* entity, const std::string& p_name, const Vector2f& p_sizeOne, const unsigned int p_count, const unsigned int p_startImage) :
         Component(entity),
         m_data(),
         m_sizeOne(p_sizeOne),

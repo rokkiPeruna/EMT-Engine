@@ -13,6 +13,7 @@ namespace jej
 	class SpriteComponent:public Component
     {
         friend class SpriteSystem;
+		friend class RenderSystem;
 
 	public:
         //Constructor
@@ -20,7 +21,7 @@ namespace jej
 		//sizeOne is single image in pixels
         //p_count is number of images in the spritesheet
         //startImage is first image to load
-        SpriteComponent(Entity& entity, const std::string& p_name, const Vector2f& p_sizeOne, const unsigned int p_count, const unsigned int p_startImage = 0u);
+        SpriteComponent(Entity* entity, const std::string& p_name, const Vector2f& p_sizeOne, const unsigned int p_count, const unsigned int p_startImage = 0u);
 
         //Destructor
 		virtual ~SpriteComponent();

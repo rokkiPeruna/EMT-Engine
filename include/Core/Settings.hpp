@@ -28,6 +28,10 @@ namespace jej
         //Path to executable
         extern std::string rootPath;
 
+        extern std::string defaultFragmentShaderFileName;
+
+        extern std::string defaultVertexShaderFileName;
+
     }
 
 

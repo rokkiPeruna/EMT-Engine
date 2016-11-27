@@ -29,67 +29,7 @@
 namespace jej
 {
 
-    //namespace detail
-    //{
-
-    //    template <typename T>
-    //    struct ComponentFactory
-    //    {
-    //        template <typename ... Args>
-    //        static T& Create(Entity&, std::vector<std::shared_ptr<T>>& components, Args... p_args)
-    //        {
-    //            components.emplace_back(std::make_shared<T>(std::forward<Args>(p_args)...));    //Create component
-    //            return *components.back().get();
-    //        };
-
-    //        ComponentFactory<T>(){};
-
-    //    };
-
-    //    template <>
-    //    struct ComponentFactory<RenderComponent>
-    //    {
-    //        template <typename ... Args>
-    //        static RenderComponent& CreateImpl(Entity& entity, std::vector<std::shared_ptr<RenderComponent>>& components, Args... p_args)
-    //        {
-    //            components.emplace_back(std::make_shared<RenderComponent>(entity, std::forward<Args>(p_args)...));    //Create component
-    //            return *components.back().get();
-    //        };
-
-    //        ComponentFactory<RenderComponent>(){};
-    //    };
-
-    //    template <>
-    //    struct ComponentFactory<RenderComponent>
-    //    {
-    //        template <typename ... Args>
-    //        static RenderComponent& CreateHelp(Entity& entity, std::vector<std::shared_ptr<RenderComponent>>& components, Args... p_args)
-    //        {
-    //            CreateImpl<RenderComponent>(entity, components);
-    //            Create<Args...>(entity, components, p_args);
-    //        }
-    //    };
-
-    //    template <>
-    //    struct ComponentFactory<RenderComponent>
-    //    {
-    //        template <typename ... Args>
-    //        static RenderComponent& Create<>(Entity& entity, std::vector<std::shared_ptr<RenderComponent>>& components, Args... p_args)
-    //        {
-    //            CreateHelp<Args...>(entity, components, p_args);
-    //        };
-
-    //    };
-
-    //    template <>
-    //    struct ComponentFactory<RenderComponent>
-    //    {
-    //        template <>
-    //        static RenderComponent& Create<>(Entity&){};
-
-    //    };
-    //}
-
+    
     class Entity
     {
         //For manipulating components
@@ -122,6 +62,8 @@ namespace jej
         //Components
 
         //Add a component to the given entity
+        //Returns a reference to either the created component
+        //Or a reference to a component that has already been bound to this entity
         template<typename T, typename ... Args>
         T& AddComponent(Args ... p_args);
 

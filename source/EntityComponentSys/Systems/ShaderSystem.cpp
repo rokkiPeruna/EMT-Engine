@@ -154,11 +154,11 @@ namespace jej
             switch (p_type)
             {
             case detail::ShaderType::Fragment:
-                p_shaderName = path + "FragmentShaderTexture.frag";
+                p_shaderName = path + settings::defaultFragmentShaderFileName;
                 return true;
 
             case detail::ShaderType::Vertex:
-                p_shaderName = path + "VertexShader.vert";
+                p_shaderName = path + settings::defaultVertexShaderFileName;
                 return true;
                 
             default:

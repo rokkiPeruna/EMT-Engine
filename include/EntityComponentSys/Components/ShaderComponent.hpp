@@ -25,8 +25,8 @@ namespace jej
             ShaderType type;
 
             //File names for shaders
-            std::string vertexShaderFileName;
             std::string fragmentShaderFileName;
+            std::string vertexShaderFileName;
 
             //For detaching && deleting
             unsigned int fragmentShaderID = 0u;
@@ -43,12 +43,14 @@ namespace jej
 
         //For deleting shaders
         friend class ShaderSystem;
+        friend class RenderSystem;
 
     public:
 
 
         //Constructor
-        ShaderComponent::ShaderComponent(Entity& entity, const std::string& p_vertexShaderFileName = "", const std::string& p_fragmentShaderFileName = "");
+        ShaderComponent::ShaderComponent(Entity* entity, const std::string& p_fragmentShaderFileName = "", const std::string& p_vertexShaderFileName = "");
+
 
         //Destructor
         ShaderComponent::~ShaderComponent();

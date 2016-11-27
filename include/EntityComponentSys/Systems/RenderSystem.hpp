@@ -12,6 +12,7 @@
 
 //
 #include <External/OpenGL_ES2/EGL/egl.h>
+//#include <External/OpenGL_ES2/GLES2/gl2.h>
 //
 
 namespace jej
@@ -19,6 +20,9 @@ namespace jej
     //Forward declarating Window-class etc.
     class Window;
     class RenderComponent;
+    class ShaderComponent;
+    class ShapeComponent;
+    class SpriteComponent;
     //
 
     namespace detail
@@ -35,6 +39,8 @@ namespace jej
 		//For manipulating m_components
 		friend class EngineObject;
 		friend class Entity;
+
+		//For allowing Win32 event handler to call _update() in WM_PAINT
         friend LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
         
 
@@ -69,19 +75,30 @@ namespace jej
         //Smart pointer to Window - singleton
         std::shared_ptr<Window> m_window;
 
-        //
+        //Method for initializing RenderComponent's draw data
+		void _createBuffersForRenderComponentDrawData(RenderComponent& p_rendComp);
 
-        //This renders and draws every RenderComponent by calling priv methods
+		//This system's update that gets called from WM_PAINT in Win32Window - class
         void _update(const float p_deltaTime) override;
 
         //
-        void _clearScreen();
+        void _clearScreen() const;
 
         //
-        bool _swapBuffers();
+        bool _swapBuffers() const;
 
         //
-        bool _updateBuffers();
+		bool _drawAllBuffers();
+
+        //
+        void _useShader(const ShaderComponent& shaderComp) const;
+
+        //
+        void _unUseShader(const ShaderComponent& shaderComp) const;
+
+		//
+		void _bindTexture() const;
+
 
 
         //////////////////////////////
@@ -90,11 +107,10 @@ namespace jej
         EGLDisplay m_display;
         EGLSurface m_surface;
 
+		//Initialize Open GL ES 2.0
         bool _createContext(const EGLint p_attributeList[]);
 
-        //Vertex buffer objects for various different types
-        //TODO: Add buffers
-
+		//Holds shared pointers to all RenderComponents
         static std::vector<std::shared_ptr<RenderComponent>> m_components;
 
     };

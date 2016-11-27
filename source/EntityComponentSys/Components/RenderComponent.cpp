@@ -4,20 +4,9 @@
 
 namespace jej
 {
-    /* RenderComponent::RenderComponent():
-         Component(),
-         m_shaderComp(nullptr),
-         m_shapeComp(nullptr),
-         m_transformComp(nullptr)
-         {
-         m_shaderComp.reset(new ShaderComponent());
-         m_shapeComp.reset(new ShapeComponent());
-         m_transformComp.reset(new TransformComponent());
-         }*/
-    //
-
-    RenderComponent::RenderComponent(Entity& entity) :
-        Component(entity),
+ 
+    RenderComponent::RenderComponent(Entity* p_entity) :
+        Component(p_entity),
         m_shaderComp(nullptr),
         m_shapeComp(nullptr),
         m_transformComp(nullptr)
@@ -28,7 +17,7 @@ namespace jej
         bool shaderDone = false;
         for (unsigned int i = 0u; i < shaderComps.size(); ++i)
         {
-            if (shaderComps[i]->m_parentID == entity.m_entityID)
+            if (shaderComps[i]->m_parentID == p_entity->m_entityID)
             {
                 m_shaderComp = shaderComps[i];
                 shaderDone = true;
@@ -37,7 +26,7 @@ namespace jej
         }
         if (!shaderDone)
         {
-            entity.AddComponent<ShaderComponent>();
+            p_entity->AddComponent<ShaderComponent>(p_entity);
             m_shaderComp = ShaderSystem::GetInstance().m_components.back();
         }
 
@@ -46,7 +35,7 @@ namespace jej
         bool shapeDone = false;
         for (unsigned int i = 0u; i < shapeComps.size(); ++i)
         {
-            if (shapeComps[i]->m_parentID == entity.m_entityID)
+            if (shapeComps[i]->m_parentID == p_entity->m_entityID)
             {
                 m_shapeComp = shapeComps[i];
                 shapeDone = true;
@@ -55,7 +44,7 @@ namespace jej
         }
         if (!shapeDone)
         {
-            entity.AddComponent<ShapeComponent>();
+            p_entity->AddComponent<ShapeComponent>(p_entity);
             m_shapeComp = ShapeSystem::GetInstance().m_components.back();
         }
 
@@ -64,7 +53,7 @@ namespace jej
         bool transformDone = false;
         for (unsigned int i = 0u; i < transformComps.size(); ++i)
         {
-            if (transformComps[i]->m_parentID == entity.m_entityID)
+            if (transformComps[i]->m_parentID == p_entity->m_entityID)
             {
                 m_transformComp = transformComps[i];
                 transformDone = true;
@@ -73,7 +62,7 @@ namespace jej
         }
         if (!transformDone)
         {
-            entity.AddComponent<TransformComponent>();
+            p_entity->AddComponent<TransformComponent>(p_entity);
             m_transformComp = TransformSystem::GetInstance().m_components.back();
         }
 

@@ -9,15 +9,16 @@ namespace jej
     unsigned int Component::m_componentIDCounter = 0u;
     unsigned int Component::m_componentIDRemovedCounter = 0u;
 
-    Component::Component(Entity& entity) :
+    Component::Component(Entity* entity) :
         m_componentType(ComponentType::Failure),
         m_componentID(++m_componentIDCounter),
-        m_parentID(entity.m_entityID)
+        m_parentID(entity->m_entityID)
     {
         
         //Entity takes
-        entity.m_componentIDs.emplace_back(m_componentID);
+        entity->m_componentIDs.emplace_back(m_componentID);
     }
+
 
     Component::Component(const Component& p_other) :
         m_componentType(p_other.m_componentType),
@@ -25,7 +26,7 @@ namespace jej
         m_parentID(p_other.m_parentID)
     {
         //Think of some way to make sure parentId is correct
-        DebugBreak();
+        //DebugBreak();
     }
 
     Component::~Component()

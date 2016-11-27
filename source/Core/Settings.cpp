@@ -37,6 +37,10 @@ namespace jej
 
         std::string rootPath = "";
 
+        std::string defaultFragmentShaderFileName = "FragmentShaderTexture.frag";
+
+        std::string defaultVertexShaderFileName = "VertexShader.vert";
+
     }
 
 }
