@@ -140,7 +140,7 @@ namespace jej
 		//Add attributes' locations, etc. unsigned int index numbers
 		//TODO: Add more attribute index queries as attributes increase
 		drawData.textureCoordIndex = glGetAttribLocation(drawData.shaderProgID, "vTexCoord");
-		drawData.vertexPositionIndex = glGetAttribLocation(drawData.shaderProgID, "vTexCoord");
+		drawData.vertexPositionIndex = glGetAttribLocation(drawData.shaderProgID, "vPosition");
 
 		//Indices
 		drawData.vertexBufferObjects.emplace_back(0);

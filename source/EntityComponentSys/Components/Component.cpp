@@ -25,7 +25,7 @@ namespace jej
         m_parentID(p_other.m_parentID)
     {
         //Think of some way to make sure parentId is correct
-        DebugBreak();
+        //DebugBreak();
     }
 
     Component::~Component()
