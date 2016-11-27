@@ -50,6 +50,7 @@ int main(int argc, char* argv[])
     for (;;)
     {
         game.EngineUpdate();
+        break;
 		//std::cout << mouse.GetMousePosition().x << "   " << mouse.GetMousePosition().y << std::endl;
 		
     }

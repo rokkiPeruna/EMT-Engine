@@ -346,9 +346,6 @@
     <None Include="..\..\include\EntityComponentSys\Systems\Inl\System.inl">
       <Filter>Header Files\EntityComponentSystem\Systems\Inl</Filter>
     </None>
-    <None Include="..\..\include\EntityComponentSys\Components\Inl\RenderComponent.inl">
-      <Filter>Header Files\EntityComponentSystem\Components\Inl</Filter>
-    </None>
     <None Include="..\..\include\EntityComponentSys\Components\Inl\ShapeComponent.inl">
       <Filter>Header Files\EntityComponentSystem\Components\Inl</Filter>
     </None>

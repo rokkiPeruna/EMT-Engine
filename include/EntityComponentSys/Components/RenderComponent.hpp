@@ -37,15 +37,7 @@ namespace jej
 
     public:
         //Default constructor
-        //RenderComponent();
-
-        //Constructor for RenderComponent, default-initializes components that were not given
-        //Arguments: (order does not matter)
-        //ShaderComponent
-        //ShapeComponent
-        //TransformComponent
-        template <typename ... Args>
-        RenderComponent(Entity& entity, const Args& ... args);
+        RenderComponent(Entity& entity);
 
         //Destructor
         ~RenderComponent();
@@ -56,43 +48,6 @@ namespace jej
 
 
     private:
-
-        //Create default component
-        template <typename T>
-        void _createDefault(Entity& p_entity, std::shared_ptr<T>& p_ptr);
-        
-        //Tried to add component of wrong type
-        template <typename T>
-        void _addComponentImpl(Entity& entity, const T& t);
-
-        //Specialized add ShaderComponent
-        template <>
-        void _addComponentImpl<ShaderComponent>(Entity& entity, const ShaderComponent& t);
-
-        //Specialized add ShapeComponent
-        template <>
-        void _addComponentImpl<ShapeComponent>(Entity& entity, const ShapeComponent& t);
-
-        //Specialized add TransformComponent
-        template <>
-        void _addComponentImpl<TransformComponent>(Entity& entity, const TransformComponent& t);
-
-        //Actual separation of var args
-        template <typename T, typename ... Args>
-        void _addComponentHelper(Entity& entity, const T& t, const Args& ... args);
-
-        //Var args not empty, calls helper to split args
-        template <typename ... Args>
-        void _addComponent(Entity& entity, const Args& ... args);
-
-        //Var args empty
-        template <>
-        void _addComponent(Entity& entity);
-
-        //Do nothing if component 't' is already parented to 'entity'
-        //Otherwise add the ID of 't' to 'entity'
-        template <typename T>
-        void _addComponentTrue(Entity& entity, const T& t);
 
         std::shared_ptr<ShaderComponent> m_shaderComp;
         std::shared_ptr<ShapeComponent> m_shapeComp;
@@ -127,8 +82,6 @@ namespace jej
     //{
     //}
 
-
-#include <EntityComponentSys/Components/Inl/RenderComponent.inl>
 
 }
 

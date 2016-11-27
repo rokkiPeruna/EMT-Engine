@@ -323,7 +323,7 @@ namespace jej//NAMESPACE jej STARTS
             tmpWinData.sizeY = std::abs(tmpOSData.rectWin.bottom - tmpOSData.rectWin.top);
 
             //Render
-            
+
             RenderSystem::GetInstance()._update(100.f);
 
             break;
@@ -331,13 +331,13 @@ namespace jej//NAMESPACE jej STARTS
 
         case WM_MOVE:
         {
-                 Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
-                 auto& tmpWinData = context->GetWinData();
-                 auto& tmpOSData = context->GetWinOSData();
-            
-            
-                 tmpOSData.offsetX = LOWORD(lparam);
-                 tmpOSData.offsetY -= (HIWORD(lparam) - tmpWinData.sizeY);
+            Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
+            auto& tmpWinData = context->GetWinData();
+            auto& tmpOSData = context->GetWinOSData();
+
+
+            tmpOSData.offsetX = LOWORD(lparam);
+            tmpOSData.offsetY -= (HIWORD(lparam) - tmpWinData.sizeY);
 
             break;
         }
@@ -371,7 +371,7 @@ namespace jej//NAMESPACE jej STARTS
         {
             Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
             auto& tmpWinData = context->GetWinData();
-            
+
             tmpWinData.sizeX = LOWORD(lparam);
             tmpWinData.sizeY = HIWORD(lparam);
 
