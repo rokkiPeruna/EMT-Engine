@@ -30,8 +30,8 @@ namespace jej
         virtual ~ShapeComponent();
 
         //Add a shape to this component
-        template <typename T, typename ... Args>
-        T& AddShape(const ShapeType p_type, const Args& ... p_args);
+        template <typename T,  typename ... Args>
+        void AddShape(const T, Args& ... p_args);
 
         //Shapes' color
         Vector4i ColorRGBA;

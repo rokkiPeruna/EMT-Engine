@@ -78,7 +78,7 @@ namespace jej
         //Method for initializing RenderComponent's draw data
 		void _createBuffersForRenderComponentDrawData(RenderComponent& p_rendComp);
 
-		//This system's update, empty currently //TODO: Change comment after adding code
+		//This system's update that gets called from WM_PAINT in Win32Window - class
         void _update(const float p_deltaTime) override;
 
         //
