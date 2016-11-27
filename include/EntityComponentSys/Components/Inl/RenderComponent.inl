@@ -117,18 +117,19 @@ void RenderComponent::_addComponentImpl<ShaderComponent>(Entity& entity, const S
 //////////////////////////////////////////
 
 
-template <>
-void RenderComponent::_addComponentImpl<ShapeComponent>(Entity& entity, const ShapeComponent& t)
-{
-    //If several ShapeComponents have been passed
-    if (m_shapeComp)
-    {
-        Messenger::Add(Messenger::MessageType::Error, "RenderComponent: ShapeComponent already bound, bypassing.");
-        JEJ_ASSERT(false, "RenderComponent: ShapeComponent already bound.");
-        return;
-    }
-    _addComponentTrue<ShapeComponent>(entity, t);
-}
+//TODO: This is second definition, see above!
+//template <>
+//void RenderComponent::_addComponentImpl<ShapeComponent>(Entity& entity, const ShapeComponent& t)
+//{
+//    //If several ShapeComponents have been passed
+//    if (m_shapeComp)
+//    {
+//        Messenger::Add(Messenger::MessageType::Error, "RenderComponent: ShapeComponent already bound, bypassing.");
+//        JEJ_ASSERT(false, "RenderComponent: ShapeComponent already bound.");
+//        return;
+//    }
+//    _addComponentTrue<ShapeComponent>(entity, t);
+//}
 //////////////////////////////////////////
 
 

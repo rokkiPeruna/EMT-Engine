@@ -5,10 +5,10 @@
 #include <EntityComponentSys/Components/Shapes/Shape.hpp>
 #include <Core/BaseStructs.hpp>
 
-//#include <EntityComponentSys/Components/Shapes/Circle.hpp>
-//#include <EntityComponentSys/Components/Shapes/Convex.hpp>
-//#include <EntityComponentSys/Components/Shapes/Rectangle.hpp>
-//#include <EntityComponentSys/Components/Shapes/Triangle.hpp>
+#include <EntityComponentSys/Components/Shapes/Circle.hpp>
+#include <EntityComponentSys/Components/Shapes/Convex.hpp>
+#include <EntityComponentSys/Components/Shapes/Rectangle.hpp>
+#include <EntityComponentSys/Components/Shapes/Triangle.hpp>
 
 #include <memory>
 
@@ -29,8 +29,8 @@ namespace jej
         virtual ~ShapeComponent();
 
         //Add a shape to this component
-        //template <typename T,  typename ... Args>
-		//void AddShape(const ShapeType p_type, Args& ... p_args);
+        template <typename T,  typename ... Args>
+		void AddShape(const ShapeType p_type, const Args& ... p_args);
 
         //Shapes' color
         Vector4i ColorRGBA;

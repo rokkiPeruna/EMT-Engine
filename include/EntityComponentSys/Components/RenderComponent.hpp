@@ -64,7 +64,7 @@ namespace jej
 
     public:
         //Default constructor
-        RenderComponent();
+        //RenderComponent();
 
         //Constructor for RenderComponent, default-initializes components that were not given
         //Arguments: (order does not matter)

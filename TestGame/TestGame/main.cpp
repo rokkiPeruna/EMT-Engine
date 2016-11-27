@@ -22,21 +22,21 @@ int main(int argc, char* argv[])
 {
 
 	//Create new EngineObject, initialize it and get alias handle to it
-    jej::EngineObject::Initialize(argv[0]);
-    auto& game = jej::EngineObject::GetInstance();
+	jej::EngineObject::Initialize(argv[0]);
+	auto& game = jej::EngineObject::GetInstance();
 
 
 	//Create scene in which you can put entities.
 	//Scene can be start menu, game level, credits ec.
-    jej::Scene myScene;
+	jej::Scene myScene;
 
 	//Add new entity to the newly created scene
 	myScene.AddEntity("Character");
 
 	//Make alias of added entity for ease of use
 	auto& myCharacter = *myScene.GetEntityPtr("Character");
-	
-	
+
+
 	//Start adding components to our entity
 	//Entity has template method AddComponent which allows you to add all kinds of components
 	//AddComponent takes as typename a component name that is available with jej::SomeComponent - style syntax
@@ -45,12 +45,12 @@ int main(int argc, char* argv[])
 	//to myCharacter:
 
 	//Creating:
-	//std::shared_ptr<jej::TransformComponent> myTransformComp = std::make_shared<jej::TransformComponent>(
-	//	myCharacter,					//Tell component that this is its owner
- //       jej::Vector2f(0.f, 0.f),		//Position, we start at center of the screen
- //       jej::Vector2f(1, 1),			//Scale in x, y - axises
- //       jej::Vector4f(0, 0, 0, 0)		//Rotation x, y, z, w
-	//	);		
+	std::shared_ptr<jej::TransformComponent> myTransformComp = std::make_shared<jej::TransformComponent>(
+		myCharacter,					//Tell component that this is its owner
+		jej::Vector2f(0.f, 0.f),		//Position, we start at center of the screen
+		jej::Vector2f(1, 1),			//Scale in x, y - axises
+		jej::Vector4f(0, 0, 0, 0)		//Rotation x, y, z, w
+		);
 	//Adding
 	myCharacter.AddComponent<jej::TransformComponent>(jej::TransformComponent(
 		myCharacter,					//Tell component that this is its owner
@@ -58,15 +58,9 @@ int main(int argc, char* argv[])
 		jej::Vector2f(1, 1),			//Scale in x, y - axises
 		jej::Vector4f(0, 0, 0, 0)		//Rotation x, y, z, w
 		));
-		
+
 
 	//Next we create ShaderComponent and add it to our entity so it can be drawn
-	//std::shared_ptr<jej::ShaderComponent> myShaderComp = std::make_shared<jej::ShaderComponent>(
-	//	myCharacter,					//Tell component that this is its owner
-	//	"VertexShader.vert"	,			//First we must give vertex shader name and file extension
-	//	"FragmentShader.frag"			//Second we guve fragment shader name and file extencion
-	//	);
-
 	myCharacter.AddComponent<jej::ShaderComponent>(jej::ShaderComponent(
 		myCharacter,					//Tell component that this is its owner
 		"VertexShader.vert",			//First we must give vertex shader name and file extension
@@ -80,11 +74,6 @@ int main(int argc, char* argv[])
 	//This is because our ShapeComponent might consist of several different shapes
 	//etc. we make a pyramid that has four triangles as sides and rectangle as bottom
 
-	//std::shared_ptr<jej::ShapeComponent> myShapeComp = std::make_shared<jej::ShapeComponent>(
-	//	myCharacter,					//Tell component that this is its owner
-	//	jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
-	//	);
-
 	myCharacter.AddComponent<jej::ShapeComponent>(jej::ShapeComponent(
 		myCharacter,					//Tell component that this is its owner
 		jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
@@ -92,18 +81,19 @@ int main(int argc, char* argv[])
 
 	//Now that our ShapeComponent is added to our character, let's add some shape to the ShapeComponent.
 	//First we make alias of our character's ShapeComponent for ease of use
-	//auto* myShapeComp = myCharacter->GetComponentPtr<jej::ShapeComponent>();
+	auto& myShapeComp = *myCharacter.GetComponentPtr<jej::ShapeComponent>();
 
 	//Now we can add shape to our ShapeComponent, multiple if we want
 	//First parameter of ShapeComponent's AddShape template method is the type of shape we
 	//want to add, in this case triangle. ShapeTypes are found at jej::ShapeType::
 	//Following parameters are the actual points (vertices) we want our shape has.
-	//myShapeComp->AddShape<jej::ShapeType>(
-	//	jej::ShapeType::Triangle,		//Type of shape to add
-	//	jej::Vector2f(0.f, 0.f),		//First point, middle of screen
-	//	jej::Vector2f(1.f, 1.f),		//Second point, upper-right corner
-	//	jej::Vector2f(1.f, -1.f)		//Third point, lower-right corner
-	//	);
+
+	myShapeComp.AddShape<jej::Triangle>(
+		jej::ShapeType::Triangle,		//Type of shape to add
+		jej::Vector2f(0.f, 0.f),		//First point, middle of screen
+		jej::Vector2f(1.f, 1.f),		//Second point, upper-right corner
+		jej::Vector2f(1.f, -1.f)		//Third point, lower-right corner
+		);
 
 
 	//Now we have our character with transform, shader and shape component. At this point it exist
@@ -117,30 +107,28 @@ int main(int argc, char* argv[])
 	//NOTICE that we have in scope all those aliases we created, so let's use them instead of
 	//fetching component with entity's GetComponentPtr<> template function
 
-	//Creating
-	//std::shared_ptr<jej::RenderComponent> myRenderComp = std::make_shared<jej::RenderComponent>(
-	//	myCharacter,
-	//	myTransformComp,
-	//	myShaderComp,
-	//	myShapeComp
-	//	);
 
-	////Adding
-	//myCharacter.AddComponent<jej::RenderComponent>(myRenderComp);
-		
-	
+	//Add RenderComponent
+	myCharacter.AddComponent<jej::RenderComponent>(jej::RenderComponent(
+		myCharacter,
+		myCharacter.GetComponentPtr<jej::TransformComponent>(),
+		myCharacter.GetComponentPtr<jej::ShaderComponent>(),
+		myCharacter.GetComponentPtr < jej::ShapeComponent>()
+		));
 
-    
+
+
+
 
 	auto& mouse = jej::Mouse::GetInstance();
 	auto& keyboard = jej::Keyboard::GetInstance();
 
-    for (;;)
-    {
-        game.EngineUpdate();
+	for (;;)
+	{
+		game.EngineUpdate();
 		//std::cout << mouse.GetMousePosition().x << "   " << mouse.GetMousePosition().y << std::endl;
-		
-    }
 
-    return 0;
+	}
+
+	return 0;
 }
