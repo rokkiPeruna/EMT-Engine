@@ -93,6 +93,7 @@
     <ClCompile Include="..\..\source\Core\Scene.cpp" />
     <ClCompile Include="..\..\source\Core\Settings.cpp" />
     <ClCompile Include="..\..\source\Core\Timer.cpp" />
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\CollisionComponent.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\Component.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\RenderComponent.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\ShaderComponent.cpp" />
@@ -100,6 +101,7 @@
     <ClCompile Include="..\..\source\EntityComponentSys\Components\TextureComponent.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\TransformComponent.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Entity\Entity.cpp" />
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\CollisionSystem.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\RenderSystem.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\ShaderSystem.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\ShapeSystem.cpp" />
@@ -126,6 +128,7 @@
     <ClInclude Include="..\..\include\Core\Scene.hpp" />
     <ClInclude Include="..\..\include\Core\Settings.hpp" />
     <ClInclude Include="..\..\include\Core\Timer.hpp" />
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\CollisionComponent.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\Component.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\RenderComponent.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\ShaderComponent.hpp" />
@@ -133,6 +136,7 @@
     <ClInclude Include="..\..\include\EntityComponentSys\Components\TextureComponent.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\TransformComponent.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Entity\Entity.hpp" />
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\CollisionSystem.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\RenderSystem.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\ShaderSystem.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\ShapeSystem.hpp" />

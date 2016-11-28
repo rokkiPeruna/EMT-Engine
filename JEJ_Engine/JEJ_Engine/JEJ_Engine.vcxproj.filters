@@ -106,6 +106,9 @@
     <Filter Include="Header Files\Texture\Inl">
       <UniqueIdentifier>{84d7adf3-c036-49e7-b653-2a717b6fd9fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\IO_Manager\Android">
+      <UniqueIdentifier>{411238b6-2f6d-4c88-8507-dbac8f0148a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -199,6 +202,12 @@
       <Filter>Source Files\EntityComponentSystem\Components</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\TextureSystem.cpp">
+      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\CollisionComponent.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\CollisionSystem.cpp">
       <Filter>Source Files\EntityComponentSystem\Systems</Filter>
     </ClCompile>
   </ItemGroup>
@@ -306,6 +315,12 @@
       <Filter>Header Files\EntityComponentSystem\Components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\TextureSystem.hpp">
+      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\CollisionComponent.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\CollisionSystem.hpp">
       <Filter>Header Files\EntityComponentSystem\Systems</Filter>
     </ClInclude>
   </ItemGroup>
