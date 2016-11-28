@@ -7,7 +7,6 @@ namespace jej
 		m_position_min(),
 		m_position_max()
 	{
-		
 
 
 	}

@@ -10,6 +10,8 @@ namespace jej
 
     class Shape
     {
+		friend class Math;
+
         //ShapeComponent must have access to m_points
         friend class ShapeComponent;
 
