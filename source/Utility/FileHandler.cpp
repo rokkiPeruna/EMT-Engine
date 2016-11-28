@@ -2,6 +2,8 @@
 
 #include <Core/Settings.hpp>
 #include <Utility/Messenger.hpp>
+#include <Utility/Assert.hpp>
+#include <Core/BaseStructs.hpp>
 
 namespace jej
 {
@@ -65,6 +67,44 @@ namespace jej
         return true;
     }
     //////////////////////////////////////////
+
+	bool FileHandler::ReadImage(const std::string& p_name, Vector2i& imageSize, std::vector<char>& p_dataBuffer, const std::vector<unsigned int>& p_selectedImages)
+	{
+		JEJ_ASSERT(!p_name.empty(), "No texture name given");
+
+		const std::string imagePath = settings::rootPath + "Textures/" + p_name;
+		if (!accessFile("Textures/" + p_name, false))
+		{
+			Messenger::Add(Messenger::MessageType::Error, "Texture could not be read");
+			return false;
+		}
+
+		LPDWORD dataRead = {};
+		OVERLAPPED overlapped = {};
+
+		auto size = GetFileSize(m_fileHandle, NULL);
+
+		//Reserve invalid operation here
+		std::vector<char> temp;
+			temp.resize(size + 1u);
+
+		//Read file
+		if (FALSE == ReadFile(
+			m_fileHandle,
+			&temp[0],
+			size,
+			dataRead,
+			&overlapped
+			))
+		{
+			Messenger::Add(Messenger::MessageType::Error, "Failed to read file: ", imagePath, getWinError());
+			return false;
+		}
+
+		imageSize = std::stol(std::string(temp[]))
+
+		std::memcpy(&p_dataBuffer, &temp.begin() + 23u, temp.size() - 24u);
+	}
 
 
     bool FileHandler::Write(const std::string& name)

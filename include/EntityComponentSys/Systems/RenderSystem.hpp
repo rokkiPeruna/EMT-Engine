@@ -22,7 +22,7 @@ namespace jej
     class RenderComponent;
     class ShaderComponent;
     class ShapeComponent;
-    class SpriteComponent;
+    class TextureComponent;
     //
 
     namespace detail

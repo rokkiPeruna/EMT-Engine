@@ -80,7 +80,7 @@ namespace jej //NAMESPACE jej
         std::get<0>(engine.m_systems) = &RenderSystem::GetInstance();
         std::get<1>(engine.m_systems) = &ShaderSystem::GetInstance();
         std::get<2>(engine.m_systems) = &ShapeSystem::GetInstance();
-        std::get<3>(engine.m_systems) = &SpriteSystem::GetInstance();
+        std::get<3>(engine.m_systems) = &TextureSystem::GetInstance();
         std::get<4>(engine.m_systems) = &TransformSystem::GetInstance();
 
 
@@ -154,7 +154,7 @@ namespace jej //NAMESPACE jej
             unsigned int id = itr->m_componentID;
             IDs.emplace_back(id);
         }
-        for (const auto& itr : std::get<ComponentHelper<SpriteComponent>::index>(m_systems)->m_components)
+        for (const auto& itr : std::get<ComponentHelper<TextureComponent>::index>(m_systems)->m_components)
         {
             unsigned int id = itr->m_componentID;
             IDs.emplace_back(id);

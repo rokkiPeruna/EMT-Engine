@@ -10,7 +10,7 @@ namespace jej
     class RenderComponent;
     class ShaderComponent;
     class ShapeComponent;
-    class SpriteComponent;
+    class TextureComponent;
     class TransformComponent;
 
 
@@ -32,7 +32,7 @@ namespace jej
         Render,
         Shader,
         Shape,
-        Sprite,
+        Texture,
         Transform
     };
 
@@ -67,10 +67,10 @@ namespace jej
     };
 
     template <>
-    struct ComponentHelper<SpriteComponent>
+    struct ComponentHelper<TextureComponent>
     {
         static const unsigned short int index = 3u;
-        ComponentHelper<SpriteComponent>(){};
+        ComponentHelper<TextureComponent>(){};
     };
 
     template <>

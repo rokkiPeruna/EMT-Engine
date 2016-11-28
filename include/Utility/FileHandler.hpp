@@ -30,6 +30,8 @@ namespace jej
         //Bytes to read, defaults to entire file
         bool Read(const std::string& name, const unsigned int length = 0u);
 
+		bool ReadImage(const std::string& p_name, Vector2i& imageSize, std::vector<char>& p_dataBuffer, const std::vector<unsigned int>& p_selectedImages = std::vector<unsigned int>());
+
         //Writes m_fileContents to a file. Creates the file if it does not exist.
         //Name of the file to create
         bool Write(const std::string& name);

@@ -40,7 +40,7 @@ namespace jej
         RemoveComponent<RenderComponent>();
         RemoveComponent<ShaderComponent>();
         RemoveComponent<ShapeComponent>();
-        RemoveComponent<SpriteComponent>();
+        RemoveComponent<TextureComponent>();
         RemoveComponent<TransformComponent>();
 
 
