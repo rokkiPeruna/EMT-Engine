@@ -1,6 +1,6 @@
 #pragma comment(lib, "ws2_32.lib")
 #include <EntityComponentSys/Systems/TextureSystem.hpp>
-#include <Utility\Messenger.hpp>
+#include <Utility/Messenger.hpp>
 #include <winsock.h>
 #include <fstream>
 
@@ -26,23 +26,24 @@ namespace jej
 	}
 
 
-	void TextureSystem::_initialize(const std::string& p_textureName)
+	bool TextureSystem::_initialize(std::string& p_textureName, GLuint& p_textureID)
 	{
+
+		std::string path = "Textures/";
+		p_textureName += path + p_textureName;
+
 		unsigned int width, height, numComponents;
-		char* imageData;
-		GLuint m_texture;
-
-
+		
 		FileHandler fileHandler;
 		fileHandler.Read(p_textureName);
-		imageData = fileHandler.m_fileContents;
-
+		
 		std::fstream file(p_textureName.c_str(), std::ios_base::binary | std::ios_base::in);
 
 		if (!file.is_open() || !file)
 		{
 			file.close();
 			Messenger::Add(Messenger::MessageType::Error, "Failed to open texture");
+			return false;
 		}
 
 		file.seekg(16);
@@ -52,9 +53,9 @@ namespace jej
 		width = ntohl(width);
 		height = ntohl(height);
 
-		glGenTextures(1, &m_texture);
+		glGenTextures(1, &p_textureID);
 
-		glBindTexture(GL_TEXTURE_2D, m_texture);
+		glBindTexture(GL_TEXTURE_2D, p_textureID);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -62,7 +63,13 @@ namespace jej
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, fileHandler.m_fileContents.data());
+		
+		return true;
+	}
+
+	void TextureSystem::_drawFromSheet()
+	{
 
 
 	}
