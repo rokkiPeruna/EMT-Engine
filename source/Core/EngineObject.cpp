@@ -2,6 +2,8 @@
 
 #include <Core/EngineObject.hpp>
 
+#include <Core/Timer.hpp>
+
 #include <IO_Manager/InputManagerImpl.hpp>
 
 #include <EntityComponentSys/Components/Component.hpp>
@@ -12,6 +14,7 @@
 #include <Graphics/OGL_ES2.hpp>
 #include <Utility/Assert.hpp>
 #include <Utility/Messenger.hpp>
+
 
 
 #ifdef _WIN32
@@ -51,7 +54,10 @@ namespace jej //NAMESPACE jej
         if (entityLeak != 0)
             Messenger::Add(Messenger::MessageType::Warning, "Amount of leaking components: ", entityLeak);
 
+        Messenger::Add(Messenger::MessageType::Debug, std::to_string(Timer::GetInstance().GetTime()));
+
         Messenger::WriteLog();
+        
     }
     //////////////////////////////////////////
 
@@ -76,6 +82,8 @@ namespace jej //NAMESPACE jej
         //TODO:
         //Initialize all systems and managers here
         InputManager::GetInstance();
+
+        Timer::GetInstance(true);
 
         std::get<0>(engine.m_systems) = &RenderSystem::GetInstance();
         std::get<1>(engine.m_systems) = &ShaderSystem::GetInstance();
