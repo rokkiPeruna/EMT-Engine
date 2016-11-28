@@ -10,7 +10,7 @@ namespace jej
     class RenderComponent;
     class ShaderComponent;
     class ShapeComponent;
-    class SpriteComponent;
+    class TextureComponent;
     class TransformComponent;
 
 
@@ -25,6 +25,8 @@ namespace jej
 #endif
 
 
+    
+
 
     enum class ComponentType : unsigned short int
     {
@@ -32,7 +34,7 @@ namespace jej
         Render,
         Shader,
         Shape,
-        Sprite,
+        Texture,
         Transform
     };
 
@@ -67,10 +69,10 @@ namespace jej
     };
 
     template <>
-    struct ComponentHelper<SpriteComponent>
+    struct ComponentHelper<TextureComponent>
     {
         static const unsigned short int index = 3u;
-        ComponentHelper<SpriteComponent>(){};
+        ComponentHelper<TextureComponent>(){};
     };
 
     template <>
@@ -185,6 +187,8 @@ namespace jej
             w = p_w;
         };
     };
+
+
 }
 
 #endif

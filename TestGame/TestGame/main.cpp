@@ -37,7 +37,8 @@ int main(int argc, char* argv[])
 	//Make alias of added entity for ease of use
 	auto& myCharacter = *myScene.GetEntityPtr("Character");
 	
-	
+    myCharacter.AddComponent<jej::TextureComponent>(&myCharacter, "asdf.png");
+
 	//Start adding components to our entity
 	//Entity has template method AddComponent which allows you to add all kinds of components
 	//AddComponent takes as typename a component name that is available with jej::SomeComponent - style syntax

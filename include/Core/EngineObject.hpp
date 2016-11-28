@@ -20,7 +20,7 @@ namespace jej //NAMESPACE jej
 	class RenderSystem;
     class ShaderSystem;
     class ShapeSystem;
-    class SpriteSystem;
+    class TextureSystem;
     class TransformSystem;
 
 	class EngineObject
@@ -78,7 +78,7 @@ namespace jej //NAMESPACE jej
 
         //TODO Add all systems
         //Pointer to each system, populated in Initialize
-        std::tuple<RenderSystem*, ShaderSystem*, ShapeSystem*, SpriteSystem*, TransformSystem*> m_systems;
+        std::tuple<RenderSystem*, ShaderSystem*, ShapeSystem*, TextureSystem*, TransformSystem*> m_systems;
 
         std::shared_ptr<Scene> m_currentScene;
         std::shared_ptr<Window> m_windowPtr;

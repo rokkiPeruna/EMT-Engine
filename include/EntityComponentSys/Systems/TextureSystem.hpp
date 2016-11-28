@@ -2,7 +2,6 @@
 #define JEJ_TEXTURE_SYSTEM_HPP
 
 #include <EntityComponentSys/Systems/System.hpp>
-#include <Utility/FileHandler.hpp>
 
 
 #include <External/OpenGL_ES2/EGL/eglplatform.h>
@@ -11,33 +10,43 @@
 
 namespace jej
 {
+
+    class TextureComponent;
+    struct TextureData;
+
 	class TextureSystem : public System 
 	{
 		friend class TextureComponent;
 		
 
-	private:
-		
-		// Short: initialize texture into standard spirte or sprite sheet.
+        //For modifying m_components
+        friend class Entity;
+        friend class EngineObject;
+        friend class System;
 
+    private:
+        
+        //Singleton constructor
+        TextureSystem();
 
-		// Singleton constructor
-		TextureSystem();
-
-
-	public:
-
-		// Delete copy constructor and operator =
+    public:
+        
+		//Disabled copy-constructors
 		TextureSystem(const TextureSystem&) = delete;
 		TextureSystem operator=(const TextureSystem&) = delete;
 
-		// Destructor
-		~TextureSystem();
+        //Destructor
+        virtual ~TextureSystem();
 
+        
 		// Get the one and only instance of singleton 
 		static TextureSystem& GetInstance();
 
-	protected:
+    protected:
+
+        static std::vector<std::shared_ptr<TextureComponent>> m_components;
+
+        void _update(const float p_deltaTime) override;
 
 		// TODO: Bind texture
 		void _bind(unsigned int p_unit);
@@ -45,11 +54,10 @@ namespace jej
 		void _drawFromSheet();
 
 		// Initialize texture
-		bool _initialize(std::string& p_textureName, GLuint& p_textureID);
+        bool _initialize(TextureData* p_data);
 		
-		// Basically useless but is required as part of system.hpp
-		void _update(const float deltaTime);
 	};
+
 }
 
 #endif

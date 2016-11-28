@@ -177,12 +177,6 @@
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\ShaderSystem.cpp">
       <Filter>Source Files\EntityComponentSystem\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\EntityComponentSys\Components\SpriteComponent.cpp">
-      <Filter>Source Files\EntityComponentSystem\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\EntityComponentSys\Systems\SpriteSystem.cpp">
-      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\ShapeSystem.cpp">
       <Filter>Source Files\EntityComponentSystem\Systems</Filter>
     </ClCompile>
@@ -200,6 +194,12 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Core\Timer.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\TextureComponent.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\TextureSystem.cpp">
+      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,12 +278,6 @@
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\ShaderSystem.hpp">
       <Filter>Header Files\EntityComponentSystem\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\EntityComponentSys\Components\SpriteComponent.hpp">
-      <Filter>Header Files\EntityComponentSystem\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\EntityComponentSys\Systems\SpriteSystem.hpp">
-      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\ShapeSystem.hpp">
       <Filter>Header Files\EntityComponentSystem\Systems</Filter>
     </ClInclude>
@@ -307,6 +301,12 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Core\Timer.hpp">
       <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\TextureComponent.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\TextureSystem.hpp">
+      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

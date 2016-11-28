@@ -8,12 +8,12 @@
 #include <EntityComponentSys/Components/RenderComponent.hpp>
 #include <EntityComponentSys/Components/ShaderComponent.hpp>
 #include <EntityComponentSys/Components/ShapeComponent.hpp>
-#include <EntityComponentSys/Components/SpriteComponent.hpp>
+#include <EntityComponentSys/Components/TextureComponent.hpp>
 #include <EntityComponentSys/Components/TransformComponent.hpp>
 #include <EntityComponentSys/Systems/RenderSystem.hpp>
 #include <EntityComponentSys/Systems/ShaderSystem.hpp>
 #include <EntityComponentSys/Systems/ShapeSystem.hpp>
-#include <EntityComponentSys/Systems/SpriteSystem.hpp>
+#include <EntityComponentSys/Systems/TextureSystem.hpp>
 #include <EntityComponentSys/Systems/TransformSystem.hpp>
 
 //

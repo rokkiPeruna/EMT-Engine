@@ -12,6 +12,9 @@
 
 namespace jej
 {
+    class TextureComponent;
+    struct TextureData;
+
 	class FileHandler
 	{
 	public:
@@ -29,6 +32,8 @@ namespace jej
         //Name of the file to read with extension
         //Bytes to read, defaults to entire file
         bool Read(const std::string& name, const unsigned int length = 0u);
+
+		bool ReadImage(TextureData* p_data);
 
         //Writes m_fileContents to a file. Creates the file if it does not exist.
         //Name of the file to create

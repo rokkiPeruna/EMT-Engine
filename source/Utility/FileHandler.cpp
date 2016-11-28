@@ -2,11 +2,18 @@
 
 #include <Core/Settings.hpp>
 #include <Utility/Messenger.hpp>
+#include <Utility/Assert.hpp>
+#include <Core/BaseStructs.hpp>
+
+#include <EntityComponentSys/Components/TextureComponent.hpp>
 
 namespace jej
 {
 
 #ifdef _WIN32
+#pragma comment(lib, "ws2_32.lib")
+#include <winsock.h>
+    //#include <WinSock2.h>
 
     FileHandler::FileHandler() :
         m_fileContents(),
@@ -65,6 +72,65 @@ namespace jej
         return true;
     }
     //////////////////////////////////////////
+
+    bool FileHandler::ReadImage(TextureData* p_data)
+    {
+        JEJ_ASSERT(!p_data->imageName.empty(), "No texture name given");
+
+        const std::string imagePath = "Textures/" + p_data->imageName;
+        if (!accessFile(imagePath, false))
+        {
+            Messenger::Add(Messenger::MessageType::Error, "Texture could not be read");
+            return false;
+        }
+
+        LPDWORD dataRead = {};
+        OVERLAPPED overlapped = {};
+
+        auto size = GetFileSize(m_fileHandle, NULL);
+
+        std::vector<char> temp;
+        //Reserve invalid operation here
+        temp.resize(size + 1u);
+        p_data->readImageData.resize(size + 1u);
+
+        //Read file
+        if (FALSE == ReadFile(
+            m_fileHandle,
+            &temp[0],
+            size,
+            dataRead,
+            &overlapped
+            ))
+        {
+            Messenger::Add(Messenger::MessageType::Error, "Failed to read file: ", imagePath, getWinError());
+            return false;
+        }
+
+        char value[4];
+        unsigned int streamPos = 15u;
+
+        //Width
+        std::stringstream ss;
+        for (unsigned char i = 0u; i < 4u; ++i, ++streamPos)
+            ss << temp[streamPos];
+
+        JEJ_ASSERT(false, "WIP, don't come here!");
+
+        std::string asdf = ss.str();
+        unsigned long int kek = std::stoul(asdf);
+        p_data->singleImageSize.x = ntohl(kek);
+
+        //Height
+        for (unsigned char i = 0u; i < 4u; ++i, ++streamPos)
+            value[i] = temp[streamPos];
+        p_data->singleImageSize.y = ntohl(std::stoul(value));
+
+        //ImageData
+        std::memcpy(&p_data->readImageData[0], &temp[24u], temp.size() - 24u);
+
+        return true;
+    }
 
 
     bool FileHandler::Write(const std::string& name)
