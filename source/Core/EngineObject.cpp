@@ -107,6 +107,13 @@ namespace jej //NAMESPACE jej
     }
     //////////////////////////////////////////
 
+    bool EngineObject::Finalize()
+    {
+        RenderSystem::GetInstance().SystemFinalize();
+
+        return true;
+    }
+
     void EngineObject::SetCurrentScene(const Scene& p_scene)
     {
         //Doesn't work in future

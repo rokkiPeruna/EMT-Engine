@@ -61,6 +61,9 @@ namespace jej
         //Create instance of class
         static RenderSystem& GetInstance();
 
+        //Finalize this system
+        void SystemFinalize();
+
         void _render();
 		
 

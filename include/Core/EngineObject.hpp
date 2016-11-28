@@ -50,6 +50,9 @@ namespace jej //NAMESPACE jej
 		//Initialize engine, should be first call in main
 		static bool Initialize(const std::string& p_root, const WindowBaseInitData* p_data = nullptr, const WindowOSInitData* p_osData = nullptr);
 
+        //Finalize method, must be called prior to EngineUpdate
+        static bool Finalize();
+
 		//Disabled copy-constructors, there should be only one EngineObject during the entire process
 		EngineObject(const EngineObject&) = delete;
 		EngineObject operator=(const EngineObject&) = delete;
