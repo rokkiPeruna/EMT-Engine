@@ -48,6 +48,8 @@ protected:
     template <typename T>
     std::vector<std::shared_ptr<T>>& _getComponentsRef();
 
+    virtual void SystemFinalize(){}
+
     };
 
 #include <EntityComponentSys/Systems/Inl/System.inl>

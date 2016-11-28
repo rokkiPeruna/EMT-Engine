@@ -12,7 +12,9 @@ namespace jej
     {
         //ShapeComponent must have access to m_points
         friend class ShapeComponent;
-        //TODO: remove friend class RenderComponent;
+
+        //Friend RenderComponent so it can get m_shapeType
+        friend class RenderComponent;
 
     public:
 

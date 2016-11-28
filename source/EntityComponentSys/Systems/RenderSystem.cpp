@@ -36,15 +36,6 @@ namespace jej
         assert(m_window != nullptr);
         if (!_createContext(settings::attributeList))
             JEJ_ASSERT(false, "Context creation failed.");
-
-        //Put every RenderComponent's draw data to buffers 
-        for (const auto& itr : m_components)
-        {
-            if (itr->m_shaderComp && itr->m_shapeComp && itr->m_transformComp) //TODO: Re-evaluate this later
-                _createBuffersForRenderComponentDrawData(*itr);
-        }
-
-
     }
     //////////////////////////////////////////
 
@@ -61,8 +52,24 @@ namespace jej
     }
     //////////////////////////////////////////
 
+    void RenderSystem::SystemFinalize()
+    {
+        for (auto& itr : m_components)
+        {
+            itr->Finalize();
+
+            if (itr->m_shaderComp && itr->m_shapeComp && itr->m_transformComp) //TODO: Re-evaluate this later
+                _createBuffersForRenderComponentDrawData(*itr);
+
+        }
+    }
+
+    //////////////////////////////////////////
+
     void RenderSystem::_update(const float p_deltaTime)
     {
+
+
         //Set window's size and offset
         m_winWidth = m_window->GetWinData().sizeX;
         m_winHeight = m_window->GetWinData().sizeY;
@@ -88,7 +95,7 @@ namespace jej
     }
     //////////////////////////////////////////
 
-    void RenderSystem::_render()
+    void RenderSystem::_render()//TODO: REMOVE THIS
     {
         _clearScreen();
         return;
@@ -99,14 +106,8 @@ namespace jej
 
     void RenderSystem::_clearScreen() const
     {
-        //eglMakeCurrent(m_display, m_surface, m_surface, m_context);
-
-        //If using Win32, set window offsets
-        //glViewport(m_window->GetWinOSData().offsetX, m_window->GetWinOSData().offsetY, m_window->GetWinData().sizeX, m_window->GetWinData().sizeY);
-        glViewport(m_winOffsetX, m_winOffsetY, m_winWidth, m_winHeight);
-        //glViewport(0, 0, m_winWidth, m_winHeight);
-
-        glClearColor(1.0f, 0.0f, 0.0f, 0.5f);
+        glViewport(0, 0, m_winWidth, m_winHeight);
+        glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
     //////////////////////////////////////////
@@ -136,6 +137,9 @@ namespace jej
     {
         //Create alias for ease of use
         auto& drawData = p_rendComp.m_myDrawData;
+
+        //Give drawData a shader program ID from p_rendComp's ShaderComponent
+        drawData.shaderProgID = p_rendComp.m_shaderComp->m_shaderData.programID;
 
         //Add attributes' locations, etc. unsigned int index numbers
         //TODO: Add more attribute index queries as attributes increase
@@ -172,7 +176,7 @@ namespace jej
         glBufferData(GL_ARRAY_BUFFER, sizeof(drawData.vertices[0]) * drawData.vertices.size(), drawData.vertices.data(), GL_STATIC_DRAW);
         glVertexAttribPointer(
             drawData.vertexPositionIndex,
-            3,
+            2,
             GL_FLOAT,
             GL_FALSE,
             0,
@@ -204,11 +208,14 @@ namespace jej
             glBindBuffer(GL_ARRAY_BUFFER, drawData.texCoordBuffer);
 
             //Init attribute pointers //TODO: If attributes increase, handle this in loop
-            glVertexAttribPointer(drawData.vertexPositionIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
             glVertexAttribPointer(drawData.textureCoordIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
+            glVertexAttribPointer(drawData.vertexPositionIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
             //TODO: Add call for texture binding once someone creates texture with decent data :D
             //_bindTexture( I take some yet undefined data in me, jee! )
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, itr->texID);
+
 
             //Draw all elements of current RenderComponent
             glDrawElements(
@@ -248,9 +255,6 @@ namespace jej
         else
         {
             unsigned int parentID = shaderComp.m_parentID;
-            //TODO: Ask Eetu how this works, cause it's midnight and you wanna sleep
-            //Messenger::Add(Messenger::MessageType::Error("Shader has zero attributes, shader parent ID: " + parentID));
-
             Messenger::Add(Messenger::MessageType::Error, "Shader has zero attributes, shader parent ID: " + std::to_string(parentID));
             //No rest for the living - Ee
         }

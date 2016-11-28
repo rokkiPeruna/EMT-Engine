@@ -82,6 +82,8 @@ namespace jej
         RenderComponent(const RenderComponent&) = delete;
         RenderComponent operator=(const RenderComponent&) = delete;
 
+        void Finalize();
+
 
     private:
 
@@ -91,6 +93,9 @@ namespace jej
 
         //Struct that holds all data for drawing, see jej::detail::DrawableData for more info
         detail::DrawableData m_myDrawData;
+
+        //TODO: remove after worko work work
+        GLuint texID;
     };
 
 }

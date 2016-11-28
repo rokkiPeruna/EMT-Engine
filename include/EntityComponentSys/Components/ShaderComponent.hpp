@@ -44,6 +44,7 @@ namespace jej
         //For deleting shaders
         friend class ShaderSystem;
         friend class RenderSystem;
+        
 
     public:
 

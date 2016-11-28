@@ -319,8 +319,8 @@ namespace jej//NAMESPACE jej STARTS
             tmpOSData.offsetY = tmpOSData.rectWin.top;
             //
             //Size = width & height
-            tmpWinData.sizeX = std::abs(tmpOSData.rectWin.right - tmpOSData.rectWin.left);
-            tmpWinData.sizeY = std::abs(tmpOSData.rectWin.bottom - tmpOSData.rectWin.top);
+            tmpWinData.sizeX = std::abs(tmpOSData.rectWin.left - tmpOSData.rectWin.right);
+            tmpWinData.sizeY = std::abs(tmpOSData.rectWin.top - tmpOSData.rectWin.bottom);
 
             //Render
 
@@ -333,13 +333,13 @@ namespace jej//NAMESPACE jej STARTS
         {
             //Throws in Win10
 
-          //  Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
-          //  auto& tmpWinData = context->GetWinData();
-          //  auto& tmpOSData = context->GetWinOSData();
-          //
-          //
-          //  tmpOSData.offsetX = LOWORD(lparam);
-          //  tmpOSData.offsetY -= (HIWORD(lparam) - tmpWinData.sizeY);
+            Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
+            auto& tmpWinData = context->GetWinData();
+            auto& tmpOSData = context->GetWinOSData();
+          
+          
+            tmpOSData.offsetX = LOWORD(lparam);
+            tmpOSData.offsetY -= (HIWORD(lparam) - tmpWinData.sizeY);
 
             break;
         }
@@ -373,11 +373,11 @@ namespace jej//NAMESPACE jej STARTS
         {
             //Throws in Win10
 
-         //   Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
-         //   auto& tmpWinData = context->GetWinData();
-         //
-         //   tmpWinData.sizeX = LOWORD(lparam);
-         //   tmpWinData.sizeY = HIWORD(lparam);
+            Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
+            auto& tmpWinData = context->GetWinData();
+         
+            tmpWinData.sizeX = LOWORD(lparam);
+            tmpWinData.sizeY = HIWORD(lparam);
 
             break;
         }
