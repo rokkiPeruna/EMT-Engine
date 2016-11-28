@@ -92,6 +92,7 @@
     <ClCompile Include="..\..\..\Grafiikkamoottori_JEJ\source\Core\EngineObject.cpp" />
     <ClCompile Include="..\..\source\Core\Scene.cpp" />
     <ClCompile Include="..\..\source\Core\Settings.cpp" />
+    <ClCompile Include="..\..\source\Core\Timer.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\Component.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\RenderComponent.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Components\ShaderComponent.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="..\..\include\Core\BaseStructs.hpp" />
     <ClInclude Include="..\..\include\Core\Scene.hpp" />
     <ClInclude Include="..\..\include\Core\Settings.hpp" />
+    <ClInclude Include="..\..\include\Core\Timer.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\Component.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\RenderComponent.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Components\ShaderComponent.hpp" />

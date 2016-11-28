@@ -198,6 +198,9 @@
     <ClCompile Include="..\..\source\Texture\Shape.cpp">
       <Filter>Source Files\Texture</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Core\Timer.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Grafiikkamoottori_JEJ\include\Core\EngineObject.hpp">
@@ -301,6 +304,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Texture\Shape.hpp">
       <Filter>Header Files\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Core\Timer.hpp">
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
