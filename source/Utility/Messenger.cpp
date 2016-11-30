@@ -22,52 +22,52 @@ namespace jej
 
         HANDLE debugHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
-        for (size_t i = 0u; i < mm.size(); ++i)
+        for (const auto& i : mm)
         {
-            if (mm[i].second == MessageType::Error && JEJ_DEBUG_LEVEL > 0)
+            if (i.second == MessageType::Error && JEJ_DEBUG_LEVEL > 0)
             {
                 SetConsoleTextAttribute(debugHandle, 4u);
-                std::cout << mm[i].first << std::endl;
+                std::cout << i.first << std::endl;
                 SetConsoleTextAttribute(debugHandle, 7u);
             }
 
-            else if (mm[i].second == MessageType::Warning && JEJ_DEBUG_LEVEL > 1)
+            else if (i.second == MessageType::Warning && JEJ_DEBUG_LEVEL > 1)
             {
                 SetConsoleTextAttribute(debugHandle, 6u);
-                std::cout << mm[i].first << std::endl;
+                std::cout << i.first << std::endl;
                 SetConsoleTextAttribute(debugHandle, 7u);
             }
 
-            else if (mm[i].second == MessageType::Debug && JEJ_DEBUG_LEVEL > 2)
+            else if (i.second == MessageType::Debug && JEJ_DEBUG_LEVEL > 2)
             {
                 SetConsoleTextAttribute(debugHandle, 10u);
-                std::cout << mm[i].first << std::endl;
+                std::cout << i.first << std::endl;
                 SetConsoleTextAttribute(debugHandle, 7u);
             }
 
-            else if (mm[i].second == MessageType::Info && JEJ_DEBUG_LEVEL > 3)
+            else if (i.second == MessageType::Info && JEJ_DEBUG_LEVEL > 3)
             {
                 SetConsoleTextAttribute(debugHandle, 8u);
-                std::cout << mm[i].first << std::endl;
+                std::cout << i.first << std::endl;
                 SetConsoleTextAttribute(debugHandle, 7u);
             }
         }
 
 #elif defined ANDROID //Android messages
 
-        for (size_t i = 0u; i < mm.size(); ++i)
+        for (const auto& i : mm)
         {
-            if (mm[i].second == MessageType::Error && JEJ_DEBUG_LEVEL > 0)
-                __android_log_assert(0, "jej", mm.first[i].c_str());
+            if (i.second == MessageType::Error && JEJ_DEBUG_LEVEL > 0)
+                __android_log_assert(0, "jej", i.first.c_str());
 
-            else if (mm[i].second == MessageType::Warning && JEJ_DEBUG_LEVEL > 1)
-                __android_log_assert(0, "jej", mm.first[i].c_str());
+            else if (i.second == MessageType::Warning && JEJ_DEBUG_LEVEL > 1)
+                __android_log_assert(0, "jej", i.first.c_str());
 
-            else if (mm[i].second == MessageType::Debug && JEJ_DEBUG_LEVEL > 2)
-                __android_log_assert(0, "jej", mm.first[i].c_str());
+            else if (i.second == MessageType::Debug && JEJ_DEBUG_LEVEL > 2)
+                __android_log_assert(0, "jej", i.first.c_str());
 
-            else if (mm[i].second == MessageType::Info && JEJ_DEBUG_LEVEL > 3)
-                __android_log_assert(0, "jej", mm.first[i].c_str());
+            else if (i.second == MessageType::Info && JEJ_DEBUG_LEVEL > 3)
+                __android_log_assert(0, "jej", i.first.c_str());
         }
 
 
@@ -86,7 +86,7 @@ namespace jej
         FileHandler handler;
 
         for (auto i : m_messages)
-            std::copy(i.first.begin(), i.first.end(), std::back_inserter(handler.m_fileContents)); //Copy all messages to FileHandler for writing
+            std::copy(i.first.begin(), i.first.end(), std::back_inserter(handler.GetReadData())); //Copy all messages to FileHandler for writing
 
         return handler.Write(fileName);
     }
