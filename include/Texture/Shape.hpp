@@ -39,6 +39,8 @@ namespace jej
 
         unsigned int GetID() const;
 
+		const float GetRadius() const;
+
     private:
 
         
@@ -56,7 +58,7 @@ namespace jej
         void _addShape();
 
         ShapeType m_shapeType;
-
+		float m_radius;
         std::vector<Vector2f> m_points;
 
         unsigned int m_ID;

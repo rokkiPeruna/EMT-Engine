@@ -3,6 +3,7 @@
 
 #include <EntityComponentSys/Components/ShapeComponent.hpp>
 
+
 namespace jej
 {
 
@@ -13,13 +14,10 @@ namespace jej
 		Math();
 		~Math();
 
-		void Finalize(Shape p_shape);
-
-
-
+		static const std::pair<const Vector2f, const Vector2f> ConvexCollisionBox(const Shape* p_shape, const Vector2f p_centralPoint = { 0, 0 });
 
 	private:
-
+		
 	};
 
 }

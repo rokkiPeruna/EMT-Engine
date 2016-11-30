@@ -39,6 +39,11 @@ namespace jej
     }
     ///////////////////////////////////////////
 
+	const float Shape::GetRadius() const
+	{
+		return m_radius;
+	}
+
 
     void Shape::_addShape(const float p_radius, const unsigned int p_accuracy)
     {
@@ -57,7 +62,7 @@ namespace jej
 
             theta += radians;
         }
-
+		m_radius = p_radius;
         m_shapeType = ShapeType::Circle;
 
     }

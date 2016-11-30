@@ -5,26 +5,28 @@
 #include <EntityComponentSys/Components/TransformComponent.hpp>
 
 
-
 namespace jej
 {
 	
-
+	class Shape;
 	class CollisionComponent : public Component
 	{
+		friend class CollisionSystem;
+
 	public:
 
-		CollisionComponent::CollisionComponent(Entity* p_entity, TransformComponent* p_transformComponent);
+		CollisionComponent::CollisionComponent(Entity* p_entity, const Shape* p_shape);
 
 		CollisionComponent::~CollisionComponent();
 
 		CollisionComponent(const CollisionComponent&) = delete;
 		CollisionComponent operator=(const CollisionComponent&) = delete;
 
-	private:
 
-		jej::Vector2f m_position_min;
-		jej::Vector2f m_position_max;
+		Vector2f m_min;
+		Vector2f m_max;
+
+	private:
 
 	};
 
