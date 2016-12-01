@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
 
     //Creating:
     myCharacter.AddComponent<jej::TransformComponent>(
-        &myCharacter,					//Tell component that this is its owner
+        //&myCharacter,					//Tell component that this is its owner
         jej::Vector2f(0.f, 0.f),		//Position, we start at center of the screen
         jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
         jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
 
     //Next we create ShaderComponent and add it to our entity so it can be drawn
     myCharacter.AddComponent<jej::ShaderComponent>(
-        &myCharacter					//Tell component that this is its owner
+        //&myCharacter					//Tell component that this is its owner
         //"PixelShader.frag",			//First we must give vertex shader name and file extension
         //"VertexShader.vert"			//Second we guve fragment shader name and file extencion
         );
@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
     //As we add ShapeComponent, we take an alias at the sametime for ease of use.
 
     auto& myShapeComp = myCharacter.AddComponent<jej::ShapeComponent>(
-        &myCharacter,					//Tell component that this is its owner
+        //&myCharacter,					//Tell component that this is its owner
         jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
         );
 
@@ -100,7 +100,7 @@ int main(int argc, char* argv[])
 
     //Creating
     myCharacter.AddComponent<jej::RenderComponent>(
-        &myCharacter
+        //&myCharacter
         );
 
     //Don't try setting components to other entities other than the one calling the function

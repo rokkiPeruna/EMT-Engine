@@ -121,7 +121,7 @@ namespace jej
             &overlapped
             ))
         {
-            Messenger::Add(Messenger::MessageType::Error, "Failed to write to file: ", settings::rootPath + "Recources/" + name, getWinError());
+            Messenger::Add(Messenger::MessageType::Error, "Failed to write to file: ", settings::rootPath + "Recources/" + p_name, getWinError());
             return false;
         }
 

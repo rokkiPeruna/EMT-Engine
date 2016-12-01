@@ -1,4 +1,5 @@
 
+
 template<typename T, typename ... Args>
 T& Entity::AddComponent(Args ... p_args)
 {
@@ -11,11 +12,11 @@ T& Entity::AddComponent(Args ... p_args)
     }
 
     auto& components = std::get<ComponentHelper<T>::index>(EngineObject::GetInstance().m_systems)->m_components;    //Get m_components from correct system
-	
-	//Removed *this - pointer from make_shared<> argument list, owner entity is given as first parameter in each component
+
+    //Removed *this - pointer from make_shared<> argument list, owner entity is given as first parameter in each component
 
     //Don't try setting components to other entities other than the one calling the function - Ee
-    components.emplace_back(std::make_shared<T>(std::forward<Args>(p_args)...));    //Create component
+    components.emplace_back(std::make_shared<T>(this, std::forward<Args>(p_args)...));    //Create component
 
     return *components.back().get();
 }

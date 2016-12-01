@@ -331,7 +331,9 @@ namespace jej//NAMESPACE jej STARTS
 
         case WM_MOVE:
         {
-            //Throws in Win10
+            //Suppresses throw in Win10
+            if (EngineObject::GetInstance().GetWindowRef().get() == nullptr)
+                break;
 
             Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
             auto& tmpWinData = context->GetWinData();
@@ -371,7 +373,9 @@ namespace jej//NAMESPACE jej STARTS
 
         case WM_SIZE:
         {
-            //Throws in Win10
+            //Suppresses throw in Win10
+            if (EngineObject::GetInstance().GetWindowRef().get() == nullptr)
+                break;
 
             Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
             auto& tmpWinData = context->GetWinData();

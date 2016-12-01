@@ -26,7 +26,7 @@ namespace jej
         }
         if (!shaderDone)
         {
-            p_entity->AddComponent<ShaderComponent>(p_entity);
+            p_entity->AddComponent<ShaderComponent>();
             m_shaderComp = ShaderSystem::GetInstance().m_components.back();
         }
 
@@ -44,7 +44,7 @@ namespace jej
         }
         if (!shapeDone)
         {
-            p_entity->AddComponent<ShapeComponent>(p_entity);
+            p_entity->AddComponent<ShapeComponent>();
             m_shapeComp = ShapeSystem::GetInstance().m_components.back();
         }
 
@@ -62,7 +62,7 @@ namespace jej
         }
         if (!transformDone)
         {
-            p_entity->AddComponent<TransformComponent>(p_entity);
+            p_entity->AddComponent<TransformComponent>();
             m_transformComp = TransformSystem::GetInstance().m_components.back();
         }
 
