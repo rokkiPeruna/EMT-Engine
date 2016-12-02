@@ -28,7 +28,14 @@ namespace jej //NAMESPACE jej
 {
     EngineObject::EngineObject() :
         m_currentScene(nullptr),
-        m_windowPtr(nullptr)
+        m_windowPtr(nullptr),
+        m_systems(
+        &RenderSystem::GetInstance(),
+        &ShaderSystem::GetInstance(),
+        &ShapeSystem::GetInstance(),
+        &TextureSystem::GetInstance(),
+        &TransformSystem::GetInstance()
+        )
     {
 
     }
@@ -57,7 +64,7 @@ namespace jej //NAMESPACE jej
         Messenger::Add(Messenger::MessageType::Debug, std::to_string(Timer::GetInstance().GetTime()));
 
         Messenger::WriteLog();
-        
+
     }
     //////////////////////////////////////////
 
@@ -74,9 +81,9 @@ namespace jej //NAMESPACE jej
 
         //Initialize window
 #ifdef _WIN32
-        engine.m_windowPtr.reset(new Win32Window(p_data, p_osData));
+        engine.m_windowPtr = std::make_shared<Win32Window>(p_data, p_osData);
 #elif defined ANDROID
-        engine.m_windowPtr.reset(new AndroidWindow(p_data, p_osData));
+        engine.m_windowPtr = std::make_shared<AndroidWindow>(p_data, p_osData);
 #endif
 
         //TODO:
@@ -85,12 +92,14 @@ namespace jej //NAMESPACE jej
 
         Timer::GetInstance(true);
 
-        std::get<0>(engine.m_systems) = &RenderSystem::GetInstance();
-        std::get<1>(engine.m_systems) = &ShaderSystem::GetInstance();
-        std::get<2>(engine.m_systems) = &ShapeSystem::GetInstance();
-        std::get<3>(engine.m_systems) = &TextureSystem::GetInstance();
-        std::get<4>(engine.m_systems) = &TransformSystem::GetInstance();
+        // std::get<0>(engine.m_systems) = &RenderSystem::GetInstance();
+        // std::get<1>(engine.m_systems) = &ShaderSystem::GetInstance();
+        // std::get<2>(engine.m_systems) = &ShapeSystem::GetInstance();
+        // std::get<3>(engine.m_systems) = &TextureSystem::GetInstance();
+        // std::get<4>(engine.m_systems) = &TransformSystem::GetInstance();
 
+
+        RenderSystem().GetInstance().Initialize();
 
         //Parse execution path
         const unsigned int slashPos = p_root.find_last_of("/\\");
@@ -99,8 +108,6 @@ namespace jej //NAMESPACE jej
             Messenger::Add(Messenger::MessageType::Error, "Bad root: ", p_root, "Requires argv[0]");
             return false;
         }
-
-
         settings::rootPath = p_root.substr(0u, slashPos + 1u);
 
         return true;
@@ -124,6 +131,8 @@ namespace jej //NAMESPACE jej
 
     void EngineObject::EngineUpdate()
     {
+        Messenger::PrintMessages();
+
         //RenderSystem::GetInstance()._update(100.f);
 
         InputManager::GetInstance().Update();//TODO: Change to ._update() for consistency

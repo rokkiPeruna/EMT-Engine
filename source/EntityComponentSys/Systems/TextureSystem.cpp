@@ -40,8 +40,8 @@ namespace jej
 
     bool TextureSystem::_initialize()
     {
-
-        
+        //TODO
+        return true;
     }
 
     bool TextureSystem::_finalize()

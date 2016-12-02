@@ -17,7 +17,7 @@ namespace jej
         bool shaderDone = false;
         for (unsigned int i = 0u; i < shaderComps.size(); ++i)
         {
-            if (shaderComps[i]->m_parentID == p_entity->m_entityID)
+            if (shaderComps[i]->GetParentID() == p_entity->m_entityID)
             {
                 m_shaderComp = shaderComps[i];
                 shaderDone = true;
@@ -35,7 +35,7 @@ namespace jej
         bool shapeDone = false;
         for (unsigned int i = 0u; i < shapeComps.size(); ++i)
         {
-            if (shapeComps[i]->m_parentID == p_entity->m_entityID)
+            if (shapeComps[i]->GetParentID() == p_entity->m_entityID)
             {
                 m_shapeComp = shapeComps[i];
                 shapeDone = true;
@@ -53,7 +53,7 @@ namespace jej
         bool transformDone = false;
         for (unsigned int i = 0u; i < transformComps.size(); ++i)
         {
-            if (transformComps[i]->m_parentID == p_entity->m_entityID)
+            if (transformComps[i]->GetParentID() == p_entity->m_entityID)
             {
                 m_transformComp = transformComps[i];
                 transformDone = true;

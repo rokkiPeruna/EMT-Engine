@@ -8,7 +8,7 @@
 namespace jej
 {
 
-    TextureComponent::TextureComponent(Entity* p_entity, const std::string& p_name, const unsigned short int p_imageCount = 0u, const std::vector<unsigned char>& p_selectedImages = std::vector<unsigned char>()) :
+    TextureComponent::TextureComponent(Entity* p_entity, const std::string& p_name, const unsigned short int p_imageCount, const std::vector<unsigned char>& p_selectedImages) :
         Component(p_entity),
         m_textureData(),
         m_readImageData(nullptr)

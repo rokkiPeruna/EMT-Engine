@@ -33,9 +33,29 @@ namespace jej
         return m_entityID;
     }
 
+    namespace
+    {
+        size_t _getSize()
+        {
+            return 
+        }
+    }
+
 
     bool Entity::RemoveAllComponents()
     {
+
+
+        auto& engine = EngineObject::GetInstance();
+
+        auto koo = std::tuple_size<engine.m_systems>::value;
+
+        size_t koko = engine.m_systems_Mysize();
+
+
+
+        detail::ForTuple(EngineObject::GetInstance().m_systems, RemoveComponent<>());
+
         //TODO: Call remove on all types
         RemoveComponent<RenderComponent>();
         RemoveComponent<ShaderComponent>();

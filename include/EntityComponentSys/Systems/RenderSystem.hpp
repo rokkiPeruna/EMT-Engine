@@ -18,6 +18,8 @@
 namespace jej
 {
     //Forward declarating Window-class etc.
+    class AndroidWindow;
+    class Win32Window;
     class Window;
     class RenderComponent;
     class ShaderComponent;
@@ -61,6 +63,8 @@ namespace jej
         //Create instance of class
         static RenderSystem& GetInstance();
 
+        void Initialize();
+
         //Finalize this system
         void SystemFinalize();
 
@@ -76,7 +80,12 @@ namespace jej
         unsigned int m_winOffsetY;
 
         //Smart pointer to Window - singleton
+#ifdef _WIN32
         std::shared_ptr<Window> m_window;
+        //std::shared_ptr<Win32Window> m_window;
+#elif defined ANDROID
+        std::shared_ptr<AndroidWindow> m_window;
+#endif
 
         //Method for initializing RenderComponent's draw data
 		void _createBuffersForRenderComponentDrawData(RenderComponent& p_rendComp);

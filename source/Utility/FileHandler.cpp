@@ -88,7 +88,7 @@ namespace jej
             return false;
         }
 
-        p_data->readImageData = stbi_load(
+        /*p_data->readImageData = stbi_load(
             std::string(settings::rootPath + imagePath).c_str(),
             &p_data->wholeImageSize.x,
             &p_data->wholeImageSize.y,
@@ -96,7 +96,7 @@ namespace jej
             0);
 
         if (p_data->readImageData)
-            return true;
+            return true;*/
 
         return false;
     }
