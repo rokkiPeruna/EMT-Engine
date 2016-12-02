@@ -64,6 +64,8 @@ namespace jej
         //Adds a component to the calling entity
         //Returns a reference to either the created component
         //Or a reference to a component that has already been bound to this entity
+        //T is component type but it's not basecomponent
+        //Args are arguments/parameters for component constructor
         template<typename T, typename ... Args>
         T& AddComponent(Args ... p_args);
 
@@ -86,9 +88,10 @@ namespace jej
         //Remove all components from the entity and from corresponding systems
         bool RemoveAllComponents();
 
+        std::string m_name;
+
     private:
 
-        const std::string m_name;
         const JEJ_COUNT m_entityID;
 
         static JEJ_COUNT m_entityIDCounter;

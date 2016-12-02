@@ -73,7 +73,7 @@ namespace jej
 
 #endif
 
-        //mm.clear();
+        mm.clear();
         //std::vector<std::pair<std::string, MessageType>> next = {};
         //mm.swap(next);
     }

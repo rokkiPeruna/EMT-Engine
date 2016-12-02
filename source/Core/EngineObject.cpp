@@ -124,6 +124,7 @@ namespace jej //NAMESPACE jej
 
     void EngineObject::EngineUpdate()
     {
+        Messenger::PrintMessages();
         //RenderSystem::GetInstance()._update(100.f);
 
         InputManager::GetInstance().Update();//TODO: Change to ._update() for consistency
