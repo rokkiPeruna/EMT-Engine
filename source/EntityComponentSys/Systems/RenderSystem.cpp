@@ -56,8 +56,162 @@ namespace jej
     {
         for (auto& itr : m_components)
         {
-            itr->Finalize();
 
+            for (const auto& shapesItr : itr->m_shapeComp->m_shapes)
+            {
+                //Create alias for current shape's vertices
+                auto* vertices = &itr->m_myDrawData.vertices.at(shapesItr->m_shapeType);
+
+                //Create alias for shapetype
+                auto& shapeType = shapesItr->m_shapeType;
+
+                //Create vertices and indices
+                switch (shapesItr->m_shapeType)
+                {
+                case jej::ShapeType::Circle:
+                    break;
+                case jej::ShapeType::Rectangle:
+                {
+
+                    /////////////////////////////////////////////
+                    //TODO: Remove this test after work work work
+                    GLubyte pixels[3 * 3] =
+                    {
+                        255, 0, 255,
+                        127, 0, 127,
+                        255, 0, 0
+                    };
+
+                    //for (const auto& testItr : itr->m_shapeComp->m_shapes)
+                    //    for (const auto& itr2 : itr->m_points)
+                    //    {
+                    //        itr->m_myDrawData.textureCoords.at(shapeType).emplace_back(itr2.x);
+                    //        itr->m_myDrawData.textureCoords.at(shapeType).emplace_back(itr2.y);
+                    //    }
+
+                    itr->m_myDrawData.textureCoords.at(shapeType) =
+                    {
+                        0.0f, 0.0f,
+                        0.5f, 0.0f,
+                        0.5f, 0.5f,
+                        0.0f, 0.5f
+
+                    };
+
+                    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+                    glGenTextures(1, &itr->texID);
+                    glBindTexture(GL_TEXTURE_2D, itr->texID);
+
+                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 3, 3, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+                    //Create indices, NOTE that DrawableData initialization makes indice 0 for all shapes
+                    itr->m_myDrawData.indices.at(shapeType).emplace_back(1);
+                    itr->m_myDrawData.indices.at(shapeType).emplace_back(2);
+                    itr->m_myDrawData.indices.at(shapeType).emplace_back(2);
+                    itr->m_myDrawData.indices.at(shapeType).emplace_back(3);
+                    itr->m_myDrawData.indices.at(shapeType).emplace_back(0);
+
+
+
+                    //TODO: Remove this with correct calculation
+                    vertices->emplace_back(0.0f);
+                    vertices->emplace_back(0.0f);
+
+                    vertices->emplace_back(0.0f);
+                    vertices->emplace_back(0.5f);
+
+                    vertices->emplace_back(0.5f);
+                    vertices->emplace_back(0.5f);
+
+                    vertices->emplace_back(0.5f);
+                    vertices->emplace_back(0.0f);
+
+                    break;
+                }
+                case jej::ShapeType::Convex:
+                    break;
+                case jej::ShapeType::Triangle:
+                {
+                    /////////////////////////////////////////////
+                    //TODO: Remove this test after work work work
+                    GLubyte pixels[3 * 3] =
+                    {
+                        255, 0, 255,
+                        127, 0, 127,
+                        255, 0, 0
+                    };
+
+
+                    for (const auto& itr2 : shapesItr->m_points)
+                    {
+                        itr->m_myDrawData.textureCoords.at(shapeType).emplace_back(itr2.x);
+                        itr->m_myDrawData.textureCoords.at(shapeType).emplace_back(itr2.y);
+                    }
+
+                    /* itr->m_myDrawData.textureCoords.at(shapeType) =
+                     {
+                     0.0f, 0.0f,
+                     0.5f, 0.0f,
+                     0.5f, 0.5f
+
+
+                     };*/
+
+                    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+                    glGenTextures(1, &itr->texID);
+                    glBindTexture(GL_TEXTURE_2D, itr->texID);
+
+                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 3, 3, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+                    //Create indices, NOTE that DrawableData initialization makes indice 0 for all shapes
+                    for (int indice = 1; indice < 3; indice++)
+                        itr->m_myDrawData.indices.at(shapeType).emplace_back(indice);
+
+                    //Triangles center of mass (center point) is in TranformComponent->position
+                    jej::Vector2f centerPoint = itr->m_transformComp->position;
+
+                    //Calculate vertices, triangle has hopefully three
+                    //These are constants
+                    jej::Vector2f first = shapesItr->GetPoints().at(0);
+                    jej::Vector2f second = shapesItr->GetPoints().at(1);
+                    jej::Vector2f third = shapesItr->GetPoints().at(2);
+
+                    //These are changing
+                    jej::Vector2f tmpFirst = first;
+                    jej::Vector2f tmpSecond = second;
+                    jej::Vector2f tmpThird = third;
+
+                    first.x = -tmpSecond.x - tmpThird.x + centerPoint.x * 3.f;
+                    second.x = -tmpFirst.x - tmpSecond.x + centerPoint.x * 3.f;
+                    third.x = -tmpSecond.x - tmpThird.x + centerPoint.x * 3.f;
+
+                    first.y = -tmpSecond.y - tmpThird.y + centerPoint.y * 3.f;
+                    second.y = -tmpFirst.y - tmpSecond.y + centerPoint.y * 3.f;
+                    third.y = -tmpSecond.y - tmpThird.y + centerPoint.y * 3.f;
+
+                    vertices->emplace_back(first.x);
+                    vertices->emplace_back(first.y);
+                    vertices->emplace_back(second.x);
+                    vertices->emplace_back(second.y);
+                    vertices->emplace_back(third.x);
+                    vertices->emplace_back(third.y);
+
+                    break;
+                }
+
+                default:
+                    break;
+                }
+
+            }
+
+            //Create buffers for each this->ShapeComp's Shapetypes
             if (itr->m_shaderComp && itr->m_shapeComp && itr->m_transformComp) //TODO: Re-evaluate this later
                 _createBuffersForRenderComponentDrawData(*itr);
 
@@ -93,15 +247,6 @@ namespace jej
             Messenger::Add(Messenger::MessageType::Error, "RenderSystem::_swapBuffers failed");
 
     }
-    //////////////////////////////////////////
-
-    void RenderSystem::_render()//TODO: REMOVE THIS
-    {
-        _clearScreen();
-        return;
-    }
-    //////////////////////////////////////////
-
     //////////////////////////////////////////
 
     void RenderSystem::_clearScreen() const
@@ -146,94 +291,109 @@ namespace jej
         drawData.textureCoordIndex = glGetAttribLocation(drawData.shaderProgID, "vTexCoord");
         drawData.vertexPositionIndex = glGetAttribLocation(drawData.shaderProgID, "vPosition");
 
-        //Indices
-        drawData.vertexBufferObjects.emplace_back(0);
-        glGenBuffers(1, &drawData.vertexBufferObjects.back());
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, drawData.vertexBufferObjects.back());
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(drawData.indices[0]) * drawData.indices.size(), drawData.indices.data(), GL_STATIC_DRAW);
-        drawData.indicesBuffer = drawData.vertexBufferObjects.back();
+        for (const auto& shaperItr : p_rendComp.m_shapeComp->m_shapes)
+        {
+
+            const auto& shapeType = shaperItr->m_shapeType;
 
 
-        //Texture coordinates
-        drawData.vertexBufferObjects.emplace_back(0);
-        glGenBuffers(1, &drawData.vertexBufferObjects.back());
-        glBindBuffer(GL_ARRAY_BUFFER, drawData.vertexBufferObjects.back());
-        glBufferData(GL_ARRAY_BUFFER, sizeof(drawData.textureCoords[0]) * drawData.textureCoords.size(), drawData.textureCoords.data(), GL_STATIC_DRAW);
-        glVertexAttribPointer(
-            drawData.textureCoordIndex,
-            2,
-            GL_FLOAT,
-            GL_FALSE,
-            0,
-            0
-            );
-        drawData.texCoordBuffer = drawData.vertexBufferObjects.back();
 
-        //Positions
-        drawData.vertexBufferObjects.emplace_back(0);
-        glGenBuffers(1, &drawData.vertexBufferObjects.back());
-        glBindBuffer(GL_ARRAY_BUFFER, drawData.vertexBufferObjects.back());
-        glBufferData(GL_ARRAY_BUFFER, sizeof(drawData.vertices[0]) * drawData.vertices.size(), drawData.vertices.data(), GL_STATIC_DRAW);
-        glVertexAttribPointer(
-            drawData.vertexPositionIndex,
-            2,
-            GL_FLOAT,
-            GL_FALSE,
-            0,
-            0
-            );
-        drawData.vertexPosBuffer = drawData.vertexBufferObjects.back();
+            //Indices
+            drawData.vertexBufferObjects.at(shapeType).emplace_back(0);
+            //glGenBuffers(1, &drawData.vertexBufferObjects.back());
+            glGenBuffers(1, &drawData.vertexBufferObjects.at(shapeType).back());
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, drawData.vertexBufferObjects.at(shapeType).back());
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(drawData.indices.at(shapeType)[0]) * drawData.indices.at(shapeType).size(), drawData.indices.at(shapeType).data(), GL_STATIC_DRAW);
+            drawData.indicesBuffer.at(shapeType) = drawData.vertexBufferObjects.at(shapeType).back();
 
-        //Unbind
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+            //Texture coordinates
+            drawData.vertexBufferObjects.at(shapeType).emplace_back(0);
+            glGenBuffers(1, &drawData.vertexBufferObjects.at(shapeType).back());
+            glBindBuffer(GL_ARRAY_BUFFER, drawData.vertexBufferObjects.at(shapeType).back());
+            glBufferData(GL_ARRAY_BUFFER, sizeof(drawData.textureCoords.at(shapeType)[0]) * drawData.textureCoords.at(shapeType).size(), drawData.textureCoords.at(shapeType).data(), GL_STATIC_DRAW);
+            glVertexAttribPointer(
+                drawData.textureCoordIndex,
+                2,
+                GL_FLOAT,
+                GL_FALSE,
+                0,
+                0
+                );
+            drawData.texCoordBuffer.at(shapeType) = drawData.vertexBufferObjects.at(shapeType).back();
+
+            //Positions
+            drawData.vertexBufferObjects.at(shapeType).emplace_back(0);
+            glGenBuffers(1, &drawData.vertexBufferObjects.at(shapeType).back());
+            glBindBuffer(GL_ARRAY_BUFFER, drawData.vertexBufferObjects.at(shapeType).back());
+            glBufferData(GL_ARRAY_BUFFER, sizeof(drawData.vertices.at(shapeType)[0]) * drawData.vertices.at(shapeType).size(), drawData.vertices.at(shapeType).data(), GL_STATIC_DRAW);
+            glVertexAttribPointer(
+                drawData.vertexPositionIndex,
+                2,
+                GL_FLOAT,
+                GL_FALSE,
+                0,
+                0
+                );
+            drawData.vertexPosBuffer.at(shapeType) = drawData.vertexBufferObjects.at(shapeType).back();
+
+            //Unbind
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        }
     }
     //////////////////////////////////////////
 
     bool RenderSystem::_drawAllBuffers()
     {
-        for (auto& itr : m_components)
+        for (const auto& itr : m_components)
         {
+
             //Create alias of current element's draw data for ease of use
             const auto& drawData = itr->m_myDrawData;
 
             //Get shader ID and use that shader and enable attributes
             _useShader(*itr->m_shaderComp);
 
-            //Bind indices to element array buffer
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, drawData.indicesBuffer);
+            for (const auto& shapesItr : itr->m_shapeComp->m_shapes)
+            {
+                //Alias for shape's type
+                const auto& shapeType = shapesItr->m_shapeType;
+
+                //Bind indices to element array buffer
+                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, drawData.indicesBuffer.at(shapeType));
 
 
-            glBindBuffer(GL_ARRAY_BUFFER, drawData.vertexPosBuffer);
-            glBindBuffer(GL_ARRAY_BUFFER, drawData.texCoordBuffer);
+                glBindBuffer(GL_ARRAY_BUFFER, drawData.vertexPosBuffer.at(shapeType));
+                glBindBuffer(GL_ARRAY_BUFFER, drawData.texCoordBuffer.at(shapeType));
 
-            //Init attribute pointers //TODO: If attributes increase, handle this in loop
-            glVertexAttribPointer(drawData.textureCoordIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
-            glVertexAttribPointer(drawData.vertexPositionIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
+                //Init attribute pointers //TODO: If attributes increase, handle this in loop
+                glVertexAttribPointer(drawData.textureCoordIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
+                glVertexAttribPointer(drawData.vertexPositionIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
-            //TODO: Add call for texture binding once someone creates texture with decent data :D
-            //_bindTexture( I take some yet undefined data in me, jee! )
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, itr->texID);
+                //TODO: Add call for texture binding once someone creates texture with decent data :D
+                //_bindTexture( I take some yet undefined data in me, jee! )
+                glActiveTexture(GL_TEXTURE0);
+                glBindTexture(GL_TEXTURE_2D, itr->texID);
+
+                //TODO: For Juho: Problem as second triangle is not showing
+                //Draw all elements of current RenderComponent
+                glDrawElements(
+                    GL_TRIANGLES,				            //What type are we drawing, everything is made of triangles so no need to change this!? Maybe triangle stripes
+                    drawData.indices.at(shapeType).size(),	//How many indices our entity has
+                    GL_UNSIGNED_SHORT,			            //What type those indices are, assume we don't have millions of points in our entity
+                    0							            //Normally this is a pointer to indice storage, but because our binding above, this is offset of where to start reading indices, so start at first index
+                    );
 
 
-            //Draw all elements of current RenderComponent
-            glDrawElements(
-                GL_TRIANGLES,				//What type are we drawing, everything is made of triangles so no need to change this!? Maybe triangle stripes
-                drawData.indices.size(),	//How many indices our entity has
-                GL_UNSIGNED_SHORT,			//What type those indices are, assume we don't have millions of points in our entity
-                0							//Normally this is a pointer to indice storage, but because our binding above, this is offset of where to start reading indices, so start at first index
-                );
+                //Unbind buffers
+                glBindBuffer(GL_ARRAY_BUFFER, 0);
+                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-
-            //Unbind buffers
-            glBindBuffer(GL_ARRAY_BUFFER, 0);
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+            }
 
             //Unuse shader and disable attributes
             _unUseShader(*itr->m_shaderComp);
-
-
 
         }
 
@@ -274,7 +434,6 @@ namespace jej
         else
         {
             unsigned int parentID = shaderComp.m_parentID;
-            Messenger::Add(Messenger::MessageType::Error, "Shader has zero attributes, shader parent ID: " + std::to_string(parentID));
         }
     }
     //////////////////////////////////////////

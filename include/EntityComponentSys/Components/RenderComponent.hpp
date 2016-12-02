@@ -21,6 +21,7 @@
 //
 #include <memory>
 #include <vector>
+#include <map>
 
 namespace jej
 {
@@ -32,19 +33,65 @@ namespace jej
         {
             //DrawableType type = DrawableType::Triangle;
             GLuint shaderProgID = 0u;
-            std::vector<GLushort> indices;
-            std::vector<GLfloat> vertices;
-            std::vector<GLuint> vertexBufferObjects;
-            std::vector<GLfloat> colours;
-            std::vector<GLfloat> textureCoords;
-            GLint indicesBuffer;
-            GLint vertexPosBuffer;
-            GLint texCoordBuffer;
+            std::map<ShapeType, std::vector<GLushort>> indices;
+            std::map<ShapeType, std::vector<GLfloat>> vertices;
+            std::map<ShapeType, std::vector<GLuint>> vertexBufferObjects;
+            std::map<ShapeType, std::vector<GLfloat>> colours;
+            std::map<ShapeType, std::vector<GLfloat>> textureCoords;
+            std::map<ShapeType, GLint> indicesBuffer;
+            std::map<ShapeType, GLint> vertexPosBuffer;
+            std::map<ShapeType, GLint> texCoordBuffer;
             void* userData = nullptr;
 
-			//TODO: Add more attribute members as they increase
-			GLuint vertexPositionIndex;
-			GLuint textureCoordIndex;
+            //TODO: Add more attribute members as they increase
+            GLuint vertexPositionIndex;
+            GLuint textureCoordIndex;
+
+            //Default constuctor, initializes map-containers with correct key-value pairs
+            DrawableData()
+            {
+
+
+                indices.insert(std::make_pair(ShapeType::Triangle, std::vector<GLushort>{0}));
+                indices.insert(std::make_pair(ShapeType::Rectangle, std::vector<GLushort>{0}));
+                indices.insert(std::make_pair(ShapeType::Circle, std::vector<GLushort>{0}));
+                indices.insert(std::make_pair(ShapeType::Convex, std::vector<GLushort>{0}));
+
+                vertices.insert(std::make_pair(ShapeType::Triangle, std::vector<GLfloat>{0}));
+                vertices.insert(std::make_pair(ShapeType::Rectangle, std::vector<GLfloat>{0}));
+                vertices.insert(std::make_pair(ShapeType::Circle, std::vector<GLfloat>{0}));
+                vertices.insert(std::make_pair(ShapeType::Convex, std::vector<GLfloat>{0}));
+
+                vertexBufferObjects.insert(std::make_pair(ShapeType::Triangle, std::vector<GLuint>{0}));
+                vertexBufferObjects.insert(std::make_pair(ShapeType::Rectangle, std::vector<GLuint>{0}));
+                vertexBufferObjects.insert(std::make_pair(ShapeType::Circle, std::vector<GLuint>{0}));
+                vertexBufferObjects.insert(std::make_pair(ShapeType::Convex, std::vector<GLuint>{0}));
+
+                colours.insert(std::make_pair(ShapeType::Triangle, std::vector<GLfloat>{0}));
+                colours.insert(std::make_pair(ShapeType::Rectangle, std::vector<GLfloat>{0}));
+                colours.insert(std::make_pair(ShapeType::Circle, std::vector<GLfloat>{0}));
+                colours.insert(std::make_pair(ShapeType::Convex, std::vector<GLfloat>{0}));
+
+                textureCoords.insert(std::make_pair(ShapeType::Triangle, std::vector<GLfloat>{0}));
+                textureCoords.insert(std::make_pair(ShapeType::Rectangle, std::vector<GLfloat>{0}));
+                textureCoords.insert(std::make_pair(ShapeType::Circle, std::vector<GLfloat>{0}));
+                textureCoords.insert(std::make_pair(ShapeType::Convex, std::vector<GLfloat>{0}));
+
+                indicesBuffer.insert(std::make_pair(ShapeType::Triangle, 0));
+                indicesBuffer.insert(std::make_pair(ShapeType::Rectangle, 0));
+                indicesBuffer.insert(std::make_pair(ShapeType::Circle, 0));
+                indicesBuffer.insert(std::make_pair(ShapeType::Convex, 0));
+
+                vertexPosBuffer.insert(std::make_pair(ShapeType::Triangle, 0));
+                vertexPosBuffer.insert(std::make_pair(ShapeType::Rectangle, 0));
+                vertexPosBuffer.insert(std::make_pair(ShapeType::Circle, 0));
+                vertexPosBuffer.insert(std::make_pair(ShapeType::Convex, 0));
+
+                texCoordBuffer.insert(std::make_pair(ShapeType::Triangle, 0));
+                texCoordBuffer.insert(std::make_pair(ShapeType::Rectangle, 0));
+                texCoordBuffer.insert(std::make_pair(ShapeType::Circle, 0));
+                texCoordBuffer.insert(std::make_pair(ShapeType::Convex, 0));
+            }
         };
     }
 
@@ -81,8 +128,6 @@ namespace jej
         //Disabled copy-constructors
         RenderComponent(const RenderComponent&) = delete;
         RenderComponent operator=(const RenderComponent&) = delete;
-
-        void Finalize();
 
 
     private:

@@ -14,7 +14,7 @@ namespace jej
         friend class ShapeComponent;
 
         //Friend RenderComponent so it can get m_shapeType
-        friend class RenderComponent;
+        friend class RenderSystem;
 
     public:
 

@@ -80,12 +80,23 @@ int main(int argc, char* argv[])
     //add three points, AddShape knows we are making a triangle.
     myShapeComp.AddShape(std::vector<jej::Vector2f>
     {
-            jej::Vector2f(0.f, 0.f),		//First point, middle of screen
-            jej::Vector2f(0.5f, 0.2f),		//Second point, upper-right corner
-            jej::Vector2f(1.f, -1.f)        //Third point, lower-right corner
+        jej::Vector2f(0.2f, 0.2f),		//First point, lower-left corner
+            jej::Vector2f(0.8f, 0.3f),		//Second point, upper-left corner
+            jej::Vector2f(0.5f, 0.5f)      //Third point, upper-right corner
+            //jej::Vector2f(0.5f, 0.5f)       //Third point, lower-right corner
     }
     );
 
+
+    myShapeComp.AddShape(std::vector<jej::Vector2f>
+    {
+            jej::Vector2f(-0.2f, -0.2f),		//First point, lower-left corner
+            jej::Vector2f(-0.8f, -0.3f),		//Second point, upper-left corner
+            jej::Vector2f(-0.5f, -0.5f)        //Third point, upper-right corner
+            //jej::Vector2f(-0.8f, -0.3f)
+            //jej::Vector2f(0.5f, 0.5f)         //Third point, lower-right corner
+    }
+    );
 
     //Now we have our character with transform, shader and shape component. At this point it exist
     //in our scene and has data in it with witch we can make it react to other entities and

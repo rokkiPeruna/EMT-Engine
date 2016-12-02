@@ -12,8 +12,9 @@ namespace jej
 
     class ShapeComponent : public Component
     {
-        //Friend RenderComponent so it can create indices from m_shapes points
-        friend class RenderComponent;
+        //Friend RenderSystem so it can create indices from m_shapes points
+        //in SystemFinalize()
+        friend class RenderSystem;
 
     public:
 

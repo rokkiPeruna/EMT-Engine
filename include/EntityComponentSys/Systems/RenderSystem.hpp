@@ -63,8 +63,6 @@ namespace jej
 
         //Finalize this system
         void SystemFinalize();
-
-        void _render();
 		
 
     private:
