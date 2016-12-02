@@ -8,29 +8,42 @@
 namespace jej
 {
 
-	TextureComponent::TextureComponent(Entity* p_entity, const std::string& p_name) :
+    TextureComponent::TextureComponent(Entity* p_entity, const std::string& p_name, const unsigned short int p_imageCount = 0u, const std::vector<unsigned char>& p_selectedImages = std::vector<unsigned char>()) :
         Component(p_entity),
-		m_textureData()
-	{
+        m_textureData(),
+        m_readImageData(nullptr)
+    {
         m_componentType = ComponentType::Texture;
 
         m_textureData.imageName = p_name;
-        
-        if (!TextureSystem::GetInstance()._initialize(&m_textureData))
-            JEJ_ASSERT(false, "Texture initialization failed!");
-	}
+        m_textureData.imageCount = p_imageCount;
+        m_textureData.selectedImages = p_selectedImages;
+    }
 
     TextureComponent::~TextureComponent()
     {
+        //Free texture if present (also called in texdata dtor)
+        if (m_textureData.displayImage)
+        {
+            stbi_image_free(m_textureData.displayImage);
+            m_textureData.displayImage = nullptr;
+        }
 
-	}
+        //Free whole image
+        if (m_readImageData)
+        {
+            stbi_image_free(m_readImageData);
+            m_readImageData = nullptr;
+        }
 
-    const TextureData TextureComponent::GetTextureData() const
+    }
+
+    const TextureData& TextureComponent::GetTextureData() const
     {
         return m_textureData;
     }
 
-    TextureData TextureComponent::GetTextureData()
+    TextureData& TextureComponent::GetTextureData()
     {
         return m_textureData;
     }

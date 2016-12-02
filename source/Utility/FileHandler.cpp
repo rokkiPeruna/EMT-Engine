@@ -10,6 +10,9 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <External/STB/stb_image.h>
 
+#define STB_IMAGE_RESIZE_IMPLEMENTATION
+#include <External/STB/stb_image_resize.h>
+
 
 namespace jej
 {
