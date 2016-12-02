@@ -23,10 +23,11 @@ namespace jej
 		CollisionComponent operator=(const CollisionComponent&) = delete;
 
 
-		Vector2f m_min;
-		Vector2f m_max;
 
 	private:
+
+		Vector2f m_min;
+		Vector2f m_max;
 
 	};
 
