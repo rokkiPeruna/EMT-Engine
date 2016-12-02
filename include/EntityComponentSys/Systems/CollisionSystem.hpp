@@ -18,7 +18,7 @@ namespace jej
 
 		~CollisionSystem();
 
-		void GetInstance();
+		static CollisionSystem& GetInstance();
 		void _update(const float deltaTime);
 		
 		static std::vector<std::shared_ptr<CollisionComponent>> m_components;

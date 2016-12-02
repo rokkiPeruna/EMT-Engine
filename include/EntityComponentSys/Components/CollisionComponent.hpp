@@ -15,14 +15,12 @@ namespace jej
 
 	public:
 
-		CollisionComponent::CollisionComponent(Entity* p_entity, const Shape* p_shape);
+		CollisionComponent::CollisionComponent(Entity* p_entity);
 
 		CollisionComponent::~CollisionComponent();
 
 		CollisionComponent(const CollisionComponent&) = delete;
 		CollisionComponent operator=(const CollisionComponent&) = delete;
-
-
 
 	private:
 

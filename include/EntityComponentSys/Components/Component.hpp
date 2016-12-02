@@ -24,6 +24,8 @@ namespace jej
         //
         friend class RenderComponent;
 
+		friend class CollisionComponent;
+
     public:
 
         //Constructor

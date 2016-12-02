@@ -12,10 +12,16 @@ namespace jej
 	{
 	}
 
+	CollisionSystem& CollisionSystem::GetInstance()
+	{
+		static CollisionSystem instance;
+		return instance;
+	}
+
 	void CollisionSystem::_update(const float deltaTime)
 	{
 
-
+		
 		for (int i = 0; i < m_components.size(); i++)
 		{
 		   	const Vector2f firstMin = m_components.at(i)->m_min;

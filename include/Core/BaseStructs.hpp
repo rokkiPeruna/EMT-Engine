@@ -7,12 +7,12 @@ namespace jej
 {
 
     //For ComponentHelper
+	class CollisionComponent;
     class RenderComponent;
     class ShaderComponent;
     class ShapeComponent;
     class TextureComponent;
     class TransformComponent;
-
 
 #ifdef JEJ_USE_MAX
     typedef unsigned long long int JEJ_COUNT;
@@ -46,39 +46,45 @@ namespace jej
     {
         ComponentHelper<T>(){ static_assert(false, "Invalid ComponentHelper type."); };
     };
+	template <>
+	struct ComponentHelper<CollisionComponent>
+	{
+		static const unsigned short int index = 0u;
+		ComponentHelper<CollisionComponent>(){};
+	};
 
     template <>
     struct ComponentHelper<RenderComponent>
     {
-        static const unsigned short int index = 0u;
+        static const unsigned short int index = 1u;
         ComponentHelper<RenderComponent>(){};
     };
 
     template <>
     struct ComponentHelper<ShaderComponent>
     {
-        static const unsigned short int index = 1u;
+        static const unsigned short int index = 2u;
         ComponentHelper<ShaderComponent>(){};
     };
 
     template <>
     struct ComponentHelper<ShapeComponent>
     {
-        static const unsigned short int index = 2u;
+        static const unsigned short int index = 3u;
         ComponentHelper<ShapeComponent>(){};
     };
 
     template <>
     struct ComponentHelper<TextureComponent>
     {
-        static const unsigned short int index = 3u;
+        static const unsigned short int index = 4u;
         ComponentHelper<TextureComponent>(){};
     };
 
     template <>
     struct ComponentHelper<TransformComponent>
     {
-        static const unsigned short int index = 4u;
+        static const unsigned short int index = 5u;
         ComponentHelper<TransformComponent>(){};
     };
 

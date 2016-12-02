@@ -14,6 +14,7 @@ namespace jej
     {
         //Friend RenderComponent so it can create indices from m_shapes points
         friend class RenderComponent;
+		friend class CollisionComponent;
 
     public:
 

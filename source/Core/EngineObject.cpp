@@ -6,8 +6,10 @@
 
 #include <IO_Manager/InputManagerImpl.hpp>
 
+
 #include <EntityComponentSys/Components/Component.hpp>
 #include <EntityComponentSys/Entity/Entity.hpp>
+#include <EntityComponentSys/Systems/CollisionSystem.hpp>
 #include <EntityComponentSys/Systems/RenderSystem.hpp>
 #include <EntityComponentSys/Systems/ShaderSystem.hpp>
 #include <EntityComponentSys/Systems/TransformSystem.hpp>
@@ -84,12 +86,13 @@ namespace jej //NAMESPACE jej
         InputManager::GetInstance();
 
         Timer::GetInstance(true);
-
-        std::get<0>(engine.m_systems) = &RenderSystem::GetInstance();
-        std::get<1>(engine.m_systems) = &ShaderSystem::GetInstance();
-        std::get<2>(engine.m_systems) = &ShapeSystem::GetInstance();
-        std::get<3>(engine.m_systems) = &TextureSystem::GetInstance();
-        std::get<4>(engine.m_systems) = &TransformSystem::GetInstance();
+		
+		std::get<0>(engine.m_systems) = &CollisionSystem::GetInstance();
+        std::get<1>(engine.m_systems) = &RenderSystem::GetInstance();
+        std::get<2>(engine.m_systems) = &ShaderSystem::GetInstance();
+        std::get<3>(engine.m_systems) = &ShapeSystem::GetInstance();
+        std::get<4>(engine.m_systems) = &TextureSystem::GetInstance();
+        std::get<5>(engine.m_systems) = &TransformSystem::GetInstance();
 
 
         //Parse execution path

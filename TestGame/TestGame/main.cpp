@@ -13,6 +13,7 @@
 #include <Utility/FileHandler.hpp>
 
 #include <EntityComponentSys/Components/ShaderComponent.hpp>
+#include <EntityComponentSys/Components/CollisionComponent.hpp>
 
 #include <IO_Manager/Win32/Mouse.hpp>
 #include <IO_Manager/Win32/Keyboard.hpp>
@@ -86,7 +87,6 @@ int main(int argc, char* argv[])
     }
     );
 
-
     //Now we have our character with transform, shader and shape component. At this point it exist
     //in our scene and has data in it with witch we can make it react to other entities and
     //vice versa. At this point, our "myCharacter" - entity could act as invisible trigger box, or 
@@ -103,7 +103,11 @@ int main(int argc, char* argv[])
         &myCharacter
         );
 
-    //Don't try setting components to other entities other than the one calling the function
+//Don't try setting components to other entities other than the one calling the function
+
+	myCharacter.AddComponent<jej::CollisionComponent>(
+		&myCharacter);
+
 
     auto& mouse = jej::Mouse::GetInstance();
     auto& keyboard = jej::Keyboard::GetInstance();

@@ -210,6 +210,9 @@
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\CollisionSystem.cpp">
       <Filter>Source Files\EntityComponentSystem\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Utility\Math.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Grafiikkamoottori_JEJ\include\Core\EngineObject.hpp">

@@ -11,6 +11,7 @@ namespace jej
     class ShapeSystem : public System
     {
         //For accessing m_components
+		friend class CollisionComponent;
         friend class Entity;
         friend class EngineObject;
         friend class RenderComponent;

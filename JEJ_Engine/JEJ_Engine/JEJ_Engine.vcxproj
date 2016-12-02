@@ -116,6 +116,7 @@
     <ClCompile Include="..\..\source\Texture\Shape.cpp" />
     <ClCompile Include="..\..\source\Utility\Assert.cpp" />
     <ClCompile Include="..\..\source\Utility\FileHandler.cpp" />
+    <ClCompile Include="..\..\source\Utility\Math.cpp" />
     <ClCompile Include="..\..\source\Utility\Messenger.cpp" />
     <ClCompile Include="..\..\source\Utility\Windows.cpp" />
     <ClCompile Include="..\..\source\Window\AndroidWindow.cpp" />

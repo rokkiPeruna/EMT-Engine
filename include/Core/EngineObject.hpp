@@ -17,6 +17,7 @@ namespace jej //NAMESPACE jej
     struct WindowOSInitData;
 
     //For m_systems tuple
+	class CollisionSystem;
 	class RenderSystem;
     class ShaderSystem;
     class ShapeSystem;
@@ -81,7 +82,8 @@ namespace jej //NAMESPACE jej
 
         //TODO Add all systems
         //Pointer to each system, populated in Initialize
-        std::tuple<RenderSystem*, ShaderSystem*, ShapeSystem*, TextureSystem*, TransformSystem*> m_systems;
+        
+		std::tuple<CollisionSystem*, RenderSystem*, ShaderSystem*, ShapeSystem*, TextureSystem*, TransformSystem*> m_systems;
 
         std::shared_ptr<Scene> m_currentScene;
         std::shared_ptr<Window> m_windowPtr;
