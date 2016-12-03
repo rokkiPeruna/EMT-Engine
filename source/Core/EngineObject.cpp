@@ -26,6 +26,7 @@
 
 namespace jej //NAMESPACE jej
 {
+
     EngineObject::EngineObject() :
         m_currentScene(nullptr),
         m_windowPtr(nullptr),

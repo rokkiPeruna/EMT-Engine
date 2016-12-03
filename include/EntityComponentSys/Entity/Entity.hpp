@@ -83,9 +83,6 @@ namespace jej
         template <typename T>
         bool RemoveComponent();
 
-        template <>
-        bool RemoveComponent();
-
         //Remove all components from the entity and from corresponding systems
         bool RemoveAllComponents();
 

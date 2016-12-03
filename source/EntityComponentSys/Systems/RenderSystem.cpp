@@ -27,7 +27,6 @@ namespace jej
         m_surface(0)
     {
 
-
     }
     //////////////////////////////////////////
 
@@ -50,11 +49,8 @@ namespace jej
     void RenderSystem::Initialize()
     {
 
-#ifdef _WIN32
         m_window = EngineObject::GetInstance().GetWindowRef();
-#elif defined ANDROID
-        m_window = std::static_pointer_cast<AndroidWindow>(EngineObject::GetInstance().GetWindowRef());
-#endif
+      
         assert(m_window != nullptr);
         if (!_createContext(settings::attributeList))
             JEJ_ASSERT(false, "Context creation failed.");
