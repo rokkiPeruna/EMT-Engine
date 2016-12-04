@@ -54,13 +54,13 @@ namespace jej//NAMESPACE jej STARTS
 
 
         //Pure virtual methods
-
+#ifdef _WIN32 //These are only needed in Windows platform
         //Returns native display type
         virtual EGLNativeDisplayType GetNativeDisplay() const = 0;
 
         //Return native window type
         virtual EGLNativeWindowType GetNativeWindow() const = 0;
-
+#endif
         //Window's update loop
         virtual bool UpdateWindowMessages() = 0;
 

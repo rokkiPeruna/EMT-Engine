@@ -19,9 +19,6 @@
     <Filter Include="Source Files\Core">
       <UniqueIdentifier>{4a964aff-1468-44a7-a3a0-77b6f93aaad9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Graphics">
-      <UniqueIdentifier>{8b9971fe-2d69-4ae6-aa26-7387263738eb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Texture">
       <UniqueIdentifier>{4b6e7ed4-eb21-45f1-9b30-cc92ad9957a9}</UniqueIdentifier>
     </Filter>
@@ -36,9 +33,6 @@
     </Filter>
     <Filter Include="Header Files\Core">
       <UniqueIdentifier>{d1c06fc3-4204-4d1b-9add-25779243b42c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Graphics">
-      <UniqueIdentifier>{c4d894a8-04d8-447e-99a3-de634852f272}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Texture">
       <UniqueIdentifier>{2d1ab1aa-f31c-4a6e-87ea-43ac1b80f682}</UniqueIdentifier>
@@ -123,15 +117,6 @@
     <ClCompile Include="..\..\source\Utility\Assert.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Graphics\Graphics.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Graphics\OGL_ES2.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Window\AndroidWindow.cpp">
-      <Filter>Source Files\Window</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\Window\Win32Window.cpp">
       <Filter>Source Files\Window</Filter>
     </ClCompile>
@@ -210,6 +195,9 @@
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\CollisionSystem.cpp">
       <Filter>Source Files\EntityComponentSystem\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Window\AndroidWindow.cpp">
+      <Filter>Source Files\Window</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Grafiikkamoottori_JEJ\include\Core\EngineObject.hpp">
@@ -217,12 +205,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Core\Settings.hpp">
       <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Graphics\Graphics.hpp">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Graphics\OGL_ES2.hpp">
-      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Utility\Assert.hpp">
       <Filter>Header Files\Utility</Filter>
@@ -235,9 +217,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Utility\Various.hpp">
       <Filter>Header Files\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Window\AndroidWindow.hpp">
-      <Filter>Header Files\Window</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Window\Win32Window.hpp">
       <Filter>Header Files\Window</Filter>
@@ -322,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\CollisionSystem.hpp">
       <Filter>Header Files\EntityComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Window\AndroidWindow.hpp">
+      <Filter>Header Files\Window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

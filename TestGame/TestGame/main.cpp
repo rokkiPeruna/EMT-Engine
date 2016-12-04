@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
     //Creating:
     myCharacter.AddComponent<jej::TransformComponent>(
         &myCharacter,					//Tell component that this is its owner
-        jej::Vector2f(0.f, 0.f),		//Position, we start at center of the screen
+        jej::Vector2f(0.0f, -0.3f),		//Position, we start at center of the screen
         jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
         jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
         );
@@ -56,9 +56,9 @@ int main(int argc, char* argv[])
 
     //Next we create ShaderComponent and add it to our entity so it can be drawn
     myCharacter.AddComponent<jej::ShaderComponent>(
-        &myCharacter					//Tell component that this is its owner
-        //"PixelShader.frag",			//First we must give vertex shader name and file extension
-        //"VertexShader.vert"			//Second we guve fragment shader name and file extencion
+        &myCharacter,					//Tell component that this is its owner
+        "FragmentShader.frag",	//First we must give vertex shader name and file extension
+        "VertexShader.vert"			//Second we guve fragment shader name and file extencion
         );
 
 
@@ -71,30 +71,26 @@ int main(int argc, char* argv[])
 
     auto& myShapeComp = myCharacter.AddComponent<jej::ShapeComponent>(
         &myCharacter,					//Tell component that this is its owner
-        jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
+        jej::Vector4i(0, 150, 150, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
         );
 
 
-
-    //Now we can add shape to our ShapeComponent. AddShape - method works intuitively. As we now
-    //add three points, AddShape knows we are making a triangle.
-    myShapeComp.AddShape(std::vector<jej::Vector2f>
-    {
-        jej::Vector2f(0.2f, 0.2f),		//First point, lower-left corner
-            jej::Vector2f(0.8f, 0.3f),		//Second point, upper-left corner
-            jej::Vector2f(0.5f, 0.5f)      //Third point, upper-right corner
-            //jej::Vector2f(0.5f, 0.5f)       //Third point, lower-right corner
-    }
+	//Now we can add shape to our ShapeComponent. AddShape - method works intuitively. 
+	//As we give just one jej::Vector2f, AddShape knows we making a rectangle.
+	//Note that width and height are twice the given values
+    myShapeComp.AddShape(
+    
+		jej::Vector2f(0.3, 0.3)	//Half width, half height
+    
     );
 
 
+   //As we now add three points, AddShape knows we are making a triangle.
     myShapeComp.AddShape(std::vector<jej::Vector2f>
     {
-            jej::Vector2f(-0.2f, -0.2f),		//First point, lower-left corner
-            jej::Vector2f(-0.8f, -0.3f),		//Second point, upper-left corner
-            jej::Vector2f(-0.5f, -0.5f)        //Third point, upper-right corner
-            //jej::Vector2f(-0.8f, -0.3f)
-            //jej::Vector2f(0.5f, 0.5f)         //Third point, lower-right corner
+            jej::Vector2f(0.0f, 0.3f),		//First point, lower-left corner
+            jej::Vector2f(0.15f, 0.6f),		//Second point, upper-left corner
+            jej::Vector2f(-0.15f, 0.6f)        //Third point, upper-right corner
     }
     );
 

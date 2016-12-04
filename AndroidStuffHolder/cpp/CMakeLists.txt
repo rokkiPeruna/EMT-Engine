@@ -24,45 +24,48 @@ add_library(app-glue STATIC
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
 add_library(native-activity SHARED
-			
-			../../../../../../source/Core/EngineObject.cpp
-			../../../../../../source/Core/Scene.cpp
-			../../../../../../source/Core/Settings.cpp
-			../../../../../../source/Core/Timer.cpp
+            #main.cpp
+            JEJ_Android_Main.cpp
+            ../../../../../../source/Core/EngineObject.cpp
+            ../../../../../../source/Core/Scene.cpp
+            ../../../../../../source/Core/Settings.cpp
+            ../../../../../../source/Core/Timer.cpp
 
-			../../../../../../source/EntityComponentSystem/Components/Component.cpp
-			../../../../../../source/EntityComponentSystem/Components/CollisionComponent.cpp
-			../../../../../../source/EntityComponentSystem/Components/RenderComponent.cpp
-			../../../../../../source/EntityComponentSystem/Components/ShaderComponent.cpp
-			../../../../../../source/EntityComponentSystem/Components/ShapeComponent.cpp
-			../../../../../../source/EntityComponentSystem/Components/TextureComponent.cpp
-			../../../../../../source/EntityComponentSystem/Components/TransformComponent.cpp
+               ../../../../../../source/EntityComponentSys/Entity/Entity.cpp
 
-			../../../../../../source/EntityComponentSystem/Entity/Entity.cpp
+            ../../../../../../source/EntityComponentSys/Components/Component.cpp
+            ../../../../../../source/EntityComponentSys/Components/CollisionComponent.cpp
+            ../../../../../../source/EntityComponentSys/Components/RenderComponent.cpp
+            ../../../../../../source/EntityComponentSys/Components/ShaderComponent.cpp
+            ../../../../../../source/EntityComponentSys/Components/ShapeComponent.cpp
+            ../../../../../../source/EntityComponentSys/Components/TextureComponent.cpp
+            ../../../../../../source/EntityComponentSys/Components/TransformComponent.cpp
 
-			../../../../../../source/EntityComponentSystem/Systems/System.cpp
-			../../../../../../source/EntityComponentSystem/Systems/CollisionSystem.cpp
-			../../../../../../source/EntityComponentSystem/Systems/RenderSystem.cpp
-			../../../../../../source/EntityComponentSystem/Systems/ShaderSystem.cpp
-			../../../../../../source/EntityComponentSystem/Systems/ShapeSystem.cpp
-			../../../../../../source/EntityComponentSystem/Systems/TextureSystem.cpp
-			../../../../../../source/EntityComponentSystem/Systems/Transform.cpp
 
-			#../../../../../../source/IO_Manager/Android/stuffHere
-			
-			../../../../../../source/Texture/Shape.cpp
+
+            ../../../../../../source/EntityComponentSys/Systems/System.cpp
+            ../../../../../../source/EntityComponentSys/Systems/CollisionSystem.cpp
+            ../../../../../../source/EntityComponentSys/Systems/RenderSystem.cpp
+            ../../../../../../source/EntityComponentSys/Systems/ShaderSystem.cpp
+            ../../../../../../source/EntityComponentSys/Systems/ShapeSystem.cpp
+            ../../../../../../source/EntityComponentSys/Systems/TextureSystem.cpp
+            ../../../../../../source/EntityComponentSys/Systems/TransformSystem.cpp
+
+            ../../../../../../source/IO_Manager/Android/InputManager.cpp
+
+            ../../../../../../source/Texture/Shape.cpp
 
             ../../../../../../source/Utility/Assert.cpp
-			../../../../../../source/Utility/FileHandler.cpp
-			../../../../../../source/Utility/Messenger.cpp
-			
-			../../../../../../source/Window/Window.cpp
-			../../../../../../source/Window/AndroidWindow.cpp
-			
-            main.cpp)
+            ../../../../../../source/Utility/FileHandler.cpp
+            ../../../../../../source/Utility/Messenger.cpp
+
+            ../../../../../../source/Window/Window.cpp
+            ../../../../../../source/Window/AndroidWindow.cpp
+            )
 
 target_include_directories(native-activity PRIVATE
-							../../../../../../include
+                            ../../../../../../include
+                            ../../../../../../include/External
                            ${ANDROID_NDK}/sources/android/native_app_glue)
 
 # add lib dependencies

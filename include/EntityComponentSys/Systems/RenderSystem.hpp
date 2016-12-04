@@ -12,11 +12,25 @@
 
 //
 #include <External/OpenGL_ES2/EGL/egl.h>
-//#include <External/OpenGL_ES2/GLES2/gl2.h>
+#include <External/OpenGL_ES2/GLES2/gl2.h>
 //
 
 namespace jej
 {
+
+	namespace detail
+	{
+		static GLubyte DefaultTexture[4 * 4 * 3] = //Width * Height * RGB
+		{
+			255, 0, 0, 255, 0, 0, 255, 0, 0, 255, 0, 0,
+			0, 255, 0, 0, 255, 0, 0, 255, 0, 0, 255, 0,
+			0, 0, 255, 0, 0, 255, 0, 0, 255, 0, 0, 255,
+			0, 150, 150, 0, 150, 150, 0, 150, 150, 0, 150, 150
+		};
+	}
+
+
+
     //Forward declarating Window-class etc.
     class Window;
     class RenderComponent;
@@ -25,14 +39,6 @@ namespace jej
     class TextureComponent;
     //
 
-    namespace detail
-    {
-        struct _VBO
-        {
-
-        };
-    }
-
     class RenderSystem : public System
     {
 
@@ -40,9 +46,10 @@ namespace jej
 		friend class EngineObject;
 		friend class Entity;
 
+#ifdef _WIN32
 		//For allowing Win32 event handler to call _update() in WM_PAINT
-        friend LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
-        
+		friend LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
+#endif
 
     private:
 
@@ -62,7 +69,7 @@ namespace jej
         static RenderSystem& GetInstance();
 
         //Finalize this system
-        void SystemFinalize();
+        void SystemFinalize() override;
 		
 
     private:
@@ -114,6 +121,7 @@ namespace jej
 		//Holds shared pointers to all RenderComponents
         static std::vector<std::shared_ptr<RenderComponent>> m_components;
 
+		GLuint m_defaultTexID;
     };
 }
 

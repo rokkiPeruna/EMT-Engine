@@ -1,0 +1,63 @@
+#ifndef JEJ_TEXTURE_SYSTEM_HPP
+#define JEJ_TEXTURE_SYSTEM_HPP
+
+#include <EntityComponentSys/Systems/System.hpp>
+
+
+#include <External/OpenGL_ES2/EGL/eglplatform.h>
+#include <External/OpenGL_ES2/GLES2/gl2.h>
+
+
+namespace jej
+{
+
+    class TextureComponent;
+    struct TextureData;
+
+	class TextureSystem : public System 
+	{
+		friend class TextureComponent;
+		
+
+        //For modifying m_components
+        friend class Entity;
+        friend class EngineObject;
+        friend class System;
+
+    private:
+        
+        //Singleton constructor
+        TextureSystem();
+
+    public:
+        
+		//Disabled copy-constructors
+		TextureSystem(const TextureSystem&) = delete;
+		TextureSystem operator=(const TextureSystem&) = delete;
+
+        //Destructor
+        virtual ~TextureSystem();
+
+        
+		// Get the one and only instance of singleton 
+		static TextureSystem& GetInstance();
+
+    protected:
+
+        static std::vector<std::shared_ptr<TextureComponent>> m_components;
+
+        void _update(const float p_deltaTime) override;
+
+		// TODO: Bind texture
+		void _bind(unsigned int p_unit);
+
+		void _drawFromSheet();
+
+		// Initialize texture
+        bool _initialize(TextureData* p_data);
+		
+	};
+
+}
+
+#endif

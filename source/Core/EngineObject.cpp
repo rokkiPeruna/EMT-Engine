@@ -11,7 +11,6 @@
 #include <EntityComponentSys/Systems/RenderSystem.hpp>
 #include <EntityComponentSys/Systems/ShaderSystem.hpp>
 #include <EntityComponentSys/Systems/TransformSystem.hpp>
-#include <Graphics/OGL_ES2.hpp>
 #include <Utility/Assert.hpp>
 #include <Utility/Messenger.hpp>
 
@@ -48,6 +47,8 @@ namespace jej //NAMESPACE jej
         JEJ_ASSERT(entityLeak == 0, "Entity memory leak!");
 
         //No leaks - no warnings
+        //TODO: Android problems
+#ifdef _WIN32
         if (componentLeak != 0)
             Messenger::Add(Messenger::MessageType::Warning, "Amount of leaking components: ", componentLeak);
 
@@ -57,7 +58,7 @@ namespace jej //NAMESPACE jej
         Messenger::Add(Messenger::MessageType::Debug, std::to_string(Timer::GetInstance().GetTime()));
 
         Messenger::WriteLog();
-        
+#endif
     }
     //////////////////////////////////////////
 
@@ -75,13 +76,15 @@ namespace jej //NAMESPACE jej
         //Initialize window
 #ifdef _WIN32
         engine.m_windowPtr.reset(new Win32Window(p_data, p_osData));
-#elif defined ANDROID
-        engine.m_windowPtr.reset(new AndroidWindow(p_data, p_osData));
+#elif defined __ANDROID__
+        engine.m_windowPtr.reset(new AndroidWindow(p_osData));
 #endif
 
         //TODO:
         //Initialize all systems and managers here
-        InputManager::GetInstance();
+
+        //TODO: Add Android InputManager code
+        //InputManager::GetInstance();
 
         Timer::GetInstance(true);
 
@@ -93,6 +96,8 @@ namespace jej //NAMESPACE jej
 
 
         //Parse execution path
+        //TODO: Android problems
+#ifdef _WIN32
         const unsigned int slashPos = p_root.find_last_of("/\\");
         if (slashPos == std::string::npos)
         {
@@ -102,7 +107,7 @@ namespace jej //NAMESPACE jej
 
 
         settings::rootPath = p_root.substr(0u, slashPos + 1u);
-
+#endif
         return true;
     }
     //////////////////////////////////////////
@@ -117,7 +122,9 @@ namespace jej //NAMESPACE jej
     void EngineObject::SetCurrentScene(const Scene& p_scene)
     {
         //Doesn't work in future
+#ifdef _WIN32
         DebugBreak();
+#endif
         m_currentScene = std::make_shared<Scene>(p_scene);
     }
     //////////////////////////////////////////
@@ -126,7 +133,7 @@ namespace jej //NAMESPACE jej
     {
         //RenderSystem::GetInstance()._update(100.f);
 
-        InputManager::GetInstance().Update();//TODO: Change to ._update() for consistency
+        //InputManager::GetInstance().Update();//TODO: Change to ._update() for consistency
 
         //This calls also RenderSystem's _update() - function in WM_PAINT
 
