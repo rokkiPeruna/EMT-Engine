@@ -34,10 +34,11 @@ int main(int argc, char* argv[])
 
     //Add new entity to the newly created scene
     myScene.AddEntity("Character");
+	myScene.AddEntity("Test");
 
     //Make alias of added entity for ease of use
     auto& myCharacter = *myScene.GetEntityPtr("Character");
-
+	auto& myTest = *myScene.GetEntityPtr("Test");
 
     //Start adding components to our entity
     //Entity has template method AddComponent which allows you to add all kinds of components
@@ -52,7 +53,11 @@ int main(int argc, char* argv[])
         jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
         jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
         );
-
+	myTest.AddComponent<jej::TransformComponent>(
+		jej::Vector2f(1.0f, 1.0f),
+		jej::Vector2f(1.0f, 1.0f),
+		jej::Vector4f(0.0f, 0.0f, 0.0f, 0.0f)
+		);
 
     //Next we create ShaderComponent and add it to our entity so it can be drawn
     myCharacter.AddComponent<jej::ShaderComponent>(
@@ -60,7 +65,7 @@ int main(int argc, char* argv[])
         //"VertexShader.vert"			//Second we guve fragment shader name and file extencion
         );
 
-
+	myTest.AddComponent<jej::ShaderComponent>();
 
     //Then we create and add ShapeComponent to give our entity some form and color
     //NOTICE that we don't give any coordinates yet or what type of shape this component holds
@@ -72,6 +77,9 @@ int main(int argc, char* argv[])
         jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
         );
 
+	auto& testShapeComponent = myTest.AddComponent<jej::ShapeComponent>(
+		jej::Vector4i(0, 255, 0, 150)
+		);
 
 
     //Now we can add shape to our ShapeComponent. AddShape - method works intuitively. As we now
@@ -83,6 +91,8 @@ int main(int argc, char* argv[])
             jej::Vector2f(1.f, -1.f)        //Third point, lower-right corner
     }
         );
+	testShapeComponent.AddShape(jej::Vector2f(1.0f, 1.0f));
+
 
     //Now we have our character with transform, shader and shape component. At this point it exist
     //in our scene and has data in it with witch we can make it react to other entities and
@@ -97,11 +107,12 @@ int main(int argc, char* argv[])
 
     //Creating
     myCharacter.AddComponent<jej::RenderComponent>();
+	
 
     //Don't try setting components to other entities other than the one calling the function
 
     myCharacter.AddComponent<jej::CollisionComponent>();
-
+	myTest.AddComponent<jej::CollisionComponent>();
 
     auto& mouse = jej::Mouse::GetInstance();
     auto& keyboard = jej::Keyboard::GetInstance();
