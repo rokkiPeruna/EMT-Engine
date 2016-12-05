@@ -12,4 +12,22 @@
 *.lib
 *.exe
 JEJ_Engine/Debug/Resources/log.txt
+android/*
+!android/build.gradle
+!android/gradle.properties
+!android/gradlew
+!android/gradlew.bat
+!android/settings.gradle
+!android/.google
+!android/.google/packaging.yaml
+!android/app
+!android/app/build.gradle
+!android/app/src/main
+!android/app/src/main/AndroidManifest.xml
+!android/app/src/main/assets/*
+!android/app/src/main/cpp/*
+!android/app/src/main/res/*
+!android/gradle
+!android/gradle/wrapper/gradle-wrapper.jar
+!android/gradle/wrapper/gradle-wrapper.properties
 
