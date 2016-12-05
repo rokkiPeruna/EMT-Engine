@@ -63,14 +63,6 @@ namespace jej
         //Create instance of class
         static RenderSystem& GetInstance();
 
-        //Initialize this system
-        void Initialize();
-
-        //Finalize this system
-        void SystemFinalize();
-
-        void _render();
-		
 
     private:
         
@@ -118,8 +110,20 @@ namespace jej
 		//Initialize Open GL ES 2.0
         bool _createContext(const EGLint p_attributeList[]);
 
-		//Holds shared pointers to all RenderComponents
+
+        void _render();
+
+
+    protected:
+
+
+        
+        //Holds shared pointers to all RenderComponents
         static std::vector<std::shared_ptr<RenderComponent>> m_components;
+
+        bool _finalize() override;
+
+        bool _initialize() override;
 
     };
 }

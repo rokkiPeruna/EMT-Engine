@@ -213,4 +213,17 @@ namespace jej
     }
     //////////////////////////////////////////
 
+    bool ShaderSystem::_finalize()
+    {
+        //TODO:
+        return true;
+    }
+    //////////////////////////////////////////
+
+    bool ShaderSystem::_initialize()
+    {
+        //TODO:
+        return true;
+    }
+    //////////////////////////////////////////
 }

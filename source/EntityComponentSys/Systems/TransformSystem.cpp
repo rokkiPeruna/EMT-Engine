@@ -31,4 +31,18 @@ namespace jej
     }
     //////////////////////////////////////////
 
+    bool TransformSystem::_finalize()
+    {
+        //TODO:
+        return true;
+    }
+    //////////////////////////////////////////
+
+    bool TransformSystem::_initialize()
+    {
+        //TODO:
+        return true;
+    }
+    //////////////////////////////////////////
+
 }

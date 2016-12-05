@@ -20,6 +20,7 @@ namespace jej
 		friend class Mouse;
 		friend class Keyboard;
 		friend class Win32Window;
+        friend class EngineObject;
 
 	private:
 		InputManager();
@@ -39,11 +40,12 @@ namespace jej
 		std::queue<Keyboard::Key>& GetKeyboardInputQueue() { return m_keyboardInputQueue; }
 		std::queue<Mouse::Button>& GetMouseInputQueue() { return m_mouseInputQueue; }
 
-		//At this moment, does nothing else but handles input queues
-		void Update();
+		
 
 
 	private:
+
+
 
 		//Input queues for keyboard and mouse
 		std::queue<Keyboard::Key> m_keyboardInputQueue;
@@ -53,13 +55,17 @@ namespace jej
 		void _handleInputQueues();
 
 		//Checks if keyboard key is pressed
-		bool _isKeyboardKeyPressed(const Keyboard::Key key) const;
+		bool _isKeyboardKeyPressed(const Keyboard::Key p_key) const;
 
 		//Checks mouse button is pressed
-		bool _isMouseButtonPressed(const Mouse::Button button) const;
+		bool _isMouseButtonPressed(const Mouse::Button p_button) const;
 
 		//Returns mouse position
 		jej::Vector2i _getMousePosition() const;
+
+
+        //At this moment, does nothing else but handles input queues
+        void _update();
 
 	};
 

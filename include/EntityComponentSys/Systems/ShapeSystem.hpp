@@ -15,6 +15,7 @@ namespace jej
         friend class Entity;
         friend class EngineObject;
         friend class RenderComponent;
+        friend class System;
 
     private:
 
@@ -37,6 +38,9 @@ namespace jej
 
         void _update(const float p_deltaTime) override;
 
+        bool _finalize() override;
+
+        bool _initialize() override;
 
     };
 

@@ -31,7 +31,7 @@ namespace jej
 	}
 	//
 
-	void InputManager::Update()
+	void InputManager::_update()
 	{
 		_handleInputQueues();
 	}
@@ -51,11 +51,11 @@ namespace jej
 		}
 	}
 
-	bool InputManager::_isKeyboardKeyPressed(const Keyboard::Key key) const
+	bool InputManager::_isKeyboardKeyPressed(const Keyboard::Key p_key) const
 	{
 		//Virtual key value
 		int vkey = 0;
-		switch (key)
+		switch (p_key)
 		{
 		default:						vkey = 0;						break;
 		case Keyboard::Key::A:          vkey = 'A';						break;
@@ -165,7 +165,7 @@ namespace jej
 		return (GetAsyncKeyState(vkey) & 0x8000) != 0;
 	}
 
-	bool InputManager::_isMouseButtonPressed(const Mouse::Button button) const 
+	bool InputManager::_isMouseButtonPressed(const Mouse::Button p_button) const 
 	{
 		return true;
 	}

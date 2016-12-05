@@ -29,26 +29,31 @@ namespace jej
         friend class RenderComponent;
 
     public:
-        
-		//Default constructor
+
+        //Default constructor
         System();
-        
+
         //Destructor
         virtual ~System();
 
-protected:
+    protected:
 
-    //Update
-    virtual void _update(const float p_deltaTime) = 0;
+        //Update
+        virtual void _update(const float p_deltaTime) = 0;
 
-    //Overloaded
-    //std::vector<std::shared_ptr<Component>> m_components;
+        //Overloaded
+        //std::vector<std::shared_ptr<Component>> m_components;
 
-    //Get component vector reference of desired type
-    template <typename T>
-    std::vector<std::shared_ptr<T>>& _getComponentsRef();
+        //Get component vector reference of desired type
+        template <typename T>
+        std::vector<std::shared_ptr<T>>& _getComponentsRef();
 
-    virtual void SystemFinalize(){}
+        //Get component vector reference of desired type
+        template <typename T>
+        const std::vector<std::shared_ptr<T>>& _getComponentsRef() const;
+
+        virtual bool _finalize() = 0;
+        virtual bool _initialize() = 0;
 
     };
 

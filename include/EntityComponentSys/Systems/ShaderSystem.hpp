@@ -67,6 +67,9 @@ namespace jej
 
 		void _update(const float p_deltaTime);
 
+        bool _finalize();
+
+        bool _initialize() override;
 
 	};
 

@@ -11,10 +11,9 @@ namespace jej
 		for (const auto& itr : ShapeSystem::GetInstance()._getComponentsRef<ShapeComponent>())
 			if (itr->m_parentID == p_entity->GetID())
 			{
-
 				// TODO: work work work..
-				m_min = Math::ConvexCollisionBox(itr->m_shapes.at);
-				m_max = Math::ConvexCollisionBox(p_shape).second;
+//				m_min = Math::ConvexCollisionBox(itr->m_shapes.at);
+	//			m_max = Math::ConvexCollisionBox(p_shape).second;
 				break;
 			}
 
@@ -25,6 +24,7 @@ namespace jej
 	{
 
 	}
+
 
 
 }

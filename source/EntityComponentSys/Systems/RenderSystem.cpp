@@ -46,33 +46,6 @@ namespace jej
     //////////////////////////////////////////
 
 
-    void RenderSystem::Initialize()
-    {
-
-        m_window = EngineObject::GetInstance().GetWindowRef();
-      
-        assert(m_window != nullptr);
-        if (!_createContext(settings::attributeList))
-            JEJ_ASSERT(false, "Context creation failed.");
-    }
-    //////////////////////////////////////////
-
-
-    void RenderSystem::SystemFinalize()
-    {
-        for (auto& itr : m_components)
-        {
-            itr->Finalize();
-
-            if (itr->m_shaderComp && itr->m_shapeComp && itr->m_transformComp) //TODO: Re-evaluate this later
-                _createBuffersForRenderComponentDrawData(*itr);
-
-        }
-    }
-
-    //////////////////////////////////////////
-
-
     void RenderSystem::_update(const float p_deltaTime)
     {
 
@@ -110,8 +83,7 @@ namespace jej
     }
     //////////////////////////////////////////
 
-
-
+    
     void RenderSystem::_clearScreen() const
     {
         glViewport(0, 0, m_winWidth, m_winHeight);
@@ -294,6 +266,8 @@ namespace jej
     {
         //TODO: Add code for texture binding
     }
+    //////////////////////////////////////////
+
 
     bool RenderSystem::_createContext(const EGLint p_attributeList[])
     {
@@ -392,4 +366,39 @@ namespace jej
 
     }
     //////////////////////////////////////////
+
+    bool RenderSystem::_finalize()
+    {
+        for (auto& itr : m_components)
+        {
+            itr->Finalize();
+
+            if (itr->m_shaderComp && itr->m_shapeComp && itr->m_transformComp) //TODO: Re-evaluate this later
+                _createBuffersForRenderComponentDrawData(*itr);
+
+        }
+        return true;
+    }
+    //////////////////////////////////////////
+
+    bool RenderSystem::_initialize()
+    {
+        m_window = EngineObject::GetInstance().GetWindowRef();
+
+        if (m_window == nullptr)
+        {
+            JEJ_ASSERT(false, "Window not initialized");
+            return false;
+        }
+
+        if (!_createContext(settings::attributeList))
+        {
+            JEJ_ASSERT(false, "Context creation failed.");
+            return false;
+        }
+
+        return true;
+    }
+    //////////////////////////////////////////
+
 }

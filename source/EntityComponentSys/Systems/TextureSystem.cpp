@@ -15,34 +15,44 @@ namespace jej
     {
 
     }
-    /////////////////////////////////
+    //////////////////////////////////////////
 
 
     TextureSystem::~TextureSystem()
     {
 
     }
-    /////////////////////////////////
+    //////////////////////////////////////////
+
 
     TextureSystem& TextureSystem::GetInstance()
     {
         static TextureSystem system;
         return system;
     }
-    /////////////////////////////////
+    //////////////////////////////////////////
 
 
     void TextureSystem::_bind(unsigned int p_unit)
     {
 
     }
+    //////////////////////////////////////////
+    
 
-
-    bool TextureSystem::_initialize()
+    void TextureSystem::_drawFromSheet()
     {
-        //TODO
-        return true;
+
     }
+    //////////////////////////////////////////
+
+
+    void TextureSystem::_update(const float p_deltaTime)
+    {
+
+    }
+    //////////////////////////////////////////
+
 
     bool TextureSystem::_finalize()
     {
@@ -72,23 +82,18 @@ namespace jej
                 JEJ_ASSERT(false, "Texture initialization failed.");
                 return false;
             }
-                
+
         }
         return true;
     }
+    //////////////////////////////////////////
 
 
-    void TextureSystem::_drawFromSheet()
+    bool TextureSystem::_initialize()
     {
-
+        //TODO
+        return true;
     }
-
-
-    void TextureSystem::_update(const float p_deltaTime)
-    {
-
-    }
-
-
+    //////////////////////////////////////////
 
 }

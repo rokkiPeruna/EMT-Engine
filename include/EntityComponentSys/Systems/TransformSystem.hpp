@@ -37,6 +37,9 @@ namespace jej
 
         static std::vector<std::shared_ptr<TransformComponent>> m_components;
 
+        bool _finalize() override;
+
+        bool _initialize() override;
 
 
     };

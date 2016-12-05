@@ -9,15 +9,17 @@ namespace jej
 {
 	
 	class Shape;
+
+
 	class CollisionComponent : public Component
 	{
 		friend class CollisionSystem;
 
 	public:
 
-		CollisionComponent::CollisionComponent(Entity* p_entity);
+		CollisionComponent(Entity* p_entity);
 
-		CollisionComponent::~CollisionComponent();
+		~CollisionComponent();
 
 		CollisionComponent(const CollisionComponent&) = delete;
 		CollisionComponent operator=(const CollisionComponent&) = delete;

@@ -9,6 +9,10 @@ namespace jej
 	class CollisionSystem : public System
 	{
 
+        friend class EngineObject;
+        friend class Entity;
+        
+
 	private:
 
 		CollisionSystem();
@@ -16,12 +20,23 @@ namespace jej
 		
 	public:
 
+        CollisionSystem(const CollisionSystem&) = delete;
+        CollisionSystem operator=(const CollisionSystem) = delete;
+
 		~CollisionSystem();
 
 		static CollisionSystem& GetInstance();
-		void _update(const float deltaTime);
 		
-		static std::vector<std::shared_ptr<CollisionComponent>> m_components;
+    protected:
+
+        void _update(const float deltaTime) override;
+
+        bool _finalize() override;
+
+        bool _initialize() override;
+
+        static std::vector<std::shared_ptr<CollisionComponent>> m_components;
+
 	};
 
 

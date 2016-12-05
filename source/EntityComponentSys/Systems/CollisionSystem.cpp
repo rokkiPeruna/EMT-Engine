@@ -4,19 +4,29 @@
 
 namespace jej
 {
+    std::vector<std::shared_ptr<CollisionComponent>> CollisionSystem::m_components;
+
 	CollisionSystem::CollisionSystem()
 	{
+
 	}
+    //////////////////////////////////////////
+
 
 	CollisionSystem::~CollisionSystem()
 	{
+
 	}
+    //////////////////////////////////////////
+
 
 	CollisionSystem& CollisionSystem::GetInstance()
 	{
 		static CollisionSystem instance;
 		return instance;
 	}
+    //////////////////////////////////////////
+
 
 	void CollisionSystem::_update(const float deltaTime)
 	{
@@ -45,4 +55,21 @@ namespace jej
 			}
 		}
 	}
+    //////////////////////////////////////////
+
+
+    bool CollisionSystem::_finalize()
+    {
+        //TODO:
+        return true;
+    }
+    //////////////////////////////////////////
+
+    bool CollisionSystem::_initialize()
+    {
+        //TODO:
+        return true;
+    }
+    //////////////////////////////////////////
+
 }
