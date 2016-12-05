@@ -1,6 +1,7 @@
 Android-directory includes now only the absolute minimum to build the project with AndroidStudio.
 
-MAKE SURE YOU DON'T HAVE AN 'android' DIRECTORY IN THE ROOT OF JEJ WHEN BEGINNING.
+MAKE SURE YOU DON'T HAVE AN 'android' DIRECTORY IN THE ROOT OF JEJ BEFORE PULLING THIS VERSION.
+DELETE IT AND PULL THIS VERSION IF YOU HAD OR YOU AREN'T SURE IF YOU HAD.
 
 How to use:
 1. Acquire AndroidStudio.
