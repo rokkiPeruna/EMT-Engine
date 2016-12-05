@@ -31,7 +31,7 @@
 namespace jej
 {
 
-    
+
     class Entity
     {
         //For manipulating components
@@ -63,7 +63,7 @@ namespace jej
 
         //Components
 
-        //Add a component to the given entity
+        //Adds a component to the calling entity
         //Returns a reference to either the created component
         //Or a reference to a component that has already been bound to this entity
         template<typename T, typename ... Args>

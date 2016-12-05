@@ -8,52 +8,44 @@
 namespace jej
 {
 
-	TextureComponent::TextureComponent(Entity* p_entity, const std::string& p_name) :
+    TextureComponent::TextureComponent(Entity* p_entity, const std::string& p_name, const unsigned short int p_imageCount, const std::vector<unsigned char>& p_selectedImages) :
         Component(p_entity),
-		m_textureData()
-	{
+        m_textureData(),
+        m_readImageData(nullptr)
+    {
         m_componentType = ComponentType::Texture;
 
         m_textureData.imageName = p_name;
-        
-        if (!TextureSystem::GetInstance()._initialize(&m_textureData))
-        {
-            JEJ_ASSERT(false, "Texture initialization failed!");
-        }
-
-	}
+        m_textureData.imageCount = p_imageCount;
+        m_textureData.selectedImages = p_selectedImages;
+    }
 
     TextureComponent::~TextureComponent()
     {
+        //Free texture if present (also called in texdata dtor)
+        if (m_textureData.displayImage)
+        {
+            stbi_image_free(m_textureData.displayImage);
+            m_textureData.displayImage = nullptr;
+        }
 
-	}
+        //Free whole image
+        if (m_readImageData)
+        {
+            stbi_image_free(m_readImageData);
+            m_readImageData = nullptr;
+        }
 
-   // std::vector<char> TextureComponent::_getImage(const unsigned int p_index)
-   // {
-   //     std::vector<char> imageData = {};
-   //
-   //     if (m_data.empty())
-   //     {
-   //         Messenger::Add(Messenger::MessageType::Error, "No image loaded.");
-   //         return imageData;
-   //     }
-   //
-   //     
-   //
-   //     if (p_index >= m_count)
-   //     {
-   //         Messenger::Add(Messenger::MessageType::Error, "Index too large.");
-   //         return imageData;
-   //     }
-   //
-   //     const unsigned int imageBytes = m_data.size() / m_count;
-   //     const unsigned int imageStart = p_index * imageBytes;
-   //
-   //     //Copies data from m_data 
-   //     //beginning from imageStart
-   //     //ending in final index or imageStart + imageBytes
-   //     imageData.assign(m_data[imageStart], imageStart + imageBytes >= m_data.size() ? m_data[m_data.size() - 1u] : m_data[imageStart + imageBytes]);
-   //     return imageData;
-   // }
+    }
+
+    const TextureData& TextureComponent::GetTextureData() const
+    {
+        return m_textureData;
+    }
+
+    TextureData& TextureComponent::GetTextureData()
+    {
+        return m_textureData;
+    }
 
 }

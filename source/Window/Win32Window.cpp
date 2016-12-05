@@ -331,13 +331,16 @@ namespace jej//NAMESPACE jej STARTS
 
         case WM_MOVE:
         {
-            //Throws in Win10
-
             Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
+            
+            //Suppresses throw in Win10
+            if (!context)
+                break;
+
             auto& tmpWinData = context->GetWinData();
             auto& tmpOSData = context->GetWinOSData();
-          
-          
+
+
             tmpOSData.offsetX = LOWORD(lparam);
             tmpOSData.offsetY -= (HIWORD(lparam) - tmpWinData.sizeY);
 
@@ -371,11 +374,14 @@ namespace jej//NAMESPACE jej STARTS
 
         case WM_SIZE:
         {
-            //Throws in Win10
-
             Win32Window* context = (Win32Window*)(LONG_PTR)GetWindowLongPtr(hwnd, GWL_USERDATA);
+
+            //Suppresses throw in Win10
+            if (!context)
+                break;
+
             auto& tmpWinData = context->GetWinData();
-         
+
             tmpWinData.sizeX = LOWORD(lparam);
             tmpWinData.sizeY = HIWORD(lparam);
 

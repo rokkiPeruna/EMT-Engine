@@ -25,19 +25,11 @@ namespace jej
         m_context(0),
         m_display(0),
         m_surface(0)
-
     {
 
-#ifdef _WIN32
-        m_window = std::static_pointer_cast<Win32Window>(EngineObject::GetInstance().GetWindowRef());
-#elif defined ANDROID
-        m_window = std::static_pointer_cast<AndroidWindow>(EngineObject::GetInstance().GetWindowRef());
-#endif
-        assert(m_window != nullptr);
-        if (!_createContext(settings::attributeList))
-            JEJ_ASSERT(false, "Context creation failed.");
     }
     //////////////////////////////////////////
+
 
     RenderSystem::~RenderSystem()
     {
@@ -45,12 +37,26 @@ namespace jej
     }
     //////////////////////////////////////////
 
+
     RenderSystem& RenderSystem::GetInstance()
     {
         static RenderSystem system;
         return system;
     }
     //////////////////////////////////////////
+
+
+    void RenderSystem::Initialize()
+    {
+
+        m_window = EngineObject::GetInstance().GetWindowRef();
+      
+        assert(m_window != nullptr);
+        if (!_createContext(settings::attributeList))
+            JEJ_ASSERT(false, "Context creation failed.");
+    }
+    //////////////////////////////////////////
+
 
     void RenderSystem::SystemFinalize()
     {
@@ -65,6 +71,7 @@ namespace jej
     }
 
     //////////////////////////////////////////
+
 
     void RenderSystem::_update(const float p_deltaTime)
     {
@@ -95,6 +102,7 @@ namespace jej
     }
     //////////////////////////////////////////
 
+
     void RenderSystem::_render()//TODO: REMOVE THIS
     {
         _clearScreen();
@@ -102,7 +110,7 @@ namespace jej
     }
     //////////////////////////////////////////
 
-    //////////////////////////////////////////
+
 
     void RenderSystem::_clearScreen() const
     {
@@ -132,6 +140,7 @@ namespace jej
         return (GL_TRUE == success) ? true : false;
     }
     //////////////////////////////////////////
+
 
     void RenderSystem::_createBuffersForRenderComponentDrawData(RenderComponent& p_rendComp)
     {
@@ -190,6 +199,7 @@ namespace jej
     }
     //////////////////////////////////////////
 
+
     bool RenderSystem::_drawAllBuffers()
     {
         for (auto& itr : m_components)
@@ -242,6 +252,7 @@ namespace jej
     }
     //////////////////////////////////////////
 
+
     void RenderSystem::_useShader(const ShaderComponent& shaderComp) const
     {
         glUseProgram(shaderComp.m_shaderData.programID);
@@ -254,12 +265,12 @@ namespace jej
         }
         else
         {
-            unsigned int parentID = shaderComp.m_parentID;
-            Messenger::Add(Messenger::MessageType::Error, "Shader has zero attributes, shader parent ID: " + std::to_string(parentID));
+            Messenger::Add(Messenger::MessageType::Error, "Shader has zero attributes, shader parent ID: " + shaderComp.GetParentID());
             //No rest for the living - Ee
         }
     }
     //////////////////////////////////////////
+
 
     void RenderSystem::_unUseShader(const ShaderComponent& shaderComp) const
     {
@@ -273,11 +284,11 @@ namespace jej
         }
         else
         {
-            unsigned int parentID = shaderComp.m_parentID;
-            Messenger::Add(Messenger::MessageType::Error, "Shader has zero attributes, shader parent ID: " + std::to_string(parentID));
+            Messenger::Add(Messenger::MessageType::Error, "Shader has zero attributes, shader parent ID: " + shaderComp.GetID());
         }
     }
     //////////////////////////////////////////
+
 
     void RenderSystem::_bindTexture() const
     {

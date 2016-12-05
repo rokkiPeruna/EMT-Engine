@@ -48,4 +48,18 @@ namespace jej
     ///////////////////////////////////
 
 
+    const JEJ_COUNT Component::GetParentID() const
+    {
+        return m_parentID;
+    }
+    ///////////////////////////////////
+
+
+    const JEJ_COUNT Component::GetID() const
+    {
+        return m_componentID;
+    }
+    ///////////////////////////////////
+
+
 }

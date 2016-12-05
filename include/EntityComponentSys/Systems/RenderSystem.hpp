@@ -18,6 +18,8 @@
 namespace jej
 {
     //Forward declarating Window-class etc.
+    class AndroidWindow;
+    class Win32Window;
     class Window;
     class RenderComponent;
     class ShaderComponent;
@@ -60,6 +62,9 @@ namespace jej
 
         //Create instance of class
         static RenderSystem& GetInstance();
+
+        //Initialize this system
+        void Initialize();
 
         //Finalize this system
         void SystemFinalize();

@@ -40,6 +40,10 @@ namespace jej
         //Destructor
         virtual ~Component();
 
+        const JEJ_COUNT GetParentID() const;
+
+        const JEJ_COUNT GetID() const;
+
     protected:
 
         void setParent(const JEJ_COUNT p_parentID);
@@ -48,10 +52,10 @@ namespace jej
         ComponentType m_componentType;
 
         //ID of this
-        const unsigned int m_componentID;
+        const JEJ_COUNT m_componentID;
 
         //ID of the entity that owns this
-        unsigned int m_parentID;
+        JEJ_COUNT m_parentID;
 
     private:
 

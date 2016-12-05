@@ -1,19 +1,23 @@
 #include <Utility/FileHandler.hpp>
 
 #include <Core/Settings.hpp>
+#include <EntityComponentSys/Components/TextureComponent.hpp>
 #include <Utility/Messenger.hpp>
 #include <Utility/Assert.hpp>
-#include <Core/BaseStructs.hpp>
 
-#include <EntityComponentSys/Components/TextureComponent.hpp>
+
+
+#define STB_IMAGE_IMPLEMENTATION
+#include <External/STB/stb_image.h>
+
+#define STB_IMAGE_RESIZE_IMPLEMENTATION
+#include <External/STB/stb_image_resize.h>
+
 
 namespace jej
 {
 
 #ifdef _WIN32
-#pragma comment(lib, "ws2_32.lib")
-#include <winsock.h>
-    //#include <WinSock2.h>
 
     FileHandler::FileHandler() :
         m_fileContents(),
@@ -84,58 +88,23 @@ namespace jej
             return false;
         }
 
-        LPDWORD dataRead = {};
-        OVERLAPPED overlapped = {};
+        /*p_data->readImageData = stbi_load(
+            std::string(settings::rootPath + imagePath).c_str(),
+            &p_data->wholeImageSize.x,
+            &p_data->wholeImageSize.y,
+            &p_data->offset,
+            0);
 
-        auto size = GetFileSize(m_fileHandle, NULL);
+        if (p_data->readImageData)
+            return true;*/
 
-        std::vector<char> temp;
-        //Reserve invalid operation here
-        temp.resize(size + 1u);
-        p_data->readImageData.resize(size + 1u);
-
-        //Read file
-        if (FALSE == ReadFile(
-            m_fileHandle,
-            &temp[0],
-            size,
-            dataRead,
-            &overlapped
-            ))
-        {
-            Messenger::Add(Messenger::MessageType::Error, "Failed to read file: ", imagePath, getWinError());
-            return false;
-        }
-
-        char value[4];
-        unsigned int streamPos = 15u;
-
-        //Width
-        std::stringstream ss;
-        for (unsigned char i = 0u; i < 4u; ++i, ++streamPos)
-            ss << temp[streamPos];
-
-        JEJ_ASSERT(false, "WIP, don't come here!");
-
-        std::string asdf = ss.str();
-        unsigned long int kek = std::stoul(asdf);
-        p_data->singleImageSize.x = ntohl(kek);
-
-        //Height
-        for (unsigned char i = 0u; i < 4u; ++i, ++streamPos)
-            value[i] = temp[streamPos];
-        p_data->singleImageSize.y = ntohl(std::stoul(value));
-
-        //ImageData
-        std::memcpy(&p_data->readImageData[0], &temp[24u], temp.size() - 24u);
-
-        return true;
+        return false;
     }
 
 
-    bool FileHandler::Write(const std::string& name)
+    bool FileHandler::Write(const std::string& p_name)
     {
-        if (!accessFile(name, true))
+        if (!accessFile(p_name, true))
             return false;
 
         if (m_fileContents.empty())
@@ -155,11 +124,24 @@ namespace jej
             &overlapped
             ))
         {
-            Messenger::Add(Messenger::MessageType::Error, "Failed to write to file: ", settings::rootPath + "Recources/" + name, getWinError());
+            Messenger::Add(Messenger::MessageType::Error, "Failed to write to file: ", settings::rootPath + "Recources/" + p_name, getWinError());
             return false;
         }
 
         return true;
+
+    }
+    //////////////////////////////////////////
+
+
+    bool FileHandler::ReadFontFile(const std::string& p_name)
+    {
+        if (Read(p_name))
+            return false;
+
+        auto size = GetFileSize(m_fileHandle, NULL);
+
+
 
     }
     //////////////////////////////////////////
@@ -249,5 +231,25 @@ namespace jej
     //////////////////////////////////////////
 
 #endif
+
+    const stbtt_fontinfo FileHandler::GetFontInfo() const
+    {
+        return m_fontInfo;
+    }
+
+    const std::vector<char> FileHandler::GetReadData() const
+    {
+        return m_fileContents;
+    }
+
+    stbtt_fontinfo FileHandler::GetFontInfo()
+    {
+        return m_fontInfo;
+    }
+
+    std::vector<char> FileHandler::GetReadData()
+    {
+        return m_fileContents;
+    }
 
 }

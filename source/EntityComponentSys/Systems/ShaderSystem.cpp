@@ -191,7 +191,8 @@ namespace jej
             }
         }
 
-        return std::string(handler.m_fileContents.begin(), handler.m_fileContents.end());
+        const auto& data = handler.GetReadData();
+        return std::string(data.begin(), data.end());
     }
     //////////////////////////////////////////
 
