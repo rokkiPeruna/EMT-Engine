@@ -10,7 +10,7 @@
 
 namespace jej
 {
-
+    class Entity;
 
     class Component
     {
@@ -23,8 +23,6 @@ namespace jej
 
         //
         friend class RenderComponent;
-
-		friend class CollisionComponent;
 
     public:
 
@@ -42,10 +40,6 @@ namespace jej
         //Destructor
         virtual ~Component();
 
-        const JEJ_COUNT GetParentID() const;
-
-        const JEJ_COUNT GetID() const;
-
     protected:
 
         void setParent(const JEJ_COUNT p_parentID);
@@ -54,10 +48,10 @@ namespace jej
         ComponentType m_componentType;
 
         //ID of this
-        const JEJ_COUNT m_componentID;
+        const unsigned int m_componentID;
 
         //ID of the entity that owns this
-        JEJ_COUNT m_parentID;
+        unsigned int m_parentID;
 
     private:
 

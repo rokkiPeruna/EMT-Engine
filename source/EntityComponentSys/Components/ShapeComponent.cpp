@@ -1,4 +1,5 @@
 #include <EntityComponentSys/Components/ShapeComponent.hpp>
+#include <EntityComponentSys/Entity/Entity.hpp>
 
 namespace jej
 {

@@ -4,6 +4,7 @@
 #include <EntityComponentSys/Components/TextureComponent.hpp>
 #include <Utility/Messenger.hpp>
 #include <Utility/Assert.hpp>
+#include <Core/BaseStructs.hpp>
 
 
 #define STB_TRUETYPE_IMPLEMENTATION
@@ -181,7 +182,7 @@ namespace jej
     //////////////////////////////////////////
 
 
-#elif defined ANDROID
+#elif defined __ANDROID__
 
     FileHandler::FileHandler(android_app* app) :
         m_fileContents(),
@@ -233,6 +234,8 @@ namespace jej
     bool FileHandler::Write(const std::string& name)
     {
         Messenger::Add(Messenger::MessageType::Error, "Write-method needs to be written for android");
+        //TODO: Android problems//Messenger::Add(Messenger::MessageType::Error, "Write-method needs to be written for android");
+        return true;
     }
     //////////////////////////////////////////
 

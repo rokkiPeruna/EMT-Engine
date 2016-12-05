@@ -6,8 +6,9 @@
 #ifdef _WIN32
 #include <Utility/Windows.hpp>
 #include <Windows.h>
-#elif defined ANDROID
+#elif defined __ANDROID__
 #include <android_native_app_glue.h>
+#include <string>
 #endif
 
 #include <vector>
@@ -22,7 +23,11 @@ namespace jej
     public:
 
         //Constructor
+#ifdef _WIN32
         FileHandler();
+#elif defined __ANDROID__
+		FileHandler(android_app* app);
+#endif
 
         //Disabled copy-constructors
         NOCOPY(FileHandler);
@@ -40,7 +45,7 @@ namespace jej
 
         //Writes m_fileContents to a file. Creates the file if it does not exist.
         //Name of the file to create
-        bool Write(const std::string& p_name);
+        bool Write(const std::string& name);
 
         //Reads a font file to memory
         //p_name: name of the file with extension
@@ -65,6 +70,7 @@ namespace jej
         //Data that was read on latest read call.
         std::vector<char> m_fileContents;
 
+    private:
 #ifdef _WIN32
 
         //Handle to the file accessed by this instance

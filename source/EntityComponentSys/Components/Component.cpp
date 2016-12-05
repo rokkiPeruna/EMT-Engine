@@ -1,4 +1,5 @@
 #include <EntityComponentSys/Components/Component.hpp>
+#include <EntityComponentSys/Entity/Entity.hpp>
 
 #include <Core/EngineObject.hpp>
 #include <Core/Scene.hpp>

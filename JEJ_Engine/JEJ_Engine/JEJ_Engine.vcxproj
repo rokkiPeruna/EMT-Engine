@@ -108,8 +108,6 @@
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\System.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\TextureSystem.cpp" />
     <ClCompile Include="..\..\source\EntityComponentSys\Systems\TransformSystem.cpp" />
-    <ClCompile Include="..\..\source\Graphics\Graphics.cpp" />
-    <ClCompile Include="..\..\source\Graphics\OGL_ES2.cpp" />
     <ClCompile Include="..\..\source\IO_Manager\Win32\InputManager.cpp" />
     <ClCompile Include="..\..\source\IO_Manager\Win32\Keyboard.cpp" />
     <ClCompile Include="..\..\source\IO_Manager\Win32\Mouse.cpp" />
@@ -144,8 +142,6 @@
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\System.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\TextureSystem.hpp" />
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\TransformSystem.hpp" />
-    <ClInclude Include="..\..\include\Graphics\Graphics.hpp" />
-    <ClInclude Include="..\..\include\Graphics\OGL_ES2.hpp" />
     <ClInclude Include="..\..\include\IO_Manager\Android\InputManager.hpp" />
     <ClInclude Include="..\..\include\IO_Manager\InputManagerImpl.hpp" />
     <ClInclude Include="..\..\include\IO_Manager\Win32\InputManager.hpp" />

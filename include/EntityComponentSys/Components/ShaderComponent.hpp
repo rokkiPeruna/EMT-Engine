@@ -38,6 +38,8 @@ namespace jej
         };
     }
 
+	class Entity;
+
     class ShaderComponent : public Component
     {
 

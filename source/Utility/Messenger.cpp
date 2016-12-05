@@ -4,6 +4,18 @@
 #include <Core/Settings.hpp>
 #include <Utility/FileHandler.hpp>
 
+#ifdef __ANDROID__
+#include <android/log.h>
+#include <android_native_app_glue.h>
+<<<<<<< HEAD
+=======
+//#include <utility>
+//#include <utility>
+
+#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
+
+>>>>>>> origin/JuhoAndroidBranch
+#endif
 
 namespace jej
 {
@@ -22,53 +34,58 @@ namespace jej
 
         HANDLE debugHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
-        for (const auto& i : mm)
+        for (size_t i = 0u; i < mm.size(); ++i)
         {
-            if (i.second == MessageType::Error && JEJ_DEBUG_LEVEL > 0)
+            if (mm[i].second == MessageType::Error && JEJ_DEBUG_LEVEL > 0)
             {
                 SetConsoleTextAttribute(debugHandle, 4u);
-                std::cout << i.first << std::endl;
+                std::cout << mm[i].first << std::endl;
                 SetConsoleTextAttribute(debugHandle, 7u);
             }
 
-            else if (i.second == MessageType::Warning && JEJ_DEBUG_LEVEL > 1)
+            else if (mm[i].second == MessageType::Warning && JEJ_DEBUG_LEVEL > 1)
             {
                 SetConsoleTextAttribute(debugHandle, 6u);
-                std::cout << i.first << std::endl;
+                std::cout << mm[i].first << std::endl;
                 SetConsoleTextAttribute(debugHandle, 7u);
             }
 
-            else if (i.second == MessageType::Debug && JEJ_DEBUG_LEVEL > 2)
+            else if (mm[i].second == MessageType::Debug && JEJ_DEBUG_LEVEL > 2)
             {
                 SetConsoleTextAttribute(debugHandle, 10u);
-                std::cout << i.first << std::endl;
+                std::cout << mm[i].first << std::endl;
                 SetConsoleTextAttribute(debugHandle, 7u);
             }
 
-            else if (i.second == MessageType::Info && JEJ_DEBUG_LEVEL > 3)
+            else if (mm[i].second == MessageType::Info && JEJ_DEBUG_LEVEL > 3)
             {
                 SetConsoleTextAttribute(debugHandle, 8u);
-                std::cout << i.first << std::endl;
+                std::cout << mm[i].first << std::endl;
                 SetConsoleTextAttribute(debugHandle, 7u);
             }
         }
 
-#elif defined ANDROID //Android messages
+#elif defined __ANDROID__ //Android messages
 
-        for (const auto& i : mm)
+        //TODO: Android problems, in which lib is mm.first?
+        /*for (size_t i = 0u; i < mm.size(); ++i)
         {
-            if (i.second == MessageType::Error && JEJ_DEBUG_LEVEL > 0)
-                __android_log_assert(0, "jej", i.first.c_str());
+            if (mm[i].second == MessageType::Error && JEJ_DEBUG_LEVEL > 0)
+                __android_log_assert(0, "jej", mm[i].first.c_str());
 
-            else if (i.second == MessageType::Warning && JEJ_DEBUG_LEVEL > 1)
-                __android_log_assert(0, "jej", i.first.c_str());
+            else if (mm[i].second == MessageType::Warning && JEJ_DEBUG_LEVEL > 1)
+                __android_log_assert(0, "jej", mm[i].first.c_str());
 
-            else if (i.second == MessageType::Debug && JEJ_DEBUG_LEVEL > 2)
-                __android_log_assert(0, "jej", i.first.c_str());
+            else if (mm[i].second == MessageType::Debug && JEJ_DEBUG_LEVEL > 2)
+                __android_log_assert(0, "jej", mm[i].first.c_str());
 
-            else if (i.second == MessageType::Info && JEJ_DEBUG_LEVEL > 3)
-                __android_log_assert(0, "jej", i.first.c_str());
-        }
+            else if (mm[i].second == MessageType::Info && JEJ_DEBUG_LEVEL > 3)
+<<<<<<< HEAD
+                __android_log_assert(0, "jej", mm.first[i].c_str());
+=======
+                __android_log_assert(0, "jej", mm[i].first.c_str());
+>>>>>>> origin/JuhoAndroidBranch
+        }*/
 
 
 #endif
@@ -81,14 +98,17 @@ namespace jej
 
     bool Messenger::WriteLog(const std::string& name)
     {
-        std::string fileName = name.empty() ? "log.txt" : name;
+        //TODO: Android problems, get back to this after passing android_app* to Messenger
+        //so correct constructor is FileHandler handler(androis_app*);
+        /*std::string fileName = name.empty() ? "log.txt" : name;
 
         FileHandler handler;
 
         for (auto i : m_messages)
-            std::copy(i.first.begin(), i.first.end(), std::back_inserter(handler.GetReadDataRef())); //Copy all messages to FileHandler for writing
+            std::copy(i.first.begin(), i.first.end(), std::back_inserter(handler.m_fileContents)); //Copy all messages to FileHandler for writing
 
-        return handler.Write(fileName);
+        return handler.Write(fileName);*/
+        return true;
     }
 
 

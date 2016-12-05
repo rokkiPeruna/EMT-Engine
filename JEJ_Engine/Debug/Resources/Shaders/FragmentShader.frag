@@ -1,7 +1,17 @@
 #version 110
+//The fragment shader operates on each pixel on given polygon
 
-precision mediump float;
+varying in vec4 v_color;
+
+varying vec2 v_texCoordinate;
+uniform sampler2D sampler_texture;
+
+
 void main()
 {
-	gl_FragColor = vec4(0.f, 1.f, 0.f, 0.5f);
+		//For solid color given on vertexShader
+		//gl_FragColor = v_color;
+		
+		//For texture color
+		gl_FragColor = texture2D(sampler_texture, v_texCoordinate);
 }

@@ -14,8 +14,10 @@
 namespace jej
 {
 
+class Entity;
     class TextureComponent : public Component
     {
+
         friend class TextureSystem;
         friend class RenderSystem;
 
@@ -65,6 +67,8 @@ namespace jej
             }
         };
 
+
+        
 
         //Constructor
         //p_name: Name of the image with extension

@@ -1,4 +1,5 @@
 #include <EntityComponentSys/Components/ShaderComponent.hpp>
+#include <EntityComponentSys/Entity/Entity.hpp>
 
 #include <Utility/Messenger.hpp>
 #include <Core/Settings.hpp>

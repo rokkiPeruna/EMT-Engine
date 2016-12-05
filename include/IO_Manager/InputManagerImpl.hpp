@@ -4,7 +4,7 @@
 #ifdef _WIN32
 #include <IO_Manager/Win32/InputManager.hpp>
 #elif defined __ANDROID__
-#include <include/IO_Manager/Android/InputManager.hpp>
+#include <IO_Manager/Android/InputManager.hpp>
 #endif
 
 
