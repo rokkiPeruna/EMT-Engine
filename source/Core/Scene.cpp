@@ -16,10 +16,10 @@ namespace jej
 
     }
 
-    std::vector<std::shared_ptr<Entity>>* Scene::GetEntities()
-    {
-        return &m_entities;
-    }
+  // std::vector<std::shared_ptr<Entity>>* Scene::GetEntities()
+  // {
+  //     return &m_entities;
+  // }
 
     Entity& Scene::AddEntity(const std::string& p_name)
     {
