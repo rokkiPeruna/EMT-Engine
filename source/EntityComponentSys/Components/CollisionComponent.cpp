@@ -5,27 +5,24 @@
 
 namespace jej
 {
-    CollisionComponent::CollisionComponent(Entity* p_entity) :
-        Component(p_entity),
-        m_min(),
-        m_max()
-    {
-        for (const auto& itr : ShapeSystem::GetInstance()._getComponentsRef<ShapeComponent>())
-            if (itr->m_parentID == p_entity->GetID())
-            {
-                // TODO: work work work..
-                //				m_min = Math::ConvexCollisionBox(itr->m_shapes.at);
-                //			m_max = Math::ConvexCollisionBox(p_shape).second;
-                break;
-            }
+	CollisionComponent::CollisionComponent(Entity* p_entity) :
+		Component(p_entity)
+	{
+		for (const auto& itr : ShapeSystem::GetInstance()._getComponentsRef<ShapeComponent>())
+			if (itr->m_parentID == p_entity->GetID())
+			{
+				for (const auto& itr2 : itr.get()->m_shapes)
+				m_AABB = Math::ConvexCollisionBox(&*itr2, p_entity->GetComponentPtr<TransformComponent>()->position);
+				break;
+			}
 
 
-    }
+	}
 
-    CollisionComponent::~CollisionComponent()
-    {
+	CollisionComponent::~CollisionComponent()
+	{
 
-    }
+	}
 
 
 

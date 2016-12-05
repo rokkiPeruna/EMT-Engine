@@ -7,32 +7,34 @@
 
 namespace jej
 {
-
-    class Shape;
-
-
-    class CollisionComponent : public Component
-    {
-        friend class CollisionSystem;
-
-    public:
-
-        //Constructor
-        CollisionComponent(Entity* p_entity);
-
-        //Disabled copy-constructors
-        NOCOPY(CollisionComponent);
-
-        //Destructor
-        ~CollisionComponent();
+	// Forward declaration of classes
+	class Shape;
 
 
-    private:
+	class CollisionComponent : public Component
+	{
+		friend class CollisionSystem;
 
-        Vector2f m_min;
-        Vector2f m_max;
+	public:
 
-    };
+		// Constructor
+		CollisionComponent(Entity* p_entity);
+
+		// Deletion of copy constructor and copy assingment operator 
+		CollisionComponent(const CollisionComponent&) = delete;
+		CollisionComponent operator=(const CollisionComponent&) = delete;
+		
+		// Destructor
+		~CollisionComponent();
+
+
+	private:
+
+		// CollisionComponent's own parameters. Includes min and max value of the AABB box
+		// for each CC.
+		std::pair<Vector2f, Vector2f> m_AABB;
+
+	};
 
 
 
