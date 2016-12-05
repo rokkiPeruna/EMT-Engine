@@ -13,6 +13,7 @@
 *.exe
 JEJ_Engine/Debug/Resources/log.txt
 android/*
+android/*/*
 !android/build.gradle
 !android/gradle.properties
 !android/gradlew
