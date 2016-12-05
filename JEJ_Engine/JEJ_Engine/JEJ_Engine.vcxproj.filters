@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Audio">
+      <UniqueIdentifier>{d168b6c5-ae77-4b34-ad17-e2fc7f2fb704}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{4a964aff-1468-44a7-a3a0-77b6f93aaad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Texture">
+      <UniqueIdentifier>{4b6e7ed4-eb21-45f1-9b30-cc92ad9957a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility">
+      <UniqueIdentifier>{7207938b-4211-4df7-8f8c-814fa98f6b4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Window">
+      <UniqueIdentifier>{571ff84e-6f9e-48c8-8c9e-3eb4e97c576e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Audio">
+      <UniqueIdentifier>{c5f899a2-c52e-422d-88c6-9bec575453f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{d1c06fc3-4204-4d1b-9add-25779243b42c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics">
+      <UniqueIdentifier>{c4d894a8-04d8-447e-99a3-de634852f272}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Texture">
+      <UniqueIdentifier>{2d1ab1aa-f31c-4a6e-87ea-43ac1b80f682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{dcc2bdd9-3c0b-4e77-97d1-73df5212b03d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Window">
+      <UniqueIdentifier>{030f6e53-932f-4c50-bb21-8055ccba542a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Inl">
+      <UniqueIdentifier>{8e1001f7-3e17-41a7-b9b4-858f5df4487f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EntityComponentSystem">
+      <UniqueIdentifier>{1fd48ab7-3dec-489c-92a3-2333e612c6ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EntityComponentSystem\Entity">
+      <UniqueIdentifier>{5cc635b0-f1d4-4dc7-94de-9c4dce2179a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EntityComponentSystem\Components">
+      <UniqueIdentifier>{6ed0b98a-c0cf-4a49-8b63-18438aa17f31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EntityComponentSystem\Systems">
+      <UniqueIdentifier>{5bc94596-c33d-45d7-a9ef-84557a450cf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EntityComponentSystem">
+      <UniqueIdentifier>{6f5b3ff6-86df-40b8-9790-19d03d353a3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EntityComponentSystem\Components">
+      <UniqueIdentifier>{5159a42b-844b-4cd9-9727-54729b9c494c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EntityComponentSystem\Systems">
+      <UniqueIdentifier>{0ce6496a-235f-4e9c-bbaa-b08ca22322d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EntityComponentSystem\Entity">
+      <UniqueIdentifier>{134ab7b3-7d14-4347-b741-25b8e5f72adc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Inl">
+      <UniqueIdentifier>{bee6a43c-7c88-417d-8e1c-f90e852cbcab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EntityComponentSystem\Entity\Inl">
+      <UniqueIdentifier>{3f1a8f78-088a-4bd9-8db1-db17e89d15a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EntityComponentSystem\Systems\Inl">
+      <UniqueIdentifier>{ecd4a468-6265-4270-bb48-2532c048d437}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EntityComponentSystem\Components\Inl">
+      <UniqueIdentifier>{d0731e5c-e411-431e-8ded-435de79d922e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\IO_Manager">
+      <UniqueIdentifier>{5bb9a354-83e5-4423-b37d-9a9aeebb3b00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\IO_Manager\Android">
+      <UniqueIdentifier>{001054ca-e904-481b-8564-a5d9d2f8df9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\IO_Manager\Win32">
+      <UniqueIdentifier>{32f018f3-4c0e-4062-9ce2-edc7fca1da10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IO_Manager">
+      <UniqueIdentifier>{429a6f4d-7341-4b22-8886-df04530f2f82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IO_Manager\Win32">
+      <UniqueIdentifier>{ae9a3537-1c26-48c7-a151-7362ff17fe5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Texture\Inl">
+      <UniqueIdentifier>{84d7adf3-c036-49e7-b653-2a717b6fd9fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IO_Manager\Android">
+      <UniqueIdentifier>{411238b6-2f6d-4c88-8507-dbac8f0148a6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\source\Utility\Messenger.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Grafiikkamoottori_JEJ\source\Core\EngineObject.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utility\Assert.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Window\AndroidWindow.cpp">
+      <Filter>Source Files\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Window\Win32Window.cpp">
+      <Filter>Source Files\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Window\Window.cpp">
+      <Filter>Source Files\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Core\Settings.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\TransformComponent.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\Component.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\System.cpp">
+      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Entity\Entity.cpp">
+      <Filter>Source Files\EntityComponentSystem\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Core\Scene.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\TransformSystem.cpp">
+      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\RenderComponent.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\ShaderComponent.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\ShapeComponent.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\RenderSystem.cpp">
+      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utility\FileHandler.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utility\Windows.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\ShaderSystem.cpp">
+      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\ShapeSystem.cpp">
+      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\IO_Manager\Win32\InputManager.cpp">
+      <Filter>Source Files\IO_Manager\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\IO_Manager\Win32\Keyboard.cpp">
+      <Filter>Source Files\IO_Manager\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\IO_Manager\Win32\Mouse.cpp">
+      <Filter>Source Files\IO_Manager\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Texture\Shape.cpp">
+      <Filter>Source Files\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Core\Timer.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\TextureComponent.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\TextureSystem.cpp">
+      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Components\CollisionComponent.cpp">
+      <Filter>Source Files\EntityComponentSystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\EntityComponentSys\Systems\CollisionSystem.cpp">
+      <Filter>Source Files\EntityComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utility\Math.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Grafiikkamoottori_JEJ\include\Core\EngineObject.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Core\Settings.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Utility\Assert.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Utility\Messenger.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Utility\Random.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Utility\Various.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Window\AndroidWindow.hpp">
+      <Filter>Header Files\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Window\Win32Window.hpp">
+      <Filter>Header Files\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Window\Window.hpp">
+      <Filter>Header Files\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\TransformComponent.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\Component.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\System.hpp">
+      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Core\BaseStructs.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Entity\Entity.hpp">
+      <Filter>Header Files\EntityComponentSystem\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Core\Scene.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\TransformSystem.hpp">
+      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\RenderComponent.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\ShaderComponent.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\ShapeComponent.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\RenderSystem.hpp">
+      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Utility\FileHandler.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Utility\Windows.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\ShaderSystem.hpp">
+      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\ShapeSystem.hpp">
+      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\IO_Manager\InputManagerImpl.hpp">
+      <Filter>Header Files\IO_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\IO_Manager\Android\InputManager.hpp">
+      <Filter>Header Files\IO_Manager\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\IO_Manager\Win32\InputManager.hpp">
+      <Filter>Header Files\IO_Manager\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\IO_Manager\Win32\Keyboard.hpp">
+      <Filter>Header Files\IO_Manager\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\IO_Manager\Win32\Mouse.hpp">
+      <Filter>Header Files\IO_Manager\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Texture\Shape.hpp">
+      <Filter>Header Files\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Core\Timer.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\TextureComponent.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\TextureSystem.hpp">
+      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Components\CollisionComponent.hpp">
+      <Filter>Header Files\EntityComponentSystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\EntityComponentSys\Systems\CollisionSystem.hpp">
+      <Filter>Header Files\EntityComponentSystem\Systems</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\include\Utility\Inl\Messenger.inl">
+      <Filter>Header Files\Utility\Inl</Filter>
+    </None>
+    <None Include="..\..\include\Utility\Inl\Random.inl">
+      <Filter>Header Files\Utility\Inl</Filter>
+    </None>
+    <None Include="..\..\include\Core\Inl\Scene.inl">
+      <Filter>Header Files\Core\Inl</Filter>
+    </None>
+    <None Include="..\..\include\EntityComponentSys\Entity\Inl\Entity.inl">
+      <Filter>Header Files\EntityComponentSystem\Entity\Inl</Filter>
+    </None>
+    <None Include="..\..\include\EntityComponentSys\Systems\Inl\System.inl">
+      <Filter>Header Files\EntityComponentSystem\Systems\Inl</Filter>
+    </None>
+    <None Include="..\..\include\EntityComponentSys\Components\Inl\ShapeComponent.inl">
+      <Filter>Header Files\EntityComponentSystem\Components\Inl</Filter>
+    </None>
+    <None Include="..\..\include\Texture\Inl\Shape.inl">
+      <Filter>Header Files\Texture\Inl</Filter>
+    </None>
+  </ItemGroup>
+</Project>
