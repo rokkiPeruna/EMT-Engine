@@ -112,17 +112,15 @@ int main(int argc, char* argv[])
 
     //Don't try setting components to other entities other than the one calling the function
 
-    auto& mouse = jej::Mouse::GetInstance();
-    auto& keyboard = jej::Keyboard::GetInstance();
+    //auto& mouse = jej::Mouse::GetInstance();
+    //auto& keyboard = jej::Keyboard::GetInstance();
 
     //Finalize EngineObject
     game.Finalize();
     while (1)
     {
         game.EngineUpdate();
-        //break;
-        //std::cout << mouse.GetMousePosition().x << "   " << mouse.GetMousePosition().y << std::endl;
-
+       
     }
 
     return 0;
