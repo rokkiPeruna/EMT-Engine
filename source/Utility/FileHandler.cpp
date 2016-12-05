@@ -237,11 +237,11 @@ namespace jej
 
 #elif defined __ANDROID__
 
-    FileHandler::FileHandler(android_app* app) :
+    FileHandler::FileHandler() :
         m_fileContents(),
-        m_app(new android_app(*(app)))
+        m_app(nullptr)
     {
-
+        m_app = new android_app(*(AndroidAppState::m_AppState));
     }
     //////////////////////////////////////////
 
@@ -249,7 +249,11 @@ namespace jej
     FileHandler::~FileHandler()
     {
         if (m_app)
+        {
             delete m_app;
+            m_app = nullptr;
+        }
+            
     }
     //////////////////////////////////////////
 

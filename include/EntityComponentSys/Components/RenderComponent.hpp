@@ -124,10 +124,6 @@ namespace jej
         ~RenderComponent();
 
 
-
-        void Finalize();
-
-
     private:
 
         std::shared_ptr<ShaderComponent> m_shaderComp;

@@ -206,11 +206,9 @@ namespace jej
     std::string ShaderSystem::_readFile(const detail::ShaderType p_type, std::string p_filePath)
     {
         //TODO: Android major fix needed, not able to read shaders currently
-#ifdef _WIN32
+
         FileHandler handler;
-#elif defined __ANDROID__
-        FileHandler handler(AndroidAppState::m_AppState);
-#endif
+      
         if (!handler.Read(p_filePath))
         {
             Messenger::Add(Messenger::MessageType::Error, "Failed to open shader file ", p_filePath);

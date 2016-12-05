@@ -7,14 +7,9 @@
 #ifdef __ANDROID__
 #include <android/log.h>
 #include <android_native_app_glue.h>
-<<<<<<< HEAD
-    =======
-    //#include <utility>
-    //#include <utility>
 
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
 
-    >>>>>>> origin/JuhoAndroidBranch
 #endif
 
 namespace jej
@@ -98,8 +93,6 @@ namespace jej
 
     bool Messenger::WriteLog(const std::string& p_name)
     {
-        //TODO: Android problems, get back to this after passing android_app* to Messenger
-        //so correct constructor is FileHandler handler(androis_app*);
         std::string fileName = p_name.empty() ? "log.txt" : p_name;
 
         FileHandler handler;
@@ -108,7 +101,6 @@ namespace jej
             std::copy(i.first.begin(), i.first.end(), std::back_inserter(handler.GetReadDataRef())); //Copy all messages to FileHandler for writing
 
         return handler.Write(fileName);
-        return true;
     }
 
 

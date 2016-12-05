@@ -10,7 +10,7 @@
 
 #include <Utility/Random.hpp>
 
-//#include <Utility/FileHandler.hpp>
+#include <Utility/FileHandler.hpp>
 
 #include <EntityComponentSys/Components/ShaderComponent.hpp>
 #include <EntityComponentSys/Components/CollisionComponent.hpp>

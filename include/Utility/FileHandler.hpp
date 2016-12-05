@@ -21,11 +21,9 @@ namespace jej
     public:
 
         //Constructor
-#ifdef _WIN32
+
         FileHandler();
-#elif defined __ANDROID__
-        FileHandler(android_app* app);
-#endif
+
 
         //Disabled copy-constructors
         NOCOPY(FileHandler);
