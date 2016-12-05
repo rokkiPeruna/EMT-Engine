@@ -16,14 +16,14 @@
 namespace jej
 {
 
+    //All Declarations in this file
     class FileHandler
     {
+
     public:
 
         //Constructor
-
         FileHandler();
-
 
         //Disabled copy-constructors
         NOCOPY(FileHandler);
@@ -73,7 +73,7 @@ namespace jej
         //Data that was read on latest read call.
         std::vector<char> m_fileContents;
 
-    private:
+
 #ifdef _WIN32
 
         //Handle to the file accessed by this instance
