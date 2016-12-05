@@ -21,6 +21,9 @@ namespace jej
 
     public:
 
+       
+
+
         //Constructor with args
         template <typename ... Args>
         Shape(const Args& ... p_args);
@@ -40,7 +43,11 @@ namespace jej
 
         unsigned int GetID() const;
 
-    private:
+        float GetRadius() const;
+
+        const ShapeType GetType() const;
+
+            private:
 
         
 
@@ -60,6 +67,7 @@ namespace jej
 
         std::vector<Vector2f> m_points;
 
+        float m_radius;
         unsigned int m_ID;
         static int m_ShapeIDCounter;
         static int m_RemovedShapeIDCounter;

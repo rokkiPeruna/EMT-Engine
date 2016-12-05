@@ -90,8 +90,7 @@ namespace jej
         ComponentHelper<TransformComponent>(){};
     };
 
-
-
+    
     enum class ShapeType
     {
         Circle,
@@ -99,6 +98,7 @@ namespace jej
         Convex,
         Triangle
     };
+
 
     //Vector of two ints
     struct Vector2i

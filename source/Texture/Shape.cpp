@@ -58,10 +58,12 @@ namespace jej
 
             theta += radians;
         }
-
+        m_radius = p_radius;
         m_shapeType = ShapeType::Circle;
 
     }
+    ///////////////////////////////////////////
+
 
     void Shape::_addShape(const Vector2f& p_extents)
     {
@@ -74,6 +76,8 @@ namespace jej
 
         m_shapeType = ShapeType::Rectangle;
     }
+    ///////////////////////////////////////////
+
 
     void Shape::_addShape(const std::vector<Vector2f>& p_points)
     {
@@ -85,6 +89,8 @@ namespace jej
         else
             m_shapeType = ShapeType::Convex;
     }
+    ///////////////////////////////////////////
+
 
     void Shape::_addShape()
     {
@@ -94,4 +100,21 @@ namespace jej
         m_points.emplace_back(1.f, 0.f);
         m_shapeType = ShapeType::Triangle;
     }
+    ///////////////////////////////////////////
+
+
+    float Shape::GetRadius() const
+    {
+        return m_radius;
+    }
+    ///////////////////////////////////////////
+
+
+    const ShapeType Shape::GetType() const
+    {
+        return m_shapeType;
+    }
+    ///////////////////////////////////////////
+
+
 }

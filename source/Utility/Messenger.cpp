@@ -96,18 +96,18 @@ namespace jej
     }
 
 
-    bool Messenger::WriteLog(const std::string& name)
+    bool Messenger::WriteLog(const std::string& p_name)
     {
         //TODO: Android problems, get back to this after passing android_app* to Messenger
         //so correct constructor is FileHandler handler(androis_app*);
-        /*std::string fileName = name.empty() ? "log.txt" : name;
+        std::string fileName = p_name.empty() ? "log.txt" : p_name;
 
         FileHandler handler;
 
         for (auto i : m_messages)
-        std::copy(i.first.begin(), i.first.end(), std::back_inserter(handler.m_fileContents)); //Copy all messages to FileHandler for writing
+            std::copy(i.first.begin(), i.first.end(), std::back_inserter(handler.GetReadDataRef())); //Copy all messages to FileHandler for writing
 
-        return handler.Write(fileName);*/
+        return handler.Write(fileName);
         return true;
     }
 

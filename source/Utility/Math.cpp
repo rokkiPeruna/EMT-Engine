@@ -10,7 +10,7 @@ namespace jej
 		Vector2f min = p_shape->GetPoints().at(0);
 		Vector2f max = p_shape->GetPoints().at(0);
 		
-		if (p_shape->m_shapeType == ShapeType::Circle)
+		if (p_shape->GetType() == ShapeType::Circle)
 		{
 			
 			min = { p_centerPoint.x - p_shape->GetRadius(), p_centerPoint.y - p_shape->GetRadius() };
