@@ -86,7 +86,7 @@ namespace jej
         FileHandler handler;
 
         for (auto i : m_messages)
-            std::copy(i.first.begin(), i.first.end(), std::back_inserter(handler.GetReadData())); //Copy all messages to FileHandler for writing
+            std::copy(i.first.begin(), i.first.end(), std::back_inserter(handler.GetReadDataRef())); //Copy all messages to FileHandler for writing
 
         return handler.Write(fileName);
     }

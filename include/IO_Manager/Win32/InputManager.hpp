@@ -30,8 +30,7 @@ namespace jej
 		~InputManager();
 
 		//Deleted copyconstructor and assign operator
-		InputManager(const InputManager&) = delete;
-		InputManager operator=(const InputManager&) = delete;
+        NOCOPY(InputManager);
 
 		//Return singleton instance
 		static InputManager& GetInstance();

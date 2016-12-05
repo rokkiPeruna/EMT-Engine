@@ -12,7 +12,6 @@
 
 //
 #include <External/OpenGL_ES2/EGL/egl.h>
-//#include <External/OpenGL_ES2/GLES2/gl2.h>
 //
 
 namespace jej
@@ -54,8 +53,7 @@ namespace jej
     public:
 
         //Disabled copy-constructors
-        RenderSystem(const RenderSystem&) = delete;
-        RenderSystem operator=(const RenderSystem&) = delete;
+        NOCOPY(RenderSystem);
 
         //Destructor
         ~RenderSystem();

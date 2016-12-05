@@ -48,13 +48,13 @@ namespace jej
 
     public:
 
-
-
+        //Constructor
         Entity(const std::string& p_name = "");
 
-        Entity(const Entity&) = delete;
-        Entity operator=(const Entity&) = delete;
+        //Disabled copy-constructors
+        NOCOPY(Entity);
 
+        //Destructor
         virtual ~Entity();
 
         void* userData;

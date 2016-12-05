@@ -7,8 +7,8 @@
 
 
 //Third party libraries
-#include <GLES2/gl2.h>
-#include <EGL/egl.h>
+#include <External/OpenGL_ES2/GLES2/gl2.h>
+#include <External/OpenGL_ES2/EGL/egl.h>
 /////////////////////////////////
 
 //Standard headers
@@ -36,7 +36,7 @@ namespace jej//NAMESPACE jej STARTS
 
     //This is a baseclass for various OS windows, e.g. Win32, Android, etc.
     //Pure virtual class
-    class Window : public std::enable_shared_from_this<Window>
+    class Window
     {
 
         //Public methods and variables

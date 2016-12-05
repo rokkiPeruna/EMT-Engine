@@ -24,8 +24,8 @@ namespace jej
         //Constructor
         ShapeComponent(Entity* p_entity, const Vector4i& p_color = Vector4i(1, 0, 0, 1));
 
-        ShapeComponent(const ShapeComponent&) = delete;
-        ShapeComponent operator=(const ShapeComponent&) = delete;
+        //Disabled copy-constructors
+        NOCOPY(ShapeComponent);
 
         //Destructor
         virtual ~ShapeComponent();

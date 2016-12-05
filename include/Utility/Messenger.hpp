@@ -1,7 +1,7 @@
 #ifndef JEJ_MESSAGES_HPP
 #define JEJ_MESSAGES_HPP
 
-
+#include <Core/Settings.hpp>
 
 #include <iostream>
 #include <string>
@@ -28,8 +28,7 @@ namespace jej
 
         //No instances of this class can be created
         Messenger() = delete;
-        Messenger(const Messenger&) = delete;
-        Messenger operator=(const Messenger&) = delete;
+        NOCOPY(Messenger);
         ~Messenger() = delete;
 
         //Add a message to be printed

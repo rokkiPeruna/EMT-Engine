@@ -1,6 +1,8 @@
 #ifndef JEJ_ENGINEOBJECT_HPP
 #define JEJ_ENGINEOBJECT_HPP
 
+#include <Core/Settings.hpp>
+
 #include <memory>
 #include <string>
 #include <tuple>
@@ -55,14 +57,13 @@ namespace jej //NAMESPACE jej
         static bool Finalize();
 
 		//Disabled copy-constructors, there should be only one EngineObject during the entire process
-		EngineObject(const EngineObject&) = delete;
-		EngineObject operator=(const EngineObject&) = delete;
+        NOCOPY(EngineObject);
 
 		//Destructor
 		~EngineObject();
 
         //Set m_scene 
-        void SetCurrentScene(const Scene& p_scene);
+        //void SetCurrentScene(const Scene& p_scene);
 
 		//Mother of all updates
 		void EngineUpdate();

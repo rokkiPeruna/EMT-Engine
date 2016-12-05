@@ -31,11 +31,13 @@ namespace jej
         //Constructor
         Component(Entity* entity);
 
+        NOCOPY(Component);
+
         //Copy-constructor
-        Component(const Component& p_other);
+        //Component(const Component& p_other);
 
         //Assignment operator removed
-        Component& operator=(const Component& p_other) = delete;
+        //Component& operator=(const Component& p_other) = delete;
 
         //Destructor
         virtual ~Component();

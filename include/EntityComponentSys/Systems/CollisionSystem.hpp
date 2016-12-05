@@ -20,8 +20,8 @@ namespace jej
 		
 	public:
 
-        CollisionSystem(const CollisionSystem&) = delete;
-        CollisionSystem operator=(const CollisionSystem) = delete;
+        //Disabled copy-constructors
+        NOCOPY(CollisionSystem);
 
 		~CollisionSystem();
 

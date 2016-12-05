@@ -42,9 +42,13 @@ namespace jej
             GLint texCoordBuffer;
             void* userData = nullptr;
 
-			//TODO: Add more attribute members as they increase
-			GLuint vertexPositionIndex;
-			GLuint textureCoordIndex;
+            //TODO: Add more attribute members as they increase
+            GLuint vertexPositionIndex;
+            GLuint textureCoordIndex;
+
+            DrawableData(){};
+            NOCOPY(DrawableData);
+            ~DrawableData(){};
         };
     }
 
@@ -67,20 +71,13 @@ namespace jej
         //Default constructor
         RenderComponent(Entity* entity);
 
-        //Constructor for RenderComponent, default-initializes components that were not given
-        //Arguments: (order does not matter)
-        //ShaderComponent
-        //ShapeComponent
-        //TransformComponent
-        //template <typename ... Args>
-        //RenderComponent(Entity& entity, const Args& ... args);
+        //Disabled copy-constructors
+        NOCOPY(RenderComponent);
 
         //Destructor
         ~RenderComponent();
 
-        //Disabled copy-constructors
-        RenderComponent(const RenderComponent&) = delete;
-        RenderComponent operator=(const RenderComponent&) = delete;
+
 
         void Finalize();
 

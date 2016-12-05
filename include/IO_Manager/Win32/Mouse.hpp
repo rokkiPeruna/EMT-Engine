@@ -27,8 +27,7 @@ namespace jej
 		~Mouse();
 
 		//Deleted copyconstructor and assign operator
-		Mouse(const Mouse&) = delete;
-		Mouse operator=(const Mouse&) = delete;
+        NOCOPY(Mouse);
 
 		//Get Mouse instance for singleton
 		static Mouse& GetInstance();

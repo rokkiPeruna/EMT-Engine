@@ -17,12 +17,15 @@ namespace jej
 
 	public:
 
+        //Constructor
 		CollisionComponent(Entity* p_entity);
 
+        //Disabled copy-constructors
+        NOCOPY(CollisionComponent);
+
+        //Destructor
 		~CollisionComponent();
 
-		CollisionComponent(const CollisionComponent&) = delete;
-		CollisionComponent operator=(const CollisionComponent&) = delete;
 
 	private:
 

@@ -24,8 +24,8 @@ namespace jej
 
     public:
 
-        ShapeSystem(const ShapeSystem&) = delete;
-        ShapeSystem operator=(const ShapeSystem&) = delete;
+        //Disabled copy-constructors
+        NOCOPY(ShapeSystem);
 
         //Destructor
         virtual ~ShapeSystem();

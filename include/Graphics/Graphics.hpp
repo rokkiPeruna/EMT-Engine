@@ -1,16 +1,18 @@
 #ifndef JEJ_GRAPHICS_HPP
 #define JEJ_GRAPHICS_HPP
 
-#include <OpenGL_ES2/EGL/egl.h>
-#include <OpenGL_ES2/EGL/eglplatform.h>
-#include <OpenGL_ES2/GLES2/gl2platform.h>
+#include <Core/Settings.hpp>
+
+#include <External/OpenGL_ES2/EGL/egl.h>
+#include <External/OpenGL_ES2/EGL/eglplatform.h>
+#include <External/OpenGL_ES2/GLES2/gl2platform.h>
 
 #include <memory>
 
 /////////////////////////////////
 namespace jej //NAMESPACE jej
 {
-    class Graphics : public std::enable_shared_from_this<Graphics>
+    class Graphics
     {
     public:
 
@@ -20,7 +22,7 @@ namespace jej //NAMESPACE jej
         enum class DEFAULTS
         {
             POSITIONS,
-            INDICIES,
+            INDICES,
             TEXTURE_COORDINATES
         };
 
@@ -28,8 +30,7 @@ namespace jej //NAMESPACE jej
         Graphics();
 
         //Disabled copy-constructors
-        Graphics(const Graphics&) = delete;
-        void operator=(const Graphics&) = delete;
+        NOCOPY(Graphics);
 
         //Destructor
         virtual ~Graphics();

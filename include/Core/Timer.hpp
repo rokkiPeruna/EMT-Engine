@@ -1,7 +1,8 @@
 #ifndef JEJ_TIMER_HPP
 #define JEJ_TIMER_HPP
 
-
+//For nocopy
+#include <Core/Settings.hpp>
 
 namespace jej
 {
@@ -22,8 +23,7 @@ namespace jej
 	public:
 		
 		//Disabled copy-constructors
-		Timer(const Timer&) = delete;
-		void operator=(const Timer&) = delete;
+        NOCOPY(Timer);
 
 		//Destructor
 		~Timer();

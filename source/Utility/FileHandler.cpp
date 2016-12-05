@@ -6,6 +6,9 @@
 #include <Utility/Assert.hpp>
 
 
+#define STB_TRUETYPE_IMPLEMENTATION
+#define STBTT_STATIC
+#include <External/STB/stb_truetype.h>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <External/STB/stb_image.h>
@@ -38,7 +41,7 @@ namespace jej
 
     bool FileHandler::Read(const std::string& name, const unsigned int length)
     {
-        if (!accessFile(name, false))
+        if (!_accessFile(name, false))
             return false;
 
         //Init
@@ -77,12 +80,13 @@ namespace jej
     }
     //////////////////////////////////////////
 
-    bool FileHandler::ReadImage(TextureData* p_data)
+
+    bool FileHandler::ReadImage(TextureComponent::TextureData* p_data)
     {
         JEJ_ASSERT(!p_data->imageName.empty(), "No texture name given");
 
         const std::string imagePath = "Textures/" + p_data->imageName;
-        if (!accessFile(imagePath, false))
+        if (!_accessFile(imagePath, false))
         {
             Messenger::Add(Messenger::MessageType::Error, "Texture could not be read");
             return false;
@@ -95,7 +99,7 @@ namespace jej
             &p_data->offset,
             0);
 
-        if (p_data->readImageData)
+            if (p_data->readImageData)
             return true;*/
 
         return false;
@@ -104,7 +108,7 @@ namespace jej
 
     bool FileHandler::Write(const std::string& p_name)
     {
-        if (!accessFile(p_name, true))
+        if (!_accessFile(p_name, true))
             return false;
 
         if (m_fileContents.empty())
@@ -134,20 +138,20 @@ namespace jej
     //////////////////////////////////////////
 
 
-    bool FileHandler::ReadFontFile(const std::string& p_name)
+    bool FileHandler::ReadFontFile(const std::string& p_name, TextureComponent::Font* p_font)
     {
-        if (Read(p_name))
+        if (_accessFile(p_name, false))
             return false;
 
-        auto size = GetFileSize(m_fileHandle, NULL);
+        if (stbtt_InitFont(&p_font->fontInfo, p_font->fontData, p_font->offset) == 1)
+            return true;
 
-
-
+        return false;
     }
     //////////////////////////////////////////
 
 
-    bool FileHandler::accessFile(const std::string& name, const bool createFile)
+    bool FileHandler::_accessFile(const std::string& name, const bool createFile)
     {
         if (name.empty())
         {
@@ -156,10 +160,9 @@ namespace jej
         }
 
         const std::string filePath = settings::rootPath + "Resources/" + name;
-        const std::wstring temp(filePath.begin(), filePath.end());
 
         m_fileHandle = CreateFile(
-            LPCWSTR(temp.c_str()),
+            LPCWSTR(std::wstring(filePath.begin(), filePath.end()).c_str()),
             GENERIC_READ | GENERIC_WRITE,
             FILE_SHARE_READ | FILE_SHARE_WRITE,
             NULL,
@@ -188,12 +191,14 @@ namespace jej
     }
     //////////////////////////////////////////
 
+
     FileHandler::~FileHandler()
     {
         if (m_app)
             delete m_app;
     }
     //////////////////////////////////////////
+
 
     bool FileHandler::Read(const std::string& name, const unsigned int length)
     {
@@ -224,32 +229,43 @@ namespace jej
     }
     //////////////////////////////////////////
 
+
     bool FileHandler::Write(const std::string& name)
     {
         Messenger::Add(Messenger::MessageType::Error, "Write-method needs to be written for android");
     }
     //////////////////////////////////////////
 
+    bool FileHandler::_accessFile(const std::string& p_name, const bool p_createFile)
+    {
+        //TODO: Needs definition on android
+        JEJ_ASSERT(false, "Needs definition on android");
+        return false;
+}
+
 #endif
 
-    const stbtt_fontinfo FileHandler::GetFontInfo() const
-    {
-        return m_fontInfo;
-    }
 
-    const std::vector<char> FileHandler::GetReadData() const
+
+    std::vector<char>& FileHandler::GetReadDataRef()
     {
         return m_fileContents;
     }
+    //////////////////////////////////////////
 
-    stbtt_fontinfo FileHandler::GetFontInfo()
+
+    const std::vector<char>& FileHandler::GetReadDataRef() const
     {
-        return m_fontInfo;
+        return m_fileContents;
     }
+    //////////////////////////////////////////
+
 
     std::vector<char> FileHandler::GetReadData()
     {
         return m_fileContents;
     }
+    //////////////////////////////////////////
+
 
 }

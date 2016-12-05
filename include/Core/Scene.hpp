@@ -17,13 +17,13 @@
 namespace jej
 {
 
-    class Scene : public std::enable_shared_from_this<Scene>
+    class Scene
     {
 
     public:
 
         Scene();
-
+        NOCOPY(Scene);
         ~Scene();
 
         std::vector<std::shared_ptr<Entity>>* GetEntities();

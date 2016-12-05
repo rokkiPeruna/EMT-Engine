@@ -26,8 +26,7 @@ namespace jej
 
         static TransformSystem& GetInstance();
 
-        TransformSystem(const TransformSystem&) = delete;
-        TransformSystem operator=(const TransformSystem&) = delete;
+        NOCOPY(TransformSystem);
 
         virtual ~TransformSystem();
 

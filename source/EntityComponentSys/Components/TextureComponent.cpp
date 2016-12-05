@@ -11,7 +11,7 @@ namespace jej
     TextureComponent::TextureComponent(Entity* p_entity, const std::string& p_name, const unsigned short int p_imageCount, const std::vector<unsigned char>& p_selectedImages) :
         Component(p_entity),
         m_textureData(),
-        m_readImageData(nullptr)
+        m_completeImageData(nullptr)
     {
         m_componentType = ComponentType::Texture;
 
@@ -29,21 +29,28 @@ namespace jej
             m_textureData.displayImage = nullptr;
         }
 
-        //Free whole image
-        if (m_readImageData)
+        //Free fontdata if present (also called in texcomp dtor)
+        if (m_fontData.fontData)
         {
-            stbi_image_free(m_readImageData);
-            m_readImageData = nullptr;
+            stbi_image_free(m_fontData.fontData);
+            m_fontData.fontData = nullptr;
+        }
+
+        //Free whole image
+        if (m_completeImageData)
+        {
+            stbi_image_free(m_completeImageData);
+            m_completeImageData = nullptr;
         }
 
     }
 
-    const TextureData& TextureComponent::GetTextureData() const
+    const TextureComponent::TextureData& TextureComponent::GetTextureData() const
     {
         return m_textureData;
     }
 
-    TextureData& TextureComponent::GetTextureData()
+    TextureComponent::TextureData& TextureComponent::GetTextureData()
     {
         return m_textureData;
     }

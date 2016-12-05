@@ -106,7 +106,7 @@ namespace jej //NAMESPACE jej
         Timer::GetInstance(true);
 
 
-        //TODO: Initialize all systems and managers here
+        //TODO: Initialize all systems here
         if (
             std::get<0>(engine.m_systems)->_initialize() &&
             std::get<1>(engine.m_systems)->_initialize() &&
@@ -140,12 +140,12 @@ namespace jej //NAMESPACE jej
         return false;
     }
 
-    void EngineObject::SetCurrentScene(const Scene& p_scene)
-    {
-        //Doesn't work in future
-        DebugBreak();
-        m_currentScene = std::make_shared<Scene>(p_scene);
-    }
+//    void EngineObject::SetCurrentScene(const Scene& p_scene)
+//    {
+//        //Doesn't work in future
+//        DebugBreak();
+//        m_currentScene = std::make_shared<Scene>(p_scene);
+//    }
     //////////////////////////////////////////
 
     void EngineObject::EngineUpdate()

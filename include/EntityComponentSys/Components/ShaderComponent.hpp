@@ -3,8 +3,6 @@
 
 #include <string>
 
-//#include <External\OpenGL_ES2\EGL\egl.h>
-
 #include <EntityComponentSys/Components/Component.hpp>
 
 namespace jej
@@ -35,6 +33,8 @@ namespace jej
 			unsigned int numAttribs = 0;
 
             ShaderData(){};
+            NOCOPY(ShaderData);
+            ~ShaderData(){};
         };
     }
 

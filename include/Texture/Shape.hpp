@@ -25,7 +25,7 @@ namespace jej
         Shape(const Args& ... p_args);
 
         //Disabled copy-constructor
-        Shape(const Shape&) = delete;
+        NOCOPY(Shape);
 
         //Destructor
         ~Shape();

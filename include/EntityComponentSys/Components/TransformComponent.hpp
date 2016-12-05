@@ -24,7 +24,10 @@ namespace jej
 
 		//Copy constructor for TransformComponent. This keeps owner Entity as same as from which it is copied.
 		//User must handle entity owner swap if needed.
-		TransformComponent(Entity* entity, const TransformComponent& p_toCopy);
+		//TransformComponent(Entity* entity, const TransformComponent& p_toCopy);
+
+        //Disabled copy-constructors
+        NOCOPY(TransformComponent);
 
         //Destructor
         virtual ~TransformComponent();

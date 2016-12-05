@@ -35,5 +35,10 @@ namespace jej
     }
 
 
+#define NOCOPY(className) \
+    className(const className&) = delete; \
+    void operator=(const className&) = delete; \
+    className(className&&) = delete
+
 
 }

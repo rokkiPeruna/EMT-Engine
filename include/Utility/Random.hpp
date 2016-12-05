@@ -28,8 +28,7 @@ namespace jej
         Random(const T p_min, const T p_max);
 
         //Disabled copy-constructors
-        Random(const Random&) = delete;
-        void operator=(const Random&) = delete;
+        NOCOPY(Random);
 
         //Destructor
         ~Random();

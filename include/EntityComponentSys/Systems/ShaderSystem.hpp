@@ -51,8 +51,7 @@ namespace jej
 	public:
 
         //Disabled copy-constructors
-		ShaderSystem(const ShaderSystem&) = delete;
-		ShaderSystem operator=(const ShaderSystem&) = delete;
+        NOCOPY(ShaderSystem);
 
         //Destructor
 		~ShaderSystem();

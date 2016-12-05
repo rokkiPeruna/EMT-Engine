@@ -191,7 +191,7 @@ namespace jej
             }
         }
 
-        const auto& data = handler.GetReadData();
+        const auto& data = handler.GetReadDataRef();
         return std::string(data.begin(), data.end());
     }
     //////////////////////////////////////////

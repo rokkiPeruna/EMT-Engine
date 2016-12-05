@@ -6,37 +6,13 @@
 #include <Core/BaseStructs.hpp>
 #include <External/OpenGL_ES2/GLES2/gl2.h>
 #include <External/STB/stb_image.h>
+#include <External/STB/stb_truetype.h>
 
 #include <string>
 #include <vector>
 
 namespace jej
 {
-
-    struct TextureData
-    {
-        std::string imageName = "";                 //Texture filename with extension
-        Vector2i wholeImageSize;                    //Size of the whole image in pixels
-        Vector2i singleImageSize;                   //Size of a single image in pixels
-        unsigned int imageCount = 0u;               //Number of images in the whole file
-        std::vector<unsigned char> selectedImages;   //Indices of the images that will be loaded, defaults to whole file
-        unsigned char* displayImage = nullptr;      //Image to render
-        GLuint m_textureID;                         //ID of the texture handled by OpenGL
-        int offset = 0;                             //Offset //TODO: Find out what does this thing do
-
-        TextureData(){};
-        TextureData(const TextureData&) = delete;
-        TextureData operator=(const TextureData&) = delete;
-        ~TextureData()
-        {
-            //Free texture if present (also called in texcomp dtor)
-            if (displayImage)
-            {
-                stbi_image_free(displayImage);
-                displayImage = nullptr;
-            }
-        };
-    };
 
     class TextureComponent : public Component
     {
@@ -45,6 +21,51 @@ namespace jej
 
     public:
 
+
+        struct TextureData
+        {
+            std::string imageName = "";                 //Texture filename with extension
+            Vector2i wholeImageSize;                    //Size of the whole image in pixels
+            Vector2i singleImageSize;                   //Size of a single image in pixels
+            unsigned int imageCount = 0u;               //Number of images in the whole file
+            std::vector<unsigned char> selectedImages;  //Indices of the images that will be loaded, defaults to whole file
+            unsigned char* displayImage = nullptr;      //Image to render
+            GLuint m_textureID;                         //ID of the texture handled by OpenGL
+            int offset = 0;                             //Offset //TODO: Find out what does this thing do
+
+            TextureData(){};
+            NOCOPY(TextureData);
+            ~TextureData()
+            {
+                //Free texture if present (also called in texcomp dtor)
+                if (displayImage)
+                {
+                    stbi_image_free(displayImage);
+                    displayImage = nullptr;
+                }
+            };
+        };
+
+        struct Font
+        {
+            stbtt_fontinfo fontInfo;
+            unsigned char* fontData = nullptr;
+            unsigned int offset = 0;
+
+            Font(){};
+            NOCOPY(Font);
+            ~Font()
+            {
+                //Free fontdata if present (also called in texcomp dtor)
+                if (fontData)
+                {
+                    stbi_image_free(fontData);
+                    fontData = nullptr;
+                }
+            }
+        };
+
+
         //Constructor
         //p_name: Name of the image with extension
         //p_imageCount: Number of images in the sheet
@@ -52,8 +73,7 @@ namespace jej
         TextureComponent(Entity* entity, const std::string& p_name, const unsigned short int p_imageCount = 0u, const std::vector<unsigned char>& p_selectedImages = std::vector<unsigned char>());
 
         //Disabled copy-constructors
-        TextureComponent(const TextureComponent&) = delete;
-        TextureComponent operator=(const TextureComponent&) = delete;
+        NOCOPY(TextureComponent);
 
         //Destructor
         virtual ~TextureComponent();
@@ -80,8 +100,11 @@ namespace jej
         //Data of the read image
         TextureData m_textureData;
 
+        //Data of the read font
+        Font m_fontData;
+
         //Requested image data from the file
-        unsigned char* m_readImageData;
+        unsigned char* m_completeImageData;
 
     };
 

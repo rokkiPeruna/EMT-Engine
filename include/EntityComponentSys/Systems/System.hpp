@@ -3,6 +3,7 @@
 
 #include <Core/BaseStructs.hpp>
 #include <Core/EngineObject.hpp>
+#include <Core/Settings.hpp>
 
 //
 #include <memory>
@@ -32,6 +33,9 @@ namespace jej
 
         //Default constructor
         System();
+
+        //Disabled copy-constructors
+        NOCOPY(System);
 
         //Destructor
         virtual ~System();
