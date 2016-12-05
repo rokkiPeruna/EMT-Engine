@@ -35,7 +35,7 @@ namespace jej//NAMESPACE jej STARTS
 
     class Win32Window : public Window
     {
-		friend LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
+        friend LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
 
     public:
 
@@ -77,8 +77,8 @@ namespace jej//NAMESPACE jej STARTS
         //Set window's OS specific init data
         virtual void SetWinOSData(const WindowOSInitData&) override;
 
-		//Change virtual keyboard codes coming from Win32 to jej::Keyboard values
-		static Keyboard::Key _virtualKeyCodeToJejKeycode(WPARAM p_keycode, LPARAM p_flags);
+        //Change virtual keyboard codes coming from Win32 to jej::Keyboard values
+        static Keyboard::Key _virtualKeyCodeToJejKeycode(WPARAM p_keycode, LPARAM p_flags);
 
     private:
 

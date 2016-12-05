@@ -3,33 +3,33 @@
 
 namespace jej
 {
-	Mouse::Mouse()
-	{
+    Mouse::Mouse()
+    {
 
-	}
-	//
+    }
+    //
 
-	Mouse::~Mouse()
-	{
+    Mouse::~Mouse()
+    {
 
-	}
-	//
+    }
+    //
 
-	Mouse& Mouse::GetInstance()
-	{
-		static Mouse mouse;
-		return mouse;
-	}
-	//
+    Mouse& Mouse::GetInstance()
+    {
+        static Mouse mouse;
+        return mouse;
+    }
+    //
 
-	bool Mouse::IsButtonPressed(Mouse::Button button) const
-	{
-		return InputManager::GetInstance()._isMouseButtonPressed(button);
-	}
-	//
+    bool Mouse::IsButtonPressed(Mouse::Button button) const
+    {
+        return InputManager::GetInstance()._isMouseButtonPressed(button);
+    }
+    //
 
-	jej::Vector2i Mouse::GetMousePosition() const
-	{
-		return InputManager::GetInstance()._getMousePosition();
-	}
+    jej::Vector2i Mouse::GetMousePosition() const
+    {
+        return InputManager::GetInstance()._getMousePosition();
+    }
 }

@@ -101,7 +101,7 @@ namespace jej
     class ShaderComponent;
     class TransformComponent;
     class ShapeComponent;
-	class Entity;
+    class Entity;
     //
 
     //RenderComponent class is basically wrapper for other components that are needed
@@ -137,7 +137,7 @@ namespace jej
         //Struct that holds all data for drawing, see jej::detail::DrawableData for more info
         detail::DrawableData m_myDrawData;
 
-        
+
     };
 
 }

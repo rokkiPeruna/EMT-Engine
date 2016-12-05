@@ -7,37 +7,37 @@ namespace jej
 {
 
 
-	class Mouse
-	{
-	private:
-		Mouse();
+    class Mouse
+    {
+    private:
+        Mouse();
 
-	public:
+    public:
 
-		enum class Button : int
-		{
-			Left,       //The left mouse button
-			Right,      //The right mouse button
-			Middle,     //The middle (wheel) mouse button
+        enum class Button : int
+        {
+            Left,       //The left mouse button
+            Right,      //The right mouse button
+            Middle,     //The middle (wheel) mouse button
 
-			ButtonCount //Keep last -- the total number of mouse buttons
-		};
+            ButtonCount //Keep last -- the total number of mouse buttons
+        };
 
-		//
-		~Mouse();
+        //
+        ~Mouse();
 
-		//Deleted copyconstructor and assign operator
+        //Deleted copyconstructor and assign operator
         NOCOPY(Mouse);
 
-		//Get Mouse instance for singleton
-		static Mouse& GetInstance();
+        //Get Mouse instance for singleton
+        static Mouse& GetInstance();
 
-		//Checks if any and which mouse button is pressed
-		bool IsButtonPressed(Button button) const;
+        //Checks if any and which mouse button is pressed
+        bool IsButtonPressed(Button button) const;
 
-		//Return mouse position
-		jej::Vector2i GetMousePosition() const;
-	};
+        //Return mouse position
+        jej::Vector2i GetMousePosition() const;
+    };
 }
 
 #endif

@@ -10,7 +10,7 @@
 namespace jej
 {
 
-	class Entity;
+    class Entity;
 
     class ShapeComponent : public Component
     {

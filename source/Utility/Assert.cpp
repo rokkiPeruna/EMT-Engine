@@ -35,14 +35,14 @@ namespace jej
 #endif
 
 #elif defined __ANDROID__ //Android log
-//#include <android_native_app_glue.h>
-//       ;
-//        __android_log_assert(0, "jej", error.c_str());
+        //#include <android_native_app_glue.h>
+        //       ;
+        //        __android_log_assert(0, "jej", error.c_str());
 
 
 
         //Assertion failure: terminate program
-//        std::exit(EXIT_FAILURE);
+        //        std::exit(EXIT_FAILURE);
 #endif
     }
 

@@ -244,7 +244,7 @@ namespace jej
         //TODO: Needs definition on android
         JEJ_ASSERT(false, "Needs definition on android");
         return false;
-}
+    }
 
 #endif
 

@@ -34,7 +34,7 @@ namespace jej
         ~Random();
 
         //Set limits
-		inline Random& SetRange(const T p_min, const T p_max);
+        inline Random& SetRange(const T p_min, const T p_max);
 
         //Randomize
         inline T Randomize();

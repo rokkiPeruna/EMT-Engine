@@ -6,7 +6,7 @@ namespace jej
     std::vector<std::shared_ptr<ShapeComponent>> ShapeSystem::m_components = {};
 
 
-    ShapeSystem::ShapeSystem():
+    ShapeSystem::ShapeSystem() :
         System()
     {
 

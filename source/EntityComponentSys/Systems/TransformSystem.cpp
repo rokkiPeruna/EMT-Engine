@@ -5,7 +5,7 @@ namespace jej
 
     std::vector<std::shared_ptr<TransformComponent>> TransformSystem::m_components = {};
 
-    TransformSystem::TransformSystem():
+    TransformSystem::TransformSystem() :
         System()
     {
 

@@ -13,18 +13,21 @@
 #include <EntityComponentSys/Systems/RenderSystem.hpp>
 #include <EntityComponentSys/Systems/ShaderSystem.hpp>
 #include <EntityComponentSys/Systems/TransformSystem.hpp>
-#include <Graphics/OGL_ES2.hpp>
 #include <Utility/Assert.hpp>
 #include <Utility/Messenger.hpp>
 
 
 
 #ifdef _WIN32
+
 #include <Window/Win32Window.hpp>
+
 #elif defined ANDROID
+
 #include <Window/AndroidWindow.hpp>
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
+
 #endif
 
 
@@ -90,25 +93,9 @@ namespace jej //NAMESPACE jej
         //Initialize window
 #ifdef _WIN32
         engine.m_windowPtr = std::make_shared<Win32Window>(p_data, p_osData);
-#elif defined __ANDROID__
-<<<<<<< HEAD
-        engine.m_windowPtr.reset(new AndroidWindow(p_osData));
-=======
-        auto* window = &AndroidWindow::GetInstance();
-        engine.m_windowPtr.reset(window);
->>>>>>> origin/JuhoAndroidBranch
-#endif
 
-<<<<<<< HEAD
-        //TODO: Add Android InputManager code
-=======
-        //TODO: Add Android InputManager code so this works on both Win32 and Android
->>>>>>> origin/JuhoAndroidBranch
-        //InputManager::GetInstance();
 
         //Parse execution path
-        //TODO: Android problems
-#ifdef _WIN32
         const unsigned int slashPos = p_root.find_last_of("/\\");
         if (slashPos == std::string::npos)
         {
@@ -122,6 +109,12 @@ namespace jej //NAMESPACE jej
         //Initialize minor areas
         InputManager::GetInstance();
         Timer::GetInstance(true);
+
+#elif defined __ANDROID__
+
+        engine.m_windowPtr = std::make_shared<AndroidWindow>(p_osData);
+
+#endif
 
 
         //TODO: Initialize all systems here
@@ -158,12 +151,12 @@ namespace jej //NAMESPACE jej
         return false;
     }
 
-//    void EngineObject::SetCurrentScene(const Scene& p_scene)
-//    {
-//        //Doesn't work in future
-//        DebugBreak();
-//        m_currentScene = std::make_shared<Scene>(p_scene);
-//    }
+    //    void EngineObject::SetCurrentScene(const Scene& p_scene)
+    //    {
+    //        //Doesn't work in future
+    //        DebugBreak();
+    //        m_currentScene = std::make_shared<Scene>(p_scene);
+    //    }
     //////////////////////////////////////////
 
     void EngineObject::EngineUpdate()
@@ -244,12 +237,12 @@ namespace jej //NAMESPACE jej
     }
     //////////////////////////////////////////
 #endif
-    
+
 #ifdef __ANDROID__
-	//void EngineObject::SetAndroidApp(android_app* p_app)
-	//{
-	//	state = p_app;
-	//}
+    //void EngineObject::SetAndroidApp(android_app* p_app)
+    //{
+    //	state = p_app;
+    //}
 #endif
 
 } //NAMESPACE jej

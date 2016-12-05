@@ -22,16 +22,16 @@ namespace jej
     ///////////////////////////////////
 
 
-  //  Component::Component(const Component& p_other) :
-  //      m_componentType(p_other.m_componentType),
-  //      m_componentID(++m_componentIDCounter),
-  //      m_parentID(p_other.m_parentID)
-  //  {
-  //      //Messes up componentIDs whether incremented or not
-  //
-  //      //Don't comment this out, your code is probably flawed if it comes here
-  //      DebugBreak();
-  //  }
+    //  Component::Component(const Component& p_other) :
+    //      m_componentType(p_other.m_componentType),
+    //      m_componentID(++m_componentIDCounter),
+    //      m_parentID(p_other.m_parentID)
+    //  {
+    //      //Messes up componentIDs whether incremented or not
+    //
+    //      //Don't comment this out, your code is probably flawed if it comes here
+    //      DebugBreak();
+    //  }
     ///////////////////////////////////
 
 

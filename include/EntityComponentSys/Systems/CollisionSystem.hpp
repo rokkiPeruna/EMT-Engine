@@ -6,27 +6,27 @@
 
 namespace jej
 {
-	class CollisionSystem : public System
-	{
+    class CollisionSystem : public System
+    {
 
         friend class EngineObject;
         friend class Entity;
-        
 
-	private:
 
-		CollisionSystem();
+    private:
 
-		
-	public:
+        CollisionSystem();
+
+
+    public:
 
         //Disabled copy-constructors
         NOCOPY(CollisionSystem);
 
-		~CollisionSystem();
+        ~CollisionSystem();
 
-		static CollisionSystem& GetInstance();
-		
+        static CollisionSystem& GetInstance();
+
     protected:
 
         void _update(const float deltaTime) override;
@@ -37,7 +37,7 @@ namespace jej
 
         static std::vector<std::shared_ptr<CollisionComponent>> m_components;
 
-	};
+    };
 
 
 

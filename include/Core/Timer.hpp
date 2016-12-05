@@ -6,8 +6,8 @@
 
 namespace jej
 {
-	class Timer
-	{
+    class Timer
+    {
     private:
 
 #if defined _WIN32
@@ -17,26 +17,26 @@ namespace jej
 #endif
         JEJ_TIME_TYPE m_time;
 
-		//Constructor
-		Timer();
+        //Constructor
+        Timer();
 
-	public:
-		
-		//Disabled copy-constructors
+    public:
+
+        //Disabled copy-constructors
         NOCOPY(Timer);
 
-		//Destructor
-		~Timer();
+        //Destructor
+        ~Timer();
 
-		//Reset timer
-		void Reset();
+        //Reset timer
+        void Reset();
 
-		//Return elapsed time since last reset
-		float GetTime() const;
+        //Return elapsed time since last reset
+        float GetTime() const;
 
-		static Timer& GetInstance(const bool p_reset = false);
+        static Timer& GetInstance(const bool p_reset = false);
 
-	};
+    };
 }
 
 #endif

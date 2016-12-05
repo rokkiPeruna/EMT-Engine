@@ -18,16 +18,16 @@
 namespace jej
 {
 
-	namespace detail
-	{
-		static GLubyte DefaultTexture[4 * 4 * 3] = //Width * Height * RGB
-		{
-			255, 0, 0, 255, 0, 0, 255, 0, 0, 255, 0, 0,
-			0, 255, 0, 0, 255, 0, 0, 255, 0, 0, 255, 0,
-			0, 0, 255, 0, 0, 255, 0, 0, 255, 0, 0, 255,
-			0, 150, 150, 0, 150, 150, 0, 150, 150, 0, 150, 150
-		};
-	}
+    namespace detail
+    {
+        static GLubyte DefaultTexture[4 * 4 * 3] = //Width * Height * RGB
+        {
+            255, 0, 0, 255, 0, 0, 255, 0, 0, 255, 0, 0,
+            0, 255, 0, 0, 255, 0, 0, 255, 0, 0, 255, 0,
+            0, 0, 255, 0, 0, 255, 0, 0, 255, 0, 0, 255,
+            0, 150, 150, 0, 150, 150, 0, 150, 150, 0, 150, 150
+        };
+    }
 
 
 
@@ -42,22 +42,18 @@ namespace jej
     class RenderSystem : public System
     {
 
-		//For manipulating m_components
-		friend class EngineObject;
-		friend class Entity;
+        //For manipulating m_components
+        friend class EngineObject;
+        friend class Entity;
 
 #ifdef _WIN32
-		//For allowing Win32 event handler to call _update() in WM_PAINT
-		friend LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
-<<<<<<< HEAD
-#endif
-=======
-#elif defined __ANDROID__
-		friend void engine_handle_cmd(struct android_app* app, int32_t cmd);
-		friend class AndroidWindow;
-#endif
+        //For allowing Win32 event handler to call _update() in WM_PAINT
+        friend LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
 
->>>>>>> origin/JuhoAndroidBranch
+#elif defined __ANDROID__
+        friend void engine_handle_cmd(struct android_app* app, int32_t cmd);
+        friend class AndroidWindow;
+#endif
 
     private:
 
@@ -77,7 +73,7 @@ namespace jej
 
 
     private:
-        
+
         //Screen properties for OpenGL ES
         unsigned int m_winWidth;
         unsigned int m_winHeight;
@@ -88,9 +84,9 @@ namespace jej
         std::shared_ptr<Window> m_window;
 
         //Method for initializing RenderComponent's draw data
-		void _createBuffersForRenderComponentDrawData(RenderComponent& p_rendComp);
+        void _createBuffersForRenderComponentDrawData(RenderComponent& p_rendComp);
 
-		//This system's update that gets called from WM_PAINT in Win32Window - class
+        //This system's update that gets called from WM_PAINT in Win32Window - class
         void _update(const float p_deltaTime) override;
 
         //
@@ -100,7 +96,7 @@ namespace jej
         bool _swapBuffers() const;
 
         //
-		bool _drawAllBuffers();
+        bool _drawAllBuffers();
 
         //
         void _useShader(const ShaderComponent& shaderComp) const;
@@ -108,8 +104,8 @@ namespace jej
         //
         void _unUseShader(const ShaderComponent& shaderComp) const;
 
-		//
-		void _bindTexture() const;
+        //
+        void _bindTexture() const;
 
 
 
@@ -119,7 +115,7 @@ namespace jej
         EGLDisplay m_display;
         EGLSurface m_surface;
 
-		//Initialize Open GL ES 2.0
+        //Initialize Open GL ES 2.0
         bool _createContext(const EGLint p_attributeList[]);
 
 
@@ -129,7 +125,7 @@ namespace jej
     protected:
 
 
-        
+
         //Holds shared pointers to all RenderComponents
         static std::vector<std::shared_ptr<RenderComponent>> m_components;
 
@@ -137,7 +133,7 @@ namespace jej
 
         bool _initialize() override;
 
-		GLuint m_defaultTexID;
+        GLuint m_defaultTexID;
     };
 }
 

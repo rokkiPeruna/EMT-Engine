@@ -3,27 +3,27 @@
 
 namespace jej
 {
-	Keyboard::Keyboard()
-	{
+    Keyboard::Keyboard()
+    {
 
-	}
-	//
+    }
+    //
 
-	Keyboard::~Keyboard()
-	{
+    Keyboard::~Keyboard()
+    {
 
-	}
-	//
+    }
+    //
 
-	Keyboard& Keyboard::GetInstance()
-	{
-		static Keyboard keyboard;
-		return keyboard;
-	}
-	//
+    Keyboard& Keyboard::GetInstance()
+    {
+        static Keyboard keyboard;
+        return keyboard;
+    }
+    //
 
-	bool Keyboard::IsKeyPressed(Keyboard::Key key) const
-	{
-		return InputManager::GetInstance()._isKeyboardKeyPressed(key);
-	}
+    bool Keyboard::IsKeyPressed(Keyboard::Key key) const
+    {
+        return InputManager::GetInstance()._isKeyboardKeyPressed(key);
+    }
 }

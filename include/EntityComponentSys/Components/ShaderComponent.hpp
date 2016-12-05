@@ -30,7 +30,7 @@ namespace jej
             unsigned int fragmentShaderID = 0u;
             unsigned int vertexShaderID = 0u;
 
-			unsigned int numAttribs = 0;
+            unsigned int numAttribs = 0;
 
             ShaderData(){};
             NOCOPY(ShaderData);
@@ -38,7 +38,7 @@ namespace jej
         };
     }
 
-	class Entity;
+    class Entity;
 
     class ShaderComponent : public Component
     {
@@ -46,7 +46,7 @@ namespace jej
         //For deleting shaders
         friend class ShaderSystem;
         friend class RenderSystem;
-        
+
 
     public:
 

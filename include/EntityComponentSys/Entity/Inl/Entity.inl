@@ -10,12 +10,8 @@ T& Entity::AddComponent(Args ... p_args)
         return *GetComponentPtr<T>();   //Component of this type already linked to the entity
     }
 
-    //auto& components = std::get<ComponentHelper<T>::index>(EngineObject::GetInstance().m_systems)->m_components;    //Get m_components from correct system
-	
-	//Removed *this - pointer from make_shared<> argument list, owner entity is given as first parameter in each component
-
-    //Don't try setting components to other entities other than the one calling the function - Ee
-    components.emplace_back(std::make_shared<T>(std::forward<Args>(p_args)...));    //Create component
+    auto& components = std::get<ComponentHelper<T>::index>(EngineObject::GetInstance().m_systems)->m_components;    //Get m_components from correct system
+    components.emplace_back(std::make_shared<T>(this, std::forward<Args>(p_args)...));    //Create component
 
     return *components.back().get();
 }

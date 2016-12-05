@@ -40,6 +40,12 @@ namespace jej
         //Destructor
         virtual ~Component();
 
+        //Return ID of the parent entity
+        const JEJ_COUNT GetParentID() const;
+
+        //Return ID of this component
+        const JEJ_COUNT GetID() const;
+
     protected:
 
         void setParent(const JEJ_COUNT p_parentID);

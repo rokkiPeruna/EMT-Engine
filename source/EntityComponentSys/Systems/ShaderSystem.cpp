@@ -75,9 +75,9 @@ namespace jej
         //glBindAttribLocation(p_sd.programID, vertexPosIndex, "vPosition");
         //glBindAttribLocation(p_sd.programID, textureCoordIndex, "vTexCoord");
 
-		_bindAttributes(p_sd.programID, p_sd.numAttribs, "a_position");
-		_bindAttributes(p_sd.programID, ++p_sd.numAttribs, "a_color");
-		_bindAttributes(p_sd.programID, ++p_sd.numAttribs, "a_texCoordinate");
+        _bindAttributes(p_sd.programID, p_sd.numAttribs, "a_position");
+        _bindAttributes(p_sd.programID, ++p_sd.numAttribs, "a_color");
+        _bindAttributes(p_sd.programID, ++p_sd.numAttribs, "a_texCoordinate");
 
 
         glLinkProgram(p_sd.programID);
@@ -102,11 +102,11 @@ namespace jej
     }
     //////////////////////////////////////////
 
-	void ShaderSystem::_bindAttributes(GLuint p_program, const unsigned int p_numAttributes, const std::string& p_attributeName)
-	{
-		glBindAttribLocation(p_program, p_numAttributes, p_attributeName.c_str());
-	}
-	//////////////////////////////////////////
+    void ShaderSystem::_bindAttributes(GLuint p_program, const unsigned int p_numAttributes, const std::string& p_attributeName)
+    {
+        glBindAttribLocation(p_program, p_numAttributes, p_attributeName.c_str());
+    }
+    //////////////////////////////////////////
 
 
 
@@ -119,38 +119,36 @@ namespace jej
             Messenger::Add(Messenger::MessageType::Error, "Failed to create shader: ", p_shaderDataSource);
 
 
-=======
         //const std::string shaderData = _readFile(p_shaderType, p_shaderDataSource).c_str();
         std::string shaderData;
-        if(p_shaderType == detail::ShaderType::Fragment)
+        if (p_shaderType == detail::ShaderType::Fragment)
         {
             shaderData = "#version 110\n"
-                    "\n"
-                    "precision mediump float;\n"
-                    "uniform sampler2D texture;\n"
-                    "varying vec2 texCoord;\n"
-                    "void main()\n"
-                    "{\n"
-                    "gl_FragColor = texture2D(texture, texCoord);\n"
-                    "}";
+                "\n"
+                "precision mediump float;\n"
+                "uniform sampler2D texture;\n"
+                "varying vec2 texCoord;\n"
+                "void main()\n"
+                "{\n"
+                "gl_FragColor = texture2D(texture, texCoord);\n"
+                "}";
         }
-        if(p_shaderType == detail::ShaderType::Vertex)
+        if (p_shaderType == detail::ShaderType::Vertex)
         {
             shaderData = "#version 110\n"
-                    "\n"
-                    "attribute vec4 vPosition;\n"
-                    "attribute vec2 vTexCoord;\n"
-                    "varying vec2 texCoord;\n"
-                    "void main()\n"
-                    "{\n"
-                    "\tgl_Position = vPosition;\n"
-                    "\ttexCoord = vTexCoord;\n"
-                    "}";
+                "\n"
+                "attribute vec4 vPosition;\n"
+                "attribute vec2 vTexCoord;\n"
+                "varying vec2 texCoord;\n"
+                "void main()\n"
+                "{\n"
+                "\tgl_Position = vPosition;\n"
+                "\ttexCoord = vTexCoord;\n"
+                "}";
         }
 
         //std::string test = "precision mediump float; void main() {gl_FragColor = vec4(0.f, 1.f, 0.f, 0.5f); }";
 
->>>>>>> origin/JuhoAndroidBranch
         const char* shaderData2 = shaderData.c_str();
 
         glShaderSource(shader, 1, &shaderData2, nullptr);
@@ -197,7 +195,7 @@ namespace jej
             case detail::ShaderType::Vertex:
                 p_shaderName = path + settings::defaultVertexShaderFileName;
                 return true;
-                
+
             default:
                 return false;
             }
@@ -233,12 +231,8 @@ namespace jej
         }
 
         const auto& data = handler.GetReadDataRef();
-                return std::string(data.begin(), data.end());
-<<<<<<< HEAD
-#endif
-=======
+        return std::string(data.begin(), data.end());
 
->>>>>>> origin/JuhoAndroidBranch
         std::string dummyValueForAndroid = "";
         return dummyValueForAndroid;
 

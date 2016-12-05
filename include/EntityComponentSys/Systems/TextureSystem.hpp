@@ -10,9 +10,9 @@
 namespace jej
 {
 
-	class TextureSystem : public System 
-	{
-		friend class TextureComponent;
+    class TextureSystem : public System
+    {
+        friend class TextureComponent;
 
         //For modifying m_components
         friend class Entity;
@@ -20,21 +20,21 @@ namespace jej
         friend class System;
 
     private:
-        
+
         //Singleton constructor
         TextureSystem();
 
     public:
-        
-		//Disabled copy-constructors
+
+        //Disabled copy-constructors
         NOCOPY(TextureSystem);
 
         //Destructor
         virtual ~TextureSystem();
 
-        
-		// Get the one and only instance of singleton 
-		static TextureSystem& GetInstance();
+
+        // Get the one and only instance of singleton 
+        static TextureSystem& GetInstance();
 
     protected:
 
@@ -42,18 +42,18 @@ namespace jej
 
         void _update(const float p_deltaTime) override;
 
-		// TODO: Bind texture
-		void _bind(unsigned int p_unit);
+        // TODO: Bind texture
+        void _bind(unsigned int p_unit);
 
-		void _drawFromSheet();
+        void _drawFromSheet();
 
         // Load images for components
         bool _finalize() override;
-		
+
         // Initialize testuresystem (don't load images here! not present yet)
         bool _initialize() override;
 
-	};
+    };
 
 }
 

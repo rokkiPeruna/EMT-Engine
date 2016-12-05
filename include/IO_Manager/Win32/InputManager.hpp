@@ -11,62 +11,62 @@
 
 namespace jej
 {
-	class Keyboard;
-	class Mouse;
+    class Keyboard;
+    class Mouse;
 
-	class InputManager
-	{
+    class InputManager
+    {
 
-		friend class Mouse;
-		friend class Keyboard;
-		friend class Win32Window;
+        friend class Mouse;
+        friend class Keyboard;
+        friend class Win32Window;
         friend class EngineObject;
 
-	private:
-		InputManager();
+    private:
+        InputManager();
 
-	public:
-		//
-		~InputManager();
+    public:
+        //
+        ~InputManager();
 
-		//Deleted copyconstructor and assign operator
+        //Deleted copyconstructor and assign operator
         NOCOPY(InputManager);
 
-		//Return singleton instance
-		static InputManager& GetInstance();
+        //Return singleton instance
+        static InputManager& GetInstance();
 
-		//Return input queues
-		std::queue<Keyboard::Key>& GetKeyboardInputQueue() { return m_keyboardInputQueue; }
-		std::queue<Mouse::Button>& GetMouseInputQueue() { return m_mouseInputQueue; }
-
-		
-
-
-	private:
+        //Return input queues
+        std::queue<Keyboard::Key>& GetKeyboardInputQueue() { return m_keyboardInputQueue; }
+        std::queue<Mouse::Button>& GetMouseInputQueue() { return m_mouseInputQueue; }
 
 
 
-		//Input queues for keyboard and mouse
-		std::queue<Keyboard::Key> m_keyboardInputQueue;
-		std::queue<Mouse::Button> m_mouseInputQueue;
 
-		//Handle inputs
-		void _handleInputQueues();
+    private:
 
-		//Checks if keyboard key is pressed
-		bool _isKeyboardKeyPressed(const Keyboard::Key p_key) const;
 
-		//Checks mouse button is pressed
-		bool _isMouseButtonPressed(const Mouse::Button p_button) const;
 
-		//Returns mouse position
-		jej::Vector2i _getMousePosition() const;
+        //Input queues for keyboard and mouse
+        std::queue<Keyboard::Key> m_keyboardInputQueue;
+        std::queue<Mouse::Button> m_mouseInputQueue;
+
+        //Handle inputs
+        void _handleInputQueues();
+
+        //Checks if keyboard key is pressed
+        bool _isKeyboardKeyPressed(const Keyboard::Key p_key) const;
+
+        //Checks mouse button is pressed
+        bool _isMouseButtonPressed(const Mouse::Button p_button) const;
+
+        //Returns mouse position
+        jej::Vector2i _getMousePosition() const;
 
 
         //At this moment, does nothing else but handles input queues
         void _update();
 
-	};
+    };
 
 }//NAMESPACE jej ENDS
 

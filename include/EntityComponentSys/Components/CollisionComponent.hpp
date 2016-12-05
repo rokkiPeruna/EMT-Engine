@@ -7,32 +7,32 @@
 
 namespace jej
 {
-	
-	class Shape;
+
+    class Shape;
 
 
-	class CollisionComponent : public Component
-	{
-		friend class CollisionSystem;
+    class CollisionComponent : public Component
+    {
+        friend class CollisionSystem;
 
-	public:
+    public:
 
         //Constructor
-		CollisionComponent(Entity* p_entity);
+        CollisionComponent(Entity* p_entity);
 
         //Disabled copy-constructors
         NOCOPY(CollisionComponent);
 
         //Destructor
-		~CollisionComponent();
+        ~CollisionComponent();
 
 
-	private:
+    private:
 
-		Vector2f m_min;
-		Vector2f m_max;
+        Vector2f m_min;
+        Vector2f m_max;
 
-	};
+    };
 
 
 

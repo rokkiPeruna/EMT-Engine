@@ -14,63 +14,63 @@
 namespace jej
 {
 
-	class ShaderSystem : public System
-	{
-		friend class EngineObject;
-		friend class Entity;
-		friend class ShaderComponent;
+    class ShaderSystem : public System
+    {
+        friend class EngineObject;
+        friend class Entity;
+        friend class ShaderComponent;
         friend class RenderComponent;
 
-	private:
+    private:
 
-		// Initialize runs through other functions
-		void _initialize(detail::ShaderData& p_sd);
+        // Initialize runs through other functions
+        void _initialize(detail::ShaderData& p_sd);
 
-		// bind attributes?
-		void _bindAttributes(GLuint p_program, const unsigned int p_numAttributes, const std::string& p_attributeName);
-		
-		// Load shaders from file and compiles them as usable shader.
-		GLuint _loadShader(const std::string& p_shaderDataSource, const GLenum p_type, const detail::ShaderType p_shaderType);
+        // bind attributes?
+        void _bindAttributes(GLuint p_program, const unsigned int p_numAttributes, const std::string& p_attributeName);
 
-		// Check if user want's to include shaders
-		bool _parseShader(const detail::ShaderType p_type, std::string& p_shaderName);
-		
-		// Read actual shader files (no matter where they are)
-		std::string _readFile(const detail::ShaderType p_type ,std::string p_filePath);
+        // Load shaders from file and compiles them as usable shader.
+        GLuint _loadShader(const std::string& p_shaderDataSource, const GLenum p_type, const detail::ShaderType p_shaderType);
+
+        // Check if user want's to include shaders
+        bool _parseShader(const detail::ShaderType p_type, std::string& p_shaderName);
+
+        // Read actual shader files (no matter where they are)
+        std::string _readFile(const detail::ShaderType p_type, std::string p_filePath);
 
 
-		// Enable shader
-		void Use(const GLuint& p_program);
+        // Enable shader
+        void Use(const GLuint& p_program);
 
-		// Disable shader
-		void Unuse(const GLuint& p_program);
+        // Disable shader
+        void Unuse(const GLuint& p_program);
 
         //Singleton constructor
         ShaderSystem();
 
-	public:
+    public:
 
         //Disabled copy-constructors
         NOCOPY(ShaderSystem);
 
         //Destructor
-		~ShaderSystem();
+        ~ShaderSystem();
 
         //Returns instance
-		static ShaderSystem& GetInstance();
+        static ShaderSystem& GetInstance();
 
 
-	protected:
+    protected:
 
         static std::vector<std::shared_ptr<ShaderComponent>> m_components;
 
-		void _update(const float p_deltaTime);
+        void _update(const float p_deltaTime);
 
         bool _finalize();
 
         bool _initialize() override;
 
-	};
+    };
 
 }
 
