@@ -5,13 +5,11 @@
 #include <Utility/Messenger.hpp>
 
 
-#include <EntityComponentSys/Components/CollisionComponent.hpp>
 #include <EntityComponentSys/Components/RenderComponent.hpp>
 #include <EntityComponentSys/Components/ShaderComponent.hpp>
 #include <EntityComponentSys/Components/ShapeComponent.hpp>
 #include <EntityComponentSys/Components/TextureComponent.hpp>
 #include <EntityComponentSys/Components/TransformComponent.hpp>
-#include <EntityComponentSys/Systems/CollisionSystem.hpp>
 #include <EntityComponentSys/Systems/RenderSystem.hpp>
 #include <EntityComponentSys/Systems/ShaderSystem.hpp>
 #include <EntityComponentSys/Systems/ShapeSystem.hpp>
@@ -31,7 +29,7 @@
 namespace jej
 {
 
-
+    
     class Entity
     {
         //For manipulating components
@@ -63,7 +61,7 @@ namespace jej
 
         //Components
 
-        //Adds a component to the calling entity
+        //Add a component to the given entity
         //Returns a reference to either the created component
         //Or a reference to a component that has already been bound to this entity
         template<typename T, typename ... Args>

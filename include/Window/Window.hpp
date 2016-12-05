@@ -24,8 +24,8 @@ namespace jej//NAMESPACE jej STARTS
 
     struct WindowBaseInitData
     {
-        int sizeX = 400u;
-        int sizeY = 250u;
+        int32_t sizeX = 400u;
+        int32_t sizeY = 250u;
         std::wstring nameApp = L"appName";
         std::wstring nameMenu = L"menuName";
         std::wstring nameWindow = L"windowName";
@@ -54,13 +54,13 @@ namespace jej//NAMESPACE jej STARTS
 
 
         //Pure virtual methods
-
+#ifdef _WIN32 //These are only needed in Windows platform
         //Returns native display type
         virtual EGLNativeDisplayType GetNativeDisplay() const = 0;
 
         //Return native window type
         virtual EGLNativeWindowType GetNativeWindow() const = 0;
-
+#endif
         //Window's update loop
         virtual bool UpdateWindowMessages() = 0;
 

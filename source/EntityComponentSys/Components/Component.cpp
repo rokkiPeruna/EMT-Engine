@@ -1,4 +1,5 @@
 #include <EntityComponentSys/Components/Component.hpp>
+#include <EntityComponentSys/Entity/Entity.hpp>
 
 #include <Core/EngineObject.hpp>
 #include <Core/Scene.hpp>
@@ -29,7 +30,9 @@ namespace jej
         //Messes up componentIDs whether incremented or not
 
         //Don't comment this out, your code is probably flawed if it comes here
+#ifdef _WIN32
         DebugBreak();
+#endif
     }
     ///////////////////////////////////
 
@@ -44,20 +47,6 @@ namespace jej
     void Component::setParent(const JEJ_COUNT p_parentID)
     {
         m_parentID = p_parentID;
-    }
-    ///////////////////////////////////
-
-
-    const JEJ_COUNT Component::GetParentID() const
-    {
-        return m_parentID;
-    }
-    ///////////////////////////////////
-
-
-    const JEJ_COUNT Component::GetID() const
-    {
-        return m_componentID;
     }
     ///////////////////////////////////
 

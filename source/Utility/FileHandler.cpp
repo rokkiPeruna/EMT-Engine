@@ -1,23 +1,19 @@
 #include <Utility/FileHandler.hpp>
 
 #include <Core/Settings.hpp>
-#include <EntityComponentSys/Components/TextureComponent.hpp>
 #include <Utility/Messenger.hpp>
 #include <Utility/Assert.hpp>
+#include <Core/BaseStructs.hpp>
 
-
-
-#define STB_IMAGE_IMPLEMENTATION
-#include <External/STB/stb_image.h>
-
-#define STB_IMAGE_RESIZE_IMPLEMENTATION
-#include <External/STB/stb_image_resize.h>
-
+#include <EntityComponentSys/Components/TextureComponent.hpp>
 
 namespace jej
 {
 
 #ifdef _WIN32
+#pragma comment(lib, "ws2_32.lib")
+#include <winsock.h>
+    //#include <WinSock2.h>
 
     FileHandler::FileHandler() :
         m_fileContents(),
@@ -88,23 +84,58 @@ namespace jej
             return false;
         }
 
-        /*p_data->readImageData = stbi_load(
-            std::string(settings::rootPath + imagePath).c_str(),
-            &p_data->wholeImageSize.x,
-            &p_data->wholeImageSize.y,
-            &p_data->offset,
-            0);
+        LPDWORD dataRead = {};
+        OVERLAPPED overlapped = {};
 
-        if (p_data->readImageData)
-            return true;*/
+        auto size = GetFileSize(m_fileHandle, NULL);
 
-        return false;
+        std::vector<char> temp;
+        //Reserve invalid operation here
+        temp.resize(size + 1u);
+        p_data->readImageData.resize(size + 1u);
+
+        //Read file
+        if (FALSE == ReadFile(
+            m_fileHandle,
+            &temp[0],
+            size,
+            dataRead,
+            &overlapped
+            ))
+        {
+            Messenger::Add(Messenger::MessageType::Error, "Failed to read file: ", imagePath, getWinError());
+            return false;
+        }
+
+        char value[4];
+        unsigned int streamPos = 15u;
+
+        //Width
+        std::stringstream ss;
+        for (unsigned char i = 0u; i < 4u; ++i, ++streamPos)
+            ss << temp[streamPos];
+
+        JEJ_ASSERT(false, "WIP, don't come here!");
+
+        std::string asdf = ss.str();
+        unsigned long int kek = std::stoul(asdf);
+        p_data->singleImageSize.x = ntohl(kek);
+
+        //Height
+        for (unsigned char i = 0u; i < 4u; ++i, ++streamPos)
+            value[i] = temp[streamPos];
+        p_data->singleImageSize.y = ntohl(std::stoul(value));
+
+        //ImageData
+        std::memcpy(&p_data->readImageData[0], &temp[24u], temp.size() - 24u);
+
+        return true;
     }
 
 
-    bool FileHandler::Write(const std::string& p_name)
+    bool FileHandler::Write(const std::string& name)
     {
-        if (!accessFile(p_name, true))
+        if (!accessFile(name, true))
             return false;
 
         if (m_fileContents.empty())
@@ -124,24 +155,11 @@ namespace jej
             &overlapped
             ))
         {
-            Messenger::Add(Messenger::MessageType::Error, "Failed to write to file: ", settings::rootPath + "Recources/" + p_name, getWinError());
+            Messenger::Add(Messenger::MessageType::Error, "Failed to write to file: ", settings::rootPath + "Recources/" + name, getWinError());
             return false;
         }
 
         return true;
-
-    }
-    //////////////////////////////////////////
-
-
-    bool FileHandler::ReadFontFile(const std::string& p_name)
-    {
-        if (Read(p_name))
-            return false;
-
-        auto size = GetFileSize(m_fileHandle, NULL);
-
-
 
     }
     //////////////////////////////////////////
@@ -178,7 +196,7 @@ namespace jej
     //////////////////////////////////////////
 
 
-#elif defined ANDROID
+#elif defined __ANDROID__
 
     FileHandler::FileHandler(android_app* app) :
         m_fileContents(),
@@ -202,7 +220,8 @@ namespace jej
 
         if (!file)
         {
-            Messenger::Add(Messenger::MessageType::Error, "Failed to open file: ", name);
+            //TODO: Android problems
+            //Messenger::Add(Messenger::MessageType::Error, "Failed to open file: ", name);
             return false;
         }
 
@@ -210,13 +229,13 @@ namespace jej
         if (length != 0u && length <= size)
             size = length;
         if (length > size)
-            Messenger::Add(Messenger::MessageType::Warning, "File length too large:", length, "File size: ", size, "Suppressing");
+            //TODO: Android problems//Messenger::Add(Messenger::MessageType::Warning, "File length too large:", length, "File size: ", size, "Suppressing");
 
         m_fileContents.resize(size + 1u);
         int result = AAsset_read(file, &m_fileContents[0], size);
 
         if (result < 0)
-            Messenger::Add(Messenger::MessageType::Error, "Failed to read file: ", name);
+            //TODO: Android problems//Messenger::Add(Messenger::MessageType::Error, "Failed to read file: ", name);
 
         AAsset_close(file);
 
@@ -226,30 +245,11 @@ namespace jej
 
     bool FileHandler::Write(const std::string& name)
     {
-        Messenger::Add(Messenger::MessageType::Error, "Write-method needs to be written for android");
+        //TODO: Android problems//Messenger::Add(Messenger::MessageType::Error, "Write-method needs to be written for android");
+        return true;
     }
     //////////////////////////////////////////
 
 #endif
-
-    const stbtt_fontinfo FileHandler::GetFontInfo() const
-    {
-        return m_fontInfo;
-    }
-
-    const std::vector<char> FileHandler::GetReadData() const
-    {
-        return m_fileContents;
-    }
-
-    stbtt_fontinfo FileHandler::GetFontInfo()
-    {
-        return m_fontInfo;
-    }
-
-    std::vector<char> FileHandler::GetReadData()
-    {
-        return m_fileContents;
-    }
 
 }

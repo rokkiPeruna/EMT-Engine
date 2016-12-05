@@ -10,6 +10,7 @@
 namespace jej
 {
 
+	class Entity;
 
     class TransformComponent : public Component
     {

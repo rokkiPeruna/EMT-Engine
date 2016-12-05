@@ -38,6 +38,8 @@ namespace jej
         };
     }
 
+	class Entity;
+
     class ShaderComponent : public Component
     {
 
@@ -50,11 +52,11 @@ namespace jej
 
 
         //Constructor
-        ShaderComponent::ShaderComponent(Entity* entity, const std::string& p_fragmentShaderFileName = "", const std::string& p_vertexShaderFileName = "");
+        ShaderComponent(Entity* entity, const std::string& p_fragmentShaderFileName = "", const std::string& p_vertexShaderFileName = "");
 
 
         //Destructor
-        ShaderComponent::~ShaderComponent();
+        ~ShaderComponent();
 
     private:
 

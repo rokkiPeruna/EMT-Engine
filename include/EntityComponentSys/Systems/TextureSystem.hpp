@@ -53,11 +53,8 @@ namespace jej
 
 		void _drawFromSheet();
 
-		// Initialize testuresystem (don't load images here! not present yet)
-        bool _initialize();
-
-        // Load images for components
-        bool _finalize();
+		// Initialize texture
+        bool _initialize(TextureData* p_data);
 		
 	};
 

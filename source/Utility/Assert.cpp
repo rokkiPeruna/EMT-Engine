@@ -1,4 +1,5 @@
 #include <Utility/Assert.hpp>
+#include <cstdlib>
 
 namespace jej
 {
@@ -11,11 +12,14 @@ namespace jej
         //Parse error message
         auto slashPos = p_file.find_last_of("/\\");
 
+        //TODO: Android problems with to_string
+#ifdef _WIN32
         std::string error = "File: " + p_file.substr(slashPos == std::string::npos ? 0 : slashPos + 1);
         error += "\nLine: " + std::to_string(p_line);
         error += "\n\n" + p_message;
+#endif
 
-#if defined(_WIN32) //Windows log
+#if defined _WIN32 //Windows log
 #include <Windows.h>
         ;
 
@@ -30,15 +34,16 @@ namespace jej
 
 #endif
 
-#elif defined(ANDROID) //Android log
+#elif defined __ANDROID__ //Android log
+//#include <android_native_app_glue.h>
+//       ;
+//        __android_log_assert(0, "jej", error.c_str());
 
-        __android_log_assert(0, "jej", error.c_str());
 
-#endif
 
         //Assertion failure: terminate program
-        std::exit(EXIT_FAILURE);
-
+//        std::exit(EXIT_FAILURE);
+#endif
     }
 
 }

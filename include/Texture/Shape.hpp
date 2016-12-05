@@ -5,18 +5,19 @@
 
 #include <vector>
 
+#include <External/OpenGL_ES2/GLES2/gl2.h>
+
 namespace jej
 {
+	
 
     class Shape
     {
-		friend class Math;
-
         //ShapeComponent must have access to m_points
         friend class ShapeComponent;
 
-        //Friend RenderComponent so it can get m_shapeType
-        friend class RenderComponent;
+        //Friend RenderComponent so it can get m_shapeType and texID
+        friend class RenderSystem;
 
     public:
 
@@ -39,8 +40,6 @@ namespace jej
 
         unsigned int GetID() const;
 
-		const float GetRadius() const;
-
     private:
 
         
@@ -58,12 +57,15 @@ namespace jej
         void _addShape();
 
         ShapeType m_shapeType;
-		float m_radius;
+
         std::vector<Vector2f> m_points;
 
         unsigned int m_ID;
         static int m_ShapeIDCounter;
         static int m_RemovedShapeIDCounter;
+
+		//TODO: Re-evaluate this in here
+		GLuint texID;
 
     };
 

@@ -1,19 +1,14 @@
-
-
 #include <Core/EngineObject.hpp>
 
 #include <Core/Timer.hpp>
 
 #include <IO_Manager/InputManagerImpl.hpp>
 
-
 #include <EntityComponentSys/Components/Component.hpp>
 #include <EntityComponentSys/Entity/Entity.hpp>
-#include <EntityComponentSys/Systems/CollisionSystem.hpp>
 #include <EntityComponentSys/Systems/RenderSystem.hpp>
 #include <EntityComponentSys/Systems/ShaderSystem.hpp>
 #include <EntityComponentSys/Systems/TransformSystem.hpp>
-#include <Graphics/OGL_ES2.hpp>
 #include <Utility/Assert.hpp>
 #include <Utility/Messenger.hpp>
 
@@ -23,6 +18,8 @@
 #include <Window/Win32Window.hpp>
 #elif defined ANDROID
 #include <Window/AndroidWindow.hpp>
+#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
+#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
 #endif
 
 
@@ -50,6 +47,8 @@ namespace jej //NAMESPACE jej
         JEJ_ASSERT(entityLeak == 0, "Entity memory leak!");
 
         //No leaks - no warnings
+        //TODO: Android problems
+#ifdef _WIN32
         if (componentLeak != 0)
             Messenger::Add(Messenger::MessageType::Warning, "Amount of leaking components: ", componentLeak);
 
@@ -59,7 +58,7 @@ namespace jej //NAMESPACE jej
         Messenger::Add(Messenger::MessageType::Debug, std::to_string(Timer::GetInstance().GetTime()));
 
         Messenger::WriteLog();
-        
+#endif
     }
     //////////////////////////////////////////
 
@@ -77,25 +76,29 @@ namespace jej //NAMESPACE jej
         //Initialize window
 #ifdef _WIN32
         engine.m_windowPtr.reset(new Win32Window(p_data, p_osData));
-#elif defined ANDROID
-        engine.m_windowPtr.reset(new AndroidWindow(p_data, p_osData));
+#elif defined __ANDROID__
+        auto* window = &AndroidWindow::GetInstance();
+        engine.m_windowPtr.reset(window);
 #endif
 
         //TODO:
         //Initialize all systems and managers here
-        InputManager::GetInstance();
+
+        //TODO: Add Android InputManager code so this works on both Win32 and Android
+        //InputManager::GetInstance();
 
         Timer::GetInstance(true);
-		
-		std::get<0>(engine.m_systems) = &CollisionSystem::GetInstance();
-        std::get<1>(engine.m_systems) = &RenderSystem::GetInstance();
-        std::get<2>(engine.m_systems) = &ShaderSystem::GetInstance();
-        std::get<3>(engine.m_systems) = &ShapeSystem::GetInstance();
-        std::get<4>(engine.m_systems) = &TextureSystem::GetInstance();
-        std::get<5>(engine.m_systems) = &TransformSystem::GetInstance();
+
+        std::get<0>(engine.m_systems) = &RenderSystem::GetInstance();
+        std::get<1>(engine.m_systems) = &ShaderSystem::GetInstance();
+        std::get<2>(engine.m_systems) = &ShapeSystem::GetInstance();
+        std::get<3>(engine.m_systems) = &TextureSystem::GetInstance();
+        std::get<4>(engine.m_systems) = &TransformSystem::GetInstance();
 
 
         //Parse execution path
+        //TODO: Android problems
+#ifdef _WIN32
         const unsigned int slashPos = p_root.find_last_of("/\\");
         if (slashPos == std::string::npos)
         {
@@ -105,7 +108,7 @@ namespace jej //NAMESPACE jej
 
 
         settings::rootPath = p_root.substr(0u, slashPos + 1u);
-
+#endif
         return true;
     }
     //////////////////////////////////////////
@@ -120,22 +123,24 @@ namespace jej //NAMESPACE jej
     void EngineObject::SetCurrentScene(const Scene& p_scene)
     {
         //Doesn't work in future
+#ifdef _WIN32
         DebugBreak();
+#endif
         m_currentScene = std::make_shared<Scene>(p_scene);
     }
     //////////////////////////////////////////
 
     void EngineObject::EngineUpdate()
     {
-		Messenger::PrintMessages();
         //RenderSystem::GetInstance()._update(100.f);
 
-        InputManager::GetInstance().Update();//TODO: Change to ._update() for consistency
+        //InputManager::GetInstance().Update();//TODO: Change to ._update() for consistency
 
         //This calls also RenderSystem's _update() - function in WM_PAINT
 
         m_windowPtr->UpdateWindowMessages();
-		
+
+
     }
     //////////////////////////////////////////
 
@@ -186,6 +191,13 @@ namespace jej //NAMESPACE jej
         return IDs;
     }
     //////////////////////////////////////////
+
+#ifdef __ANDROID__
+	//void EngineObject::SetAndroidApp(android_app* p_app)
+	//{
+	//	state = p_app;
+	//}
+#endif
     //#endif
 
 } //NAMESPACE jej

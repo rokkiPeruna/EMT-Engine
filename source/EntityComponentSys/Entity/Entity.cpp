@@ -2,6 +2,7 @@
 
 #include <Core/EngineObject.hpp>
 
+//#include <EntityComponentSys/Systems/TransformSystem.hpp>
 
 namespace jej
 {
@@ -16,8 +17,7 @@ namespace jej
     {
 
     }
-    ////////////////////////////////////////////
-
+    //
 
     Entity::~Entity()
     {
@@ -26,20 +26,16 @@ namespace jej
         //Entity takes care of it's components
         RemoveAllComponents();
     }
-    ////////////////////////////////////////////
-
+    //
 
     const JEJ_COUNT Entity::GetID() const
     {
         return m_entityID;
     }
-    ////////////////////////////////////////////
 
 
     bool Entity::RemoveAllComponents()
     {
-        //Current development environment does not support required features to do the following with meta-template-programming - Ee
-
         //TODO: Call remove on all types
         RemoveComponent<RenderComponent>();
         RemoveComponent<ShaderComponent>();
@@ -47,14 +43,10 @@ namespace jej
         RemoveComponent<TextureComponent>();
         RemoveComponent<TransformComponent>();
 
+
         if (m_componentIDs.empty())
             return true;
-         
-        JEJ_ASSERT(false, "Not all components removed!");
-        Messenger::Add(Messenger::MessageType::Warning, "Not all components removed from entity: ", m_name);
         return false;
     }
-    ////////////////////////////////////////////
-
 
 }
