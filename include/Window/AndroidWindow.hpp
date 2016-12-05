@@ -2,6 +2,7 @@
 #define JEJ_ANDROIDWINDOW_HPP
 
 #include <Window/Window.hpp>
+<<<<<<< HEAD
 
 namespace jej
 {
@@ -20,6 +21,66 @@ namespace jej
 
 		//Constructor
 		AndroidWindow(const WindowOSInitData* p_winOSinitData);
+=======
+#ifdef __ANDROID__
+#include <android_native_app_glue.h>
+#include <android/sensor.h>
+#include <Core/AndroidAppState.hpp>
+#endif
+
+//Forward declaring android_app - struct
+struct android_app;
+
+namespace jej
+{
+
+	//For returning to Android app's previous state
+	struct saved_state {
+		float angle;
+		int32_t x;
+		int32_t y;
+	};
+
+	//Android specific initializing data
+	struct WindowOSInitData
+	{
+		android_app* app;
+
+
+
+#ifdef __ANDROID__
+		ASensorManager* sensorManager;
+		const ASensor* accelerometerSensor;
+		ASensorEventQueue* sensorEventQueue;
+
+		int animating;
+        EGLDisplay display;
+        EGLSurface surface;
+        EGLContext context;
+
+        struct saved_state state;
+
+		WindowOSInitData():
+			animating(-1)
+		{
+            app = AndroidAppState::m_AppState;
+		};
+#endif
+	};
+
+
+
+	class AndroidWindow : public Window
+	{
+		friend class EngineObject;
+		friend class RenderSystem;
+
+	private:
+		//Constructor
+		AndroidWindow();
+	public:
+
+>>>>>>> origin/JuhoAndroidBranch
 
 		//Disabled copy constructor
 		AndroidWindow(const AndroidWindow&) = delete;
@@ -27,8 +88,18 @@ namespace jej
 
 		//Destructor
 		~AndroidWindow();
+<<<<<<< HEAD
 
 
+=======
+#ifdef __ANDROID__
+		static AndroidWindow& GetInstance();
+
+		static void engine_handle_cmd(struct android_app* app, int32_t cmd);
+
+		static int32_t engine_handle_input(struct android_app* app, AInputEvent* event);
+#endif
+>>>>>>> origin/JuhoAndroidBranch
 		//inherited methods override/////////////////////////////////
 
 		//Window's update loop
@@ -49,6 +120,13 @@ namespace jej
 
 	private:
 
+<<<<<<< HEAD
+=======
+		bool _initWindow();
+
+		android_app* state;
+
+>>>>>>> origin/JuhoAndroidBranch
 		//Android specific window init data
 		WindowOSInitData m_winOSInitData;
 	};

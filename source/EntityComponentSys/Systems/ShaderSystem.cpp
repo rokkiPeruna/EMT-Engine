@@ -4,6 +4,10 @@
 
 #include <EntityComponentSys/Systems/ShaderSystem.hpp>
 
+#ifdef __ANDROID__
+#include <Core/AndroidAppState.hpp>
+#endif
+
 #include <vector>
 namespace jej
 {
@@ -80,7 +84,7 @@ namespace jej
 
         GLint isLinked = 0;
 
-        glGetProgramiv(p_sd.programID, GL_LINK_STATUS, (int*)&isLinked);
+        glGetProgramiv(p_sd.programID, GL_LINK_STATUS, &isLinked);
         if (isLinked == GL_FALSE)
         {
             //TODO: Android problem //Messenger::Add(Messenger::MessageType::Error, "Failed to link program, shader creation failed ");
@@ -118,7 +122,40 @@ namespace jej
             Messenger::Add(Messenger::MessageType::Error, "Failed to create shader: ", p_shaderDataSource);
 #endif
         }
+<<<<<<< HEAD
         const std::string shaderData = _readFile(p_shaderType, p_shaderDataSource).c_str();
+=======
+        //const std::string shaderData = _readFile(p_shaderType, p_shaderDataSource).c_str();
+        std::string shaderData;
+        if(p_shaderType == detail::ShaderType::Fragment)
+        {
+            shaderData = "#version 110\n"
+                    "\n"
+                    "precision mediump float;\n"
+                    "uniform sampler2D texture;\n"
+                    "varying vec2 texCoord;\n"
+                    "void main()\n"
+                    "{\n"
+                    "gl_FragColor = texture2D(texture, texCoord);\n"
+                    "}";
+        }
+        if(p_shaderType == detail::ShaderType::Vertex)
+        {
+            shaderData = "#version 110\n"
+                    "\n"
+                    "attribute vec4 vPosition;\n"
+                    "attribute vec2 vTexCoord;\n"
+                    "varying vec2 texCoord;\n"
+                    "void main()\n"
+                    "{\n"
+                    "\tgl_Position = vPosition;\n"
+                    "\ttexCoord = vTexCoord;\n"
+                    "}";
+        }
+
+        //std::string test = "precision mediump float; void main() {gl_FragColor = vec4(0.f, 1.f, 0.f, 0.5f); }";
+
+>>>>>>> origin/JuhoAndroidBranch
         const char* shaderData2 = shaderData.c_str();
 
         glShaderSource(shader, 1, &shaderData2, nullptr);
@@ -179,28 +216,34 @@ namespace jej
         //TODO: Android major fix needed, not able to read shaders currently
 #ifdef _WIN32
         FileHandler handler;
-
+#elif defined __ANDROID__
+        FileHandler handler(AndroidAppState::m_AppState);
+#endif
         if (!handler.Read(p_filePath))
         {
-            Messenger::Add(Messenger::MessageType::Error, "Failed to open shader file ", p_filePath);
+            //Messenger::Add(Messenger::MessageType::Error, "Failed to open shader file ", p_filePath);
             std::string empty = "";
             if (_parseShader(p_type, empty))
             {
                 if (!handler.Read(p_filePath))
                 {
-                    Messenger::Add(Messenger::MessageType::Error, "Failed to open default shader file ", p_filePath);
+                   // Messenger::Add(Messenger::MessageType::Error, "Failed to open default shader file ", p_filePath);
                     return "";
                 }
             }
             else
             {
-                Messenger::Add(Messenger::MessageType::Error, "Failed to parse default shader file ");
+                //Messenger::Add(Messenger::MessageType::Error, "Failed to parse default shader file ");
                 return "";
             }
         }
 
         return std::string(handler.m_fileContents.begin(), handler.m_fileContents.end());
+<<<<<<< HEAD
 #endif
+=======
+
+>>>>>>> origin/JuhoAndroidBranch
         std::string dummyValueForAndroid = "";
         return dummyValueForAndroid;
     }

@@ -29,6 +29,28 @@
 #include <android/log.h>
 #include <android_native_app_glue.h>
 
+<<<<<<< HEAD
+=======
+#include <Window/AndroidWindow.hpp>
+
+#include <Core/EngineObject.hpp>
+#include <EntityComponentSys/Entity/Entity.hpp>
+#include <EntityComponentSys/Components/TransformComponent.hpp>
+
+#include <EntityComponentSys/Systems/System.hpp>
+#include <Core/Scene.hpp>
+
+#include <Utility/Random.hpp>
+
+#include <Utility/FileHandler.hpp>
+
+#include <EntityComponentSys/Components/ShaderComponent.hpp>
+
+#include <EntityComponentSys/Systems/RenderSystem.hpp>
+
+
+
+>>>>>>> origin/JuhoAndroidBranch
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
 
@@ -45,24 +67,37 @@ struct saved_state {
  * Shared state for our app.
  */
 struct engine {
+<<<<<<< HEAD
     struct android_app* app;
+=======
+    struct android_app* app;        //Löytyy AndroidWindowsta
+>>>>>>> origin/JuhoAndroidBranch
 
     ASensorManager* sensorManager;
     const ASensor* accelerometerSensor;
     ASensorEventQueue* sensorEventQueue;
 
     int animating;
+<<<<<<< HEAD
     EGLDisplay display;
     EGLSurface surface;
     EGLContext context;
     int32_t width;
     int32_t height;
+=======
+    EGLDisplay display;             //Löytyy RenderSystemista
+    EGLSurface surface;             //Löytyy RenderSystemista
+    EGLContext context;             //Löytyy RenderSystemista
+    int32_t width;                  //Löytyy WindowBaseInitDatasta
+    int32_t height;                 //Löytyy WindowBaseInitDatasta
+>>>>>>> origin/JuhoAndroidBranch
     struct saved_state state;
 };
 
 /**
  * Initialize an EGL context for the current display.
  */
+<<<<<<< HEAD
 static int engine_init_display(struct engine* engine) {
     // initialize OpenGL ES and EGL
 
@@ -150,12 +185,23 @@ static int engine_init_display(struct engine* engine) {
     glDisable(GL_DEPTH_TEST);
 
     return 0;
+=======
+static int engine_init_display(struct engine* engine) {     //Löytyy RenderSystemistä
+    // initialize OpenGL ES and EGL
+
+    jej::AndroidWindow::GetInstance().
+    jej::RenderSystem::GetInstance();
+>>>>>>> origin/JuhoAndroidBranch
 }
 
 /**
  * Just the current frame in the display.
  */
+<<<<<<< HEAD
 static void engine_draw_frame(struct engine* engine) {
+=======
+static void engine_draw_frame(struct engine* engine) {      //Löytyy RenderSystemistä
+>>>>>>> origin/JuhoAndroidBranch
     if (engine->display == NULL) {
         // No display.
         return;
@@ -172,7 +218,11 @@ static void engine_draw_frame(struct engine* engine) {
 /**
  * Tear down the EGL context currently associated with the display.
  */
+<<<<<<< HEAD
 static void engine_term_display(struct engine* engine) {
+=======
+static void engine_term_display(struct engine* engine) {            //Löytyy RenderSystemin destruktorista
+>>>>>>> origin/JuhoAndroidBranch
     if (engine->display != EGL_NO_DISPLAY) {
         eglMakeCurrent(engine->display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
         if (engine->context != EGL_NO_CONTEXT) {
@@ -192,7 +242,11 @@ static void engine_term_display(struct engine* engine) {
 /**
  * Process the next input event.
  */
+<<<<<<< HEAD
 static int32_t engine_handle_input(struct android_app* app, AInputEvent* event) {
+=======
+static int32_t engine_handle_input(struct android_app* app, AInputEvent* event) {       //Tulee löytymään IO_Managerin Android-puolelta
+>>>>>>> origin/JuhoAndroidBranch
     struct engine* engine = (struct engine*)app->userData;
     if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) {
         engine->animating = 1;
@@ -206,7 +260,11 @@ static int32_t engine_handle_input(struct android_app* app, AInputEvent* event) 
 /**
  * Process the next main command.
  */
+<<<<<<< HEAD
 static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
+=======
+static void engine_handle_cmd(struct android_app* app, int32_t cmd) {       //Löytyy AndroidWindowsta
+>>>>>>> origin/JuhoAndroidBranch
     struct engine* engine = (struct engine*)app->userData;
     switch (cmd) {
         case APP_CMD_SAVE_STATE:

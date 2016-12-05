@@ -7,6 +7,14 @@
 #ifdef __ANDROID__
 #include <android/log.h>
 #include <android_native_app_glue.h>
+<<<<<<< HEAD
+=======
+//#include <utility>
+//#include <utility>
+
+#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
+
+>>>>>>> origin/JuhoAndroidBranch
 #endif
 
 namespace jej
@@ -63,16 +71,20 @@ namespace jej
         /*for (size_t i = 0u; i < mm.size(); ++i)
         {
             if (mm[i].second == MessageType::Error && JEJ_DEBUG_LEVEL > 0)
-                __android_log_assert(0, "jej", mm.first[i].c_str());
+                __android_log_assert(0, "jej", mm[i].first.c_str());
 
             else if (mm[i].second == MessageType::Warning && JEJ_DEBUG_LEVEL > 1)
-                __android_log_assert(0, "jej", mm.first[i].c_str());
+                __android_log_assert(0, "jej", mm[i].first.c_str());
 
             else if (mm[i].second == MessageType::Debug && JEJ_DEBUG_LEVEL > 2)
-                __android_log_assert(0, "jej", mm.first[i].c_str());
+                __android_log_assert(0, "jej", mm[i].first.c_str());
 
             else if (mm[i].second == MessageType::Info && JEJ_DEBUG_LEVEL > 3)
+<<<<<<< HEAD
                 __android_log_assert(0, "jej", mm.first[i].c_str());
+=======
+                __android_log_assert(0, "jej", mm[i].first.c_str());
+>>>>>>> origin/JuhoAndroidBranch
         }*/
 
 

@@ -1,5 +1,3 @@
-
-
 #include <Core/EngineObject.hpp>
 
 #include <Core/Timer.hpp>
@@ -20,6 +18,8 @@
 #include <Window/Win32Window.hpp>
 #elif defined ANDROID
 #include <Window/AndroidWindow.hpp>
+#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
+#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
 #endif
 
 
@@ -77,13 +77,22 @@ namespace jej //NAMESPACE jej
 #ifdef _WIN32
         engine.m_windowPtr.reset(new Win32Window(p_data, p_osData));
 #elif defined __ANDROID__
+<<<<<<< HEAD
         engine.m_windowPtr.reset(new AndroidWindow(p_osData));
+=======
+        auto* window = &AndroidWindow::GetInstance();
+        engine.m_windowPtr.reset(window);
+>>>>>>> origin/JuhoAndroidBranch
 #endif
 
         //TODO:
         //Initialize all systems and managers here
 
+<<<<<<< HEAD
         //TODO: Add Android InputManager code
+=======
+        //TODO: Add Android InputManager code so this works on both Win32 and Android
+>>>>>>> origin/JuhoAndroidBranch
         //InputManager::GetInstance();
 
         Timer::GetInstance(true);
@@ -190,6 +199,13 @@ namespace jej //NAMESPACE jej
         return IDs;
     }
     //////////////////////////////////////////
+
+#ifdef __ANDROID__
+	//void EngineObject::SetAndroidApp(android_app* p_app)
+	//{
+	//	state = p_app;
+	//}
+#endif
     //#endif
 
 } //NAMESPACE jej

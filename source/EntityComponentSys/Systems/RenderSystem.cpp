@@ -6,8 +6,11 @@
 
 #ifdef _WIN32
 #include <Window/Win32Window.hpp>
-#else
+#elif defined __ANDROID__
 #include <Window/AndroidWindow.hpp>
+#include <android/log.h>
+#include <Core/AndroidAppState.hpp>
+
 #endif
 
 namespace jej
@@ -33,7 +36,10 @@ namespace jej
 #elif defined ANDROID
 		m_window = std::static_pointer_cast<AndroidWindow>(EngineObject::GetInstance().GetWindowRef());
 #endif
+<<<<<<< HEAD
 		assert(m_window != nullptr);
+=======
+>>>>>>> origin/JuhoAndroidBranch
 		if (!_createContext(settings::attributeList))
 			JEJ_ASSERT(false, "Context creation failed.");
 
@@ -55,7 +61,24 @@ namespace jej
 
 	RenderSystem::~RenderSystem()
 	{
+<<<<<<< HEAD
 
+=======
+		if (m_display != EGL_NO_DISPLAY)
+			eglMakeCurrent(m_display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+
+		if (m_context != EGL_NO_CONTEXT)
+			eglDestroyContext(m_display, m_context);
+
+		if (m_surface != EGL_NO_SURFACE)
+			eglDestroySurface(m_display, m_surface);
+
+		eglTerminate(m_display);
+
+		m_display = EGL_NO_DISPLAY;
+		m_context = EGL_NO_CONTEXT;
+		m_surface = EGL_NO_SURFACE;
+>>>>>>> origin/JuhoAndroidBranch
 	}
 	//////////////////////////////////////////
 
@@ -181,6 +204,7 @@ namespace jej
 
 	void RenderSystem::_update(const float p_deltaTime)
 	{
+<<<<<<< HEAD
 
 
 		//Set window's size and offset
@@ -188,11 +212,24 @@ namespace jej
 		m_winHeight = m_window->GetWinData().sizeY;
 
 #ifdef _WIN32
+=======
+
+
+#ifdef _WIN32
+		//Set window's size and offset
+		m_winWidth = m_window->GetWinData().sizeX;
+		m_winHeight = m_window->GetWinData().sizeY;
+
+>>>>>>> origin/JuhoAndroidBranch
 		m_winOffsetX = m_window->GetWinOSData().offsetX;
 		m_winOffsetY = m_window->GetWinOSData().offsetY;
 #elif defined __ANDROID__
 		m_winOffsetX = 0;
 		m_winOffsetY = 0;
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/JuhoAndroidBranch
 #endif
 
 		//Clear color and depth buffer with color
@@ -330,8 +367,13 @@ namespace jej
 				glVertexAttribPointer(drawData.vertexPositionIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
 
+<<<<<<< HEAD
 				glVertexAttribPointer(drawData.textureCoordIndex, 2, GL_FLOAT, GL_FALSE, 0, &drawData.texCoordBuffer.at(shapeType));
 				//glVertexAttribPointer(drawData.textureCoordIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
+=======
+				//glVertexAttribPointer(drawData.textureCoordIndex, 2, GL_FLOAT, GL_FALSE, 0, &drawData.texCoordBuffer.at(shapeType));
+				glVertexAttribPointer(drawData.textureCoordIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
+>>>>>>> origin/JuhoAndroidBranch
 
 
 				//TODO: Add call for texture binding once someone creates texture with decent data :D
@@ -479,8 +521,12 @@ namespace jej
 			config = supportedConfigs[0];
 
 		eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format);
+<<<<<<< HEAD
 		//TODO: Android major fix needed //surface = eglCreateWindowSurface(display, config, p_androidApplication->window, NULL);
 
+=======
+		surface = eglCreateWindowSurface(display, config, AndroidAppState::m_AppState->window, NULL);
+>>>>>>> origin/JuhoAndroidBranch
 		EGLint contextAttribs[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE, EGL_NONE };
 
 		context = eglCreateContext(display, config, NULL, contextAttribs);
@@ -502,6 +548,20 @@ namespace jej
 		m_surface = surface;
 		m_context = context;
 
+<<<<<<< HEAD
+=======
+		// Check openGL on the system
+		auto opengl_info = { GL_VENDOR, GL_RENDERER, GL_VERSION, GL_EXTENSIONS };
+		for (auto name : opengl_info) {
+			auto info = glGetString(name);
+			//LOGI("OpenGL Info: %s", info);
+		}
+		// Initialize GL state.
+		//glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
+		glEnable(GL_CULL_FACE);
+		glDisable(GL_DEPTH_TEST);
+
+>>>>>>> origin/JuhoAndroidBranch
 		return true;
 #endif
 

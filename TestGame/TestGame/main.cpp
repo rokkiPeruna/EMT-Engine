@@ -10,9 +10,10 @@
 
 #include <Utility/Random.hpp>
 
-#include <Utility/FileHandler.hpp>
+//#include <Utility/FileHandler.hpp>
 
 #include <EntityComponentSys/Components/ShaderComponent.hpp>
+#include <EntityComponentSys/Components/CollisionComponent.hpp>
 
 #include <IO_Manager/Win32/Mouse.hpp>
 #include <IO_Manager/Win32/Keyboard.hpp>
@@ -47,8 +48,13 @@ int main(int argc, char* argv[])
 
     //Creating:
     myCharacter.AddComponent<jej::TransformComponent>(
+<<<<<<< HEAD
         &myCharacter,					//Tell component that this is its owner
         jej::Vector2f(0.0f, -0.3f),		//Position, we start at center of the screen
+=======
+        //&myCharacter,					//Tell component that this is its owner
+        jej::Vector2f(0.f, 0.f),		//Position, we start at center of the screen
+>>>>>>> origin/JuhoAndroidBranch
         jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
         jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
         );
@@ -56,9 +62,15 @@ int main(int argc, char* argv[])
 
     //Next we create ShaderComponent and add it to our entity so it can be drawn
     myCharacter.AddComponent<jej::ShaderComponent>(
+<<<<<<< HEAD
         &myCharacter,					//Tell component that this is its owner
         "FragmentShader.frag",	//First we must give vertex shader name and file extension
         "VertexShader.vert"			//Second we guve fragment shader name and file extencion
+=======
+        //&myCharacter					//Tell component that this is its owner
+        //"PixelShader.frag",			//First we must give vertex shader name and file extension
+        //"VertexShader.vert"			//Second we guve fragment shader name and file extencion
+>>>>>>> origin/JuhoAndroidBranch
         );
 
 
@@ -70,8 +82,13 @@ int main(int argc, char* argv[])
     //As we add ShapeComponent, we take an alias at the sametime for ease of use.
 
     auto& myShapeComp = myCharacter.AddComponent<jej::ShapeComponent>(
+<<<<<<< HEAD
         &myCharacter,					//Tell component that this is its owner
         jej::Vector4i(0, 150, 150, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
+=======
+        //&myCharacter,					//Tell component that this is its owner
+        jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
+>>>>>>> origin/JuhoAndroidBranch
         );
 
 
@@ -107,10 +124,14 @@ int main(int argc, char* argv[])
 
     //Creating
     myCharacter.AddComponent<jej::RenderComponent>(
-        &myCharacter
+        //&myCharacter
         );
 
-    //Don't try setting components to other entities other than the one calling the function
+//Don't try setting components to other entities other than the one calling the function
+
+	myCharacter.AddComponent<jej::CollisionComponent>(
+		&myCharacter);
+
 
     //auto& mouse = jej::Mouse::GetInstance();
     //auto& keyboard = jej::Keyboard::GetInstance();

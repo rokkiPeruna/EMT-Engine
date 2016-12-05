@@ -24,16 +24,30 @@ add_library(app-glue STATIC
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
 add_library(native-activity SHARED
+<<<<<<< HEAD
             main.cpp
+=======
+            #main.cpp
+            JEJ_Android_Main.cpp
+>>>>>>> origin/JuhoAndroidBranch
             ../../../../../../source/Core/EngineObject.cpp
             ../../../../../../source/Core/Scene.cpp
             ../../../../../../source/Core/Settings.cpp
             ../../../../../../source/Core/Timer.cpp
 
+<<<<<<< HEAD
                ../../../../../../source/EntityComponentSys/Entity/Entity.cpp
 
             ../../../../../../source/EntityComponentSys/Components/Component.cpp
             ../../../../../../source/EntityComponentSys/Components/CollisionComponent.cpp
+=======
+            ../../../../../../source/Core/AndroidAppState.cpp
+
+            ../../../../../../source/EntityComponentSys/Entity/Entity.cpp
+
+            ../../../../../../source/EntityComponentSys/Components/Component.cpp
+            #../../../../../../source/EntityComponentSys/Components/CollisionComponent.cpp
+>>>>>>> origin/JuhoAndroidBranch
             ../../../../../../source/EntityComponentSys/Components/RenderComponent.cpp
             ../../../../../../source/EntityComponentSys/Components/ShaderComponent.cpp
             ../../../../../../source/EntityComponentSys/Components/ShapeComponent.cpp

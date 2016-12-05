@@ -49,7 +49,15 @@ namespace jej
 #ifdef _WIN32
 		//For allowing Win32 event handler to call _update() in WM_PAINT
 		friend LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
+<<<<<<< HEAD
 #endif
+=======
+#elif defined __ANDROID__
+		friend void engine_handle_cmd(struct android_app* app, int32_t cmd);
+		friend class AndroidWindow;
+#endif
+
+>>>>>>> origin/JuhoAndroidBranch
 
     private:
 
