@@ -18,20 +18,20 @@ namespace jej
     {
         friend class TextureSystem;
         friend class RenderSystem;
+        friend class FileHandler;
 
     public:
 
-
         struct TextureData
         {
-            std::string imageName = "";                 //Texture filename with extension
-            Vector2i wholeImageSize;                    //Size of the whole image in pixels
-            Vector2i singleImageSize;                   //Size of a single image in pixels
-            unsigned int imageCount = 0u;               //Number of images in the whole file
-            std::vector<unsigned char> selectedImages;  //Indices of the images that will be loaded, defaults to whole file
-            unsigned char* displayImage = nullptr;      //Image to render
-            GLuint m_textureID;                         //ID of the texture handled by OpenGL
-            int offset = 0;                             //Offset //TODO: Find out what does this thing do
+            std::string imageName = "";             //Texture filename with extension
+            Vector2i wholeImageSize;                //Size of the whole image in pixels
+            unsigned int imageCount = 0u;           //Number of images in the whole file
+            unsigned char* displayImage = nullptr;  //Image to render
+            unsigned int imageDataSize = 0u;        //Number of bytes of data
+            GLuint m_textureID;                     //ID of the texture handled by OpenGL
+            int imageOffset = 0;                    //Offset //TODO: Find out what does this thing do
+            
 
             TextureData(){};
             NOCOPY(TextureData);
@@ -40,7 +40,7 @@ namespace jej
                 //Free texture if present (also called in texcomp dtor)
                 if (displayImage)
                 {
-                    stbi_image_free(displayImage);
+                    delete[] displayImage;
                     displayImage = nullptr;
                 }
             };
@@ -50,7 +50,8 @@ namespace jej
         {
             stbtt_fontinfo fontInfo;
             unsigned char* fontData = nullptr;
-            unsigned int offset = 0;
+            unsigned int fontDataSize = 0u;
+            unsigned int fontOffset = 0;
 
             Font(){};
             NOCOPY(Font);
@@ -67,10 +68,7 @@ namespace jej
 
 
         //Constructor
-        //p_name: Name of the image with extension
-        //p_imageCount: Number of images in the sheet
-        //p_selectedImages: Indices of the images you wish to load from the sheet
-        TextureComponent(Entity* entity, const std::string& p_name, const unsigned short int p_imageCount = 0u, const std::vector<unsigned char>& p_selectedImages = std::vector<unsigned char>());
+        TextureComponent(Entity* entity);
 
         //Disabled copy-constructors
         NOCOPY(TextureComponent);
@@ -78,22 +76,30 @@ namespace jej
         //Destructor
         virtual ~TextureComponent();
 
-        //Return texture data
-        const TextureData& GetTextureData() const;
+        //  //Return texture data
+        //  const TextureData& GetTextureDataRef() const;
+        //
+        //  //Return texture data
+        //  TextureData& GetTextureDataRef();
+        //
+        //  const Font& GetFontRef() const;
+        //
+        //  Font& GetFontRef();
 
-        //Return texture data
-        TextureData& GetTextureData();
-
-        //Add a displayable image
+        //Adds a displayable image
+        //Sets the image to be rendered
         //p_name: Name of the file with extension
-        //p_images: Separate images in the file
-        //p_pixelsInOne: Pixels in a single image (Images should be the same size in the file)
-        bool AddImage(const std::string& p_name, const unsigned short int p_images, const Vector2i& p_pixelsInOne);
+        //p_images: Number of images in the file, defaults to whole file
+        bool AddImage(const std::string& p_name, const unsigned short int p_imageCount = 0u);
 
-        //Add a displayable image
-        //p_name: Name of the file with extension
-        //p_startPixel: Upper left corner of an image you 
-        //bool AddImage(const std::string& p_name, const Vector2i& p_startPixel)
+        //Set selected image to be rendered
+        //p_imageIndex: Index of the image in the sheet
+        bool UseImage(const unsigned int p_imageIndex);
+
+        //Add font to print characters
+        //p_name: Name of the file with extension, currentlty only supports truetype fonts (.ttf)
+        bool AddFont(const std::string& p_name);
+
 
     private:
 

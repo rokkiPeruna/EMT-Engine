@@ -33,8 +33,7 @@ namespace jej
 
     FileHandler::~FileHandler()
     {
-        if (m_fileHandle)
-            CloseHandle(m_fileHandle);
+        _releaseHandle();
     }
     //////////////////////////////////////////
 
@@ -81,29 +80,88 @@ namespace jej
     //////////////////////////////////////////
 
 
-    bool FileHandler::ReadImage(TextureComponent::TextureData* p_data)
+    bool FileHandler::ReadFontFile(const std::string& p_name, TextureComponent::Font* p_font)
     {
-        JEJ_ASSERT(!p_data->imageName.empty(), "No texture name given");
+        if (!_accessFile(p_name, false))
+            return false;
 
-        const std::string imagePath = "Textures/" + p_data->imageName;
+        auto size = GetFileSize(m_fileHandle, NULL);
+
+        unsigned char* buf = new unsigned char[size];
+
+        stbtt_InitFont(&p_font->fontInfo, buf, p_font->fontOffset);
+
+        std::memcpy(&p_font->fontData, &buf, size);
+
+        delete[] buf;
+
+        return true;
+
+    }
+    //////////////////////////////////////////
+
+
+    bool FileHandler::ReadImage(TextureComponent* p_component)
+    {
+        JEJ_ASSERT(!p_component->m_textureData.imageName.empty(), "No texture name given");
+
+        const std::string imagePath = "Textures/" + p_component->m_textureData.imageName;
         if (!_accessFile(imagePath, false))
         {
             Messenger::Add(Messenger::MessageType::Error, "Texture could not be read");
             return false;
         }
 
-        /*p_data->readImageData = stbi_load(
-            std::string(settings::rootPath + imagePath).c_str(),
-            &p_data->wholeImageSize.x,
-            &p_data->wholeImageSize.y,
-            &p_data->offset,
+        //Used for copying data
+        p_component->m_textureData.imageDataSize = GetFileSize(m_fileHandle, NULL);
+        //Release handle so that stb can access the file
+        _releaseHandle();
+
+        //Load image
+        p_component->m_completeImageData = stbi_load(
+            std::string(settings::rootPath + "Resources/" + imagePath).c_str(),
+            &p_component->m_textureData.wholeImageSize.x,
+            &p_component->m_textureData.wholeImageSize.y,
+            &p_component->m_textureData.imageOffset,
             0);
 
-            if (p_data->readImageData)
-            return true;*/
+        if (p_component->m_completeImageData)
+            return true;
 
         return false;
     }
+    //////////////////////////////////////////
+
+
+    bool FileHandler::ReadSingleImage(
+        TextureComponent::TextureData* p_data,
+        const unsigned char* p_wholeImageData,
+        const unsigned int p_index)
+    {
+        const unsigned int singleImageX = p_data->wholeImageSize.x / p_data->imageCount;
+        const unsigned int singleImageY = p_data->wholeImageSize.y / p_data->imageCount;
+
+        //TODO: What do these things do?
+        const unsigned int outStrideBytes = 0u;
+        const unsigned int outChannelCount = 0u;
+
+        stbir_resize_uint8(
+            p_wholeImageData,
+            p_data->wholeImageSize.x,
+            p_data->wholeImageSize.y,
+            p_data->imageOffset,
+            p_data->displayImage,
+            singleImageX,
+            singleImageY,
+            outStrideBytes,
+            outChannelCount);
+
+        if (p_data->displayImage)
+            return true;
+
+        return false;
+    }
+    //////////////////////////////////////////
 
 
     bool FileHandler::Write(const std::string& p_name)
@@ -138,19 +196,6 @@ namespace jej
     //////////////////////////////////////////
 
 
-    bool FileHandler::ReadFontFile(const std::string& p_name, TextureComponent::Font* p_font)
-    {
-        if (_accessFile(p_name, false))
-            return false;
-
-        if (stbtt_InitFont(&p_font->fontInfo, p_font->fontData, p_font->offset) == 1)
-            return true;
-
-        return false;
-    }
-    //////////////////////////////////////////
-
-
     bool FileHandler::_accessFile(const std::string& name, const bool createFile)
     {
         if (name.empty())
@@ -180,6 +225,14 @@ namespace jej
     }
     //////////////////////////////////////////
 
+    void FileHandler::_releaseHandle()
+    {
+        if (m_fileHandle)
+        {
+            CloseHandle(m_fileHandle);
+            m_fileHandle = nullptr;
+        }
+    }
 
 #elif defined ANDROID
 
@@ -241,7 +294,7 @@ namespace jej
         //TODO: Needs definition on android
         JEJ_ASSERT(false, "Needs definition on android");
         return false;
-}
+    }
 
 #endif
 

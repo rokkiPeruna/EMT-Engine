@@ -22,11 +22,17 @@ namespace jej
 
     public:
 
+        //Constructor
         Scene();
+
+        //Disabled copy-constructors
         NOCOPY(Scene);
+
+        //Destructor
         ~Scene();
 
-        std::vector<std::shared_ptr<Entity>>* GetEntities();
+        //Don't give user access to shared_ptrs
+        //std::vector<std::shared_ptr<Entity>>* GetEntities();
 
         //Entities
 
