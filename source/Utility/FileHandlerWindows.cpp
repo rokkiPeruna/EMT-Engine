@@ -102,11 +102,11 @@ namespace jej
     //////////////////////////////////////////
 
 
-    bool FileHandler::ReadImage(TextureComponent* p_component)
+    bool FileHandler::ReadImage(TextureComponent::tempData* p_data)
     {
-        JEJ_ASSERT(!p_component->m_textureData.imageName.empty(), "No texture name given");
+        JEJ_ASSERT(!p_data->name.empty(), "No texture name given");
 
-        const std::string imagePath = "Textures/" + p_component->m_textureData.imageName;
+        const std::string imagePath = "Textures/" + p_data->name;
         if (!_accessFile(imagePath, false))
         {
             Messenger::Add(Messenger::MessageType::Error, "Texture could not be read");
@@ -114,54 +114,63 @@ namespace jej
         }
 
         //Used for copying data
-        p_component->m_textureData.imageDataSize = GetFileSize(m_fileHandle, NULL);
+        auto size = GetFileSize(m_fileHandle, NULL);
         //Release handle so that stb can access the file
         _releaseHandle();
 
         //Load image
-        p_component->m_completeImageData = stbi_load(
+
+        auto* data = stbi_load(
             std::string(settings::rootPath + "Resources/" + imagePath).c_str(),
-            &p_component->m_textureData.wholeImageSize.x,
-            &p_component->m_textureData.wholeImageSize.y,
-            &p_component->m_textureData.imageOffset,
+            &p_data->x,
+            &p_data->y,
+            &p_data->offset,
             0);
 
-        if (p_component->m_completeImageData)
+        if (data)
+        {
+            for (unsigned int i = 0u; i < size; ++i)
+                p_data->data.emplace_back(data[i]);
+            stbi_image_free(data);
+
+
             return true;
+        }
+
 
         return false;
     }
     //////////////////////////////////////////
 
 
-    bool FileHandler::ReadSingleImage(
-        TextureComponent::TextureData* p_data,
-        const unsigned char* p_wholeImageData,
-        const unsigned int p_index)
-    {
-        const unsigned int singleImageX = p_data->wholeImageSize.x / p_data->imageCount;
-        const unsigned int singleImageY = p_data->wholeImageSize.y / p_data->imageCount;
-
-        //TODO: What do these things do?
-        const unsigned int outStrideBytes = 0u;
-        const unsigned int outChannelCount = 0u;
-
-        stbir_resize_uint8(
-            p_wholeImageData,
-            p_data->wholeImageSize.x,
-            p_data->wholeImageSize.y,
-            p_data->imageOffset,
-            p_data->displayImage,
-            singleImageX,
-            singleImageY,
-            outStrideBytes,
-            outChannelCount);
-
-        if (p_data->displayImage)
-            return true;
-
-        return false;
-    }
+    //  bool FileHandler::ReadSingleImage(
+    //      TextureComponent::TextureData* p_data,
+    //      const unsigned char* p_wholeImageData,
+    //      const unsigned int p_index)
+    //  {
+    //      const unsigned int singleImageX = p_data->wholeImageSize.x / p_data->imageCount;
+    //      const unsigned int singleImageY = p_data->wholeImageSize.y / p_data->imageCount;
+    //
+    //      //TODO: What do these things do?
+    //      const unsigned int outStrideBytes = 0u;
+    //      const unsigned int outChannelCount = 0u;
+    //
+    //      stbir_resize_uint8(
+    //          p_wholeImageData,
+    //          p_data->wholeImageSize.x,
+    //          p_data->wholeImageSize.y,
+    //          p_data->imageOffset,
+    //          p_data->displayImage,
+    //          singleImageX,
+    //          singleImageY,
+    //          outStrideBytes,
+    //          outChannelCount);
+    //
+    //      if (p_data->displayImage)
+    //          return true;
+    //
+    //      return false;
+    //  }
     //////////////////////////////////////////
 
 

@@ -22,6 +22,9 @@ namespace jej
 
     public:
 
+        //TODO temp remnove
+        friend class TextureSystem;
+
         //Constructor
         Scene();
 

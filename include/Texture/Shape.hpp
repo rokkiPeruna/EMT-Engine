@@ -19,6 +19,9 @@ namespace jej
         //Friend RenderComponent so it can get m_shapeType and texID
         friend class RenderSystem;
 
+        //temo
+        friend class TextureSystem;
+
     public:
 
        
@@ -68,12 +71,12 @@ namespace jej
         std::vector<Vector2f> m_points;
 
         float m_radius;
+        int m_textureID;
+        
         unsigned int m_ID;
+                
         static int m_ShapeIDCounter;
         static int m_RemovedShapeIDCounter;
-
-		//TODO: Re-evaluate this in here
-		GLuint texID;
 
     };
 

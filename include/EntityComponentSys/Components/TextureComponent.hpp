@@ -15,6 +15,8 @@ namespace jej
 {
 
     class Entity;
+    class Shape;
+
     class TextureComponent : public Component
     {
 
@@ -24,29 +26,40 @@ namespace jej
 
     public:
 
-        struct TextureData
-        {
-            std::string imageName = "";             //Texture filename with extension
-            Vector2i wholeImageSize;                //Size of the whole image in pixels
-            unsigned int imageCount = 0u;           //Number of images in the whole file
-            unsigned char* displayImage = nullptr;  //Image to render
-            unsigned int imageDataSize = 0u;        //Number of bytes of data
-            GLuint m_textureID;                     //ID of the texture handled by OpenGL
-            int imageOffset = 0;                    //Offset //TODO: Find out what does this thing do
-            
+        //struct TextureData
+        //{
+        //    std::string imageName = "";             //Texture filename with extension
+        //    Vector2i wholeImageSize;                //Size of the whole image in pixels
+        //    unsigned int imageCount = 0u;           //Number of images in the whole file
+        //    unsigned char* displayImage = nullptr;  //Image to render
+        //    unsigned int imageDataSize = 0u;        //Number of bytes of data
+        //    GLuint m_textureID;                     //ID of the texture handled by OpenGL
+        //    int imageOffset = 0;                    //Offset //TODO: Find out what does this thing do
+        //    
 
-            TextureData(){};
-            NOCOPY(TextureData);
-            ~TextureData()
-            {
-                //Free texture if present (also called in texcomp dtor)
-                if (displayImage)
-                {
-                    delete[] displayImage;
-                    displayImage = nullptr;
-                }
-            };
+        //    TextureData(){};
+        //    NOCOPY(TextureData);
+        //    ~TextureData()
+        //    {
+        //        //Free texture if present (also called in texcomp dtor)
+        //        if (displayImage)
+        //        {
+        //            delete[] displayImage;
+        //            displayImage = nullptr;
+        //        }
+        //    };
+        //};
+
+        struct tempData
+        {
+            std::string name;
+            int x;
+            int y;
+            int offset;
+            std::vector<unsigned char> data;
         };
+
+        tempData m_texData;
 
         struct Font
         {
@@ -72,7 +85,8 @@ namespace jej
 
 
         //Constructor
-        TextureComponent(Entity* entity);
+        TextureComponent(Entity* p_entity, const JEJ_COUNT p_shapeID);
+        TextureComponent(Entity* p_entity, Shape* p_shape);
 
         //Disabled copy-constructors
         NOCOPY(TextureComponent);
@@ -105,16 +119,22 @@ namespace jej
         bool AddFont(const std::string& p_name);
 
 
+        int m_textureID;
+
     private:
 
+        JEJ_COUNT m_shapeID;
+
         //Data of the read image
-        TextureData m_textureData;
+        //TextureData m_textureData;
+
+        
 
         //Data of the read font
         Font m_fontData;
 
         //Requested image data from the file
-        unsigned char* m_completeImageData;
+        //unsigned char* m_completeImageData;
 
     };
 

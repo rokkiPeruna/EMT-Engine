@@ -30,4 +30,9 @@ namespace jej
         return false;
     }
 
+    std::vector<std::shared_ptr<Shape>>& ShapeComponent::_getShapes()
+    {
+        return m_shapes;
+    }
+
 }
