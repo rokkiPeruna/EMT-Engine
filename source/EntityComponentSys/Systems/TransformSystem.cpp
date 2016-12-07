@@ -27,7 +27,21 @@ namespace jej
 
     void TransformSystem::_update(const float deltaTime)
     {
-
+        //Check if changes has occurred so we'll know if vertices needs to be recalculated
+        for (auto& itr : m_components)
+        {
+            if (itr->position.x != itr->previousPosition.x ||
+                itr->position.y != itr->previousPosition.y ||
+                itr->scale.x != itr->previousScale.x       ||
+                itr->scale.y != itr->previousScale.y       ||
+                itr->rotation.x != itr->previousRotation.x ||
+                itr->rotation.x != itr->previousRotation.y ||
+                itr->rotation.x != itr->previousRotation.z )
+            {
+                itr->hasChanged = true;
+            }
+            else{itr->hasChanged = false;}
+        }
     }
     //////////////////////////////////////////
 

@@ -71,8 +71,6 @@ namespace jej
         m_winWidth = m_window->GetWinData().sizeX;
         m_winHeight = m_window->GetWinData().sizeY;
 
-
-
 #ifdef _WIN32
         //Set window's size and offset
         m_winWidth = m_window->GetWinData().sizeX;
@@ -83,11 +81,12 @@ namespace jej
 #elif defined __ANDROID__
         m_winOffsetX = 0;
         m_winOffsetY = 0;
-
 #endif
-
         //Clear color and depth buffer with color
         _clearScreen();
+
+        //Update all changed vertices, etc. some entity has moved
+        _updateVertices();
 
         //Update all vertex buffers, element buffer, etc.
         _drawAllBuffers();
@@ -95,7 +94,6 @@ namespace jej
         //Swap front and back buffers
         if (!_swapBuffers())
             Messenger::Add(Messenger::MessageType::Error, "RenderSystem::_swapBuffers failed");
-
     }
     //////////////////////////////////////////
 
@@ -236,7 +234,7 @@ namespace jej
                 glActiveTexture(GL_TEXTURE0);
                 glBindTexture(GL_TEXTURE_2D, shapesItr->texID ? -1 : m_defaultTexID);
 
-                glUniform1i(glGetUniformLocation(itr->m_shaderComp->m_shaderData.programID, "s_texture"), 0);
+                glUniform1i(glGetUniformLocation(itr->m_shaderComp->m_shaderData.programID, "sampler_texture"), 0);
 
 
                 //TODO: For Juho: Problem as second triangle is not showing
@@ -596,5 +594,97 @@ namespace jej
         return true;
     }
     //////////////////////////////////////////
+
+    void RenderSystem::_updateVertices()
+    {
+        for (auto& itr : m_components)
+        {
+            if (itr->m_transformComp->hasChanged)
+            {
+                for (const auto& shapesItr : itr->m_shapeComp->m_shapes)
+                {
+                    //Create alias for current shape's vertices
+                    auto* vertices = &itr->m_myDrawData.vertices.at(shapesItr->m_shapeType);
+
+                    //Create alias for shapetype
+                    auto& shapeType = shapesItr->m_shapeType;
+
+                    //Create vertices and indices
+                    switch (shapesItr->m_shapeType)
+                    {
+                    case jej::ShapeType::Circle:
+                    {
+                        break;
+                    }
+
+                    case jej::ShapeType::Rectangle:
+                    {
+                        //TODO: Replace this with translation matrix, this works though
+                        //Translate local coordinates to global coordinates
+                        
+                        vertices->at(0) = shapesItr->m_points.at(0).x + itr->m_transformComp->position.x;
+                        vertices->at(1) = shapesItr->m_points.at(0).y + itr->m_transformComp->position.y;
+                       
+
+                        vertices->at(2) = shapesItr->m_points.at(1).x + itr->m_transformComp->position.x;
+                        vertices->at(3) = shapesItr->m_points.at(1).y + itr->m_transformComp->position.y;
+
+                        vertices->at(4) = shapesItr->m_points.at(2).x + itr->m_transformComp->position.x;
+                        vertices->at(5) = shapesItr->m_points.at(2).y + itr->m_transformComp->position.y;
+
+                        vertices->at(6) = shapesItr->m_points.at(3).x + itr->m_transformComp->position.x;
+                        vertices->at(7) = shapesItr->m_points.at(3).y + itr->m_transformComp->position.y;
+                        //
+
+                        //TODO: Figure out why shape must be drawn with texture coordinates
+                        itr->m_myDrawData.textureCoords.at(shapeType) = itr->m_myDrawData.vertices.at(shapeType);
+                        break;
+                    }
+
+                    case jej::ShapeType::Convex:
+                    {
+                        break;
+                    }
+
+                    case jej::ShapeType::Triangle:
+                    {
+                        
+                        vertices->at(0) = shapesItr->m_points.at(0).x + itr->m_transformComp->position.x;
+                        vertices->at(1) = shapesItr->m_points.at(0).y + itr->m_transformComp->position.y;
+                        
+                        vertices->at(2) = shapesItr->m_points.at(1).x + itr->m_transformComp->position.x;
+                        vertices->at(3) = shapesItr->m_points.at(1).y + itr->m_transformComp->position.y;
+
+                        vertices->at(4) = shapesItr->m_points.at(2).x + itr->m_transformComp->position.x;
+                        vertices->at(5) = shapesItr->m_points.at(2).y + itr->m_transformComp->position.y;
+
+                        //
+                        itr->m_myDrawData.textureCoords.at(shapeType) = itr->m_myDrawData.vertices.at(shapeType);
+                        break;
+                    }
+
+                    default:
+                    {
+                        break;
+                    }
+
+                    }
+                    auto& drawData = itr->m_myDrawData;
+
+
+                    //Update position vertices buffer and texture coordinate buffer
+                    //TODO: Texture coordinates shouldn't need updating, fix this after figuring out how to draw the whole texture as intendet
+                    glBindBuffer(GL_ARRAY_BUFFER, drawData.vertexPosBuffer.at(shapeType));
+                    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(drawData.vertices.at(shapeType)[0]) * drawData.vertices.at(shapeType).size(), drawData.vertices.at(shapeType).data());
+                    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+                    glBindBuffer(GL_ARRAY_BUFFER, drawData.texCoordBuffer.at(shapeType));
+                    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(drawData.textureCoords.at(shapeType)[0]) * drawData.textureCoords.at(shapeType).size(), drawData.textureCoords.at(shapeType).data());
+                    glBindBuffer(GL_ARRAY_BUFFER, 0);
+                          
+                }
+            }
+        }
+    }
 
 }

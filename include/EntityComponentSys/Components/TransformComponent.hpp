@@ -38,6 +38,16 @@ namespace jej
         Vector2f scale;
         Vector4f rotation;
 
+        //For handling collision etc.
+        Vector2f previousPosition;
+        Vector2f previousScale;
+        Vector4f previousRotation;
+
+        //For checking if any transform quality has changed
+        bool hasChanged;
+
+
+
     };
 }
 

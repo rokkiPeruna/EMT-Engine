@@ -158,6 +158,20 @@ int main(int argc, char* argv[])
     for (int i = 0; i < 500000000; ++i)
     {
         game.EngineUpdate();
+
+        auto charLocChange = myCharacter.GetComponentPtr<jej::TransformComponent>();
+
+        if (keyboard.IsKeyPressed(jej::Keyboard::Key::A))
+        charLocChange->position.x -= 0.05f;
+
+        if (keyboard.IsKeyPressed(jej::Keyboard::Key::D))
+            charLocChange->position.x += 0.05f;
+
+        if (keyboard.IsKeyPressed(jej::Keyboard::Key::S))
+            charLocChange->position.y -= 0.05f;
+
+        if (keyboard.IsKeyPressed(jej::Keyboard::Key::W))
+            charLocChange->position.y += 0.05f;
         //break;
         //std::cout << mouse.GetMousePosition().x << "   " << mouse.GetMousePosition().y << std::endl;
 

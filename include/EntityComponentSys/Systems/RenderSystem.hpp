@@ -133,6 +133,8 @@ namespace jej
 
         bool _initialize() override;
 
+        void _updateVertices();
+
         GLuint m_defaultTexID;
     };
 }

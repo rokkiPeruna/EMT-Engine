@@ -9,7 +9,11 @@ namespace jej
         Component(entity),
         position(p_position),
         scale(p_scale),
-        rotation(p_rotation)
+        rotation(p_rotation),
+        previousPosition(position),
+        previousScale(scale),
+        previousRotation(rotation),
+        hasChanged(false)
     {
         //Give component it's right enum type
         m_componentType = ComponentType::Transform;
