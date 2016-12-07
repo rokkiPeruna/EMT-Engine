@@ -669,8 +669,9 @@ namespace jej
                     }
 
                     }
-                    auto& drawData = itr->m_myDrawData;
 
+                    //Alias
+                    auto& drawData = itr->m_myDrawData;
 
                     //Update position vertices buffer and texture coordinate buffer
                     //TODO: Texture coordinates shouldn't need updating, fix this after figuring out how to draw the whole texture as intendet

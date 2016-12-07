@@ -35,8 +35,8 @@ namespace jej
                 itr->scale.x != itr->previousScale.x       ||
                 itr->scale.y != itr->previousScale.y       ||
                 itr->rotation.x != itr->previousRotation.x ||
-                itr->rotation.x != itr->previousRotation.y ||
-                itr->rotation.x != itr->previousRotation.z )
+                itr->rotation.y != itr->previousRotation.y ||
+                itr->rotation.z != itr->previousRotation.z )
             {
                 itr->hasChanged = true;
             }
