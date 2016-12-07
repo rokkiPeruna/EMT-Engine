@@ -578,6 +578,21 @@ namespace jej
             return false;
         }
 
+        //Create default texture, texture data can be found in RenderSystem.hpp
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+        glGenTextures(1, &m_defaultTexID);
+
+        if (m_defaultTexID)
+        {
+            glBindTexture(GL_TEXTURE_2D, m_defaultTexID);
+
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 4, 4, 0, GL_RGB, GL_UNSIGNED_BYTE, detail::DefaultTexture);
+
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        }
+
+
         return true;
     }
     //////////////////////////////////////////

@@ -118,36 +118,39 @@ namespace jej
         if (!(shader = glCreateShader(p_type)))
             Messenger::Add(Messenger::MessageType::Error, "Failed to create shader: ", p_shaderDataSource);
 
+#ifdef _WIN32
+        const std::string shaderData = _readFile(p_shaderType, p_shaderDataSource).c_str();
 
-        //const std::string shaderData = _readFile(p_shaderType, p_shaderDataSource).c_str();
+
+#elif defined __ANDROID__
         std::string shaderData;
         if (p_shaderType == detail::ShaderType::Fragment)
         {
             shaderData = "#version 110\n"
                 "\n"
                 "precision mediump float;\n"
-                "uniform sampler2D texture;\n"
-                "varying vec2 texCoord;\n"
+                "uniform sampler2D sampler_texture;\n"
+                "varying vec2 v_texCoordinate;\n"
                 "void main()\n"
                 "{\n"
-                "gl_FragColor = texture2D(texture, texCoord);\n"
+                "gl_FragColor = texture2D(sampler_texture, v_texCoordinate);\n"
                 "}";
         }
         if (p_shaderType == detail::ShaderType::Vertex)
         {
             shaderData = "#version 110\n"
                 "\n"
-                "attribute vec4 vPosition;\n"
-                "attribute vec2 vTexCoord;\n"
-                "varying vec2 texCoord;\n"
+                "attribute vec4 a_position;\n"
+                "attribute vec2 a_texCoordinate;\n"
+                "varying vec2 v_texCoordinate;\n"
                 "void main()\n"
                 "{\n"
-                "\tgl_Position = vPosition;\n"
-                "\ttexCoord = vTexCoord;\n"
+                "\tgl_Position = a_position;\n"
+                "\tv_texCoordinate = a_texCoordinate;\n"
                 "}";
         }
-
-        //std::string test = "precision mediump float; void main() {gl_FragColor = vec4(0.f, 1.f, 0.f, 0.5f); }";
+#endif
+       
 
         const char* shaderData2 = shaderData.c_str();
 

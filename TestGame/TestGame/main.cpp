@@ -39,10 +39,10 @@ int main(int argc, char* argv[])
     auto& myCharacter = *myScene.GetEntityPtr("Character");
 
 
-     auto& texcomp = myCharacter.AddComponent<jej::TextureComponent>();
+    auto& texcomp = myCharacter.AddComponent<jej::TextureComponent>();
 
-     texcomp.AddFont("Roboto_Black.ttf");
-     //texcomp.AddImage("jellyfish.png");
+    //texcomp.AddFont("Roboto_Black.ttf");
+    //texcomp.AddImage("jellyfish.png");
 
     ////Start adding components to our entity
     ////Entity has template method AddComponent which allows you to add all kinds of components
@@ -52,18 +52,18 @@ int main(int argc, char* argv[])
     ////to myCharacter:
 
     ////Creating:
-    //myCharacter.AddComponent<jej::TransformComponent>(
-    //    jej::Vector2f(0.f, 0.f),		//Position, we start at center of the screen
-    //    jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
-    //    jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
-    //    );
+    myCharacter.AddComponent<jej::TransformComponent>(
+        jej::Vector2f(0.25f, -0.25f),		//Position, we start at center of the screen
+        jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
+        jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
+        );
 
 
     ////Next we create ShaderComponent and add it to our entity so it can be drawn
-    //myCharacter.AddComponent<jej::ShaderComponent>(
-    //    //"PixelShader.frag",			//First we must give vertex shader name and file extension
-    //    //"VertexShader.vert"			//Second we guve fragment shader name and file extencion
-    //    );
+    myCharacter.AddComponent<jej::ShaderComponent>(
+        "PixelShader.frag",			//First we must give vertex shader name and file extension
+        "VertexShader.vert"			//Second we guve fragment shader name and file extencion
+        );
 
 
 
@@ -73,21 +73,25 @@ int main(int argc, char* argv[])
     ////etc. we make a pyramid that has four triangles as sides and rectangle as bottom.
     ////As we add ShapeComponent, we take an alias at the sametime for ease of use.
 
-    //auto& myShapeComp = myCharacter.AddComponent<jej::ShapeComponent>(
-    //    jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
-    //    );
+    auto& myShapeComp = myCharacter.AddComponent<jej::ShapeComponent>(
+        jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
+        );
 
 
 
     ////Now we can add shape to our ShapeComponent. AddShape - method works intuitively. As we now
     ////add three points, AddShape knows we are making a triangle.
-    //myShapeComp.AddShape(std::vector<jej::Vector2f>
-    //{
-    //    jej::Vector2f(0.f, 0.f),		//First point, middle of screen
-    //        jej::Vector2f(0.5f, 0.2f),		//Second point, upper-right corner
-    //        jej::Vector2f(1.f, -1.f)        //Third point, lower-right corner
-    //}
-    //    );
+    myShapeComp.AddShape(std::vector<jej::Vector2f>
+    {
+        jej::Vector2f(0.f, 0.3f),		//First point, middle of screen
+            jej::Vector2f(0.2f, 0.5f),		//Second point, upper-right corner
+            jej::Vector2f(-0.2f, 0.5f)        //Third point, lower-right corner
+    }
+    );
+
+    myShapeComp.AddShape(
+        jej::Vector2f(0.3f, 0.3f)
+        );
 
     ////Now we have our character with transform, shader and shape component. At this point it exist
     ////in our scene and has data in it with witch we can make it react to other entities and
@@ -101,11 +105,49 @@ int main(int argc, char* argv[])
     ////fetching component with entity's GetComponentPtr<> template function
 
     ////Creating
-    //myCharacter.AddComponent<jej::RenderComponent>();
+    myCharacter.AddComponent<jej::RenderComponent>();
 
     ////Don't try setting components to other entities other than the one calling the function
 
-    //myCharacter.AddComponent<jej::CollisionComponent>();
+    myCharacter.AddComponent<jej::CollisionComponent>();
+
+
+
+    myScene.AddEntity("Enemy");
+
+    auto& enemy = *myScene.GetEntityPtr("Enemy");
+
+    enemy.AddComponent<jej::TransformComponent>(
+        jej::Vector2f(-0.5f, -0.25f),		//Position, we start at center of the screen
+        jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
+        jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
+
+        );
+
+    enemy.AddComponent<jej::ShaderComponent>(
+        "PixelShader.frag",			//First we must give vertex shader name and file extension
+        "VertexShader.vert"			//Second we guve fragment shader name and file extencion
+        );
+
+    auto& enemyShapeComp = enemy.AddComponent<jej::ShapeComponent>(
+        jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
+        );
+
+    enemyShapeComp.AddShape(std::vector<jej::Vector2f>
+    {
+            jej::Vector2f(0.0f, 0.5f),		//First point, middle of screen
+            jej::Vector2f(0.2f, 0.3f),		//Second point, upper-right corner
+            jej::Vector2f(-0.2f, 0.3f)        //Third point, lower-right corner
+    }
+    );
+
+    enemyShapeComp.AddShape(
+        jej::Vector2f(0.3f, 0.3f)
+        );
+
+    enemy.AddComponent<jej::RenderComponent>();
+
+    enemy.AddComponent<jej::CollisionComponent>();
 
 
     auto& mouse = jej::Mouse::GetInstance();
@@ -113,7 +155,7 @@ int main(int argc, char* argv[])
 
     //Finalize EngineObject
     game.Finalize();
-    for (int i = 0; i < 50; ++i)
+    for (int i = 0; i < 500000000; ++i)
     {
         game.EngineUpdate();
         //break;
