@@ -178,11 +178,11 @@ int main(int argc, char* argv[])
 
     //Finalize EngineObject
     game.Finalize();
-    for (int i = 0; i < 500000000; ++i)
+    for (int i = 0; i < 50; ++i)
     {
         game.EngineUpdate();
 
-        auto charLocChange = myCharacter.GetComponentPtr<jej::TransformComponent>();
+        auto* charLocChange = myCharacter.GetComponentPtr<jej::TransformComponent>();
 
         if (keyboard.IsKeyPressed(jej::Keyboard::Key::A))
             charLocChange->position.x -= 0.05f;

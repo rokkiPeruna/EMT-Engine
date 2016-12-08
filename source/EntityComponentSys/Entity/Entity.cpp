@@ -37,6 +37,7 @@ namespace jej
     bool Entity::RemoveAllComponents()
     {
         //TODO: Call remove on all types
+        RemoveComponent<CollisionComponent>();
         RemoveComponent<RenderComponent>();
         RemoveComponent<ShaderComponent>();
         RemoveComponent<ShapeComponent>();
