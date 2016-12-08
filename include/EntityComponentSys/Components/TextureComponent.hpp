@@ -61,6 +61,28 @@ namespace jej
 
         tempData m_texData;
 
+        struct ShapeData
+        {
+            const JEJ_COUNT parentID;
+            const JEJ_COUNT shapeID;
+            int textureID;
+
+            ShapeData() = delete;
+
+            ShapeData(
+                const JEJ_COUNT p_parentID,
+                const JEJ_COUNT p_shapeID,
+                const int p_textureID
+                ):
+                parentID(p_parentID),
+                shapeID(p_shapeID),
+                textureID(p_textureID)
+            {}
+            NOCOPY(ShapeData);
+        };
+
+        ShapeData m_shapeData;
+
         struct Font
         {
             stbtt_fontinfo fontInfo;
@@ -119,11 +141,11 @@ namespace jej
         bool AddFont(const std::string& p_name);
 
 
-        int m_textureID;
+        //int m_textureID;
 
     private:
 
-        JEJ_COUNT m_shapeID;
+        //JEJ_COUNT m_shapeID;
 
         //Data of the read image
         //TextureData m_textureData;

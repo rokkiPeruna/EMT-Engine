@@ -2,6 +2,8 @@
 #include <Texture/Shape.hpp>
 #include <EntityComponentSys/Systems/TextureSystem.hpp>
 
+#include <EntityComponentSys/Entity/Entity.hpp>
+
 #include <Utility/FileHandler.hpp>
 #include <Utility/Messenger.hpp>
 #include <Utility/Assert.hpp>
@@ -14,7 +16,7 @@ namespace jej
         Component(p_entity),
         m_fontData(),
         m_texData(),
-        m_shapeID(p_shapeID)
+        m_shapeData(p_entity->GetID(), p_shapeID, -1)
     {
 
     }
@@ -23,7 +25,7 @@ namespace jej
         Component(p_entity),
         m_fontData(),
         m_texData(),
-        m_shapeID(p_shape->GetID())
+        m_shapeData(p_entity->GetID(), p_shape->GetID(), -1)
     {
 
     }

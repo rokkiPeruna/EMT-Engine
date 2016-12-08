@@ -1,5 +1,7 @@
 #include <EntityComponentSys/Systems/ShapeSystem.hpp>
 
+#include <EntityComponentSys/Components/ShapeComponent.hpp>
+
 namespace jej
 {
 
@@ -50,6 +52,17 @@ namespace jej
     }
     //////////////////////////////////////////
 
-
+    bool ShapeSystem::_setTextureID(const TextureComponent::ShapeData* p_shapeData)
+    {
+        for (const auto& itrComp : m_components)
+            if (itrComp->GetParentID() == p_shapeData->parentID)
+                for (auto& itrShape : itrComp->m_shapes)
+                    if (itrShape->GetID() == p_shapeData->shapeID)
+                    {
+                        itrShape->m_textureID = p_shapeData->textureID;
+                        return true;
+                    }
+        return false;
+    }
 
 }

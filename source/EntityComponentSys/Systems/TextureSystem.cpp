@@ -5,6 +5,9 @@
 #include <EntityComponentSys/Components/TextureComponent.hpp>
 #include <Utility/FileHandler.hpp>
 #include <Utility/Messenger.hpp>
+#include <EntityComponentSys/Systems/ShapeSystem.hpp>
+
+#include <Utility/Various.hpp>
 
 //temp
 #include <Core/Scene.hpp>
@@ -92,18 +95,19 @@ namespace jej
 
             delete[]data;
 
+            various::j_glError();
+
             if (glGetError() != GL_NO_ERROR)
             {
                 Messenger::Add(Messenger::MessageType::Error, "Texture initialization failed by OpenGL.");
-                itr->m_textureID = -1;
+                //TextureID defaulted to -1 in struct ctor //itr->m_shapeData.textureID = -1;
                 JEJ_ASSERT(false, "Texture initialization failed.");
                 return false;
             }
 
-            itr->m_textureID = static_cast<int>(tempID);
+            itr->m_shapeData.textureID = static_cast<int>(tempID);
 
-
-
+            ShapeSystem::GetInstance()._setTextureID(&itr->m_shapeData);
 
         }
         return true;

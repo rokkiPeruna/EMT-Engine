@@ -22,6 +22,8 @@ namespace jej
         //temo
         friend class TextureSystem;
 
+        friend class ShapeSystem;
+
     public:
 
        

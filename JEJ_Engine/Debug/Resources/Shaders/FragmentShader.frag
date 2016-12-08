@@ -1,4 +1,4 @@
-#version 110
+#version 130
 //The fragment shader operates on each pixel on given polygon
 
 varying in vec4 v_color;

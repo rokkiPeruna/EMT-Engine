@@ -3,7 +3,7 @@
 
 #include <EntityComponentSys/Systems/System.hpp>
 
-
+#include <EntityComponentSys/Components/TextureComponent.hpp>
 
 namespace jej
 {
@@ -15,11 +15,14 @@ namespace jej
         friend class EngineObject;
         friend class RenderComponent;
         friend class System;
+        friend class TextureSystem;
 
     private:
 
         //Singleton constructor
         ShapeSystem();
+
+        bool _setTextureID(const TextureComponent::ShapeData* p_shapeData);
 
     public:
 
