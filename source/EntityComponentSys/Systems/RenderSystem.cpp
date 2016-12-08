@@ -232,7 +232,7 @@ namespace jej
                 //TODO: Add call for texture binding once someone creates texture with decent data :D
                 //_bindTexture( I take some yet undefined data in me, jee! )
                 glActiveTexture(GL_TEXTURE0);
-                glBindTexture(GL_TEXTURE_2D, shapesItr->texID ? -1 : m_defaultTexID);
+                glBindTexture(GL_TEXTURE_2D, shapesItr->m_textureID ? -1 : m_defaultTexID);
 
                 glUniform1i(glGetUniformLocation(itr->m_shaderComp->m_shaderData.programID, "sampler_texture"), 0);
 

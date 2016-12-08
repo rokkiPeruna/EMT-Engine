@@ -4,7 +4,7 @@ m_ID(++m_ShapeIDCounter),
 m_points(),
 m_shapeType(),
 m_radius(0.f),
-texID(0)
+m_textureID(-1)
 {
     _addShape(p_args...);
 }

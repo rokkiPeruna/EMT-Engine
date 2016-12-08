@@ -20,6 +20,7 @@ namespace jej
         friend class RenderComponent;
         friend class CollisionComponent;
         friend class ShapeSystem;
+        friend class TextureSystem;
 
     public:
 
@@ -42,6 +43,9 @@ namespace jej
 
 
     private:
+
+
+        std::vector<std::shared_ptr<Shape>>& _getShapes();
 
         std::vector<std::shared_ptr<Shape>> m_shapes;
 
