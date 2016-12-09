@@ -119,7 +119,7 @@ int main(int argc, char* argv[])
       auto& enemy = *myScene.GetEntityPtr("Enemy");
     
       enemy.AddComponent<jej::TransformComponent>(
-          jej::Vector2f(-0.4f, -0.4f),		//Position, we start at center of the screen
+          jej::Vector2f(-0.5f, -0.5f),		//Position, we start at center of the screen
           jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
           jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
     

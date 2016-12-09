@@ -34,6 +34,25 @@ namespace jej
 
 	void CollisionSystem::_update(const float deltaTime)
 	{
+	
+		for (const auto& AllComponents : m_components)
+		{
+			for (const auto& ShapeCompItr : ShapeSystem::GetInstance()._getComponentsRef<ShapeComponent>())
+			{
+				if (AllComponents->m_parentID == ShapeCompItr->GetParentID())
+				{
+					for (const auto& ShapeItr : ShapeCompItr.get()->m_shapes)
+					{
+						AllComponents->m_AABB = Math::ConvexCollisionBox(&*ShapeItr,
+							EngineObject::GetInstance().GetCurrentScene()->
+							GetEntityPtr(AllComponents->m_parentID)->
+							GetComponentPtr<TransformComponent>()->position);
+						break;
+					}
+					break;
+				}
+			}
+		}
 
 		for (int i = 0; i < m_components.size(); ++i)
 		{
@@ -51,7 +70,8 @@ namespace jej
 					secondMin.y < (firstMin.x + (firstMax.y - firstMin.y)))
 				{
 					// Collision happening if all are true
-					Messenger::Add(Messenger::MessageType::Info, "Collision detected");
+					Messenger::Add(Messenger::MessageType::Info, "Collision detected between " 
+						,m_components[i]->GetID(), m_components[j]->GetID() );
 					m_components[i]->isColliding = true;
 					m_components[j]->isColliding = true;
 				}
@@ -64,26 +84,7 @@ namespace jej
 		}
 
 
-		//Fist of all.. go through all m_components
 
-		for (const auto& AllComponents : m_components)
-		{
-			for (const auto& ShapeCompItr : ShapeSystem::GetInstance()._getComponentsRef<ShapeComponent>())
-			{
-				if (AllComponents->m_parentID == ShapeCompItr->GetParentID())
-				{
-					for (const auto& ShapeItr : ShapeCompItr.get()->m_shapes)
-					{
-						AllComponents->m_AABB = Math::ConvexCollisionBox(&*ShapeItr,
-							EngineObject::GetInstance().GetCurrentScene()->
-							GetEntityPtr(AllComponents->m_parentID)->
-							GetComponentPtr<TransformComponent>()->position);
-					}
-				}
-
-			}
-
-		}
 
 
 

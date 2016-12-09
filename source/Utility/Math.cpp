@@ -7,8 +7,8 @@ namespace jej
 {
 	const std::pair<const Vector2f, const Vector2f> Math::ConvexCollisionBox(const Shape* p_shape, const Vector2f p_centerPoint)
 	{
-		Vector2f min = p_shape->GetPoints().at(0);
-		Vector2f max = p_shape->GetPoints().at(0);
+		Vector2f min = {0, 0};
+		Vector2f max = {0, 0};
 		
 		if (p_shape->GetType() == ShapeType::Circle)
 		{
