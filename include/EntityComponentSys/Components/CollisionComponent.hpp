@@ -33,7 +33,7 @@ namespace jej
 		// CollisionComponent's own parameters. Includes min and max value of the AABB box
 		// for each CC.
 		std::pair<Vector2f, Vector2f> m_AABB;
-
+		bool isColliding;
 	};
 
 
