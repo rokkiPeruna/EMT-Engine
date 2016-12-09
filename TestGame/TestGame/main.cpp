@@ -150,7 +150,7 @@ int main(int argc, char* argv[])
       enemy.AddComponent<jej::CollisionComponent>();
 
 
-#if 1
+#if 0
 
     auto& tex = myCharacter.AddComponent<jej::TextureComponent>(s.GetID());
 
@@ -164,7 +164,7 @@ int main(int argc, char* argv[])
         jej::Messenger::Add(jej::Messenger::MessageType::Warning, "image loading unsuccessful");
 #endif
 
-#if 1
+#if 0
 
     if (tex.AddFont("Textures/Bungee_Regular.ttf"))
         jej::Messenger::Add(jej::Messenger::MessageType::Info, "font loaded successfully");

@@ -100,7 +100,7 @@ namespace jej
     //////////////////////////////////////////
 
 
-    bool FileHandler::ReadImage(TextureComponent::tempData* p_data)
+    bool FileHandler::ReadImage(TextureComponent::TextureData* p_data)
     {
         JEJ_ASSERT(!p_data->name.empty(), "No texture name given");
 
