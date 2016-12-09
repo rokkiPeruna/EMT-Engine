@@ -6,6 +6,9 @@
 #include <Core/EngineObject.hpp>
 #include <Core/Scene.hpp>
 
+//TEMP 
+#include <iostream>
+
 namespace jej
 {
 	std::vector<std::shared_ptr<CollisionComponent>> CollisionSystem::m_components;
@@ -34,25 +37,21 @@ namespace jej
 
 	void CollisionSystem::_update(const float deltaTime)
 	{
-	
+		
 		for (const auto& AllComponents : m_components)
 		{
 			for (const auto& ShapeCompItr : ShapeSystem::GetInstance()._getComponentsRef<ShapeComponent>())
 			{
 				if (AllComponents->m_parentID == ShapeCompItr->GetParentID())
 				{
-					for (const auto& ShapeItr : ShapeCompItr.get()->m_shapes)
-					{
-						AllComponents->m_AABB = Math::ConvexCollisionBox(&*ShapeItr,
+						AllComponents->m_AABB = Math::ConvexCollisionBox(*ShapeCompItr,
 							EngineObject::GetInstance().GetCurrentScene()->
 							GetEntityPtr(AllComponents->m_parentID)->
 							GetComponentPtr<TransformComponent>()->position);
-						break;
-					}
-					break;
 				}
 			}
 		}
+		
 
 		for (int i = 0; i < m_components.size(); ++i)
 		{
@@ -64,14 +63,16 @@ namespace jej
 				const Vector2f secondMin = m_components[j].get()->m_AABB.first;
 				const Vector2f secondMax = m_components[j].get()->m_AABB.second;
 
+					
 				if (firstMin.x < (secondMin.x + (secondMax.x - secondMin.x)) &&
 					secondMin.x < (firstMin.x + (firstMax.x - firstMin.x)) &&
+
 					firstMin.y < (secondMin.y + (secondMax.y - secondMin.y)) &&
-					secondMin.y < (firstMin.x + (firstMax.y - firstMin.y)))
+					secondMin.y < (firstMin.y + (firstMax.y - firstMin.y)))
 				{
 					// Collision happening if all are true
-					Messenger::Add(Messenger::MessageType::Info, "Collision detected between " 
-						,m_components[i]->GetID(), m_components[j]->GetID() );
+					Messenger::Add(Messenger::MessageType::Info, "Collision detected between ");
+				
 					m_components[i]->isColliding = true;
 					m_components[j]->isColliding = true;
 				}

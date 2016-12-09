@@ -15,7 +15,7 @@ namespace jej
 		~Math();
 		
 		// Calculates AABB box over all shapes of Entity.
-		static const std::pair<const Vector2f, const Vector2f> ConvexCollisionBox(const Shape* p_shape, const Vector2f p_centerPoint = { 0, 0 });
+		static const std::pair<const Vector2f, const Vector2f> ConvexCollisionBox(const ShapeComponent& p_shapes, const Vector2f p_centerPoint = { 0, 0 });
 
 	private:
 		
