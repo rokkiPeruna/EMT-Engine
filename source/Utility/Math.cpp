@@ -32,6 +32,13 @@ namespace jej
 				max.y = itr.y;
 		}
 
+		min.x += p_centerPoint.x;
+		min.y += p_centerPoint.y;
+
+		max.x += p_centerPoint.x;
+		max.y += p_centerPoint.y;
+
+
 		return std::make_pair(min, max);
 	}
 }

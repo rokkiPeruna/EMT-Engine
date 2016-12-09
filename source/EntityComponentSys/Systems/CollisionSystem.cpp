@@ -48,6 +48,13 @@ namespace jej
 				{
 					// Collision happening if all are true
 					Messenger::Add(Messenger::MessageType::Info, "Collision detected");
+					m_components[i]->isColliding = true;
+					m_components[j]->isColliding = true;
+				}
+				else
+				{
+					m_components[i]->isColliding = false;
+					m_components[j]->isColliding = false;
 				}
 			}
 
