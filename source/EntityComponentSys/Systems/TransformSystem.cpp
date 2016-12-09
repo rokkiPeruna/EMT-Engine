@@ -40,7 +40,10 @@ namespace jej
             {
                 itr->hasChanged = true;
             }
-            else{itr->hasChanged = false;}
+            else
+            {
+                itr->hasChanged = false;
+            }
         }
     }
     //////////////////////////////////////////

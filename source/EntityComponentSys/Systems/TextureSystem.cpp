@@ -91,7 +91,7 @@ namespace jej
                 itr->m_texData.x,
                 itr->m_texData.y,
                 0, GL_RGBA, GL_UNSIGNED_BYTE,
-                data);
+                &data[0]);
 
             delete[]data;
 
