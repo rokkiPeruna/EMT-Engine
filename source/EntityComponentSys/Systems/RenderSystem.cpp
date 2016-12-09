@@ -214,27 +214,26 @@ namespace jej
                 //Bind indices to element array buffer
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, drawData.indicesBuffer.at(shapeType));
 
+                //Init attribute pointers //TODO: If attributes increase, handle this in loop
 
                 glBindBuffer(GL_ARRAY_BUFFER, drawData.vertexPosBuffer.at(shapeType));
+                //glVertexAttribPointer(drawData.vertexPositionIndex, 2, GL_FLOAT, GL_FALSE, sizeof(jej::Vector2f), 0);
+
+
                 glBindBuffer(GL_ARRAY_BUFFER, drawData.texCoordBuffer.at(shapeType));
-
-                //Init attribute pointers //TODO: If attributes increase, handle this in loop
-                //glVertexAttribPointer(drawData.vertexPositionIndex, 2, GL_FLOAT, GL_FALSE, 0, &drawData.vertexPosBuffer.at(shapeType));
-                glVertexAttribPointer(drawData.vertexPositionIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
-
-
-                glVertexAttribPointer(drawData.textureCoordIndex, 2, GL_FLOAT, GL_FALSE, 0, &drawData.texCoordBuffer.at(shapeType));
-                //glVertexAttribPointer(drawData.textureCoordIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
-
-                //glVertexAttribPointer(drawData.textureCoordIndex, 2, GL_FLOAT, GL_FALSE, 0, &drawData.texCoordBuffer.at(shapeType));
-                glVertexAttribPointer(drawData.textureCoordIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
+                //glVertexAttribPointer(drawData.textureCoordIndex, 2, GL_FLOAT, GL_FALSE, sizeof(jej::Vector2f), &drawData.texCoordBuffer.at(shapeType));
 
                 //TODO: Add call for texture binding once someone creates texture with decent data :D
                 //_bindTexture( I take some yet undefined data in me, jee! )
-                glActiveTexture(GL_TEXTURE0);
-                glBindTexture(GL_TEXTURE_2D, shapesItr->m_textureID ? -1 : m_defaultTexID);
+                GLuint textureHandle = m_defaultTexID;
 
-                glUniform1i(glGetUniformLocation(itr->m_shaderComp->m_shaderData.programID, "sampler_texture"), 0);
+                glBindTexture(GL_TEXTURE_2D, textureHandle);
+                glActiveTexture(GL_TEXTURE0); //TODO: Add texture offset
+                
+                //GLuint textureHandle = shapesItr->m_textureID == -1 ? m_defaultTexID : shapesItr->m_textureID;
+
+
+                glUniform1i(glGetUniformLocation(itr->m_shaderComp->m_shaderData.programID, "sampler_texture"), 0);//TODO: Zero needs to be changed to texture offset
 
 
                 //TODO: For Juho: Problem as second triangle is not showing
@@ -242,7 +241,7 @@ namespace jej
                 glDrawElements(
                     GL_TRIANGLES,				            //What type are we drawing, everything is made of triangles so no need to change this!? Maybe triangle stripes
                     drawData.indices.at(shapeType).size(),	//How many indices our entity has
-                    GL_UNSIGNED_SHORT,			            //What type those indices are, assume we don't have millions of indices in our entity
+                    GL_UNSIGNED_SHORT,			            //What type those indices are, assume we don't have millions of indices in our entity's shape
                     0							            //Normally this is a pointer to indice storage, but because our binding above, this is offset of where to start reading indices, so start at first index
                     );
 
@@ -250,6 +249,7 @@ namespace jej
                 //Unbind buffers
                 glBindBuffer(GL_ARRAY_BUFFER, 0);
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+                glBindTexture(GL_TEXTURE_2D, 0);
 
             }
 
@@ -476,7 +476,13 @@ namespace jej
                     //
 
                     //TODO: Figure out why shape must be drawn with texture coordinates
-                    itr->m_myDrawData.textureCoords.at(shapeType) = itr->m_myDrawData.vertices.at(shapeType);
+                    //itr->m_myDrawData.textureCoords.at(shapeType) = itr->m_myDrawData.vertices.at(shapeType);
+                    itr->m_myDrawData.textureCoords.at(shapeType) = 
+                    {0.0f, 0.0f,
+                     1.0f, 0.0f,
+                     1.0f, 1.0f,
+                     0.0f, 1.0f
+                     };
                     break;
                 }
 
@@ -511,7 +517,12 @@ namespace jej
                     vertices->emplace_back(shapesItr->m_points.at(2).y + itr->m_transformComp->position.y);
 
                     //
-                    itr->m_myDrawData.textureCoords.at(shapeType) = itr->m_myDrawData.vertices.at(shapeType);
+                    //itr->m_myDrawData.textureCoords.at(shapeType) = itr->m_myDrawData.vertices.at(shapeType);
+                    itr->m_myDrawData.textureCoords.at(shapeType) =
+                    { 0.0f, 0.0f,
+                    1.0f, 1.0f,
+                    1.0f, 0.0f
+                    };
                     break;
                 }
 
@@ -580,6 +591,8 @@ namespace jej
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         glGenTextures(1, &m_defaultTexID);
 
+        
+
         if (m_defaultTexID)
         {
             glBindTexture(GL_TEXTURE_2D, m_defaultTexID);
@@ -589,7 +602,7 @@ namespace jej
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         }
-
+        
 
         return true;
     }
@@ -637,7 +650,13 @@ namespace jej
                         //
 
                         //TODO: Figure out why shape must be drawn with texture coordinates
-                        itr->m_myDrawData.textureCoords.at(shapeType) = itr->m_myDrawData.vertices.at(shapeType);
+                        //itr->m_myDrawData.textureCoords.at(shapeType) = itr->m_myDrawData.vertices.at(shapeType);
+                        //itr->m_myDrawData.textureCoords.at(shapeType) =
+                        //{ 0.0f, 0.0f,
+                        //0.0f, 1.0f,
+                        //1.0f, 1.0f,
+                        //1.0f, 0.0f
+                        //};
                         break;
                     }
 
@@ -659,7 +678,13 @@ namespace jej
                         vertices->at(5) = shapesItr->m_points.at(2).y + itr->m_transformComp->position.y;
 
                         //
-                        itr->m_myDrawData.textureCoords.at(shapeType) = itr->m_myDrawData.vertices.at(shapeType);
+                        //itr->m_myDrawData.textureCoords.at(shapeType) = itr->m_myDrawData.vertices.at(shapeType);
+                        //itr->m_myDrawData.textureCoords.at(shapeType) =
+                        //{ 0.0f, 0.0f,
+                        //0.0f, 1.0f,
+                        //1.0f, 1.0f
+                        //};
+                        
                         break;
                     }
 
@@ -679,9 +704,9 @@ namespace jej
                     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(drawData.vertices.at(shapeType)[0]) * drawData.vertices.at(shapeType).size(), drawData.vertices.at(shapeType).data());
                     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-                    glBindBuffer(GL_ARRAY_BUFFER, drawData.texCoordBuffer.at(shapeType));
-                    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(drawData.textureCoords.at(shapeType)[0]) * drawData.textureCoords.at(shapeType).size(), drawData.textureCoords.at(shapeType).data());
-                    glBindBuffer(GL_ARRAY_BUFFER, 0);
+                    //glBindBuffer(GL_ARRAY_BUFFER, drawData.texCoordBuffer.at(shapeType));
+                    //glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(drawData.textureCoords.at(shapeType)[0]) * drawData.textureCoords.at(shapeType).size(), drawData.textureCoords.at(shapeType).data());
+                    //glBindBuffer(GL_ARRAY_BUFFER, 0);
                           
                 }
             }

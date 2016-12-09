@@ -20,7 +20,6 @@ main()
 	gl_Position.z = 0;
 	gl_Position.w = 1.0;
 	v_color = a_color;
-	//v_color = vec4(0,0,1,1);
 	v_texCoordinate = a_texCoordinate;
 	
 }
