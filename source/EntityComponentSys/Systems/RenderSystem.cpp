@@ -227,8 +227,8 @@ namespace jej
                 //_bindTexture( I take some yet undefined data in me, jee! )
                 GLuint textureHandle = m_defaultTexID;
 
-                glBindTexture(GL_TEXTURE_2D, textureHandle);
                 glActiveTexture(GL_TEXTURE0); //TODO: Add texture offset
+                glBindTexture(GL_TEXTURE_2D, textureHandle);
                 
                 //GLuint textureHandle = shapesItr->m_textureID == -1 ? m_defaultTexID : shapesItr->m_textureID;
 
@@ -519,9 +519,10 @@ namespace jej
                     //
                     //itr->m_myDrawData.textureCoords.at(shapeType) = itr->m_myDrawData.vertices.at(shapeType);
                     itr->m_myDrawData.textureCoords.at(shapeType) =
-                    { 0.0f, 0.0f,
-                    1.0f, 1.0f,
-                    1.0f, 0.0f
+                    { 
+					0.0f, 0.0f,
+                    1.0f, 0.0f,
+                    1.0f, 1.0f
                     };
                     break;
                 }
@@ -602,6 +603,8 @@ namespace jej
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         }
+
+		
         
 
         return true;
