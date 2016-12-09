@@ -1,8 +1,6 @@
 #ifndef JEJ_BASESTRUCTS_HPP
 #define JEJ_BASESTRUCTS_HPP
 
-#include <Utility/Assert.hpp>
-
 namespace jej
 {
 
@@ -45,7 +43,7 @@ namespace jej
     template <typename T>
     struct ComponentHelper
     {
-        // ComponentHelper<T>(){ static_assert(false, "Invalid ComponentHelper type."); };
+         ComponentHelper<T>(){ static_assert(false, "Invalid ComponentHelper type."); };
     };
 
     template <>

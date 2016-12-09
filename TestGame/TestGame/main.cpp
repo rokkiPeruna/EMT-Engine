@@ -30,7 +30,8 @@ int main(int argc, char* argv[])
 
     //Create scene in which you can put entities.
     //Scene can be start menu, game level, credits ec.
-    jej::Scene myScene;
+
+	auto& myScene = *game.CreateScene(true, "My Scene Name");
 
     //Add new entity to the newly created scene
     myScene.AddEntity("Character");
@@ -81,7 +82,7 @@ int main(int argc, char* argv[])
 
     ////Now we can add shape to our ShapeComponent. AddShape - method works intuitively. As we now
     ////add three points, AddShape knows we are making a triangle.
-    myShapeComp.AddShape(std::vector<jej::Vector2f>
+    auto& s = myShapeComp.AddShape(std::vector<jej::Vector2f>
     {
         jej::Vector2f(0.f, 0.3f),		//First point, middle of screen
             jej::Vector2f(0.2f, 0.5f),		//Second point, upper-right corner
@@ -89,7 +90,7 @@ int main(int argc, char* argv[])
     }
     );
 
-    auto& s = myShapeComp.AddShape(
+    myShapeComp.AddShape(
         jej::Vector2f(0.3f, 0.3f)
         );
 
@@ -113,64 +114,63 @@ int main(int argc, char* argv[])
 
 
 
-    myScene.AddEntity("Enemy");
+      myScene.AddEntity("Enemy");
+    
+      auto& enemy = *myScene.GetEntityPtr("Enemy");
+    
+      enemy.AddComponent<jej::TransformComponent>(
+          jej::Vector2f(-0.4f, -0.4f),		//Position, we start at center of the screen
+          jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
+          jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
+    
+          );
+    
+      enemy.AddComponent<jej::ShaderComponent>(
+          "PixelShader.frag",			//First we must give vertex shader name and file extension
+          "VertexShader.vert"			//Second we guve fragment shader name and file extencion
+          );
+    
+      auto& enemyShapeComp = enemy.AddComponent<jej::ShapeComponent>(
+          jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
+          );
+    
+      auto& shape = enemyShapeComp.AddShape(std::vector<jej::Vector2f>
+      {
+          jej::Vector2f(0.0f, 0.5f),		//First point, middle of screen
+              jej::Vector2f(0.2f, 0.3f),		//Second point, upper-right corner
+              jej::Vector2f(-0.2f, 0.3f)        //Third point, lower-right corner
+      }
+      );
+    
+      enemyShapeComp.AddShape(
+          jej::Vector2f(0.3f, 0.3f)
+          );
+    
+      enemy.AddComponent<jej::RenderComponent>();
+      enemy.AddComponent<jej::CollisionComponent>();
 
-    auto& enemy = *myScene.GetEntityPtr("Enemy");
 
-    enemy.AddComponent<jej::TransformComponent>(
-        jej::Vector2f(-0.5f, -0.25f),		//Position, we start at center of the screen
-        jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
-        jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
-
-        );
-
-    enemy.AddComponent<jej::ShaderComponent>(
-        "PixelShader.frag",			//First we must give vertex shader name and file extension
-        "VertexShader.vert"			//Second we guve fragment shader name and file extencion
-        );
-
-    auto& enemyShapeComp = enemy.AddComponent<jej::ShapeComponent>(
-        jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
-        );
-
-    auto& shape = enemyShapeComp.AddShape(std::vector<jej::Vector2f>
-    {
-        jej::Vector2f(0.0f, 0.5f),		//First point, middle of screen
-            jej::Vector2f(0.2f, 0.3f),		//Second point, upper-right corner
-            jej::Vector2f(-0.2f, 0.3f)        //Third point, lower-right corner
-    }
-    );
-
-    enemyShapeComp.AddShape(
-        jej::Vector2f(0.3f, 0.3f)
-        );
-
-    enemy.AddComponent<jej::RenderComponent>();
-    enemy.AddComponent<jej::CollisionComponent>();
-
-
-
-#if 1
-
-    auto& tex = myCharacter.AddComponent<jej::TextureComponent>(s.GetID());
-
-#endif
-
-#if 1
-
-    if (tex.AddImage("untitled.png"))
-        jej::Messenger::Add(jej::Messenger::MessageType::Info, "image loaded successfully");
-    else
-        jej::Messenger::Add(jej::Messenger::MessageType::Warning, "image loading unsuccessful");
-#endif
-
-#if 0
-
-    if (tex.AddFont("Textures/Bungee_Regular.ttf"))
-        jej::Messenger::Add(jej::Messenger::MessageType::Info, "font loaded successfully");
-    else
-        jej::Messenger::Add(jej::Messenger::MessageType::Warning, "font loading unsuccessful");
-#endif
+//#if 1
+//
+//    auto& tex = myCharacter.AddComponent<jej::TextureComponent>(s.GetID());
+//
+//#endif
+//
+//#if 1
+//
+//    if (tex.AddImage("Capture.png"))
+//        jej::Messenger::Add(jej::Messenger::MessageType::Info, "image loaded successfully");
+//    else
+//        jej::Messenger::Add(jej::Messenger::MessageType::Warning, "image loading unsuccessful");
+//#endif
+//
+//#if 0
+//
+//    if (tex.AddFont("Textures/Bungee_Regular.ttf"))
+//        jej::Messenger::Add(jej::Messenger::MessageType::Info, "font loaded successfully");
+//    else
+//        jej::Messenger::Add(jej::Messenger::MessageType::Warning, "font loading unsuccessful");
+//#endif
 
 
     auto& mouse = jej::Mouse::GetInstance();
@@ -178,8 +178,8 @@ int main(int argc, char* argv[])
 
     //Finalize EngineObject
     game.Finalize();
-    bool loop = true;
-    while (loop)
+	bool loop = true;
+    while(loop)
     {
         game.EngineUpdate();
 
@@ -196,10 +196,11 @@ int main(int argc, char* argv[])
 
         if (keyboard.IsKeyPressed(jej::Keyboard::Key::W))
             charLocChange->position.y += 0.05f;
+        
+		if (keyboard.IsKeyPressed(jej::Keyboard::Key::Escape))
+			loop = false;
 
-        if (keyboard.IsKeyPressed(jej::Keyboard::Key::Escape))
-            loop = false;
-        //break;
+		//break;
         //std::cout << mouse.GetMousePosition().x << "   " << mouse.GetMousePosition().y << std::endl;
 
     }

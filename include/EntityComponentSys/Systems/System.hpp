@@ -28,7 +28,7 @@ namespace jej
 
         //For modifying containers
         friend class RenderComponent;
-        friend class CollisionComponent;
+		friend class CollisionSystem;
 
     public:
 

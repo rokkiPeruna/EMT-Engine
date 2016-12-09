@@ -18,7 +18,7 @@ namespace jej
         //in SystemFinalize()
         friend class RenderSystem;
         friend class RenderComponent;
-        friend class CollisionComponent;
+        friend class CollisionSystem;
         friend class ShapeSystem;
         friend class TextureSystem;
 

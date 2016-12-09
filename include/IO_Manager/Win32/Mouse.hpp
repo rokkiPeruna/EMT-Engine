@@ -2,6 +2,7 @@
 #define JEJ_MOUSE_HPP
 
 #include <Core/BaseStructs.hpp>
+#include <Core/Settings.hpp>
 
 namespace jej
 {
