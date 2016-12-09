@@ -7,6 +7,7 @@
 
 #include <Utility/FileHandler.hpp>
 #include <Utility/Messenger.hpp>
+#include <Utility/Assert.hpp>
 
 
 #define STB_TRUETYPE_IMPLEMENTATION

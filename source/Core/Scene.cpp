@@ -5,8 +5,15 @@
 namespace jej
 {
 
-    Scene::Scene() :
-        m_entities()
+
+	JEJ_COUNT Scene::m_sceneCounter = 0u;
+    
+	
+	Scene::Scene(const std::string& p_name) :
+		m_name(p_name),
+		m_ID(++m_sceneCounter),
+        m_entities(),
+		m_active(false)
     {
 
     }
@@ -29,7 +36,7 @@ namespace jej
 
     Entity* Scene::GetEntityPtr(const std::string& p_name)
     {
-        for (auto itr : m_entities)
+        for (auto& itr : m_entities)
             if (itr->m_name == p_name)
                 return itr.get();
 
@@ -38,7 +45,7 @@ namespace jej
 
     Entity* Scene::GetEntityPtr(const unsigned int p_ID)
     {
-        for (auto itr : m_entities)
+        for (auto& itr : m_entities)
             if (itr->m_entityID == p_ID)
                 return itr.get();
 
@@ -47,7 +54,7 @@ namespace jej
 
     const Entity* Scene::GetEntityPtr(const std::string& p_name) const
     {
-        for (auto itr : m_entities)
+        for (const auto& itr : m_entities)
             if (itr->m_name == p_name)
                 return itr.get();
 
@@ -56,7 +63,7 @@ namespace jej
 
     const Entity* Scene::GetEntityPtr(const unsigned int p_ID) const
     {
-        for (auto itr : m_entities)
+        for (const auto& itr : m_entities)
             if (itr->m_entityID == p_ID)
                 return itr.get();
 
@@ -65,7 +72,7 @@ namespace jej
 
     bool Scene::HasEntity(const std::string& p_name)
     {
-        for (auto itr : m_entities)
+        for (const auto& itr : m_entities)
             if (itr->m_name == p_name)
                 return true;
 
@@ -74,7 +81,7 @@ namespace jej
 
     bool Scene::HasEntity(const unsigned int p_ID)
     {
-        for (auto itr : m_entities)
+		for (const auto& itr : m_entities)
             if (itr->m_entityID == p_ID)
                 return true;
 
@@ -83,7 +90,7 @@ namespace jej
 
     bool Scene::RemoveEntity(const std::string& p_name)
     {
-        for (auto itr = m_entities.begin(); itr != m_entities.end(); ++itr)
+        for (auto& itr = m_entities.begin(); itr != m_entities.end(); ++itr)
             if (itr->get()->m_name == p_name)
             {
                 m_entities.erase(itr);
@@ -94,7 +101,7 @@ namespace jej
 
     bool Scene::RemoveEntity(const unsigned int p_ID)
     {
-        for (auto itr = m_entities.begin(); itr != m_entities.end(); ++itr)
+        for (auto& itr = m_entities.begin(); itr != m_entities.end(); ++itr)
             if (itr->get()->m_entityID == p_ID)
             {
                 m_entities.erase(itr);

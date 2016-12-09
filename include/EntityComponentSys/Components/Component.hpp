@@ -4,6 +4,7 @@
 #include <Core/BaseStructs.hpp>
 
 //One does not simply #include <Core/Settings.hpp> here
+#include <Core/Settings.hpp>
 
 #include <string>
 #include <vector>

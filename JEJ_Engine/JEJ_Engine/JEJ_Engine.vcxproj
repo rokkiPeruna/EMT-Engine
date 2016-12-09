@@ -152,6 +152,7 @@
     <ClInclude Include="..\..\include\Texture\Shape.hpp" />
     <ClInclude Include="..\..\include\Utility\Assert.hpp" />
     <ClInclude Include="..\..\include\Utility\FileHandler.hpp" />
+    <ClInclude Include="..\..\include\Utility\Math.hpp" />
     <ClInclude Include="..\..\include\Utility\Messenger.hpp" />
     <ClInclude Include="..\..\include\Utility\Random.hpp" />
     <ClInclude Include="..\..\include\Utility\Various.hpp" />

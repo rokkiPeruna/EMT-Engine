@@ -317,6 +317,9 @@
     <ClInclude Include="..\..\include\EntityComponentSys\Systems\CollisionSystem.hpp">
       <Filter>Header Files\EntityComponentSystem\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\Utility\Math.hpp">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\include\Utility\Inl\Messenger.inl">

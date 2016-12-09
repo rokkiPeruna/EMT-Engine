@@ -2,6 +2,7 @@
 #define JEJ_SHAPE_HPP
 
 #include <Core/BaseStructs.hpp>
+#include <Core/Settings.hpp>
 
 #include <vector>
 

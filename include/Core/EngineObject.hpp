@@ -2,6 +2,7 @@
 #define JEJ_ENGINEOBJECT_HPP
 
 #include <Core/Settings.hpp>
+#include <Core/BaseStructs.hpp>
 
 #include <memory>
 #include <string>
@@ -74,9 +75,19 @@ namespace jej //NAMESPACE jej
         //Mother of all updates
         void EngineUpdate();
 
+		Scene* CreateScene(const bool p_active, const std::string& p_name = "");
+
+		Scene* SetCurrentScene(const JEJ_COUNT p_ID);
+
+		Scene* GetCurrentScene();
+		const Scene* GetCurrentScene() const;
+
+		bool RemoveScene(const JEJ_COUNT p_ID);
+
         std::shared_ptr<Graphics>& GetGraphicsRef();
         std::shared_ptr<Scene>& GetSceneRef();
-        std::shared_ptr<Window>& GetWindowRef();
+		const std::shared_ptr<Scene>& GetSceneRef() const; 
+		std::shared_ptr<Window>& GetWindowRef();
 
 
         //#ifdef JEJ_DEBUG_MODE
@@ -89,8 +100,9 @@ namespace jej //NAMESPACE jej
         //Pointer to each system, populated in Initialize
         std::tuple<CollisionSystem*, RenderSystem*, ShaderSystem*, ShapeSystem*, TextureSystem*, TransformSystem*> m_systems;
 
-        std::shared_ptr<Scene> m_currentScene;
-        std::shared_ptr<Window> m_windowPtr;
+		std::vector<std::shared_ptr<Scene>> m_scenes;
+        std::shared_ptr<Window> m_windowPtr; 
+		JEJ_COUNT m_currentSceneID;
 
     public:
 

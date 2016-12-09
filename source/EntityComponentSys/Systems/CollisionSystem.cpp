@@ -1,23 +1,27 @@
+#include <EntityComponentSys/Systems/ShapeSystem.hpp>
 #include <EntityComponentSys/Systems/CollisionSystem.hpp>
+#include <EntityComponentSys/Components/ShapeComponent.hpp>
+#include <Utility/Math.hpp>
 #include <Utility/Messenger.hpp>
-
+#include <Core/EngineObject.hpp>
+#include <Core/Scene.hpp>
 
 namespace jej
 {
-    std::vector<std::shared_ptr<CollisionComponent>> CollisionSystem::m_components;
+	std::vector<std::shared_ptr<CollisionComponent>> CollisionSystem::m_components;
 
 	CollisionSystem::CollisionSystem()
 	{
 
 	}
-    //////////////////////////////////////////
+	//////////////////////////////////////////
 
 
 	CollisionSystem::~CollisionSystem()
 	{
 
 	}
-    //////////////////////////////////////////
+	//////////////////////////////////////////
 
 
 	CollisionSystem& CollisionSystem::GetInstance()
@@ -25,12 +29,12 @@ namespace jej
 		static CollisionSystem instance;
 		return instance;
 	}
-    //////////////////////////////////////////
+	//////////////////////////////////////////
 
 
 	void CollisionSystem::_update(const float deltaTime)
 	{
-		
+
 		for (int i = 0; i < m_components.size(); ++i)
 		{
 			const Vector2f firstMin = m_components[i].get()->m_AABB.first;
@@ -57,24 +61,55 @@ namespace jej
 					m_components[j]->isColliding = false;
 				}
 			}
+		}
+
+
+		//Fist of all.. go through all m_components
+
+		for (const auto& AllComponents : m_components)
+		{
+			for (const auto& ShapeCompItr : ShapeSystem::GetInstance()._getComponentsRef<ShapeComponent>())
+			{
+				if (AllComponents->m_parentID == ShapeCompItr->GetParentID())
+				{
+					for (const auto& ShapeItr : ShapeCompItr.get()->m_shapes)
+					{
+						AllComponents->m_AABB = Math::ConvexCollisionBox(&*ShapeItr,
+							EngineObject::GetInstance().GetCurrentScene()->
+							GetEntityPtr(AllComponents->m_parentID)->
+							GetComponentPtr<TransformComponent>()->position);
+					}
+				}
+
+			}
 
 		}
+
+
+
+
+
+
+
+
+
+
 	}
-    //////////////////////////////////////////
+	//////////////////////////////////////////
 
 
-    bool CollisionSystem::_finalize()
-    {
-        //TODO:
-        return true;
-    }
-    //////////////////////////////////////////
+	bool CollisionSystem::_finalize()
+	{
+		//TODO:
+		return true;
+	}
+	//////////////////////////////////////////
 
-    bool CollisionSystem::_initialize()
-    {
-        //TODO:
-        return true;
-    }
-    //////////////////////////////////////////
+	bool CollisionSystem::_initialize()
+	{
+		//TODO:
+		return true;
+	}
+	//////////////////////////////////////////
 
 }

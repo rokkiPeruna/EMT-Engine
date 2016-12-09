@@ -24,9 +24,8 @@ namespace jej
 
         //TODO temp remnove
         friend class TextureSystem;
+		friend class EngineObject;
 
-        //Constructor
-        Scene();
 
         //Disabled copy-constructors
         NOCOPY(Scene);
@@ -37,7 +36,6 @@ namespace jej
         //Don't give user access to shared_ptrs
         //std::vector<std::shared_ptr<Entity>>* GetEntities();
 
-        //Entities
 
         //Add a component to the given entity
         Entity& AddEntity(const std::string& p_name = "");
@@ -58,6 +56,9 @@ namespace jej
         bool RemoveEntity(const std::string& p_name);
         bool RemoveEntity(const unsigned int p_ID);
 
+        //Constructor
+        Scene(const std::string& p_name = "");
+
     private:
 
         template <typename T>
@@ -69,7 +70,13 @@ namespace jej
         template <typename T>
         bool _hasComponent(const unsigned int p_ID);
 
+        //Entities
         std::vector<std::shared_ptr<Entity>> m_entities;
+		std::string m_name;
+		JEJ_COUNT m_ID;
+		bool m_active;
+
+		static JEJ_COUNT m_sceneCounter;
 
     };
 
