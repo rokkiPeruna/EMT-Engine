@@ -91,6 +91,7 @@ namespace jej
     
     enum class ShapeType
     {
+		Failed,
         Circle,
         Rectangle,
         Convex,

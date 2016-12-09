@@ -27,7 +27,7 @@ namespace jej
         Vector4i ColorRGBA;
 
         //Constructor
-        ShapeComponent(Entity* p_entity, const Vector4i& p_color = Vector4i(1, 0, 0, 1));
+        ShapeComponent(Entity* p_entity, const Vector4i& p_color = Vector4i(0, 0, 0, 1));
 
         //Disabled copy-constructors
         NOCOPY(ShapeComponent);

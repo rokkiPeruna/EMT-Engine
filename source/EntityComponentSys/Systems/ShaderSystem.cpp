@@ -76,8 +76,8 @@ namespace jej
         //glBindAttribLocation(p_sd.programID, textureCoordIndex, "vTexCoord");
 
         _bindAttributes(p_sd.programID, p_sd.numAttribs, "a_position");
-        _bindAttributes(p_sd.programID, ++p_sd.numAttribs, "a_color");
         _bindAttributes(p_sd.programID, ++p_sd.numAttribs, "a_texCoordinate");
+        _bindAttributes(p_sd.programID, ++p_sd.numAttribs, "a_color");
 
 
         glLinkProgram(p_sd.programID);

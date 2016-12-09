@@ -194,7 +194,7 @@ namespace jej //NAMESPACE jej
 			std::get<5>(engine.m_systems)->_update(deltaTime);
 			timer.Reset();
 		}
-
+		
 		Messenger::PrintMessages();
 
 		InputManager::GetInstance()._update();

@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
 
     ////Creating:
     myCharacter.AddComponent<jej::TransformComponent>(
-        jej::Vector2f(0.25f, -0.25f),		//Position, we start at center of the screen
+        jej::Vector2f(0.0f, 0.0f),		//Position, we start at center of the screen
         jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
         jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
         );
@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
     ////As we add ShapeComponent, we take an alias at the sametime for ease of use.
 
     auto& myShapeComp = myCharacter.AddComponent<jej::ShapeComponent>(
-        jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
+        jej::Vector4i(0, 255, 0, 150)	//This is our shape's color in RGBA, so this is fully green and somewhat opaque
         );
 
 
@@ -87,7 +87,9 @@ int main(int argc, char* argv[])
         jej::Vector2f(0.f, 0.3f),		//First point, middle of screen
             jej::Vector2f(0.2f, 0.5f),		//Second point, upper-right corner
             jej::Vector2f(-0.2f, 0.5f)        //Third point, lower-right corner
+			
     }
+	//jej::Vector4i(150, 0, 50, 150)
     );
 
     myShapeComp.AddShape(
@@ -134,7 +136,7 @@ int main(int argc, char* argv[])
           jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
           );
     
-      auto& shape = enemyShapeComp.AddShape(std::vector<jej::Vector2f>
+      enemyShapeComp.AddShape(std::vector<jej::Vector2f>
       {
           jej::Vector2f(0.0f, 0.5f),		//First point, middle of screen
               jej::Vector2f(0.2f, 0.3f),		//Second point, upper-right corner

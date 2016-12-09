@@ -1,4 +1,6 @@
 #include <EntityComponentSys/Systems/TransformSystem.hpp>
+#include <string>
+#include <iostream>
 
 namespace jej
 {
@@ -39,11 +41,16 @@ namespace jej
                 itr->rotation.z != itr->previousRotation.z )
             {
                 itr->hasChanged = true;
+				std::cout << "TransformComp's position changed in TransformSystem" << std::endl;
             }
             else
             {
                 itr->hasChanged = false;
             }
+
+			itr->previousPosition = itr->position;
+			itr->previousScale = itr->scale;
+			itr->previousRotation = itr->rotation;
         }
     }
     //////////////////////////////////////////
