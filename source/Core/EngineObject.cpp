@@ -120,11 +120,11 @@ namespace jej //NAMESPACE jej
         //TODO: Initialize all systems here
         if (
             std::get<0>(engine.m_systems)->_initialize() &&
-            std::get<1>(engine.m_systems)->_initialize() &&
+            std::get<5>(engine.m_systems)->_initialize() &&
             std::get<2>(engine.m_systems)->_initialize() &&
             std::get<3>(engine.m_systems)->_initialize() &&
             std::get<4>(engine.m_systems)->_initialize() &&
-            std::get<5>(engine.m_systems)->_initialize()
+            std::get<1>(engine.m_systems)->_initialize()
             )
         {
             return true;
@@ -139,16 +139,21 @@ namespace jej //NAMESPACE jej
     {
         //TODO: Call finalize on all systems
         EngineObject& engine = EngineObject::GetInstance();
-        if (
-            std::get<0>(engine.m_systems)->_finalize() &&
-            std::get<1>(engine.m_systems)->_finalize() &&
-            std::get<2>(engine.m_systems)->_finalize() &&
-            std::get<3>(engine.m_systems)->_finalize() &&
-            std::get<4>(engine.m_systems)->_finalize() &&
-            std::get<5>(engine.m_systems)->_finalize()
-            )
-            return true;
-        return false;
+
+        if (!std::get<0>(engine.m_systems)->_finalize())
+            return false;
+        if (!std::get<5>(engine.m_systems)->_finalize())
+            return false;
+        if (!std::get<2>(engine.m_systems)->_finalize())
+            return false;
+        if (!std::get<3>(engine.m_systems)->_finalize())
+            return false;
+        if (!std::get<4>(engine.m_systems)->_finalize())
+            return false;
+        if (!std::get<1>(engine.m_systems)->_finalize())
+            return false;
+
+        return true;
     }
 
     //    void EngineObject::SetCurrentScene(const Scene& p_scene)

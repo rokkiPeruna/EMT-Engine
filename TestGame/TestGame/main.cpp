@@ -150,13 +150,13 @@ int main(int argc, char* argv[])
 
 
 
-#if 0
+#if 1
 
     auto& tex = myCharacter.AddComponent<jej::TextureComponent>(s.GetID());
 
 #endif
 
-#if 0
+#if 1
 
     if (tex.AddImage("Capture.png"))
         jej::Messenger::Add(jej::Messenger::MessageType::Info, "image loaded successfully");
