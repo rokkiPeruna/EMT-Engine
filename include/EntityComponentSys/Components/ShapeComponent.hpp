@@ -16,9 +16,9 @@ namespace jej
     {
         //Friend RenderSystem so it can create indices from m_shapes points
         //in SystemFinalize()
+		friend class Math;
         friend class RenderSystem;
         friend class RenderComponent;
-        friend class CollisionSystem;
         friend class ShapeSystem;
         friend class TextureSystem;
 
