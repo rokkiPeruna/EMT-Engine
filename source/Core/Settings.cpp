@@ -21,7 +21,7 @@ namespace jej
         };
 
 
-#elif defined ANDROID //Android GL attributes
+#elif defined __ANDROID__ //Android GL attributes
 
         const EGLint attributeList[] =
         {
@@ -40,6 +40,8 @@ namespace jej
         std::string defaultFragmentShaderFileName = "FragmentShaderTexture.frag";
 
         std::string defaultVertexShaderFileName = "VertexShader.vert";
+
+        std::string defaultErrorTextureName = "error.png";
 
     }
 

@@ -28,9 +28,14 @@ namespace jej
         //Path to executable
         extern std::string rootPath;
 
+        //Default fragment shader file name with extension
         extern std::string defaultFragmentShaderFileName;
 
+        //Default vertex shader file name with extension
         extern std::string defaultVertexShaderFileName;
+
+        //Default error texture file name with extension
+        extern std::string defaultErrorTextureName;
 
     }
 

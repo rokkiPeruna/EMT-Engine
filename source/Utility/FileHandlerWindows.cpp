@@ -86,9 +86,9 @@ namespace jej
     {
         if (!Read(p_name))
             return false;
-        
+
         p_font->fontData = new unsigned char[m_fileContents.size() - 1u];
-        
+
         for (unsigned int i = 0u; i < m_fileContents.size() - 1u; ++i)
             p_font->fontData[i] = m_fileContents[i];
 
@@ -110,33 +110,24 @@ namespace jej
             Messenger::Add(Messenger::MessageType::Error, "Texture could not be read");
             return false;
         }
-
         //Used for copying data
-        auto size = GetFileSize(m_fileHandle, NULL);
+        p_data->size = GetFileSize(m_fileHandle, NULL);
+        
         //Release handle so that stb can access the file
         _releaseHandle();
 
         //Load image
-
-        auto* data = stbi_load(
+        p_data->data = stbi_load(
             std::string(settings::rootPath + "Resources/" + imagePath).c_str(),
             &p_data->x,
             &p_data->y,
             &p_data->offset,
             0);
 
-        if (data)
-        {
-            for (unsigned int i = 0u; i < size; ++i)
-                p_data->data.emplace_back(data[i]);
-            stbi_image_free(data);
+        if (!p_data->data)
+            return false;
 
-
-            return true;
-        }
-
-
-        return false;
+        return true;
     }
     //////////////////////////////////////////
 

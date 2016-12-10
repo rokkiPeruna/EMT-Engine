@@ -51,12 +51,12 @@ namespace jej
         }
 
 
-        for (int i = 0; i < m_components.size(); ++i)
+        for (unsigned int i = 0u; i < m_components.size(); ++i)
         {
             const Vector2f firstMin = m_components[i].get()->m_AABB.first;
             const Vector2f firstMax = m_components[i].get()->m_AABB.second;
 
-            for (int j = (i + 1); j < m_components.size(); ++j)
+            for (unsigned int j = (i + 1u); j < m_components.size(); ++j)
             {
                 const Vector2f secondMin = m_components[j].get()->m_AABB.first;
                 const Vector2f secondMax = m_components[j].get()->m_AABB.second;

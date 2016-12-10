@@ -15,7 +15,7 @@ namespace jej
     TextureComponent::TextureComponent(Entity* p_entity, const JEJ_COUNT p_shapeID):
         Component(p_entity),
         m_fontData(),
-        m_texData(),
+        m_textureData(),
         m_shapeData(p_entity->GetID(), p_shapeID, -1)
     {
 
@@ -24,7 +24,7 @@ namespace jej
     TextureComponent::TextureComponent(Entity* p_entity, Shape* p_shape):
         Component(p_entity),
         m_fontData(),
-        m_texData(),
+        m_textureData(),
         m_shapeData(p_entity->GetID(), p_shape->GetID(), -1)
     {
 
@@ -83,7 +83,7 @@ namespace jej
 
     bool TextureComponent::AddImage(const std::string& p_name, const unsigned short int p_imageCount)
     {
-        m_texData.name = p_name;
+        m_textureData.name = p_name;
         return true;
      //   m_textureData.imageCount = p_imageCount;
      //   m_textureData.imageName = p_name;
@@ -104,6 +104,7 @@ namespace jej
 
     bool TextureComponent::UseImage(const unsigned int p_imageIndex)
     {
+        JEJ_ASSERT(false, "SpriteSheets not yet supported");
         FileHandler handler;
         return false;
         //return handler.ReadSingleImage(&m_textureData, m_completeImageData, p_imageIndex);

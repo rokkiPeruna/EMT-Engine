@@ -32,7 +32,6 @@ namespace jej
         //Destructor
         virtual ~TextureSystem();
 
-
         // Get the one and only instance of singleton 
         static TextureSystem& GetInstance();
 
@@ -40,18 +39,29 @@ namespace jej
 
         static std::vector<std::shared_ptr<TextureComponent>> m_components;
 
-        void _update(const float p_deltaTime) override;
-
-        // TODO: Bind texture
-        void _bind(unsigned int p_unit);
-
-        void _drawFromSheet();
-
         // Load images for components
         bool _finalize() override;
 
-        // Initialize testuresystem (don't load images here! not present yet)
+        // Initialize texturesystem (don't load images here! not present yet)
         bool _initialize() override;
+
+        //Update
+        void _update(const float p_deltaTime) override;
+
+
+    private:
+
+        //Bind texture
+        void _bindImage(TextureComponent* p_component);
+
+        //SpriteSheet stuff
+        void _drawFromSheet();
+        
+        //Font stuff
+        void _fontStuff();
+
+
+        
 
     };
 
