@@ -10,7 +10,7 @@ attribute vec4 a_color; 		// input vertex color
 
 // varying variables – input to the fragment shader
 varying vec2 v_texCoordinate;	// output vertex coordinates
-varying out vec4 v_color; 		// output vertex color
+varying vec4 v_color; 		// output vertex color
 
 
 void
