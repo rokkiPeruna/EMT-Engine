@@ -132,7 +132,6 @@ namespace jej
 		for (const auto& shaperItr : p_rendComp.m_shapeComp->m_shapes)
 		{
 
-
 			//Create alias for ease of use
 			auto& drawData = shaperItr->m_myDrawData;
 
@@ -145,19 +144,11 @@ namespace jej
 			drawData.colorValuesIndex = glGetAttribLocation(drawData.shaderProgID, "a_color");
 			drawData.textureCoordIndex = glGetAttribLocation(drawData.shaderProgID, "a_texCoordinate");
 
-			std::cout << drawData.textureCoordIndex << "   " << drawData.vertexPositionIndex << std::endl;
-
-			const auto& shapeType = shaperItr->m_shapeType;
-
-
-
 			//Indices
  			glGenBuffers(1, &drawData.indicesBuffer);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, drawData.indicesBuffer);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(drawData.indices[0]) * drawData.indices.size(), drawData.indices.data(), GL_STATIC_DRAW);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-			// @JUHO: drawData.textureCoordIndex == INT_MAX, fix pl0x
 
 			//Texture coordinates
 			glGenBuffers(1, &drawData.texCoordBuffer);
@@ -172,8 +163,6 @@ namespace jej
 				0,
 				0
 				);
-
-			// @JUHO: drawData.vertexPositionIndex == INT_MAX, fix pl0x
 
 			//Positions
 			glGenBuffers(1, &drawData.vertexPosBuffer);
