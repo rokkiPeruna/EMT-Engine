@@ -42,7 +42,7 @@ namespace jej
 
         //Read an image file, currently supports only .png files
         //p_data must have 'imagename' declared before this call
-        bool ReadImage(TextureComponent::tempData* p_data);
+        bool ReadImage(TextureComponent::TextureData* p_data);
 
         //Sets 'displayImage' in p_data to an image pointed to by p_index, calculated from size in p_data, from p_wholeImageData
         //p_data should therefore be constructed with p_wholeImageData

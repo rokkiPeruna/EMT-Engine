@@ -84,26 +84,23 @@ namespace jej
 
     bool FileHandler::ReadFontFile(const std::string& p_name, TextureComponent::Font* p_font)
     {
-        if (!_accessFile(p_name, false))
+        if (!Read(p_name))
             return false;
+        
+        p_font->fontData = new unsigned char[m_fileContents.size() - 1u];
+        
+        for (unsigned int i = 0u; i < m_fileContents.size() - 1u; ++i)
+            p_font->fontData[i] = m_fileContents[i];
 
-        auto size = GetFileSize(m_fileHandle, NULL);
-
-        unsigned char* buf = new unsigned char[size];
-
-        stbtt_InitFont(&p_font->fontInfo, buf, p_font->fontOffset);
-
-        std::memcpy(&p_font->fontData, &buf, size);
-
-        delete[] buf;
+        p_font->fontDataSize = m_fileContents.size() - 1u;
+        stbtt_InitFont(&p_font->fontInfo, p_font->fontData, p_font->fontOffset);
 
         return true;
-
     }
     //////////////////////////////////////////
 
 
-    bool FileHandler::ReadImage(TextureComponent::tempData* p_data)
+    bool FileHandler::ReadImage(TextureComponent::TextureData* p_data)
     {
         JEJ_ASSERT(!p_data->name.empty(), "No texture name given");
 

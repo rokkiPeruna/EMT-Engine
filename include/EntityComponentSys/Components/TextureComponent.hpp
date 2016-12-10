@@ -50,17 +50,6 @@ namespace jej
         //    };
         //};
 
-        struct tempData
-        {
-            std::string name;
-            int x;
-            int y;
-            int offset;
-            std::vector<unsigned char> data;
-        };
-
-        tempData m_texData;
-
         struct ShapeData
         {
             const JEJ_COUNT parentID;
@@ -73,13 +62,27 @@ namespace jej
                 const JEJ_COUNT p_parentID,
                 const JEJ_COUNT p_shapeID,
                 const int p_textureID
-                ):
+                ) :
                 parentID(p_parentID),
                 shapeID(p_shapeID),
                 textureID(p_textureID)
             {}
             NOCOPY(ShapeData);
         };
+
+
+        struct TextureData
+        {
+            std::string name;
+            int x;
+            int y;
+            int offset;
+            std::vector<unsigned char> data;
+        };
+
+        TextureData m_texData;
+
+       
 
         ShapeData m_shapeData;
 
@@ -97,7 +100,7 @@ namespace jej
                 //Free fontdata if present (also called in texcomp dtor)
                 if (fontData)
                 {
-                    stbi_image_free(fontData);
+                    delete[] fontData;
                     fontData = nullptr;
                 }
             }

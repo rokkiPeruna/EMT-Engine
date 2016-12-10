@@ -44,10 +44,7 @@ namespace jej
         RemoveComponent<TextureComponent>();
         RemoveComponent<TransformComponent>();
 
-
-        if (m_componentIDs.empty())
-            return true;
-        return false;
+        return m_componentIDs.empty();
     }
 
 }
