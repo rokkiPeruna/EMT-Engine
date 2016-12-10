@@ -1,8 +1,11 @@
-#version 110
+#version 130
 
 precision mediump float;
-varying vec2 texCoord;
+varying vec2 v_texCoordinate;
+varying vec4 v_color; // output vertex color
+uniform sampler2D sampler_texture;
 void main()
 {
-	gl_FragColor = vec4(texCoord.x, texCoord.y, 0.f, 1.0f);
+	gl_FragColor = texture2D(sampler_texture, v_texCoordinate);
+	gl_FragColor.rgb *= v_color.a;
 }

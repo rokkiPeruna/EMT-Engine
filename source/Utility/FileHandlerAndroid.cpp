@@ -5,6 +5,7 @@
 
 #ifdef __ANDROID__
 
+#include <Core/AndroidAppState.hpp>
 #include <Utility/FileHandler.hpp>
 #include <Utility/Messenger.hpp>
 
@@ -72,6 +73,18 @@ namespace jej
     }
     //////////////////////////////////////////
 
+	bool FileHandler::ReadFontFile(const std::string& p_name, TextureComponent::Font* p_font)
+	{
+		//TODO: Add Android stuff
+		return false;
+	}
+
+	bool FileHandler::ReadImage(TextureComponent::tempData* p_data)
+	{
+		//TODO: Add Android stuff
+		return false;
+	}
+	//////////////////////////////////////////
 
     bool FileHandler::Write(const std::string& name)
     {
@@ -85,9 +98,17 @@ namespace jej
     bool FileHandler::_accessFile(const std::string& p_name, const bool p_createFile)
     {
         //TODO: Needs definition on android
-        JEJ_ASSERT(false, "Needs definition on android");
+        //JEJ_ASSERT(false, "Needs definition on android");
         return false;
     }
+	//////////////////////////////////////////
+
+	void FileHandler::_releaseHandle()
+	{
+		//TODO: Add Android stuff
+	}
+
+	
 
 }
 

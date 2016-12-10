@@ -7,22 +7,16 @@
 #include <Window/Window.hpp>
 
 
-//#include <android_native_app_glue.h>
-//#include <android/sensor.h>
+#include <android/sensor.h>
+#include <android_native_app_glue.h>
 
 #include <Core/AndroidAppState.hpp>
 
 namespace jej
 {
-    //Android specific initializing data
-    struct WindowOSInitData
-    {
-        WindowOSInitData(){};
-    };
-
 
     //Forward declaring android_app - struct
-    struct android_app;
+    //struct android_app;
 
 
     //For returning to Android app's previous state
@@ -66,10 +60,10 @@ namespace jej
 
     private:
 
-        //Constructor
-        AndroidWindow();
 
     public:
+        //Constructor
+        AndroidWindow();
 
         //Disabled copy constructor
         AndroidWindow(const AndroidWindow&) = delete;

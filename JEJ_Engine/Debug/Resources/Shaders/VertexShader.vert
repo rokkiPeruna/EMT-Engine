@@ -3,7 +3,7 @@
 
 //input data from the VBO. Each vertex is 2 floats
 
-attribute vec2 a_position; 		// input position value
+attribute vec4 a_position; 		// input position value
 attribute vec2 a_texCoordinate;	// input texture coordinates
 attribute vec4 a_color; 		// input vertex color
 
@@ -16,9 +16,7 @@ varying out vec4 v_color; 		// output vertex color
 void
 main()
 {
-	gl_Position.xy = a_position.xy;
-	gl_Position.z = 0;
-	gl_Position.w = 1.0;
+	gl_Position = a_position;
 	v_color = a_color;
 	v_texCoordinate = a_texCoordinate;
 	

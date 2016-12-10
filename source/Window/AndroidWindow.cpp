@@ -3,7 +3,7 @@
 #ifdef __ANDROID__
 
 #include <EntityComponentSys/Systems/RenderSystem.hpp>
-
+#include <Core/AndroidAppState.hpp>
 
 
 #include <android/sensor.h>
@@ -12,13 +12,6 @@
 
 namespace jej
 {
-    AndroidWindow::AndroidWindow() :
-        Window()
-    {
-
-    }
-    ///////////////////////////////////////
-
 
     void AndroidWindow::engine_handle_cmd(struct android_app* app, int32_t cmd)
     {
@@ -102,13 +95,6 @@ namespace jej
 
     }
     ///////////////////////////////////////
-
-
-    bool AndroidWindow::UpdateWindowMessages()
-    {
-        return true;
-    }
-    ////////////////////////////////
 
 
     AndroidWindow& AndroidWindow::GetInstance()

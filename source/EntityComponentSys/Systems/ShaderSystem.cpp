@@ -50,21 +50,21 @@ namespace jej
 
     void ShaderSystem::_initialize(detail::ShaderData& p_sd)
     {
-
+#ifdef _WIN32
         if (!_parseShader(detail::ShaderType::Fragment, p_sd.fragmentShaderFileName))
             Messenger::Add(Messenger::MessageType::Error, "Failed to parse fragment shader ");
 
         if (!_parseShader(detail::ShaderType::Vertex, p_sd.vertexShaderFileName))
             Messenger::Add(Messenger::MessageType::Error, "Failed to parse vertex shader ");
-
+#endif
         if (!(p_sd.programID = glCreateProgram()))
         {
             Messenger::Add(Messenger::MessageType::Error, "Failed to create GL program");
             return;
         }
 
-        GLuint fragmentShader = _loadShader((p_sd.fragmentShaderFileName), GL_FRAGMENT_SHADER, detail::ShaderType::Fragment);
         GLuint vertexShader = _loadShader((p_sd.vertexShaderFileName), GL_VERTEX_SHADER, detail::ShaderType::Vertex);
+        GLuint fragmentShader = _loadShader((p_sd.fragmentShaderFileName), GL_FRAGMENT_SHADER, detail::ShaderType::Fragment);
 
         glCompileShader(fragmentShader);
         glCompileShader(vertexShader);
@@ -75,7 +75,7 @@ namespace jej
         //glBindAttribLocation(p_sd.programID, vertexPosIndex, "vPosition");
         //glBindAttribLocation(p_sd.programID, textureCoordIndex, "vTexCoord");
 
-        _bindAttributes(p_sd.programID, p_sd.numAttribs, "a_position");
+        _bindAttributes(p_sd.programID, ++p_sd.numAttribs, "a_position");
         _bindAttributes(p_sd.programID, ++p_sd.numAttribs, "a_texCoordinate");
         _bindAttributes(p_sd.programID, ++p_sd.numAttribs, "a_color");
 
@@ -118,36 +118,41 @@ namespace jej
         if (!(shader = glCreateShader(p_type)))
             Messenger::Add(Messenger::MessageType::Error, "Failed to create shader: ", p_shaderDataSource);
 
-#ifdef _WIN32
+
         const std::string shaderData = _readFile(p_shaderType, p_shaderDataSource).c_str();
 
-
-#elif defined __ANDROID__
+#ifdef __REMOVE_THISANDROID__
         std::string shaderData;
         if (p_shaderType == detail::ShaderType::Fragment)
         {
-            shaderData = "#version 110\n"
-                "\n"
-                "precision mediump float;\n"
-                "uniform sampler2D sampler_texture;\n"
-                "varying vec2 v_texCoordinate;\n"
-                "void main()\n"
-                "{\n"
-                "gl_FragColor = texture2D(sampler_texture, v_texCoordinate);\n"
-                "}";
+            shaderData = 
+                    "precision mediump float;\n"
+                    "varying vec2 v_texCoordinate;\n"
+                    "varying vec4 v_color;\n"
+                    "uniform sampler2D sampler_texture;\n"
+                    "void main()\n"
+                    "{\n"
+                    "gl_FragColor = texture2D(sampler_texture, v_texCoordinate);\n"
+                    "gl_FragColor.rgb *= v_color.a;\n"
+                    "}\n";
         }
         if (p_shaderType == detail::ShaderType::Vertex)
         {
-            shaderData = "#version 110\n"
-                "\n"
-                "attribute vec4 a_position;\n"
-                "attribute vec2 a_texCoordinate;\n"
-                "varying vec2 v_texCoordinate;\n"
-                "void main()\n"
-                "{\n"
-                "\tgl_Position = a_position;\n"
-                "\tv_texCoordinate = a_texCoordinate;\n"
-                "}";
+            shaderData = 
+                    "attribute vec2 a_position;\n"
+                    "attribute vec2 a_texCoordinate;\n"
+                    "attribute vec4 a_color;\n"
+                    "varying vec2 v_texCoordinate;\n"
+                    "varying out vec4 v_color;\n"
+                    "void\n"
+                    "main()\n"
+                    "{\n"
+                    "gl_Position.xy = a_position.xy;\n"
+                    "gl_Position.z = 0;\n"
+                    "gl_Position.w = 1.0;\n"
+                    "v_color = a_color;\n"
+                    "v_texCoordinate = a_texCoordinate;\n"
+                    "}\n";
         }
 #endif
        
@@ -158,7 +163,7 @@ namespace jej
         glCompileShader(shader);
         glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 
-        if (success == GL_FALSE)
+         if (success == GL_FALSE)
         {
             GLint maxLength = 0;
             glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
@@ -234,8 +239,7 @@ namespace jej
         const auto& data = handler.GetReadDataRef();
         return std::string(data.begin(), data.end());
 
-        std::string dummyValueForAndroid = "";
-        return dummyValueForAndroid;
+      
 
     }
     //////////////////////////////////////////

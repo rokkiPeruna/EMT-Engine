@@ -10,4 +10,4 @@ How to use:
 4. Wait for the gradle to build and possibly update itself.
 5. Build the project.
 
-6. Juho: fix the things I broke.
+6. Juho: fix the things I broke. -->FIXED

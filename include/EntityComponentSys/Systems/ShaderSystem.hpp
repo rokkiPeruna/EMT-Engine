@@ -64,9 +64,9 @@ namespace jej
 
         static std::vector<std::shared_ptr<ShaderComponent>> m_components;
 
-        void _update(const float p_deltaTime);
+        void _update(const float p_deltaTime) override;
 
-        bool _finalize();
+        bool _finalize() override;
 
         bool _initialize() override;
 

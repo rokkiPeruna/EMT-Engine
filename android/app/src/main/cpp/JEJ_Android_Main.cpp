@@ -33,6 +33,8 @@
 
 void android_main(struct android_app* state)
 {
+    //Critical for Android game
+    //Sets phone's inner state qualities to easily reachable static variable for Engine to use
     AndroidAppState app(state);
 
     jej::WindowOSInitData engine;
@@ -60,9 +62,10 @@ void android_main(struct android_app* state)
 
     // Make sure glue isn't stripped.
     app_dummy();
-    //AndroidAppState app(state);
+
     jej::AndroidWindow::GetInstance().SetWinOSData(engine);
-// Read all pending events.
+
+    // Read all pending events.
     int ident;
     int events;
     struct android_poll_source* source;
@@ -92,7 +95,7 @@ void android_main(struct android_app* state)
     //Create scene in which you can put entities.
     //Scene can be start menu, game level, credits ec.
     jej::Scene myScene;
-
+///////////////////////////////CUT FOR COPYING TO ANDROID
     //Add new entity to the newly created scene
     myScene.AddEntity("Character");
 
@@ -100,81 +103,114 @@ void android_main(struct android_app* state)
     auto& myCharacter = *myScene.GetEntityPtr("Character");
 
 
-    //Start adding components to our entity
-    //Entity has template method AddComponent which allows you to add all kinds of components
-    //AddComponent takes as typename a component name that is available with jej::SomeComponent - style syntax
-    //Every different component has a different parameter list so be sure what you're giving to your component
-    //In this example, TransformComponent is created as parameter of Entity's AddComponent - method and is then added
-    //to myCharacter:
+    //auto& texcomp = myCharacter.AddComponent<jej::TextureComponent>();
 
-    //Creating:
+    //texcomp.AddFont("Roboto_Black.ttf");
+    //texcomp.AddImage("jellyfish.png");
+
+    ////Start adding components to our entity
+    ////Entity has template method AddComponent which allows you to add all kinds of components
+    ////AddComponent takes as typename a component name that is available with jej::SomeComponent - style syntax
+    ////Every different component has a different parameter list so be sure what you're giving to your component
+    ////In this example, TransformComponent is created as parameter of Entity's AddComponent - method and is then added
+    ////to myCharacter:
+
+    ////Creating:
     myCharacter.AddComponent<jej::TransformComponent>(
-            &myCharacter,					//Tell component that this is its owner
-            jej::Vector2f(0.0f, -0.3f),		//Position, we start at center of the screen
+            jej::Vector2f(0.3f, 0.0f),		//Position, we start at center of the screen
             jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
             jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
     );
 
 
-    //Next we create ShaderComponent and add it to our entity so it can be drawn
+    ////Next we create ShaderComponent and add it to our entity so it can be drawn
     myCharacter.AddComponent<jej::ShaderComponent>(
-            &myCharacter,					//Tell component that this is its owner
-            "FragmentShader.frag",	//First we must give vertex shader name and file extension
+            "PixelShader.frag",			//First we must give vertex shader name and file extension
             "VertexShader.vert"			//Second we guve fragment shader name and file extencion
     );
 
 
 
-    //Then we create and add ShapeComponent to give our entity some form and color
-    //NOTICE that we don't give any coordinates yet or what type of shape this component holds
-    //This is because our ShapeComponent might consist of several different shapes
-    //etc. we make a pyramid that has four triangles as sides and rectangle as bottom.
-    //As we add ShapeComponent, we take an alias at the sametime for ease of use.
+    ////Then we create and add ShapeComponent to give our entity some form and color
+    ////NOTICE that we don't give any coordinates yet or what type of shape this component holds
+    ////This is because our ShapeComponent might consist of several different shapes
+    ////etc. we make a pyramid that has four triangles as sides and rectangle as bottom.
+    ////As we add ShapeComponent, we take an alias at the sametime for ease of use.
 
     auto& myShapeComp = myCharacter.AddComponent<jej::ShapeComponent>(
-            &myCharacter,					//Tell component that this is its owner
-            jej::Vector4i(0, 150, 150, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
+            jej::Vector4i(0, 255, 0, 150)	//This is our shape's color in RGBA, so this is fully green and somewhat opaque
     );
 
 
-    //Now we can add shape to our ShapeComponent. AddShape - method works intuitively.
-    //As we give just one jej::Vector2f, AddShape knows we making a rectangle.
-    //Note that width and height are twice the given values
-    myShapeComp.AddShape(
 
-            jej::Vector2f(0.3, 0.3)	//Half width, half height
+    ////Now we can add shape to our ShapeComponent. AddShape - method works intuitively. As we now
+    ////add three points, AddShape knows we are making a triangle.
+    auto& s = myShapeComp.AddShape(std::vector<jej::Vector2f>
+                                           {
+                                                   jej::Vector2f(0.0f, 0.3f),		//First point, middle of screen
+                                                   jej::Vector2f(0.2f, 0.5f),		//Second point, upper-right corner
+                                                   jej::Vector2f(-0.2f, 0.5f)        //Third point, lower-right corner
+
+                                           }
+            //jej::Vector4i(150, 0, 50, 150)
+    );
+
+  myShapeComp.AddShape(
+          jej::Vector2f(0.3f, 0.3f)
+  );
+
+    ////Now we have our character with transform, shader and shape component. At this point it exist
+    ////in our scene and has data in it with witch we can make it react to other entities and
+    ////vice versa. At this point, our "myCharacter" - entity could act as invisible trigger box, or
+    ////trigger triangle if you will.
+    ////However, we want our character to be visible protagonist that moves and shows. So, in addition to all above
+    ////components, we must tell our rendering system that we want to draw this entity. We do it by
+    ////creating and adding one more component, RenderComponent. RenderComponent is a container component that takes in
+    ////all the above created components and uses their data in rendering system.
+    ////NOTICE that we have in scope all those aliases we created, so let's use them instead of
+    ////fetching component with entity's GetComponentPtr<> template function
+
+    ////Creating
+    myCharacter.AddComponent<jej::RenderComponent>();
+
+    myScene.AddEntity("Enemy");
+
+    auto& enemy = *myScene.GetEntityPtr("Enemy");
+
+    enemy.AddComponent<jej::TransformComponent>(
+            jej::Vector2f(-0.4f, -0.4f),		//Position, we start at center of the screen
+            jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
+            jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
 
     );
 
-
-    //As we now add three points, AddShape knows we are making a triangle.
-    myShapeComp.AddShape(std::vector<jej::Vector2f>
-                                 {
-                                         jej::Vector2f(0.0f, 0.3f),		//First point, lower-left corner
-                                         jej::Vector2f(0.15f, 0.6f),		//Second point, upper-left corner
-                                         jej::Vector2f(-0.15f, 0.6f)        //Third point, upper-right corner
-                                 }
+    enemy.AddComponent<jej::ShaderComponent>(
+            "PixelShader.frag",			//First we must give vertex shader name and file extension
+            "VertexShader.vert"			//Second we guve fragment shader name and file extencion
     );
 
-    //Now we have our character with transform, shader and shape component. At this point it exist
-    //in our scene and has data in it with witch we can make it react to other entities and
-    //vice versa. At this point, our "myCharacter" - entity could act as invisible trigger box, or
-    //trigger triangle if you will.
-    //However, we want our character to be visible protagonist that moves and shows. So, in addition to all above
-    //components, we must tell our rendering system that we want to draw this entity. We do it by
-    //creating and adding one more component, RenderComponent. RenderComponent is a container component that takes in
-    //all the above created components and uses their data in rendering system.
-    //NOTICE that we have in scope all those aliases we created, so let's use them instead of
-    //fetching component with entity's GetComponentPtr<> template function
-
-    //Creating
-    myCharacter.AddComponent<jej::RenderComponent>(
-            &myCharacter
+    auto& enemyShapeComp = enemy.AddComponent<jej::ShapeComponent>(
+            jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
     );
+
+    enemyShapeComp.AddShape(std::vector<jej::Vector2f>
+                                    {
+                                            jej::Vector2f(0.0f, 0.5f),		//First point, middle of screen
+                                            jej::Vector2f(0.2f, 0.3f),		//Second point, upper-right corner
+                                            jej::Vector2f(-0.2f, 0.3f)        //Third point, lower-right corner
+                                    }
+    );
+
+    enemyShapeComp.AddShape(
+            jej::Vector2f(0.3f, 0.3f)
+    );
+
+    enemy.AddComponent<jej::RenderComponent>();
+    ///////////////////////////////CUT FOR COPYING TO ANDROID
 
     //Finalize EngineObject
     game.Finalize();
 
-    game.EngineUpdate();
+    game.EngineUpdate(); //TODO: Create loop, maybe handle android's events just once in AndroidWindow?..
 
 }

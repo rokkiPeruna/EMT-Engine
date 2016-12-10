@@ -10,7 +10,6 @@
 #include <Window/AndroidWindow.hpp>
 #include <android/log.h>
 #include <Core/AndroidAppState.hpp>
-
 #endif
 
 namespace jej
@@ -65,13 +64,13 @@ namespace jej
 
 	void RenderSystem::_update(const float p_deltaTime)
 	{
-
-
+		//If on ANDROID, screen size is given on RenderSystem::_createContext
+#ifdef _WIN32
 		//Set window's size and offset
 		m_winWidth = m_window->GetWinData().sizeX;
 		m_winHeight = m_window->GetWinData().sizeY;
 
-#ifdef _WIN32
+
 		//Set window's size and offset
 		m_winWidth = m_window->GetWinData().sizeX;
 		m_winHeight = m_window->GetWinData().sizeY;
@@ -100,7 +99,7 @@ namespace jej
 	void RenderSystem::_clearScreen() const
 	{
 		glViewport(0, 0, m_winWidth, m_winHeight);
-		glClearColor(0.1f, 0.5f, 0.2f, 0.5f);
+		glClearColor(0.5f, 0.5f, 0.2f, 0.5f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 	//////////////////////////////////////////
@@ -145,14 +144,12 @@ namespace jej
 			drawData.colorValuesIndex = glGetAttribLocation(drawData.shaderProgID, "a_color");
 			drawData.textureCoordIndex = glGetAttribLocation(drawData.shaderProgID, "a_texCoordinate");
 
-			std::cout << drawData.textureCoordIndex << "   " << drawData.vertexPositionIndex << std::endl;
-
 			const auto& shapeType = shaperItr->m_shapeType;
 
 
 
 			//Indices
- 			glGenBuffers(1, &drawData.indicesBuffer);
+			glGenBuffers(1, &drawData.indicesBuffer);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, drawData.indicesBuffer);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(drawData.indices[0]) * drawData.indices.size(), drawData.indices.data(), GL_STATIC_DRAW);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -198,7 +195,7 @@ namespace jej
 				drawData.colorValuesIndex,
 				4,
 				GL_INT,
-				GL_FALSE,
+				GL_TRUE,
 				0,
 				0
 				);
@@ -212,7 +209,7 @@ namespace jej
 		for (const auto& itr : m_components)
 		{
 
-			
+
 
 			//Get shader ID and use that shader and enable attributes
 			_useShader(*itr->m_shaderComp);
@@ -278,7 +275,7 @@ namespace jej
 		else
 		{
 
-			Messenger::Add(Messenger::MessageType::Error, "Shader has zero attributes, shader parent ID: " + std::to_string(shaderComp.m_parentID));
+			//Messenger::Add(Messenger::MessageType::Error, "Shader has zero attributes, shader parent ID: " + std::to_string(shaderComp.m_parentID));
 			//No rest for the living - Ee
 		}
 	}
@@ -296,7 +293,7 @@ namespace jej
 		}
 		else
 		{
-			Messenger::Add(Messenger::MessageType::Error, "Shader has zero attributes, shader parent ID: " + std::to_string(shaderComp.m_parentID));
+			//Messenger::Add(Messenger::MessageType::Error, "Shader has zero attributes, shader parent ID: " + std::to_string(shaderComp.m_parentID));
 		}
 	}
 	//////////////////////////////////////////
@@ -375,13 +372,10 @@ namespace jej
 			config = supportedConfigs[0];
 
 		eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format);
-		<<<<<<< HEAD
-			//TODO: Android major fix needed //surface = eglCreateWindowSurface(display, config, p_androidApplication->window, NULL);
+		//TODO: Android major fix needed //surface = eglCreateWindowSurface(display, config, p_androidApplication->window, NULL);
 
-			=======
-			surface = eglCreateWindowSurface(display, config, AndroidAppState::m_AppState->window, NULL);
-		>>>>>>> origin/JuhoAndroidBranch
-			EGLint contextAttribs[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE, EGL_NONE };
+		surface = eglCreateWindowSurface(display, config, AndroidAppState::m_AppState->window, NULL);
+		EGLint contextAttribs[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE, EGL_NONE };
 
 		context = eglCreateContext(display, config, NULL, contextAttribs);
 
@@ -402,21 +396,19 @@ namespace jej
 		m_surface = surface;
 		m_context = context;
 
-		<<<<<<< HEAD
-			=======
-			// Check openGL on the system
-			auto opengl_info = { GL_VENDOR, GL_RENDERER, GL_VERSION, GL_EXTENSIONS };
+
+		// Check openGL on the system
+		auto opengl_info = { GL_VENDOR, GL_RENDERER, GL_VERSION, GL_EXTENSIONS };
 		for (auto name : opengl_info) {
 			auto info = glGetString(name);
 			//LOGI("OpenGL Info: %s", info);
 		}
 		// Initialize GL state.
-		//glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
-		glEnable(GL_CULL_FACE);
-		glDisable(GL_DEPTH_TEST);
 
-		>>>>>>> origin/JuhoAndroidBranch
-			return true;
+		//glEnable(GL_CULL_FACE);
+		//glDisable(GL_DEPTH_TEST);
+
+		return true;
 #endif
 
 	}
@@ -467,8 +459,8 @@ namespace jej
 					//Give texture coordinates
 					shapesItr->m_myDrawData.textureCoords =
 					{
-						0.0f, -1.0f,
-						1.0f, -1.0f,
+						0.0f, 1.0f,
+						1.0f, 1.0f,
 						1.0f, 0.0f,
 						0.0f, 0.0f
 					};
@@ -488,9 +480,9 @@ namespace jej
 
 					//Create vertices
 					vertices.emplace_back(shapesItr->m_points.at(0).x + itr->m_transformComp->position.x);
-					vertices.emplace_back(shapesItr->m_points.at(0).y + itr->m_transformComp->position.y);						
+					vertices.emplace_back(shapesItr->m_points.at(0).y + itr->m_transformComp->position.y);
 					vertices.emplace_back(shapesItr->m_points.at(1).x + itr->m_transformComp->position.x);
-					vertices.emplace_back(shapesItr->m_points.at(1).y + itr->m_transformComp->position.y);	
+					vertices.emplace_back(shapesItr->m_points.at(1).y + itr->m_transformComp->position.y);
 					vertices.emplace_back(shapesItr->m_points.at(2).x + itr->m_transformComp->position.x);
 					vertices.emplace_back(shapesItr->m_points.at(2).y + itr->m_transformComp->position.y);
 

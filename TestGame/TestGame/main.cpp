@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
     //Scene can be start menu, game level, credits ec.
 
 	auto& myScene = *game.CreateScene(true, "My Scene Name");
-
+///////////////////////////////CUT FOR COPYING TO ANDROID
     //Add new entity to the newly created scene
     myScene.AddEntity("Character");
 
@@ -109,11 +109,11 @@ int main(int argc, char* argv[])
 
     ////Creating
     myCharacter.AddComponent<jej::RenderComponent>();
-
+	///////////////////////////////CUT FOR COPYING TO ANDROID
     ////Don't try setting components to other entities other than the one calling the function
 
     myCharacter.AddComponent<jej::CollisionComponent>();
-
+	///////////////////////////////CUT FOR COPYING TO ANDROID
 
 
       myScene.AddEntity("Enemy");
