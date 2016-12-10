@@ -20,16 +20,15 @@ namespace jej
 		// and compare its content with itself..? since its a vector of shapes.. which are a vector of vertecies...
 		for (const auto& all_shapes : p_shapes.m_shapes)
 		{
-			/*
-			if (all_shapes->GetType == ShapeType::Circle)
+			
+			if (all_shapes->GetType() == ShapeType::Circle)
 			{
-				min = { p_centerPoint.x - p_shape->GetRadius(), p_centerPoint.y - p_shape->GetRadius() };
-				max = { p_centerPoint.x + p_shape->GetRadius(), p_centerPoint.y + p_shape->GetRadius() };
+				min = { p_centerPoint.x - all_shapes->GetRadius(), p_centerPoint.y - all_shapes->GetRadius() };
+				max = { p_centerPoint.x + all_shapes->GetRadius(), p_centerPoint.y + all_shapes->GetRadius() };
 
 				return std::make_pair(min, max);
 			}
-			*/
-
+			
 			for (const auto& single_shape : all_shapes->GetPoints())
 			{
 				if (single_shape.x < min.x)
