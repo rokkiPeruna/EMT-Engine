@@ -2,6 +2,8 @@
 
 #include <Utility/Messenger.hpp>
 
+#include <iterator>
+
 namespace jej
 {
 
@@ -97,23 +99,25 @@ namespace jej
 
     bool Scene::RemoveEntity(const std::string& p_name)
     {
-        for (auto& itr = m_entities.begin(); itr != m_entities.end(); ++itr)
-            if (itr->get()->m_name == p_name)
-            {
-                m_entities.erase(itr);
-                return true;
-            }
+       //for (auto& itr = m_entities.begin(); itr != m_entities.end(); ++itr)
+       //{
+       //    if (itr->get()->m_name == p_name)
+       //    {
+       //        m_entities.erase(itr);
+       //        return true;
+       //    }
+       //}
         return false;
     }
 
     bool Scene::RemoveEntity(const unsigned int p_ID)
     {
-        for (auto& itr = m_entities.begin(); itr != m_entities.end(); ++itr)
-            if (itr->get()->m_entityID == p_ID)
-            {
-                m_entities.erase(itr);
-                return true;
-            }
+        //for (auto& itr = m_entities.begin(); itr != m_entities.end(); ++itr)
+        //    if (itr->get()->m_entityID == p_ID)
+        //    {
+        //        m_entities.erase(itr);
+        //        return true;
+        //    }
         return false;
     }
 

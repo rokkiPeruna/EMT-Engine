@@ -24,25 +24,19 @@ add_library(app-glue STATIC
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
 add_library(native-activity SHARED
-            main.cpp
+            #main.cpp
             JEJ_Android_Main.cpp
             ../../../../../source/Core/EngineObject.cpp
             ../../../../../source/Core/Scene.cpp
             ../../../../../source/Core/Settings.cpp
             ../../../../../source/Core/Timer.cpp
 
-               ../../../../../source/EntityComponentSys/Entity/Entity.cpp
-
-            ../../../../../source/EntityComponentSys/Components/Component.cpp
-            ../../../../../source/EntityComponentSys/Components/CollisionComponent.cpp
-
             ../../../../../source/Core/AndroidAppState.cpp
 
             ../../../../../source/EntityComponentSys/Entity/Entity.cpp
 
             ../../../../../source/EntityComponentSys/Components/Component.cpp
-            #../../../../../source/EntityComponentSys/Components/CollisionComponent.cpp
-
+            ../../../../../source/EntityComponentSys/Components/CollisionComponent.cpp
             ../../../../../source/EntityComponentSys/Components/RenderComponent.cpp
             ../../../../../source/EntityComponentSys/Components/ShaderComponent.cpp
             ../../../../../source/EntityComponentSys/Components/ShapeComponent.cpp
@@ -65,7 +59,9 @@ add_library(native-activity SHARED
 
             ../../../../../source/Utility/Assert.cpp
             ../../../../../source/Utility/FileHandler.cpp
+            ../../../../../source/Utility/FileHandlerAndroid.cpp
             ../../../../../source/Utility/Messenger.cpp
+            ../../../../../source/Utility/Math.cpp
 
             ../../../../../source/Window/Window.cpp
             ../../../../../source/Window/AndroidWindow.cpp

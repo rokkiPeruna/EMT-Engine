@@ -87,7 +87,10 @@ namespace jej //NAMESPACE jej
         std::shared_ptr<Graphics>& GetGraphicsRef();
         std::shared_ptr<Scene>& GetSceneRef();
 		const std::shared_ptr<Scene>& GetSceneRef() const; 
+
+
 		std::shared_ptr<Window>& GetWindowRef();
+
 
 
         //#ifdef JEJ_DEBUG_MODE
@@ -102,6 +105,7 @@ namespace jej //NAMESPACE jej
 
 		std::vector<std::shared_ptr<Scene>> m_scenes;
         std::shared_ptr<Window> m_windowPtr; 
+
 		JEJ_COUNT m_currentSceneID;
 
     public:

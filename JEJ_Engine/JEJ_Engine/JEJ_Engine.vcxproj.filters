@@ -114,9 +114,6 @@
     <ClCompile Include="..\..\source\Utility\Messenger.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Grafiikkamoottori_JEJ\source\Core\EngineObject.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\Utility\Assert.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
@@ -210,11 +207,11 @@
     <ClCompile Include="..\..\source\Utility\FileHandlerWindows.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Core\EngineObject.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Grafiikkamoottori_JEJ\include\Core\EngineObject.hpp">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\Core\Settings.hpp">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
@@ -319,6 +316,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Utility\Math.hpp">
       <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Core\EngineObject.hpp">
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -124,9 +124,7 @@ namespace jej //NAMESPACE jej
 		Timer::GetInstance(true);
 
 #elif defined __ANDROID__
-
-		engine.m_windowPtr = std::make_shared<AndroidWindow>(p_osData);
-
+		engine.m_windowPtr = std::make_shared<AndroidWindow>();
 #endif
 
 
@@ -197,7 +195,7 @@ namespace jej //NAMESPACE jej
 		
 		Messenger::PrintMessages();
 
-		InputManager::GetInstance()._update();
+		//InputManager::GetInstance()._update();
 
 		//This calls also RenderSystem's _update() - function in WM_PAINT
 
@@ -297,6 +295,7 @@ namespace jej //NAMESPACE jej
 	{
 		return m_windowPtr;
 	}
+
 	//////////////////////////////////////////
 
 #ifdef JEJ_DEBUG_MODE

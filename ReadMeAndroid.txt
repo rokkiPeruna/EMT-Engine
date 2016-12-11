@@ -9,5 +9,3 @@ How to use:
 3. Select 'android' directory from the root of JEJ.
 4. Wait for the gradle to build and possibly update itself.
 5. Build the project.
-
-6. Juho: fix the things I broke.
