@@ -115,7 +115,7 @@ namespace jej
     bool TextureComponent::AddFont(const std::string& p_name)
     {
         FileHandler handler;
-        m_fontData.fontInfo.data = (unsigned char*)std::string(settings::rootPath + "Resources/" + p_name).c_str();
+        m_fontData.fontInfo.data = (unsigned char*)std::string(settings::Settings::rootPath + "Resources/" + p_name).c_str();
         return handler.ReadFontFile(p_name, &m_fontData);
     }
     //////////////////////////////////////////

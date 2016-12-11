@@ -344,5 +344,8 @@
       <Filter>Header Files\Texture\Inl</Filter>
     </None>
     <None Include="ClassDiagram.cd" />
+    <None Include="..\..\include\Core\Inl\Settings.inl">
+      <Filter>Header Files\Core\Inl</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
 
     ////Now we can add shape to our ShapeComponent. AddShape - method works intuitively. As we now
     ////add three points, AddShape knows we are making a triangle.
-    auto& s = myShapeComp.AddShape(std::vector<jej::Vector2f>
+     myShapeComp.AddShape(std::vector<jej::Vector2f>
     {
         jej::Vector2f(0.f, 0.3f),		//First point, middle of screen
             jej::Vector2f(0.2f, 0.5f),		//Second point, upper-right corner
@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
 	//jej::Vector4i(150, 0, 50, 150)
     );
 
-    myShapeComp.AddShape(
+     auto& s = myShapeComp.AddShape(
         jej::Vector2f(0.3f, 0.3f)
         );
 
@@ -144,35 +144,39 @@ int main(int argc, char* argv[])
       }
       );
     
-      enemyShapeComp.AddShape(
+      
+      enemy.AddComponent<jej::TextureComponent>(
+          enemyShapeComp.AddShape(
           jej::Vector2f(0.3f, 0.3f)
+          ).GetID()
           );
     
-      enemy.AddComponent<jej::RenderComponent>();
+      
       enemy.AddComponent<jej::CollisionComponent>();
 
+      enemy.AddComponent<jej::RenderComponent>();
 
-//#if 1
-//
-//    auto& tex = myCharacter.AddComponent<jej::TextureComponent>(s.GetID());
-//
-//#endif
-//
-//#if 1
-//
-//    if (tex.AddImage("Capture.png"))
-//        jej::Messenger::Add(jej::Messenger::MessageType::Info, "image loaded successfully");
-//    else
-//        jej::Messenger::Add(jej::Messenger::MessageType::Warning, "image loading unsuccessful");
-//#endif
-//
-//#if 0
-//
-//    if (tex.AddFont("Textures/Bungee_Regular.ttf"))
-//        jej::Messenger::Add(jej::Messenger::MessageType::Info, "font loaded successfully");
-//    else
-//        jej::Messenger::Add(jej::Messenger::MessageType::Warning, "font loading unsuccessful");
-//#endif
+#if 1
+
+    auto& tex = myCharacter.AddComponent<jej::TextureComponent>(s.GetID());
+
+#endif
+
+#if 1
+
+    if (tex.AddImage("Capture.png"))
+        jej::Messenger::Add(jej::Messenger::MessageType::Info, "image loaded successfully");
+    else
+        jej::Messenger::Add(jej::Messenger::MessageType::Warning, "image loading unsuccessful");
+#endif
+
+#if 0
+
+    if (tex.AddFont("Textures/Bungee_Regular.ttf"))
+        jej::Messenger::Add(jej::Messenger::MessageType::Info, "font loaded successfully");
+    else
+        jej::Messenger::Add(jej::Messenger::MessageType::Warning, "font loading unsuccessful");
+#endif
 
 
     auto& mouse = jej::Mouse::GetInstance();

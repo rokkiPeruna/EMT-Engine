@@ -1,30 +1,19 @@
-//
-// Created by Kaapo on 4.12.2016.
-//
 
-
-
-#include <memory>
-
-#include <Window/AndroidWindow.hpp>
 #include <Core/AndroidAppState.hpp>
-
 #include <Core/EngineObject.hpp>
-#include <EntityComponentSys/Entity/Entity.hpp>
-#include <EntityComponentSys/Components/TransformComponent.hpp>
-
-#include <EntityComponentSys/Systems/System.hpp>
 #include <Core/Scene.hpp>
-
-#include <Utility/Random.hpp>
-
-#include <Utility/FileHandler.hpp>
-
 #include <EntityComponentSys/Components/ShaderComponent.hpp>
+#include <EntityComponentSys/Components/TransformComponent.hpp>
+#include <EntityComponentSys/Entity/Entity.hpp>
+#include <EntityComponentSys/Systems/System.hpp>
+#include <Utility/FileHandler.hpp>
+#include <Utility/Random.hpp>
+#include <Window/AndroidWindow.hpp>
 
 #include <android/sensor.h>
 #include <android/log.h>
 #include <android_native_app_glue.h>
+#include <memory>
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))

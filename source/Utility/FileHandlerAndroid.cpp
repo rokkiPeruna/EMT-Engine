@@ -79,7 +79,7 @@ namespace jej
 		return false;
 	}
 
-	bool FileHandler::ReadImage(TextureComponent::tempData* p_data)
+	bool FileHandler::ReadImage(TextureComponent::TextureData* p_data)
 	{
 		//TODO: Add Android stuff
 		return false;
@@ -89,7 +89,6 @@ namespace jej
     bool FileHandler::Write(const std::string& name)
     {
         Messenger::Add(Messenger::MessageType::Error, "Write-method needs to be written for android");
-        //TODO: Android problems//Messenger::Add(Messenger::MessageType::Error, "Write-method needs to be written for android");
         return true;
     }
     //////////////////////////////////////////

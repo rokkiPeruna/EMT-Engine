@@ -48,7 +48,7 @@ namespace jej
         //Init
         LPDWORD dataRead = {};
         OVERLAPPED overlapped = {};
-        const std::string filePath = settings::rootPath + "Resources/" + name;
+        const std::string filePath = settings::Settings::rootPath + "Resources/" + name;
 
         //Adjust how much data will be read, if necessary
         auto size = GetFileSize(m_fileHandle, NULL);
@@ -118,7 +118,7 @@ namespace jej
 
         //Load image
         p_data->data = stbi_load(
-            std::string(settings::rootPath + "Resources/" + imagePath).c_str(),
+            std::string(settings::Settings::rootPath + "Resources/" + imagePath).c_str(),
             &p_data->x,
             &p_data->y,
             &p_data->offset,
@@ -185,7 +185,7 @@ namespace jej
             &overlapped
             ))
         {
-            Messenger::Add(Messenger::MessageType::Error, "Failed to write to file: ", settings::rootPath + "Recources/" + p_name, getWinError());
+            Messenger::Add(Messenger::MessageType::Error, "Failed to write to file: ", settings::Settings::rootPath + "Recources/" + p_name, getWinError());
             return false;
         }
 
@@ -203,7 +203,7 @@ namespace jej
             return false;
         }
 
-        const std::string filePath = settings::rootPath + "Resources/" + name;
+        const std::string filePath = settings::Settings::rootPath + "Resources/" + name;
 
         m_fileHandle = CreateFile(
             LPCWSTR(std::wstring(filePath.begin(), filePath.end()).c_str()),

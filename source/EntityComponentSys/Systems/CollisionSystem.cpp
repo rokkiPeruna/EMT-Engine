@@ -5,7 +5,7 @@
 #include <Utility/Messenger.hpp>
 #include <Core/EngineObject.hpp>
 #include <Core/Scene.hpp>
-
+#include <Core/Settings.hpp>
 
 namespace jej
 {

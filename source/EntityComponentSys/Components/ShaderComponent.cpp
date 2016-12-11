@@ -6,9 +6,6 @@
 
 #include <EntityComponentSys/Systems/ShaderSystem.hpp>
 
-// TODO:: remove if we use our own read system
-#include <fstream>
-
 namespace jej
 {
     ShaderComponent::ShaderComponent(Entity* entity, const std::string& p_fragmentShaderFileName, const std::string& p_vertexShaderFileName) :

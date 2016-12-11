@@ -49,7 +49,7 @@ namespace jej
             if (name.empty())
             {
                 Messenger::Add(Messenger::MessageType::Warning, "No texture name given. Using default error texture.");
-                name = settings::defaultErrorTextureName;
+                name = settings::Settings::defaultErrorTextureName;
             }
 
             //png or ttf
@@ -60,7 +60,7 @@ namespace jej
             else
             {
                 type = "png";
-                name = settings::defaultErrorTextureName;
+                name = settings::Settings::defaultErrorTextureName;
             }
 
             //Currentlty unsupported type
@@ -68,7 +68,7 @@ namespace jej
             {
                 JEJ_ASSERT(false, "Unsupported file type");
                 Messenger::Add(Messenger::MessageType::Error, "Unsupported file type: " + type, "Using default texture instead.");
-                name = settings::defaultErrorTextureName;
+                name = settings::Settings::defaultErrorTextureName;
                 type = "png";
             }
 

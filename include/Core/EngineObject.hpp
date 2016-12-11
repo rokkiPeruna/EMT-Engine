@@ -108,12 +108,6 @@ namespace jej //NAMESPACE jej
 
 		JEJ_COUNT m_currentSceneID;
 
-    public:
-
-#ifdef __ANDROID__
-        //android_app* state;
-        //void SetAndroidApp(android_app* p_app);
-#endif	
 
     };
 

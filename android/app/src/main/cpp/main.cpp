@@ -16,37 +16,29 @@
  */
 
 //BEGIN_INCLUDE(all)
-#include <initializer_list>
-#include <memory>
-#include <jni.h>
-#include <errno.h>
-#include <cassert>
-
-#include <EGL/egl.h>
-#include <GLES/gl.h>
-
-#include <android/sensor.h>
-#include <android/log.h>
-#include <android_native_app_glue.h>
-
-
+#include <Core/EngineObject.hpp>
+#include <Core/Scene.hpp>
+#include <EntityComponentSys/Systems/RenderSystem.hpp>
+#include <EntityComponentSys/Components/ShaderComponent.hpp>
+#include <EntityComponentSys/Components/TransformComponent.hpp>
+#include <EntityComponentSys/Entity/Entity.hpp>
+#include <EntityComponentSys/Systems/System.hpp>
+#include <Utility/Assert.hpp>
+#include <Utility/FileHandler.hpp>
+#include <Utility/Random.hpp>
 #include <Window/AndroidWindow.hpp>
 
-#include <Core/EngineObject.hpp>
-#include <EntityComponentSys/Entity/Entity.hpp>
-#include <EntityComponentSys/Components/TransformComponent.hpp>
+#include <External/EGL/egl.h>
+#include <External/GLES/gl.h>
 
-#include <EntityComponentSys/Systems/System.hpp>
-#include <Core/Scene.hpp>
+#include <errno.h>
+#include <initializer_list>
+#include <jni.h>
+#include <memory>
 
-#include <Utility/Random.hpp>
-
-#include <Utility/FileHandler.hpp>
-
-#include <EntityComponentSys/Components/ShaderComponent.hpp>
-
-#include <EntityComponentSys/Systems/RenderSystem.hpp>
-
+#include <android/log.h>
+#include <android/sensor.h>
+#include <android_native_app_glue.h>
 
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
@@ -125,9 +117,9 @@ static int engine_init_display(struct engine* engine) {
      */
     eglChooseConfig(display, attribs, nullptr,0, &numConfigs);
     std::unique_ptr<EGLConfig[]> supportedConfigs(new EGLConfig[numConfigs]);
-    assert(supportedConfigs);
+    JEJ_ASSERT(supportedConfigs, "Invalid configs");
     eglChooseConfig(display, attribs, supportedConfigs.get(), numConfigs, &numConfigs);
-    assert(numConfigs);
+    JEJ_ASSERT(numConfigs, "Invalid configs");
     auto i = 0;
     for (; i < numConfigs; i++) {
         auto& cfg = supportedConfigs[i];

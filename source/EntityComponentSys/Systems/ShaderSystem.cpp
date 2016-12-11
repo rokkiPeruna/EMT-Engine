@@ -121,49 +121,13 @@ namespace jej
 
         const std::string shaderData = _readFile(p_shaderType, p_shaderDataSource).c_str();
 
-#ifdef __REMOVE_THISANDROID__
-        std::string shaderData;
-        if (p_shaderType == detail::ShaderType::Fragment)
-        {
-            shaderData = 
-                    "precision mediump float;\n"
-                    "varying vec2 v_texCoordinate;\n"
-                    "varying vec4 v_color;\n"
-                    "uniform sampler2D sampler_texture;\n"
-                    "void main()\n"
-                    "{\n"
-                    "gl_FragColor = texture2D(sampler_texture, v_texCoordinate);\n"
-                    "gl_FragColor.rgb *= v_color.a;\n"
-                    "}\n";
-        }
-        if (p_shaderType == detail::ShaderType::Vertex)
-        {
-            shaderData = 
-                    "attribute vec2 a_position;\n"
-                    "attribute vec2 a_texCoordinate;\n"
-                    "attribute vec4 a_color;\n"
-                    "varying vec2 v_texCoordinate;\n"
-                    "varying out vec4 v_color;\n"
-                    "void\n"
-                    "main()\n"
-                    "{\n"
-                    "gl_Position.xy = a_position.xy;\n"
-                    "gl_Position.z = 0;\n"
-                    "gl_Position.w = 1.0;\n"
-                    "v_color = a_color;\n"
-                    "v_texCoordinate = a_texCoordinate;\n"
-                    "}\n";
-        }
-#endif
-       
-
         const char* shaderData2 = shaderData.c_str();
 
         glShaderSource(shader, 1, &shaderData2, nullptr);
         glCompileShader(shader);
         glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 
-         if (success == GL_FALSE)
+        if (success == GL_FALSE)
         {
             GLint maxLength = 0;
             glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
@@ -197,11 +161,11 @@ namespace jej
             switch (p_type)
             {
             case detail::ShaderType::Fragment:
-                p_shaderName = path + settings::defaultFragmentShaderFileName;
+                p_shaderName = path + settings::Settings::defaultFragmentShaderFileName;
                 return true;
 
             case detail::ShaderType::Vertex:
-                p_shaderName = path + settings::defaultVertexShaderFileName;
+                p_shaderName = path + settings::Settings::defaultVertexShaderFileName;
                 return true;
 
             default:
@@ -213,10 +177,9 @@ namespace jej
 
     std::string ShaderSystem::_readFile(const detail::ShaderType p_type, std::string p_filePath)
     {
-        //TODO: Android major fix needed, not able to read shaders currently
-
+        
         FileHandler handler;
-      
+
         if (!handler.Read(p_filePath))
         {
             Messenger::Add(Messenger::MessageType::Error, "Failed to open shader file ", p_filePath);
@@ -239,7 +202,7 @@ namespace jej
         const auto& data = handler.GetReadDataRef();
         return std::string(data.begin(), data.end());
 
-      
+
 
     }
     //////////////////////////////////////////

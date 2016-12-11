@@ -128,7 +128,7 @@ namespace jej
     void RenderSystem::_createBuffersForRenderComponentDrawData(RenderComponent& p_rendComp)
     {
 
-        for (const auto& shaperItr : p_rendComp.m_shapeComp->m_shapes)
+        for (auto& shaperItr : p_rendComp.m_shapeComp->m_shapes)
         {
             //Create alias for ease of use
             auto& drawData = shaperItr->m_myDrawData;
@@ -141,9 +141,6 @@ namespace jej
             drawData.vertexPositionIndex = glGetAttribLocation(drawData.shaderProgID, "a_position");
             drawData.colorValuesIndex = glGetAttribLocation(drawData.shaderProgID, "a_color");
             drawData.textureCoordIndex = glGetAttribLocation(drawData.shaderProgID, "a_texCoordinate");
-
-            const auto& shapeType = shaperItr->m_shapeType;
-
 
 
             //Indices
@@ -213,9 +210,6 @@ namespace jej
             {
                 //Create alias of current element's draw data for ease of use
                 const auto& drawData = shapesItr->m_myDrawData;
-
-                //Alias for shape's type
-                const auto& shapeType = shapesItr->m_shapeType;
 
                 glBindBuffer(GL_ARRAY_BUFFER, drawData.vertexPosBuffer);
                 glVertexAttribPointer(drawData.vertexPositionIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
@@ -368,7 +362,6 @@ namespace jej
             config = supportedConfigs[0];
 
         eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format);
-        //TODO: Android major fix needed //surface = eglCreateWindowSurface(display, config, p_androidApplication->window, NULL);
 
         surface = eglCreateWindowSurface(display, config, AndroidAppState::m_AppState->window, NULL);
         EGLint contextAttribs[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE, EGL_NONE };
@@ -420,9 +413,6 @@ namespace jej
                 //Create alias for current shape's vertices
                 auto& vertices = shapesItr->m_myDrawData.vertices;
 
-                //Create alias for shapetype
-                auto& shapeType = shapesItr->m_shapeType;
-
                 //Create vertices and indices
                 switch (shapesItr->m_shapeType)
                 {
@@ -455,9 +445,9 @@ namespace jej
                     //Give texture coordinates
                     shapesItr->m_myDrawData.textureCoords =
                     {
-                        0.0f, 1.0f,
-                        1.0f, 1.0f,
-                        1.0f, 0.0f,
+                        0.0f, -1.f,
+                        -1.f, -1.f,
+                        -1.f, 0.0f,
                         0.0f, 0.0f
                     };
                     break;
@@ -527,7 +517,7 @@ namespace jej
             return false;
         }
 
-        if (!_createContext(settings::attributeList))
+        if (!_createContext(settings::Settings::attributeList))
         {
             JEJ_ASSERT(false, "Context creation failed.");
             return false;

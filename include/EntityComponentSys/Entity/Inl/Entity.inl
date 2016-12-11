@@ -1,6 +1,6 @@
 
 template<typename T, typename ... Args>
-T& Entity::AddComponent(Args ... p_args)
+inline T& Entity::AddComponent(Args ... p_args)
 {
     static_assert(std::is_base_of<Component, T>::value, "Tried to create component that doesn't inherit from Component.");
 
@@ -18,7 +18,7 @@ T& Entity::AddComponent(Args ... p_args)
 
 
 template <typename T>
-T* Entity::GetComponentPtr()
+inline T* Entity::GetComponentPtr()
 {
     static_assert(std::is_base_of<Component, T>::value, "Tried to get component that doesn't inherit from Component.");
 
@@ -31,14 +31,14 @@ T* Entity::GetComponentPtr()
 
 
 template <typename T>
-const T* Entity::GetComponentPtr() const
+inline const T* Entity::GetComponentPtr() const
 {
     return GetComponentPtr<T>();
 }
 
 
 template <typename T>
-bool Entity::HasComponent()
+inline bool Entity::HasComponent()
 {
     static_assert(std::is_base_of<Component, T>::value, "Tried to compare component that doesn't inherit from Component.");
 
@@ -51,7 +51,7 @@ bool Entity::HasComponent()
 
 
 template <typename T>
-bool Entity::RemoveComponent()
+inline bool Entity::RemoveComponent()
 {
     static_assert(std::is_base_of<Component, T>::value, "Tried to remove component that doesn't inherit from Component.");
 
