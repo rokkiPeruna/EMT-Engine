@@ -35,11 +35,8 @@ int main(int argc, char* argv[])
 
 	auto& myScene = *game.CreateScene(true, "My Scene Name");
 
-	//Add new entity to the newly created scene
-	myScene.AddEntity("Player");
-
-	//Make alias of added entity for ease of use
-	auto& player = *myScene.GetEntityPtr("Player");
+	//Add new entity to the newly created scene and make alias of added entity for ease of use
+    auto& player = myScene.AddEntity("Player");
 
 	////Start adding components to our entity
 	////Entity has template method AddComponent which allows you to add all kinds of components
@@ -162,6 +159,8 @@ int main(int argc, char* argv[])
 			enemy.AddComponent<jej::CollisionComponent>();
 		}
 	}
+
+    auto kek =  myScene.GetEntities("Enemy");
 
 	//#if 1
 	//
