@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
 	auto& myScene = *game.CreateScene(true, "My Scene Name");
 
 	//Add new entity to the newly created scene and make alias of added entity for ease of use
-    auto& player = myScene.AddEntity("Player");
+	auto& player = myScene.AddEntity("Player");
 
 	////Start adding components to our entity
 	////Entity has template method AddComponent which allows you to add all kinds of components
@@ -104,8 +104,6 @@ int main(int argc, char* argv[])
 
 
 	//Enemies:
-
-
 	//Creates as many enemies as enemyNumber is
 
 
@@ -160,7 +158,7 @@ int main(int argc, char* argv[])
 		}
 	}
 
-    auto kek =  myScene.GetEntities("Enemy");
+
 
 	//#if 1
 	//
@@ -215,64 +213,57 @@ int main(int argc, char* argv[])
 		if (keyboard.IsKeyPressed(jej::Keyboard::Key::Space))
 		{
 
+
 		}
 
+		auto kek = myScene.GetEntities("Enemy");
 
-
-		for (const auto& itr : myScene.GetEntityIDs())
+		for (const auto& itr : kek)
 		{
+			auto& enemyPosition = itr->GetComponentPtr<jej::TransformComponent>()->position;
 
-
-
-			if (player.GetID() != itr)
+			if (!itr->userData)
 			{
+				enemyPosition.x += -0.5f * deltaTime;
 
-				auto& enemyPos = myScene.GetEntityPtr(itr)->GetComponentPtr<jej::TransformComponent>()->position;
-				//auto& enemyPrevPos = myScene.GetEntityPtr(itr)->GetComponentPtr<jej::TransformComponent>()->previousPosition;
-
-				
-
-
-				if (!myScene.GetEntityPtr(itr)->userData)
+				if (enemyPosition.x < -1)
 				{
-					enemyPos.x += -0.5f * deltaTime;
-
-					if (enemyPos.x < -1)
+					for (int i = 1; i <= myScene.GetEntityIDs().size(); ++i)
 					{
-						for (int i = 1; i <= myScene.GetEntityIDs().size(); ++i)
-						{
-							//EnemyMove = true;
-							enemyPos.x = -1.f;
-							myScene.GetEntityPtr(i)->userData = (void*)true;
-						}
+						//EnemyMove = true;
+						enemyPosition.x = -1.f;
+						myScene.GetEntityPtr(i)->userData = (void*)true;
+					}
 
-						for (int i = 2; i <= myScene.GetEntityIDs().size(); ++i)
-						{
-							myScene.GetEntityPtr(i)->GetComponentPtr<jej::TransformComponent>()->position.y -= 3.0f *deltaTime;
-						}
+					for (int i = 2; i <= myScene.GetEntityIDs().size(); ++i)
+					{
+						myScene.GetEntityPtr(i)->GetComponentPtr<jej::TransformComponent>()->position.y -= 3.0f *deltaTime;
 					}
 				}
-				if (myScene.GetEntityPtr(itr)->userData)
+			
+			}
+
+			if (itr->userData)
+			{
+				enemyPosition.x += 0.5f * deltaTime;
+
+				if (enemyPosition.x > 1)
 				{
-					enemyPos.x += 0.5f * deltaTime;
 
-					if (enemyPos.x > 1)
+					for (int i = 1; i <= myScene.GetEntityIDs().size(); ++i)
 					{
+						//EnemyMove = false;
+						enemyPosition.x = 1.f;
+						myScene.GetEntityPtr(i)->userData = (void*)false;
+					}
 
-						for (int i = 1; i <= myScene.GetEntityIDs().size(); ++i)
-						{
-							//EnemyMove = false;
-							enemyPos.x = 1.f;
-							myScene.GetEntityPtr(i)->userData = (void*)false;
-						}
-
-						for (int i = 2; i <= myScene.GetEntityIDs().size(); ++i)
-						{
-							myScene.GetEntityPtr(i)->GetComponentPtr<jej::TransformComponent>()->position.y -= 3.0f *deltaTime;
-						}
+					for (int i = 2; i <= myScene.GetEntityIDs().size(); ++i)
+					{
+						myScene.GetEntityPtr(i)->GetComponentPtr<jej::TransformComponent>()->position.y -= 3.0f *deltaTime;
 					}
 				}
 			}
+
 		}
 
 
