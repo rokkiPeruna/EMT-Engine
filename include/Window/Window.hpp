@@ -16,6 +16,15 @@
 #include <string>
 /////////////////////////////////
 
+#ifdef __ANDROID__
+
+#include <android/sensor.h>
+#include <android_native_app_glue.h>
+
+#include <Core/AndroidAppState.hpp>
+
+#endif
+
 
 namespace jej//NAMESPACE jej STARTS
 {
@@ -54,6 +63,15 @@ namespace jej//NAMESPACE jej STARTS
         };
 
 #elif defined __ANDROID__
+
+
+        //For returning to Android app's previous state
+        struct saved_state {
+            float angle;
+            int32_t x;
+            int32_t y;
+        };
+
 
         //Android specific initializing data
         struct WindowOSInitData

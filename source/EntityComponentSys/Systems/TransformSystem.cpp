@@ -26,7 +26,7 @@ namespace jej
     }
     //////////////////////////////////////////
 
-    void TransformSystem::_update(const float deltaTime)
+    void TransformSystem::_update(const float)
     {
         //Check if changes has occurred so we'll know if vertices needs to be recalculated
         for (auto& itr : m_components)

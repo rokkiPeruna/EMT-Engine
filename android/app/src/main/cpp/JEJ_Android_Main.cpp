@@ -26,7 +26,7 @@ void android_main(struct android_app* state)
     //Sets phone's inner state qualities to easily reachable static variable for Engine to use
     AndroidAppState app(state);
 
-    jej::WindowOSInitData engine;
+    jej::Window::WindowOSInitData engine;
 
     memset(&engine, 0, sizeof(engine));
     state->userData = &engine;
@@ -46,7 +46,7 @@ void android_main(struct android_app* state)
 
     if (state->savedState != NULL) {
         // We are starting with a previous saved state; restore from it.
-        engine.state = *(jej::saved_state*)state->savedState;
+        engine.state = *(jej::Window::saved_state*)state->savedState;
     }
 
     // Make sure glue isn't stripped.
@@ -150,10 +150,10 @@ void android_main(struct android_app* state)
 
 
 
-    auto& playerTex = myCharacter.AddComponent<jej::TextureComponent>(playerRectShape.GetID());
+    //auto& playerTex = myCharacter.AddComponent<jej::TextureComponent>(playerRectShape.GetID());
 
 
-    playerTex.AddImage("Player.png");
+    //playerTex.AddImage("Player.png");
         //jej::Messenger::Add(jej::Messenger::MessageType::Info, "image loaded successfully");
     //else
         //jej::Messenger::Add(jej::Messenger::MessageType::Warning, "image loading unsuccessful");
@@ -207,9 +207,9 @@ void android_main(struct android_app* state)
 
     enemy.AddComponent<jej::RenderComponent>();
 
-    auto& enemyTex = enemy.AddComponent<jej::TextureComponent>(enemyRectShape.GetID());
+    //auto& enemyTex = enemy.AddComponent<jej::TextureComponent>(enemyRectShape.GetID());
 
-   enemyTex.AddImage("Enemy.png");
+   //enemyTex.AddImage("Enemy.png");
     ///////////////////////////////CUT FOR COPYING TO ANDROID
 
     //Finalize EngineObject

@@ -1,6 +1,8 @@
 #ifndef JEJ_WIN32WINDOW_HPP
 #define JEJ_WIN32WINDOW_HPP
 
+#ifdef _WIN32
+
 //Engine headers
 #include <Window/Window.hpp>
 #include <IO_Manager/Win32/Keyboard.hpp>
@@ -30,7 +32,7 @@ namespace jej//NAMESPACE jej STARTS
         //Takes in two structs, first for common window attributes,
         //second for Win32 specific attributes.
         //See WindowBaseInitData and WindowOSInitData for more information
-        Win32Window(const WindowBaseInitData*, const WindowOSInitData*);
+        Win32Window(const Window::WindowBaseInitData*, const Window::WindowOSInitData*);
 
         //Disabled copy constructor
         Win32Window(const Win32Window&) = delete;
@@ -53,16 +55,16 @@ namespace jej//NAMESPACE jej STARTS
 
         //Get window's initialization data, THIS is not OS specific data
         //Includes width, height, names.
-        virtual WindowBaseInitData& GetWinData() override;
+        virtual Window::WindowBaseInitData& GetWinData() override;
 
         //Set window's base initialization data
-        virtual void SetWinData(const WindowBaseInitData&) override;
+        virtual void SetWinData(const Window::WindowBaseInitData&) override;
 
         //Get window's OS specific init data
-        virtual WindowOSInitData& GetWinOSData() override;
+        virtual Window::WindowOSInitData& GetWinOSData() override;
 
         //Set window's OS specific init data
-        virtual void SetWinOSData(const WindowOSInitData&) override;
+        virtual void SetWinOSData(const Window::WindowOSInitData&) override;
 
         //Change virtual keyboard codes coming from Win32 to jej::Keyboard values
         static Keyboard::Key _virtualKeyCodeToJejKeycode(WPARAM p_keycode, LPARAM p_flags);
@@ -74,9 +76,11 @@ namespace jej//NAMESPACE jej STARTS
         bool _initWindow();
 
         //Win32 specific init data
-        WindowOSInitData m_winOSInitData;
+        Window::WindowOSInitData m_winOSInitData;
 
 
     };
 }//NAMESPACE jej ENDS
+
+#endif
 #endif

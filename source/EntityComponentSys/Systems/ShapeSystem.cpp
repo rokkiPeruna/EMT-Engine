@@ -31,7 +31,7 @@ namespace jej
     //////////////////////////////////////////
 
 
-    void ShapeSystem::_update(const float p_deltaTime)
+    void ShapeSystem::_update(const float)
     {
 
     }

@@ -98,7 +98,7 @@ namespace jej
     //////////////////////////////////////////
 
 
-    void TextureSystem::_update(const float p_deltaTime)
+    void TextureSystem::_update(const float)
     {
         for (auto& itr : m_components)
         {

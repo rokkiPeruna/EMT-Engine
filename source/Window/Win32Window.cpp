@@ -100,7 +100,7 @@ namespace jej//NAMESPACE jej STARTS
     /////////////////////////////////
 
     //Set window base data struct
-    void Win32Window::SetWinData(const WindowBaseInitData& p_winBaseInitData)
+    void Win32Window::SetWinData(const Window::WindowBaseInitData& p_winBaseInitData)
     {
         m_winBaseInitData = p_winBaseInitData;
     }

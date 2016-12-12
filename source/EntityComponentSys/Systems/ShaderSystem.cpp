@@ -57,7 +57,9 @@ namespace jej
         if (!_parseShader(detail::ShaderType::Vertex, p_sd.vertexShaderFileName))
             Messenger::Add(Messenger::MessageType::Error, "Failed to parse vertex shader ");
 #endif
-        if (!(p_sd.programID = glCreateProgram()))
+
+        p_sd.programID = glCreateProgram();
+        if (!p_sd.programID)
         {
             Messenger::Add(Messenger::MessageType::Error, "Failed to create GL program");
             return;
@@ -112,10 +114,11 @@ namespace jej
 
     GLuint ShaderSystem::_loadShader(const std::string& p_shaderDataSource, const GLenum p_type, const detail::ShaderType p_shaderType)
     {
-        GLuint shader = 0u;
+        
         GLint success = 0;
+        GLuint shader = glCreateShader(p_type);
 
-        if (!(shader = glCreateShader(p_type)))
+        if (!shader)
             Messenger::Add(Messenger::MessageType::Error, "Failed to create shader: ", p_shaderDataSource);
 
 
@@ -138,7 +141,7 @@ namespace jej
 
             glDeleteShader(shader);
 
-            Messenger::Add(Messenger::MessageType::Error, "Compile shaders failed " + shader);
+            Messenger::Add(Messenger::MessageType::Error, "Compile shaders failed " + std::to_string(shader));
             return 0u;
         }
 
@@ -219,7 +222,7 @@ namespace jej
     }
     //////////////////////////////////////////
 
-    void ShaderSystem::_update(const float p_deltaTime)
+    void ShaderSystem::_update(const float)
     {
     }
     //////////////////////////////////////////

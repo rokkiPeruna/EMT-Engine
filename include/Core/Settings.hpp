@@ -31,7 +31,7 @@
 
 namespace jej
 {
-    
+
     namespace settings
     {
 
@@ -67,5 +67,14 @@ namespace jej
 }
 
 #include <Core/Inl/Settings.inl>
+
+#endif
+
+#ifdef __ANDROID__
+
+namespace std
+{
+    char* strstr(const char* s, const char* find);
+}
 
 #endif

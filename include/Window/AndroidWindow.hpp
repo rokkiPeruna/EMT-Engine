@@ -19,12 +19,7 @@ namespace jej
     //struct android_app;
 
 
-    //For returning to Android app's previous state
-    struct saved_state {
-        float angle;
-        int32_t x;
-        int32_t y;
-    };
+ 
 
 
     
@@ -68,16 +63,16 @@ namespace jej
 
         //Get window's initialization data, THIS is not OS specific data
         //Includes width, height, names.
-        virtual WindowBaseInitData& GetWinData() override;
+        virtual Window::WindowBaseInitData& GetWinData() override;
 
         //Set window's base initialization data
-        virtual void SetWinData(const WindowBaseInitData&) override;
+        virtual void SetWinData(const Window::WindowBaseInitData&) override;
 
         //Get window's OS specific init data
-        virtual WindowOSInitData& GetWinOSData() override;
+        virtual Window::WindowOSInitData& GetWinOSData() override;
 
         //Set window's OS specific init data
-        virtual void SetWinOSData(const WindowOSInitData&) override;
+        virtual void SetWinOSData(const Window::WindowOSInitData&) override;
 
         virtual bool GetWinActivityState() override { return m_isWinActive; }
 
@@ -90,7 +85,7 @@ namespace jej
         android_app* state;
 
         //Android specific window init data
-        WindowOSInitData m_winOSInitData;
+        Window::WindowOSInitData m_winOSInitData;
     };
 
 }

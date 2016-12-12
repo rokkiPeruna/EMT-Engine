@@ -165,7 +165,7 @@ namespace jej
         return (GetAsyncKeyState(vkey) & 0x8000) != 0;
     }
 
-    bool InputManager::_isMouseButtonPressed(const Mouse::Button p_button) const
+    bool InputManager::_isMouseButtonPressed(const Mouse::Button) const
     {
         return true;
     }

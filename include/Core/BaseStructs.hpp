@@ -40,7 +40,9 @@ namespace jej
     template <typename T>
     struct ComponentHelper
     {
+#ifdef _WIN32
         ComponentHelper<T>(){ static_assert(false, "Invalid ComponentHelper type."); };
+#endif
     };
 
     template <>

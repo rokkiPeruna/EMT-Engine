@@ -177,28 +177,28 @@ namespace jej
     ///////////////////////////////////////
 
 
-    WindowBaseInitData& AndroidWindow::GetWinData()
+    Window::WindowBaseInitData& AndroidWindow::GetWinData()
     {
         return m_winBaseInitData;
     }
     ///////////////////////////////////////
 
 
-    WindowOSInitData& AndroidWindow::GetWinOSData()
+    Window::WindowOSInitData& AndroidWindow::GetWinOSData()
     {
         return m_winOSInitData;
     }
     ///////////////////////////////////////
 
 
-    void AndroidWindow::SetWinData(const WindowBaseInitData&)
+    void AndroidWindow::SetWinData(const Window::WindowBaseInitData& p_winBaseInitData)
     {
-        return;
+        m_winBaseInitData = p_winBaseInitData;
     }
     ///////////////////////////////////////
 
 
-    void AndroidWindow::SetWinOSData(const WindowOSInitData& p_winOSInitData)
+    void AndroidWindow::SetWinOSData(const Window::WindowOSInitData& p_winOSInitData)
     {
         m_winOSInitData = p_winOSInitData;
     }

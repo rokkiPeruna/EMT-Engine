@@ -47,3 +47,27 @@ namespace jej
 
 }
 
+#ifdef __ANDROID__
+
+#include <string>
+#include <stddef.h>
+namespace std
+{
+    //extern char* strchr(const char*, int);
+    //extern int strncmp(const void*, const void*, size_t);
+    //extern size_t strlen(const char*);
+
+    char* strstr(const char* s, const char* find)
+    {
+        const char*p = s;
+        const size_t len = strlen(find);
+        for(;(p = strchr(p, *find)) != 0; p++)
+        {
+            if(strncmp(p, find, len) == 0)
+                return (char*)p;
+        }
+        return nullptr;
+    }
+}
+
+#endif

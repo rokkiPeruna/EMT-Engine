@@ -1,7 +1,8 @@
 #include <EntityComponentSys/Systems/RenderSystem.hpp>
 #include <EntityComponentSys/Components/RenderComponent.hpp>
+#include <Core/BaseStructs.hpp>
 #include <Utility/Assert.hpp>
-
+#include <Utility/Messenger.hpp>
 
 
 #ifdef _WIN32
@@ -62,7 +63,7 @@ namespace jej
     //////////////////////////////////////////
 
 
-    void RenderSystem::_update(const float p_deltaTime)
+    void RenderSystem::_update(const float)
     {
         //If on ANDROID, screen size is given on RenderSystem::_createContext
 #ifdef _WIN32
@@ -550,18 +551,15 @@ namespace jej
                     //Create alias for current shape's vertices
                     auto* vertices = &shapesItr->m_myDrawData.vertices;
 
-                    //Create alias for shapetype
-                    auto& shapeType = shapesItr->m_shapeType;
-
                     //Create vertices and indices
                     switch (shapesItr->m_shapeType)
                     {
-                    case jej::ShapeType::Circle:
+                    case ShapeType::Circle:
                     {
                         break;
                     }
 
-                    case jej::ShapeType::Rectangle:
+                    case ShapeType::Rectangle:
                     {
                         //Translate local coordinates to global coordinates
                         vertices->at(0) = shapesItr->m_points.at(0).x + itr->m_transformComp->position.x;
@@ -575,12 +573,12 @@ namespace jej
                         break;
                     }
 
-                    case jej::ShapeType::Convex:
+                    case ShapeType::Convex:
                     {
                         break;
                     }
 
-                    case jej::ShapeType::Triangle:
+                    case ShapeType::Triangle:
                     {
 
                         vertices->at(0) = shapesItr->m_points.at(0).x + itr->m_transformComp->position.x;
@@ -592,9 +590,9 @@ namespace jej
                         break;
                     }
 
-                    case jej::ShapeType::Failed:
+                    case ShapeType::Failed:
                     {
-                        jej::Messenger::Add(jej::Messenger::MessageType::Error, "Shape had no valid type in RenderSystem::_updateVertices");
+                        Messenger::Add(Messenger::MessageType::Error, "Shape had no valid type in RenderSystem::_updateVertices");
                         break;
                     }
 
