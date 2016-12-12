@@ -76,6 +76,7 @@ namespace jej
             if (type == "png")
             {
                 _bindImage(itr.get());
+                _drawFromSheet(itr.get());
             }
 
             //Font
@@ -99,7 +100,13 @@ namespace jej
 
     void TextureSystem::_update(const float p_deltaTime)
     {
-
+        for (auto& itr : m_components)
+        {
+            if (itr->m_textureData.usingImage != itr->m_textureData.previousImage)
+            {
+                _drawFromSheet(itr.get());
+            }
+        }
     }
     //////////////////////////////////////////
 
@@ -169,9 +176,70 @@ namespace jej
     //////////////////////////////////////////
 
 
-    void TextureSystem::_drawFromSheet()
+    void TextureSystem::_drawFromSheet(TextureComponent* p_component)
     {
+        for (auto& itr : EngineObject::GetInstance().GetSceneRef()->GetEntityPtr(p_component->m_shapeData.parentID)->GetComponentPtr<ShapeComponent>()->m_shapes)
+        {
+            switch (itr->m_shapeType)
+            {
 
+            case ShapeType::Rectangle:
+            {
+                if (p_component->m_textureData.usingImage == -1)
+                {
+                    itr->m_myDrawData.textureCoords = {
+                        0.0f, -1.f,
+                        -1.f, -1.f,
+                        -1.f, 0.0f,
+                        0.0f, 0.0f
+                    };
+                }
+                else
+                {
+                    p_component->m_textureData.previousImage = p_component->m_textureData.usingImage;
+
+                    auto& td = p_component->m_textureData;
+                    const float singleImageX = static_cast<float>(td.x / td.imagesInTexture.x);
+                    const float singleImageY = static_cast<float>(td.y / td.imagesInTexture.y);
+                    int row = 0u;
+
+                    //Count rows
+                    while (row * td.imagesInTexture.x < td.usingImage)
+                    {
+                        ++row;
+                    }
+
+                    if (row * td.imagesInTexture.x > td.usingImage)
+                    {
+                        //Went over
+                        --row;
+                    }
+
+                    //Count columns
+                    const unsigned int col = td.usingImage - (row * td.imagesInTexture.x);
+
+                    itr->m_myDrawData.textureCoords =
+                    {
+                        -1.f + ((col * singleImageX + singleImageX) / td.x),
+                        -1.f + ((row * singleImageY) / td.y),
+
+                        -1.f + ((col * singleImageX) / td.x),
+                        -1.f + ((row * singleImageY) / td.y),
+
+                        -1.f + ((col * singleImageX) / td.x),
+                        -1.f + ((row * singleImageY + singleImageY) / td.y),
+
+                        -1.f + ((col * singleImageX + singleImageX) / td.x),
+                        -1.f + ((row * singleImageY + singleImageY) / td.y)
+                    };
+                }
+            }
+
+            default:
+                break;
+            }
+
+        }
     }
     //////////////////////////////////////////
 

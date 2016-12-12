@@ -1,5 +1,3 @@
-#ifndef JEJ_FILEHANDLER_ANDROID_HPP
-#define JEJ_FILEHANDLER_ANDROID_HPP
 
 //All Android-specific definitions in this file
 
@@ -8,16 +6,6 @@
 #include <Core/AndroidAppState.hpp>
 #include <Utility/FileHandler.hpp>
 #include <Utility/Messenger.hpp>
-
-#define STB_TRUETYPE_IMPLEMENTATION
-#define STBTT_STATIC
-#include <External/STB/stb_truetype.h>
-
-#define STB_IMAGE_IMPLEMENTATION
-#include <External/STB/stb_image.h>
-
-#define STB_IMAGE_RESIZE_IMPLEMENTATION
-#include <External/STB/stb_image_resize.h>
 
 
 namespace jej
@@ -110,7 +98,5 @@ namespace jej
 	
 
 }
-
-#endif
 
 #endif

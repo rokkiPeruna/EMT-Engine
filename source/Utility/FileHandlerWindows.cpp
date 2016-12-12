@@ -1,5 +1,3 @@
-#ifndef JEJ_FILEHANDLER_WINDOWS_HPP
-#define JEJ_FILEHANDLER_WINDOWS_HPP
 
 //All Windows-specific definitions in this file
 
@@ -8,17 +6,6 @@
 #include <Utility/FileHandler.hpp>
 #include <Utility/Messenger.hpp>
 #include <Utility/Assert.hpp>
-
-
-#define STB_TRUETYPE_IMPLEMENTATION
-#define STBTT_STATIC
-#include <External/STB/stb_truetype.h>
-
-#define STB_IMAGE_IMPLEMENTATION
-#include <External/STB/stb_image.h>
-
-#define STB_IMAGE_RESIZE_IMPLEMENTATION
-#include <External/STB/stb_image_resize.h>
 
 
 namespace jej
@@ -112,7 +99,7 @@ namespace jej
         }
         //Used for copying data
         p_data->size = GetFileSize(m_fileHandle, NULL);
-        
+
         //Release handle so that stb can access the file
         _releaseHandle();
 
@@ -238,4 +225,3 @@ namespace jej
 
 #endif
 
-#endif

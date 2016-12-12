@@ -31,8 +31,8 @@ int main(int argc, char* argv[])
     //Create scene in which you can put entities.
     //Scene can be start menu, game level, credits ec.
 
-	auto& myScene = *game.CreateScene(true, "My Scene Name");
-///////////////////////////////CUT FOR COPYING TO ANDROID
+    auto& myScene = *game.CreateScene(true, "My Scene Name");
+    ///////////////////////////////CUT FOR COPYING TO ANDROID
     //Add new entity to the newly created scene
     myScene.AddEntity("Character");
 
@@ -82,17 +82,17 @@ int main(int argc, char* argv[])
 
     ////Now we can add shape to our ShapeComponent. AddShape - method works intuitively. As we now
     ////add three points, AddShape knows we are making a triangle.
-     myShapeComp.AddShape(std::vector<jej::Vector2f>
+    myShapeComp.AddShape(std::vector<jej::Vector2f>
     {
         jej::Vector2f(0.f, 0.3f),		//First point, middle of screen
             jej::Vector2f(0.2f, 0.5f),		//Second point, upper-right corner
             jej::Vector2f(-0.2f, 0.5f)        //Third point, lower-right corner
-			
+
     }
-	//jej::Vector4i(150, 0, 50, 150)
+    //jej::Vector4i(150, 0, 50, 150)
     );
 
-     auto& s = myShapeComp.AddShape(
+    auto& s = myShapeComp.AddShape(
         jej::Vector2f(0.3f, 0.3f)
         );
 
@@ -109,52 +109,55 @@ int main(int argc, char* argv[])
 
     ////Creating
     myCharacter.AddComponent<jej::RenderComponent>();
-	///////////////////////////////CUT FOR COPYING TO ANDROID
+    ///////////////////////////////CUT FOR COPYING TO ANDROID
     ////Don't try setting components to other entities other than the one calling the function
 
     myCharacter.AddComponent<jej::CollisionComponent>();
-	///////////////////////////////CUT FOR COPYING TO ANDROID
+    ///////////////////////////////CUT FOR COPYING TO ANDROID
 
 
-      myScene.AddEntity("Enemy");
-    
-      auto& enemy = *myScene.GetEntityPtr("Enemy");
-    
-      enemy.AddComponent<jej::TransformComponent>(
-          jej::Vector2f(-0.4f, -0.4f),		//Position, we start at center of the screen
-          jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
-          jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
-    
-          );
-    
-      enemy.AddComponent<jej::ShaderComponent>(
-          "PixelShader.frag",			//First we must give vertex shader name and file extension
-          "VertexShader.vert"			//Second we guve fragment shader name and file extencion
-          );
-    
-      auto& enemyShapeComp = enemy.AddComponent<jej::ShapeComponent>(
-          jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
-          );
-    
-      enemyShapeComp.AddShape(std::vector<jej::Vector2f>
-      {
-          jej::Vector2f(0.0f, 0.5f),		//First point, middle of screen
-              jej::Vector2f(0.2f, 0.3f),		//Second point, upper-right corner
-              jej::Vector2f(-0.2f, 0.3f)        //Third point, lower-right corner
-      }
-      );
-    
-      
-      enemy.AddComponent<jej::TextureComponent>(
-          enemyShapeComp.AddShape(
-          jej::Vector2f(0.3f, 0.3f)
-          ).GetID()
-          );
-    
-      
-      enemy.AddComponent<jej::CollisionComponent>();
+#if 0
+    myScene.AddEntity("Enemy");
 
-      enemy.AddComponent<jej::RenderComponent>();
+    auto& enemy = *myScene.GetEntityPtr("Enemy");
+
+    enemy.AddComponent<jej::TransformComponent>(
+        jej::Vector2f(-0.4f, -0.4f),		//Position, we start at center of the screen
+        jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
+        jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
+
+        );
+
+    enemy.AddComponent<jej::ShaderComponent>(
+        //"PixelShader.frag",			//First we must give vertex shader name and file extension
+        //"VertexShader.vert"			//Second we guve fragment shader name and file extencion
+        );
+
+    auto& enemyShapeComp = enemy.AddComponent<jej::ShapeComponent>(
+        jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
+        );
+
+    enemyShapeComp.AddShape(std::vector<jej::Vector2f>
+    {
+        jej::Vector2f(0.0f, 0.5f),		//First point, middle of screen
+            jej::Vector2f(0.2f, 0.3f),		//Second point, upper-right corner
+            jej::Vector2f(-0.2f, 0.3f)        //Third point, lower-right corner
+    }
+    );
+
+
+    enemy.AddComponent<jej::TextureComponent>(
+        enemyShapeComp.AddShape(
+        jej::Vector2f(0.3f, 0.3f)
+        ).GetID()
+        );
+
+
+    enemy.AddComponent<jej::CollisionComponent>();
+
+    enemy.AddComponent<jej::RenderComponent>();
+#endif // 0
+
 
 #if 1
 
@@ -164,10 +167,12 @@ int main(int argc, char* argv[])
 
 #if 1
 
-    if (tex.AddImage("Capture.png"))
+    if (tex.AddImage("test.png", jej::Vector2i(8,8)))
         jej::Messenger::Add(jej::Messenger::MessageType::Info, "image loaded successfully");
     else
         jej::Messenger::Add(jej::Messenger::MessageType::Warning, "image loading unsuccessful");
+
+    tex.UseImage(2);
 #endif
 
 #if 0
@@ -182,12 +187,20 @@ int main(int argc, char* argv[])
     auto& mouse = jej::Mouse::GetInstance();
     auto& keyboard = jej::Keyboard::GetInstance();
 
+    const char max = 8 * 8;
+    char use = -1;
+
     //Finalize EngineObject
     game.Finalize();
-	bool loop = true;
-    while(loop)
+    bool loop = true;
+    while (loop)
     {
         game.EngineUpdate();
+
+        if (use == max - 1)
+            use = -1;
+        
+        tex.UseImage(++use);
 
         auto* charLocChange = myCharacter.GetComponentPtr<jej::TransformComponent>();
 
@@ -202,11 +215,11 @@ int main(int argc, char* argv[])
 
         if (keyboard.IsKeyPressed(jej::Keyboard::Key::W))
             charLocChange->position.y += 0.05f;
-        
-		if (keyboard.IsKeyPressed(jej::Keyboard::Key::Escape))
-			loop = false;
 
-		//break;
+        if (keyboard.IsKeyPressed(jej::Keyboard::Key::Escape))
+            loop = false;
+
+        //break;
         //std::cout << mouse.GetMousePosition().x << "   " << mouse.GetMousePosition().y << std::endl;
 
     }

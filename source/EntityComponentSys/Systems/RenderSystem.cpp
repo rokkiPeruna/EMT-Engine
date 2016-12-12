@@ -200,9 +200,6 @@ namespace jej
     {
         for (const auto& itr : m_components)
         {
-
-
-
             //Get shader ID and use that shader and enable attributes
             _useShader(*itr->m_shaderComp);
 
@@ -443,13 +440,13 @@ namespace jej
                     vertices.emplace_back(shapesItr->m_points.at(3).y + itr->m_transformComp->position.y);
 
                     //Give texture coordinates
-                    shapesItr->m_myDrawData.textureCoords =
-                    {
-                        0.0f, -1.f,
-                        -1.f, -1.f,
-                        -1.f, 0.0f,
-                        0.0f, 0.0f
-                    };
+                    //     shapesItr->m_myDrawData.textureCoords =
+                    //     {
+                    //         0.0f, -1.f,
+                    //         -1.f, -1.f,
+                    //         -1.f, 0.0f,
+                    //         0.0f, 0.0f
+                    //     };
                     break;
                 }
 
@@ -508,7 +505,7 @@ namespace jej
 
     bool RenderSystem::_initialize()
     {
-        
+
         m_window = EngineObject::GetInstance().GetWindowRef();
 
         if (m_window == nullptr)
@@ -614,6 +611,10 @@ namespace jej
                     //Update position vertices buffer
                     glBindBuffer(GL_ARRAY_BUFFER, drawData.vertexPosBuffer);
                     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(drawData.vertices[0]) * drawData.vertices.size(), drawData.vertices.data());
+                    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+                    glBindBuffer(GL_ARRAY_BUFFER, drawData.texCoordBuffer);
+                    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(drawData.textureCoords[0]) * drawData.textureCoords.size(), drawData.textureCoords.data());
                     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
                 }

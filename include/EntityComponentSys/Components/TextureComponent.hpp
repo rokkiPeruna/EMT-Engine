@@ -56,6 +56,9 @@ namespace jej
             int offset = 0;
             unsigned int size = 0u;
             unsigned char* data = nullptr;
+            int usingImage = -1;
+            int previousImage = -1;
+            Vector2i imagesInTexture = Vector2i(0, 0);
 
             TextureData(){};
             ~TextureData()
@@ -65,12 +68,12 @@ namespace jej
                     stbi_image_free(data);
                     data = nullptr;
                 }
-                    
+
             }
 
         };
 
-        
+
 
 
 
@@ -122,11 +125,11 @@ namespace jej
         //Sets the image to be rendered
         //p_name: Name of the file with extension
         //p_images: Number of images in the file, defaults to whole file
-        bool AddImage(const std::string& p_name, const unsigned short int p_imageCount = 0u);
+        bool AddImage(const std::string& p_name, const Vector2i p_imageCount = Vector2i(0, 0));
 
         //Set selected image to be rendered
         //p_imageIndex: Index of the image in the sheet
-        bool UseImage(const unsigned int p_imageIndex);
+        bool UseImage(const int p_imageIndex);
 
         //Add font to print characters
         //p_name: Name of the file with extension, currentlty only supports truetype fonts (.ttf)

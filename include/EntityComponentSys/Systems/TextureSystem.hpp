@@ -55,7 +55,7 @@ namespace jej
         void _bindImage(TextureComponent* p_component);
 
         //SpriteSheet stuff
-        void _drawFromSheet();
+        void _drawFromSheet(TextureComponent* p_component);
         
         //Font stuff
         void _fontStuff();

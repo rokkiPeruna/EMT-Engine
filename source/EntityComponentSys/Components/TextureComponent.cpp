@@ -12,7 +12,7 @@ namespace jej
 {
 
 
-    TextureComponent::TextureComponent(Entity* p_entity, const JEJ_COUNT p_shapeID):
+    TextureComponent::TextureComponent(Entity* p_entity, const JEJ_COUNT p_shapeID) :
         Component(p_entity),
         m_fontData(),
         m_textureData(),
@@ -21,7 +21,7 @@ namespace jej
 
     }
 
-    TextureComponent::TextureComponent(Entity* p_entity, Shape* p_shape):
+    TextureComponent::TextureComponent(Entity* p_entity, Shape* p_shape) :
         Component(p_entity),
         m_fontData(),
         m_textureData(),
@@ -31,41 +31,41 @@ namespace jej
     }
 
 
- //  TextureComponent::TextureComponent(Entity* p_entity) :
- //      Component(p_entity),
- //      m_fontData(),
- //     m_texData()
- //     // m_textureData(),
- //      //m_completeImageData(nullptr)
- //  {
- //      m_componentType = ComponentType::Texture;
- //
- //  }
+    //  TextureComponent::TextureComponent(Entity* p_entity) :
+    //      Component(p_entity),
+    //      m_fontData(),
+    //     m_texData()
+    //     // m_textureData(),
+    //      //m_completeImageData(nullptr)
+    //  {
+    //      m_componentType = ComponentType::Texture;
+    //
+    //  }
     //////////////////////////////////////////
 
 
     TextureComponent::~TextureComponent()
     {
         //Free texture if present (also called in texdata dtor)
-     //   if (m_textureData.displayImage)
-     //   {
-     //       delete[] m_textureData.displayImage;
-     //       m_textureData.displayImage = nullptr;
-     //   }
-     //
+        //   if (m_textureData.displayImage)
+        //   {
+        //       delete[] m_textureData.displayImage;
+        //       m_textureData.displayImage = nullptr;
+        //   }
+        //
         //Free fontdata if present (also called in texcomp dtor)
         if (m_fontData.fontData)
         {
             stbi_image_free(m_fontData.fontData);
             m_fontData.fontData = nullptr;
         }
-     //
-     //   //Free whole image if present
-     //   if (m_completeImageData)
-     //   {
-     //       stbi_image_free(m_completeImageData);
-     //       m_completeImageData = nullptr;
-     //   }
+        //
+        //   //Free whole image if present
+        //   if (m_completeImageData)
+        //   {
+        //       stbi_image_free(m_completeImageData);
+        //       m_completeImageData = nullptr;
+        //   }
 
     }
     //////////////////////////////////////////
@@ -81,33 +81,28 @@ namespace jej
     //      return m_textureData;
     //  }
 
-    bool TextureComponent::AddImage(const std::string& p_name, const unsigned short int p_imageCount)
+    bool TextureComponent::AddImage(const std::string& p_name, const Vector2i p_imageCount)
     {
         m_textureData.name = p_name;
+        m_textureData.imagesInTexture = p_imageCount;
         return true;
-     //   m_textureData.imageCount = p_imageCount;
-     //   m_textureData.imageName = p_name;
-     //   FileHandler handler;
-     //   if (handler.ReadImage(this))
-     //   {
-     //       m_textureData.displayImage = new unsigned char[m_textureData.imageDataSize];
-     //       std::memcpy(m_textureData.displayImage, m_completeImageData, m_textureData.imageDataSize);
-     //
-     //       //Both pointers contain same-size arrays after this with same data
-     //
-     //       return true;
-     //   }
-     //   return false;
     }
     //////////////////////////////////////////
 
 
-    bool TextureComponent::UseImage(const unsigned int p_imageIndex)
+    bool TextureComponent::UseImage(const int p_imageIndex)
     {
-        JEJ_ASSERT(false, "SpriteSheets not yet supported");
-        FileHandler handler;
-        return false;
-        //return handler.ReadSingleImage(&m_textureData, m_completeImageData, p_imageIndex);
+        const unsigned int imageCount = m_textureData.imagesInTexture.x * m_textureData.imagesInTexture.y;
+        
+        if (imageCount <= p_imageIndex)
+        {
+            JEJ_ASSERT(false, "Invalid index");
+            Messenger::Add(Messenger::MessageType::Error, "Tried to access " + std::to_string(p_imageIndex) + " th image from a file with " + std::to_string(imageCount) + " images");
+            return false;
+        }
+
+        m_textureData.usingImage = p_imageIndex;
+        return true;
     }
     //////////////////////////////////////////
 
