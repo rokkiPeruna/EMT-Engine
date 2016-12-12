@@ -32,18 +32,12 @@ int main(int argc, char* argv[])
     //Scene can be start menu, game level, credits ec.
 
 	auto& myScene = *game.CreateScene(true, "My Scene Name");
-///////////////////////////////CUT FOR COPYING TO ANDROID
+
     //Add new entity to the newly created scene
-    myScene.AddEntity("Character");
+    myScene.AddEntity("Player");
 
     //Make alias of added entity for ease of use
-    auto& myCharacter = *myScene.GetEntityPtr("Character");
-
-
-    //auto& texcomp = myCharacter.AddComponent<jej::TextureComponent>();
-
-    //texcomp.AddFont("Roboto_Black.ttf");
-    //texcomp.AddImage("jellyfish.png");
+    auto& player = *myScene.GetEntityPtr("Player");
 
     ////Start adding components to our entity
     ////Entity has template method AddComponent which allows you to add all kinds of components
@@ -53,15 +47,15 @@ int main(int argc, char* argv[])
     ////to myCharacter:
 
     ////Creating:
-    myCharacter.AddComponent<jej::TransformComponent>(
-        jej::Vector2f(0.0f, 0.0f),		//Position, we start at center of the screen
+    player.AddComponent<jej::TransformComponent>(
+        jej::Vector2f(0.25f, -0.25f),		//Position, we start at center of the screen
         jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
         jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
         );
 
 
     ////Next we create ShaderComponent and add it to our entity so it can be drawn
-    myCharacter.AddComponent<jej::ShaderComponent>(
+    player.AddComponent<jej::ShaderComponent>(
         "PixelShader.frag",			//First we must give vertex shader name and file extension
         "VertexShader.vert"			//Second we guve fragment shader name and file extencion
         );
@@ -74,27 +68,22 @@ int main(int argc, char* argv[])
     ////etc. we make a pyramid that has four triangles as sides and rectangle as bottom.
     ////As we add ShapeComponent, we take an alias at the sametime for ease of use.
 
-    auto& myShapeComp = myCharacter.AddComponent<jej::ShapeComponent>(
-        jej::Vector4i(0, 255, 0, 150)	//This is our shape's color in RGBA, so this is fully green and somewhat opaque
+    auto& PlayerShapeComponent = player.AddComponent<jej::ShapeComponent>(
+        jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
         );
 
 
 
     ////Now we can add shape to our ShapeComponent. AddShape - method works intuitively. As we now
     ////add three points, AddShape knows we are making a triangle.
-     myShapeComp.AddShape(std::vector<jej::Vector2f>
+    PlayerShapeComponent.AddShape(std::vector<jej::Vector2f>
     {
         jej::Vector2f(0.f, 0.3f),		//First point, middle of screen
             jej::Vector2f(0.2f, 0.5f),		//Second point, upper-right corner
             jej::Vector2f(-0.2f, 0.5f)        //Third point, lower-right corner
-			
     }
-	//jej::Vector4i(150, 0, 50, 150)
     );
 
-     auto& s = myShapeComp.AddShape(
-        jej::Vector2f(0.3f, 0.3f)
-        );
 
     ////Now we have our character with transform, shader and shape component. At this point it exist
     ////in our scene and has data in it with witch we can make it react to other entities and
@@ -108,75 +97,77 @@ int main(int argc, char* argv[])
     ////fetching component with entity's GetComponentPtr<> template function
 
     ////Creating
-    myCharacter.AddComponent<jej::RenderComponent>();
-	///////////////////////////////CUT FOR COPYING TO ANDROID
+    player.AddComponent<jej::RenderComponent>();
+
     ////Don't try setting components to other entities other than the one calling the function
 
-    myCharacter.AddComponent<jej::CollisionComponent>();
-	///////////////////////////////CUT FOR COPYING TO ANDROID
+    player.AddComponent<jej::CollisionComponent>();
 
 
-      myScene.AddEntity("Enemy");
-    
-      auto& enemy = *myScene.GetEntityPtr("Enemy");
-    
-      enemy.AddComponent<jej::TransformComponent>(
-          jej::Vector2f(-0.4f, -0.4f),		//Position, we start at center of the screen
-          jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
-          jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
-    
-          );
-    
-      enemy.AddComponent<jej::ShaderComponent>(
-          "PixelShader.frag",			//First we must give vertex shader name and file extension
-          "VertexShader.vert"			//Second we guve fragment shader name and file extencion
-          );
-    
-      auto& enemyShapeComp = enemy.AddComponent<jej::ShapeComponent>(
-          jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
-          );
-    
-      enemyShapeComp.AddShape(std::vector<jej::Vector2f>
-      {
-          jej::Vector2f(0.0f, 0.5f),		//First point, middle of screen
-              jej::Vector2f(0.2f, 0.3f),		//Second point, upper-right corner
-              jej::Vector2f(-0.2f, 0.3f)        //Third point, lower-right corner
-      }
-      );
-    
-      
-      enemy.AddComponent<jej::TextureComponent>(
-          enemyShapeComp.AddShape(
-          jej::Vector2f(0.3f, 0.3f)
-          ).GetID()
-          );
-    
-      
-      enemy.AddComponent<jej::CollisionComponent>();
+   //Enemies:
 
-      enemy.AddComponent<jej::RenderComponent>();
+   const char enemyNumber = 20;
 
-#if 1
+   //Creates as many enemies as enemyNumber is
+   for (signed char i = 0; i < enemyNumber; ++i)
+   {
+       //Adds single enemy to the scene
+       myScene.AddEntity("Enemy " + std::to_string(i));
 
-    auto& tex = myCharacter.AddComponent<jej::TextureComponent>(s.GetID());
+       auto& enemy = *myScene.GetEntityPtr("Enemy " + std::to_string(i));
 
-#endif
+       //Adds growing position for current enemy
+       enemy.AddComponent<jej::TransformComponent>(
+           jej::Vector2f(-1.f + (float)i / 10.f, 0.9f)
+           );
 
-#if 1
+       enemy.AddComponent<jej::ShaderComponent>(
+           "PixelShader.frag",			//First we must give vertex shader name and file extension
+           "VertexShader.vert"			//Second we give fragment shader name and file extension
+           );
 
-    if (tex.AddImage("Capture.png"))
-        jej::Messenger::Add(jej::Messenger::MessageType::Info, "image loaded successfully");
-    else
-        jej::Messenger::Add(jej::Messenger::MessageType::Warning, "image loading unsuccessful");
-#endif
 
-#if 0
+       auto& enemyShapeComp = enemy.AddComponent<jej::ShapeComponent>(
+           jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA, so this is fully green and somewhat opaque
+           );
 
-    if (tex.AddFont("Textures/Bungee_Regular.ttf"))
-        jej::Messenger::Add(jej::Messenger::MessageType::Info, "font loaded successfully");
-    else
-        jej::Messenger::Add(jej::Messenger::MessageType::Warning, "font loading unsuccessful");
-#endif
+       //Adds a downwards pointing triangle shape for current enemy
+       auto& shape = enemyShapeComp.AddShape(std::vector<jej::Vector2f>
+       {
+               jej::Vector2f(0.f, -0.1f),
+               jej::Vector2f(-0.04f, 0.04f),
+               jej::Vector2f(0.04f, 0.04f)
+       }
+       );
+
+       //Adds the possibility to draw current enemy
+       enemy.AddComponent<jej::RenderComponent>();
+
+       enemy.AddComponent<jej::CollisionComponent>();
+   }
+
+
+//#if 1
+//
+//    auto& tex = myCharacter.AddComponent<jej::TextureComponent>(s.GetID());
+//
+//#endif
+//
+//#if 1
+//
+//    if (tex.AddImage("Capture.png"))
+//        jej::Messenger::Add(jej::Messenger::MessageType::Info, "image loaded successfully");
+//    else
+//        jej::Messenger::Add(jej::Messenger::MessageType::Warning, "image loading unsuccessful");
+//#endif
+//
+//#if 0
+//
+//    if (tex.AddFont("Textures/Bungee_Regular.ttf"))
+//        jej::Messenger::Add(jej::Messenger::MessageType::Info, "font loaded successfully");
+//    else
+//        jej::Messenger::Add(jej::Messenger::MessageType::Warning, "font loading unsuccessful");
+//#endif
 
 
     auto& mouse = jej::Mouse::GetInstance();
@@ -189,7 +180,7 @@ int main(int argc, char* argv[])
     {
         game.EngineUpdate();
 
-        auto* charLocChange = myCharacter.GetComponentPtr<jej::TransformComponent>();
+        auto* charLocChange = player.GetComponentPtr<jej::TransformComponent>();
 
         if (keyboard.IsKeyPressed(jej::Keyboard::Key::A))
             charLocChange->position.x -= 0.05f;
