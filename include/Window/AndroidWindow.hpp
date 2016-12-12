@@ -97,8 +97,12 @@ namespace jej
         //Set window's OS specific init data
         virtual void SetWinOSData(const WindowOSInitData&) override;
 
+        virtual bool GetWinActivityState() override { return m_isWinActive; }
+
+
     private:
 
+        bool m_isWinActive;
         bool _initWindow();
 
         android_app* state;

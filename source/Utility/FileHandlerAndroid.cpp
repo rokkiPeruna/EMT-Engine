@@ -81,8 +81,42 @@ namespace jej
 
 	bool FileHandler::ReadImage(TextureComponent::TextureData* p_data)
 	{
-		//TODO: Add Android stuff
-		return false;
+
+       //const std::string imagePath = "Textures/" + p_data->name;
+        const std::string imagePath = p_data->name;
+
+
+        AAsset* file = AAssetManager_open(m_app->activity->assetManager, imagePath.c_str(), AASSET_MODE_BUFFER);
+
+        unsigned char* buffer;
+
+        p_data->size = AAsset_getLength(file);
+
+        AAsset_read(file, buffer, p_data->size);
+        if (!file)
+        {
+            Messenger::Add(Messenger::MessageType::Error, "Texture could not be read");
+            return false;
+        }
+        //const char* tmpData = (char*)AAsset_getBuffer(file);
+        //Used for copying data
+
+        AAsset_close(file);
+
+        //Load image
+        p_data->data = stbi_load_from_memory(
+                buffer,
+                p_data->size,
+            &p_data->x,
+            &p_data->y,
+            &p_data->offset,
+            0);
+
+
+        if (!p_data->data)
+            return false;
+
+        return true;
 	}
 	//////////////////////////////////////////
 
@@ -96,15 +130,14 @@ namespace jej
 
     bool FileHandler::_accessFile(const std::string& p_name, const bool p_createFile)
     {
-        //TODO: Needs definition on android
-        //JEJ_ASSERT(false, "Needs definition on android");
+        //Not needed in Android
         return false;
     }
 	//////////////////////////////////////////
 
 	void FileHandler::_releaseHandle()
 	{
-		//TODO: Add Android stuff
+		//Not needed Android
 	}
 
 	

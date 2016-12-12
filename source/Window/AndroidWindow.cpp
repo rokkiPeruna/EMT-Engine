@@ -4,8 +4,6 @@
 
 #include <EntityComponentSys/Systems/RenderSystem.hpp>
 #include <Core/AndroidAppState.hpp>
-
-
 #include <android/sensor.h>
 #include <android_native_app_glue.h>
 
@@ -19,23 +17,28 @@ namespace jej
         auto& rend = RenderSystem::GetInstance();
 
         switch (cmd) {
-            //case APP_CMD_SAVE_STATE:
-            //	// The system has asked us to save our current state.  Do so.
-            //	engine->app->savedState = malloc(sizeof(struct saved_state));
-            //	*((struct saved_state*)engine->app->savedState) = engine->state;
-            //	engine->app->savedStateSize = sizeof(struct saved_state);
-            //	break;
+            case APP_CMD_SAVE_STATE:
+            	// The system has asked us to save our current state.  Do so.
+            	engine.app->savedState = malloc(sizeof(struct saved_state));
+            	*((struct saved_state*)engine.app->savedState) = engine.state;
+            	engine.app->savedStateSize = sizeof(struct saved_state);
+            	break;
         case APP_CMD_INIT_WINDOW:
             // The window is being shown, get it ready.
             if (rend.m_display != nullptr) {
                 //engine_init_display(engine);
+                AndroidWindow::GetInstance().m_isWinActive = true;
                 rend._update(100.f);
             }
             break;
         case APP_CMD_TERM_WINDOW:
             // The window is being hidden or closed, clean it up.
-            rend.~RenderSystem();
-            break;
+                engine.animating = 0;
+                rend.m_display = EGL_NO_DISPLAY;
+                rend.m_context = EGL_NO_CONTEXT;
+                rend.m_surface = EGL_NO_SURFACE;
+
+                break;
         case APP_CMD_GAINED_FOCUS:
             // When our app gains focus, we start monitoring the accelerometer.
             if (engine.accelerometerSensor != NULL) {
@@ -56,8 +59,10 @@ namespace jej
             }
             // Also stop animating.
             engine.animating = 0;
+                AndroidWindow::GetInstance().m_isWinActive = false;
             //engine_draw_frame(engine);
             break;
+
         }
     }
     ///////////////////////////////////////
@@ -72,7 +77,7 @@ namespace jej
 
         if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION)
         {
-            window.m_winOSInitData.animating = 1;
+            window.m_winOSInitData.animating = 0;
             window.m_winOSInitData.state.x = AMotionEvent_getX(event, 0);
             window.m_winOSInitData.state.y = AMotionEvent_getY(event, 0);
             return 1;
@@ -83,7 +88,8 @@ namespace jej
 
 
     AndroidWindow::AndroidWindow() :
-        m_winOSInitData()
+        m_winOSInitData(),
+        m_isWinActive(true)
     {
 
     }
@@ -108,23 +114,28 @@ namespace jej
     bool AndroidWindow::UpdateWindowMessages()
     {
 
-        AndroidAppState state;
+        android_app& state = *AndroidAppState::m_AppState;
 
-        while (1) {
+            auto& engine = AndroidWindow::GetInstance().m_winOSInitData;
+            auto& rend = RenderSystem::GetInstance();
+
             // Read all pending events.
             int ident;
             int events;
             struct android_poll_source* source;
 
+        //m_winOSInitData.animating = 1;
+
             // If not animating, we will block forever waiting for events.
             // If animating, we loop until all events are read, then continue
             // to draw the next frame of animation.
-            while ((ident = ALooper_pollAll(m_winOSInitData.animating ? 0 : -1, NULL, &events,
-                (void**)&source)) >= 0) {
+            while ((ident = ALooper_pollOnce(m_winOSInitData.animating ? 0 : -1, NULL, &events,
+                (void**)&source)) >= 0)
+            {
 
                 // Process this event.
                 if (source != NULL) {
-                    source->process(state.m_AppState, source);
+                    source->process(&state, source);
                 }
 
                 // If a sensor has data, process it now.
@@ -134,28 +145,33 @@ namespace jej
                 //		while (ASensorEventQueue_getEvents(m_winOSInitData.sensorEventQueue,
                 //			&event, 1) > 0) {
                 //			//LOGI("accelerometer: x=%f y=%f z=%f",
-                //				//event.acceleration.x, event.acceleration.y,
-                //				//event.acceleration.z;
+                //				event.acceleration.x, event.acceleration.y,
+                //				event.acceleration.z;
                 //		}
                 //	}
                 //}
-
                 // Check if we are exiting.
-                if (state.m_AppState->destroyRequested != 0) {
+                if (state.destroyRequested != 0) {
                     //delete EngineObject::GetInstance();
-                    return false;
-                }
 
-                //if (m_winOSInitData.animating) {
-                // Done with events; draw next animation frame.
-                // Drawing is throttled to the screen update rate, so there
-                // is no need to do timing here.
-                RenderSystem::GetInstance()._update(100.f);
-                //}
+                    engine.animating = 0;
+                    rend.m_display = EGL_NO_DISPLAY;
+                    rend.m_context = EGL_NO_CONTEXT;
+                    rend.m_surface = EGL_NO_SURFACE;
+                }
             }
 
 
-        }
+               //if (m_winOSInitData.animating) {
+               //// Done with events; draw next animation frame.
+               //// Drawing is throttled to the screen update rate, so there
+               //// is no need to do timing here.
+               //    rend._update(100.f);
+               //    }
+
+
+
+
         return true;
     }
     ///////////////////////////////////////

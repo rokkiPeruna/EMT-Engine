@@ -134,7 +134,7 @@ void android_main(struct android_app* state)
 
     ////Now we can add shape to our ShapeComponent. AddShape - method works intuitively. As we now
     ////add three points, AddShape knows we are making a triangle.
-    auto& s = myShapeComp.AddShape(std::vector<jej::Vector2f>
+    myShapeComp.AddShape(std::vector<jej::Vector2f>
                                            {
                                                    jej::Vector2f(0.0f, 0.3f),		//First point, middle of screen
                                                    jej::Vector2f(0.2f, 0.5f),		//Second point, upper-right corner
@@ -144,9 +144,20 @@ void android_main(struct android_app* state)
             //jej::Vector4i(150, 0, 50, 150)
     );
 
-  myShapeComp.AddShape(
+    auto& playerRectShape = myShapeComp.AddShape(
           jej::Vector2f(0.3f, 0.3f)
   );
+
+
+
+    auto& playerTex = myCharacter.AddComponent<jej::TextureComponent>(playerRectShape.GetID());
+
+
+    playerTex.AddImage("Player.png");
+        //jej::Messenger::Add(jej::Messenger::MessageType::Info, "image loaded successfully");
+    //else
+        //jej::Messenger::Add(jej::Messenger::MessageType::Warning, "image loading unsuccessful");
+
 
     ////Now we have our character with transform, shader and shape component. At this point it exist
     ////in our scene and has data in it with witch we can make it react to other entities and
@@ -166,7 +177,7 @@ void android_main(struct android_app* state)
 
     auto& enemy = *myScene.GetEntityPtr("Enemy");
 
-    enemy.AddComponent<jej::TransformComponent>(
+    auto& enemyMovesHopefully = enemy.AddComponent<jej::TransformComponent>(
             jej::Vector2f(-0.4f, -0.4f),		//Position, we start at center of the screen
             jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
             jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
@@ -190,16 +201,24 @@ void android_main(struct android_app* state)
                                     }
     );
 
-    enemyShapeComp.AddShape(
+    auto& enemyRectShape = enemyShapeComp.AddShape(
             jej::Vector2f(0.3f, 0.3f)
     );
 
     enemy.AddComponent<jej::RenderComponent>();
+
+    auto& enemyTex = enemy.AddComponent<jej::TextureComponent>(enemyRectShape.GetID());
+
+   enemyTex.AddImage("Enemy.png");
     ///////////////////////////////CUT FOR COPYING TO ANDROID
 
     //Finalize EngineObject
     game.Finalize();
 
-    game.EngineUpdate(); //TODO: Create loop, maybe handle android's events just once in AndroidWindow?..
+    while(jej::AndroidWindow::GetInstance().GetWinActivityState())
+    {
+        game.EngineUpdate(); //TODO: Create loop, maybe handle android's events just once in AndroidWindow?..
+    }
+        //enemyMovesHopefully.position.x += 0.01f;
 
 }

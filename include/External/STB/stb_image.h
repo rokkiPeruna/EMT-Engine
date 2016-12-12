@@ -443,8 +443,8 @@ STBIDEF stbi_uc *stbi_load_from_file  (FILE *f,                  int *x, int *y,
 #endif
 
 #ifndef STBI_NO_LINEAR
-   STBIDEF float *stbi_loadf                 (char const *filename,           int *x, int *y, int *comp, int req_comp);
-   STBIDEF float *stbi_loadf_from_memory     (stbi_uc const *buffer, int len, int *x, int *y, int *comp, int req_comp);
+   STBIDEF float *stbi_loadf                 (char          const *filename,           int *x, int *y, int *comp, int req_comp);
+   STBIDEF float *stbi_loadf_from_memory     (stbi_uc       const *buffer, int len, int *x, int *y, int *comp, int req_comp);
    STBIDEF float *stbi_loadf_from_callbacks  (stbi_io_callbacks const *clbk, void *user, int *x, int *y, int *comp, int req_comp);
 
    #ifndef STBI_NO_STDIO
