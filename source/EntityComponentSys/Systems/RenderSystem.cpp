@@ -99,7 +99,7 @@ namespace jej
     void RenderSystem::_clearScreen() const
     {
         glViewport(0, 0, m_winWidth, m_winHeight);
-        glClearColor(0.5f, 0.5f, 0.2f, 0.5f);
+        glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
     //////////////////////////////////////////

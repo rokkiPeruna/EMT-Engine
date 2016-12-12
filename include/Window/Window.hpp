@@ -133,6 +133,8 @@ namespace jej//NAMESPACE jej STARTS
         //Set window's OS specific init data
         virtual void SetWinOSData(const WindowOSInitData&) = 0;
 
+        virtual bool GetWinActivityState(){ return m_isWinActive; }
+
 
         //Protected methods and variables
     protected:
