@@ -40,6 +40,9 @@ namespace jej
         //Add a component to the given entity
         Entity& AddEntity(const std::string& p_name = "");
 
+        std::vector<Entity*> GetEntities(const std::string& p_includes);
+        std::vector<Entity*> GetEntities(const JEJ_COUNT p_min, const JEJ_COUNT p_max);
+
         //Returns pointer to a component of desired type if present on the target entity, otherwise nullptr
         Entity* GetEntityPtr(const std::string& p_name);
         Entity* GetEntityPtr(const unsigned int p_ID);

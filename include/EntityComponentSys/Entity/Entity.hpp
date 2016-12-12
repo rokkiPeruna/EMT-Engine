@@ -88,6 +88,8 @@ namespace jej
         //Remove all components from the entity and from corresponding systems
         bool RemoveAllComponents();
 
+        const std::string& GetName() const;
+
     private:
 
         const std::string m_name;

@@ -2,7 +2,6 @@
 
 #include <Utility/Messenger.hpp>
 
-#include <iterator>
 
 namespace jej
 {
@@ -42,6 +41,37 @@ namespace jej
         m_entities.emplace_back(std::make_shared<Entity>(p_name));
         return *m_entities.back().get();
     }
+
+
+    std::vector<Entity*> Scene::GetEntities(const std::string& p_includes)
+    {
+        std::vector<Entity*> entities;
+
+        for (auto& itr : m_entities)
+        {
+            if (std::strstr(itr->m_name.c_str(), p_includes.c_str()))
+            {
+                entities.emplace_back(itr.get());
+            }
+        }
+        return entities;
+    }
+
+
+    std::vector<Entity*> Scene::GetEntities(const JEJ_COUNT p_min, const JEJ_COUNT p_max)
+    {
+        std::vector<Entity*> entities;
+
+        for (auto& itr : m_entities)
+        {
+            if (p_min >= itr->m_entityID || itr->m_entityID <= p_max)
+            {
+                entities.emplace_back(itr.get());
+            }
+        }
+        return entities;
+    }
+
 
     Entity* Scene::GetEntityPtr(const std::string& p_name)
     {
@@ -99,25 +129,25 @@ namespace jej
 
     bool Scene::RemoveEntity(const std::string& p_name)
     {
-       //for (auto& itr = m_entities.begin(); itr != m_entities.end(); ++itr)
-       //{
-       //    if (itr->get()->m_name == p_name)
-       //    {
-       //        m_entities.erase(itr);
-       //        return true;
-       //    }
-       //}
+       for (auto& itr = m_entities.begin(); itr != m_entities.end(); ++itr)
+       {
+           if (itr->get()->m_name == p_name)
+           {
+               m_entities.erase(itr);
+               return true;
+           }
+       }
         return false;
     }
 
     bool Scene::RemoveEntity(const unsigned int p_ID)
     {
-        //for (auto& itr = m_entities.begin(); itr != m_entities.end(); ++itr)
-        //    if (itr->get()->m_entityID == p_ID)
-        //    {
-        //        m_entities.erase(itr);
-        //        return true;
-        //    }
+        for (auto& itr = m_entities.begin(); itr != m_entities.end(); ++itr)
+            if (itr->get()->m_entityID == p_ID)
+            {
+                m_entities.erase(itr);
+                return true;
+            }
         return false;
     }
 

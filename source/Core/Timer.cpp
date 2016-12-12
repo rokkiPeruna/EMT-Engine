@@ -6,9 +6,9 @@ namespace jej
     {
 
 #if defined _WIN32
-
 #include <Windows.h>
-        typedef __int64 JEJ_TIME_TYPE;
+
+        using JEJ_TIME_TYPE = __int64;
 
         static LARGE_INTEGER freq;
         static BOOL available = false;
@@ -34,7 +34,7 @@ namespace jej
 #elif defined ANDROID
 #include <time.h>
 
-        typedef long JEJ_TIME_TYPE;
+        using JEJ_TIME_TYPE = long;
 
 
         inline JEJ_TIME_TYPE _getTimeScale()

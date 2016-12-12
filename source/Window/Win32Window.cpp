@@ -93,7 +93,7 @@ namespace jej//NAMESPACE jej STARTS
     /////////////////////////////////
 
     //Return window base data struct
-    WindowBaseInitData& Win32Window::GetWinData()
+    Window::WindowBaseInitData& Win32Window::GetWinData()
     {
         return m_winBaseInitData;
     }
@@ -107,14 +107,14 @@ namespace jej//NAMESPACE jej STARTS
     /////////////////////////////////
 
     //Get window's OS specific data struct
-    WindowOSInitData& Win32Window::GetWinOSData()
+    Window::WindowOSInitData& Win32Window::GetWinOSData()
     {
         return m_winOSInitData;
     }
     /////////////////////////////////
 
     //Set windos's OS specific data struct
-    void Win32Window::SetWinOSData(const WindowOSInitData& p_winOSInitData)
+    void Win32Window::SetWinOSData(const Window::WindowOSInitData& p_winOSInitData)
     {
         m_winOSInitData = p_winOSInitData;
     }

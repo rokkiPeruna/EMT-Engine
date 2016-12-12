@@ -13,31 +13,18 @@
 
 namespace jej//NAMESPACE jej STARTS
 {
-    //Win32 specific initializing data
-    struct WindowOSInitData
-    {
-        int offsetX = 600;
-        int offsetY = 600;
-
-        HINSTANCE m_hInstance;
-        HWND m_hWnd;
-
-        LPWSTR cursor = IDC_ARROW;
-        DWORD style = WS_OVERLAPPEDWINDOW | WS_VISIBLE;
-        UINT classStyle = CS_HREDRAW | CS_VREDRAW;
-        COLORREF backGroundColor = 0x00111111;
-        HBRUSH brush = nullptr;
-
-        RECT rectWin;
-
-        WindowOSInitData(){};
-    };
+    
 
     class Win32Window : public Window
     {
         friend LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
 
     public:
+
+
+        
+
+
 
         //Constructor for user given size, style, etc.
         //Takes in two structs, first for common window attributes,

@@ -19,20 +19,8 @@
 
 namespace jej//NAMESPACE jej STARTS
 {
-    //Forward declaration for OS specific data struct
-    struct WindowOSInitData;
-
-    struct WindowBaseInitData
-    {
-        int32_t sizeX = 400u;
-        int32_t sizeY = 250u;
-        std::wstring nameApp = L"appName";
-        std::wstring nameMenu = L"menuName";
-        std::wstring nameWindow = L"windowName";
-
-        WindowBaseInitData(){};
-    };
-    /////////////////////////////////
+    
+    
 
     //This is a baseclass for various OS windows, e.g. Win32, Android, etc.
     //Pure virtual class
@@ -41,6 +29,75 @@ namespace jej//NAMESPACE jej STARTS
 
         //Public methods and variables
     public:
+
+
+#ifdef _WIN32
+
+        //Win32 specific initializing data
+        struct WindowOSInitData
+        {
+            int offsetX = 600;
+            int offsetY = 600;
+
+            HINSTANCE m_hInstance;
+            HWND m_hWnd;
+
+            LPWSTR cursor = IDC_ARROW;
+            DWORD style = WS_OVERLAPPEDWINDOW | WS_VISIBLE;
+            UINT classStyle = CS_HREDRAW | CS_VREDRAW;
+            COLORREF backGroundColor = 0x00111111;
+            HBRUSH brush = nullptr;
+
+            RECT rectWin;
+
+            WindowOSInitData(){};
+        };
+
+#elif defined __ANDROID__
+
+        //Android specific initializing data
+        struct WindowOSInitData
+        {
+            android_app* app;
+
+            ASensorManager* sensorManager;
+            const ASensor* accelerometerSensor;
+            ASensorEventQueue* sensorEventQueue;
+
+            int animating;
+            EGLDisplay display;
+            EGLSurface surface;
+            EGLContext context;
+
+            struct saved_state state;
+
+            WindowOSInitData() :
+                animating(-1)
+            {
+                app = AndroidAppState::m_AppState;
+            };
+
+        };
+
+#endif
+
+
+
+
+        struct WindowBaseInitData
+        {
+            int32_t sizeX = 400u;
+            int32_t sizeY = 250u;
+            std::wstring nameApp = L"appName";
+            std::wstring nameMenu = L"menuName";
+            std::wstring nameWindow = L"windowName";
+
+            WindowBaseInitData(){};
+        };
+        /////////////////////////////////
+
+
+        
 
         //Default constructor
         Window();

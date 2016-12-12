@@ -27,29 +27,7 @@ namespace jej
     };
 
 
-    //Android specific initializing data
-    struct WindowOSInitData
-    {
-        android_app* app;
-
-        ASensorManager* sensorManager;
-        const ASensor* accelerometerSensor;
-        ASensorEventQueue* sensorEventQueue;
-
-        int animating;
-        EGLDisplay display;
-        EGLSurface surface;
-        EGLContext context;
-
-        struct saved_state state;
-
-        WindowOSInitData() :
-            animating(-1)
-        {
-            app = AndroidAppState::m_AppState;
-        };
-
-    };
+    
 
 
 
@@ -58,10 +36,14 @@ namespace jej
         friend class EngineObject;
         friend class RenderSystem;
 
-    private:
-
-
+    
     public:
+
+
+        
+
+
+
         //Constructor
         AndroidWindow();
 

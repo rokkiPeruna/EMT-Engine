@@ -14,17 +14,14 @@ namespace jej
 
 
 #ifdef JEJ_USE_MAX
-    typedef unsigned long long int JEJ_COUNT;
+    using  JEJ_COUNT = unsigned long long int;
 #elif defined JEJ_USE_LARGE
-    typedef unsigned long int JEJ_COUNT;
+    using  JEJ_COUNT = unsigned long int;
 #elif defined JEJ_USE_MIN
-    typedef unsigned short int JEJ_COUNT;
+    using  JEJ_COUNT= unsigned short int;
 #else
-    typedef unsigned int JEJ_COUNT;
+    using  JEJ_COUNT = unsigned int;
 #endif
-
-
-
 
 
     enum class ComponentType : unsigned short int
@@ -43,9 +40,7 @@ namespace jej
     template <typename T>
     struct ComponentHelper
     {
-#ifdef _WIN32
-         ComponentHelper<T>(){ static_assert(false, "Invalid ComponentHelper type."); };
-#endif
+        ComponentHelper<T>(){ static_assert(false, "Invalid ComponentHelper type."); };
     };
 
     template <>
@@ -90,10 +85,10 @@ namespace jej
         ComponentHelper<TransformComponent>(){};
     };
 
-    
+
     enum class ShapeType
     {
-		Failed,
+        Failed,
         Circle,
         Rectangle,
         Convex,

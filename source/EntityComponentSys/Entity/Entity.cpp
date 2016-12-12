@@ -47,4 +47,9 @@ namespace jej
         return m_componentIDs.empty();
     }
 
+    const std::string& Entity::GetName() const
+    {
+        return m_name;
+    }
+
 }

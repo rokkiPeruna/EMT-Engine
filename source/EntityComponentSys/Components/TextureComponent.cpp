@@ -92,7 +92,7 @@ namespace jej
 
     bool TextureComponent::UseImage(const int p_imageIndex)
     {
-        const unsigned int imageCount = m_textureData.imagesInTexture.x * m_textureData.imagesInTexture.y;
+        const int imageCount = m_textureData.imagesInTexture.x * m_textureData.imagesInTexture.y;
         
         if (imageCount <= p_imageIndex)
         {

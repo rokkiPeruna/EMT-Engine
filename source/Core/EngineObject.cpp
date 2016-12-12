@@ -98,7 +98,7 @@ namespace jej //NAMESPACE jej
     }
     //////////////////////////////////////////
 
-    bool EngineObject::Initialize(const std::string& p_root, const WindowBaseInitData* p_data, const WindowOSInitData* p_osData)
+    bool EngineObject::Initialize(const std::string& p_root, const Window::WindowBaseInitData* p_data, const Window::WindowOSInitData* p_osData)
     {
         EngineObject& engine = GetInstance();
 
@@ -297,42 +297,42 @@ namespace jej //NAMESPACE jej
 
     //////////////////////////////////////////
 
-#ifdef JEJ_DEBUG_MODE
-    std::vector<unsigned int> EngineObject::_getAllCompIDs() const
-    {
-        std::vector<unsigned int> IDs;
-        IDs.reserve(Component::m_componentIDCounter);
-
-        for (const auto& itr : std::get<ComponentHelper<RenderComponent>::index>(m_systems)->m_components)
-        {
-            unsigned int id = itr->m_componentID;
-            IDs.emplace_back(id);
-        }
-        for (const auto& itr : std::get<ComponentHelper<ShaderComponent>::index>(m_systems)->m_components)
-        {
-            unsigned int id = itr->m_componentID;
-            IDs.emplace_back(id);
-        }
-        for (const auto& itr : std::get<ComponentHelper<ShapeComponent>::index>(m_systems)->m_components)
-        {
-            unsigned int id = itr->m_componentID;
-            IDs.emplace_back(id);
-        }
-        for (const auto& itr : std::get<ComponentHelper<TextureComponent>::index>(m_systems)->m_components)
-        {
-            unsigned int id = itr->m_componentID;
-            IDs.emplace_back(id);
-        }
-        for (const auto& itr : std::get<ComponentHelper<TransformComponent>::index>(m_systems)->m_components)
-        {
-            unsigned int id = itr->m_componentID;
-            IDs.emplace_back(id);
-        }
-
-        return IDs;
-    }
-    //////////////////////////////////////////
-#endif
+//#ifdef JEJ_DEBUG_MODE
+//    std::vector<unsigned int> EngineObject::_getAllCompIDs() const
+//    {
+//        std::vector<unsigned int> IDs;
+//        IDs.reserve(Component::m_componentIDCounter);
+//
+//        for (const auto& itr : std::get<ComponentHelper<RenderComponent>::index>(m_systems)->m_components)
+//        {
+//            unsigned int id = itr->m_componentID;
+//            IDs.emplace_back(id);
+//        }
+//        for (const auto& itr : std::get<ComponentHelper<ShaderComponent>::index>(m_systems)->m_components)
+//        {
+//            unsigned int id = itr->m_componentID;
+//            IDs.emplace_back(id);
+//        }
+//        for (const auto& itr : std::get<ComponentHelper<ShapeComponent>::index>(m_systems)->m_components)
+//        {
+//            unsigned int id = itr->m_componentID;
+//            IDs.emplace_back(id);
+//        }
+//        for (const auto& itr : std::get<ComponentHelper<TextureComponent>::index>(m_systems)->m_components)
+//        {
+//            unsigned int id = itr->m_componentID;
+//            IDs.emplace_back(id);
+//        }
+//        for (const auto& itr : std::get<ComponentHelper<TransformComponent>::index>(m_systems)->m_components)
+//        {
+//            unsigned int id = itr->m_componentID;
+//            IDs.emplace_back(id);
+//        }
+//
+//        return IDs;
+//    }
+//    //////////////////////////////////////////
+//#endif
 
 #ifdef __ANDROID__
     //void EngineObject::SetAndroidApp(android_app* p_app)

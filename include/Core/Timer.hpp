@@ -11,9 +11,9 @@ namespace jej
     private:
 
 #if defined _WIN32
-        typedef __int64 JEJ_TIME_TYPE;
+        using  JEJ_TIME_TYPE = __int64;
 #elif defined ANDROID
-        typedef long JEJ_TIME_TYPE;
+        using JEJ_TIME_TYPE = long;
 #endif
         JEJ_TIME_TYPE m_time;
 
