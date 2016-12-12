@@ -151,4 +151,13 @@ namespace jej
         return false;
     }
 
+	std::vector<JEJ_COUNT> Scene::GetEntityIDs()const
+	{
+		std::vector<JEJ_COUNT> IDs;
+
+		for (const auto& itr : m_entities)
+			IDs.emplace_back(itr->m_entityID);
+		return IDs;
+	}
+
 }

@@ -62,6 +62,8 @@ namespace jej
         //Constructor
         Scene(const std::string& p_name = "");
 
+		std::vector<JEJ_COUNT>GetEntityIDs() const;
+
     private:
 
         template <typename T>
