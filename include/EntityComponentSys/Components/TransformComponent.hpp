@@ -36,6 +36,10 @@ namespace jej
         Vector2f previousScale;
         Vector4f previousRotation;
 
+		//
+		Vector2f velocity;
+		Vector2f previousVelocity;
+
         //For checking if any transform quality has changed
         bool hasChanged;
 

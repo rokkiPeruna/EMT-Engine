@@ -10,9 +10,11 @@ namespace jej
         position(p_position),
         scale(p_scale),
         rotation(p_rotation),
+		velocity{0,0},
         previousPosition(position),
         previousScale(scale),
         previousRotation(rotation),
+		previousVelocity{0,0},
         hasChanged(false)
     {
         //Give component it's right enum type

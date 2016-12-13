@@ -46,9 +46,15 @@ namespace jej
                 itr->hasChanged = false;
             }
 
+			
+
 			itr->previousPosition = itr->position;
 			itr->previousScale = itr->scale;
 			itr->previousRotation = itr->rotation;
+
+
+			itr->position.x += itr->velocity.x;
+			itr->position.y += itr->velocity.y;
         }
     }
     //////////////////////////////////////////

@@ -102,6 +102,40 @@ int main(int argc, char* argv[])
 
 	player.AddComponent<jej::CollisionComponent>();
 
+	//Bullets:
+
+	myScene.AddEntity("Bullet");
+
+	auto& bullet = *myScene.GetEntityPtr("Bullet");
+
+	auto& bulletToShoot = bullet.AddComponent<jej::TransformComponent>(
+		jej::Vector2f(0.f, -1.f),		//Position, we start at center of the screen
+		jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
+		jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
+		);
+
+	bullet.AddComponent<jej::ShaderComponent>(
+		"PixelShader.frag",			//First we must give vertex shader name and file extension
+		"VertexShader.vert"			//Second we give fragment shader name and file extension
+		);
+
+	auto& bulletShapeComp = bullet.AddComponent<jej::ShapeComponent>
+		(
+		jej::Vector4i(0, 255, 0, 150)	//This our shape's color in RGBA
+		);
+
+	auto& shape = bulletShapeComp.AddShape(std::vector<jej::Vector2f>
+	{
+		jej::Vector2f(0.f, -0.1f),		//First point, middle of screen
+			jej::Vector2f(-0.05f, -0.25f),		//Second point, upper-right corner
+			jej::Vector2f(0.05f, -0.25f)
+	}
+	);
+
+
+	bullet.AddComponent<jej::RenderComponent>();
+	bullet.AddComponent<jej::CollisionComponent>();
+
 
 	//Enemies:
 	//Creates as many enemies as enemyNumber is
@@ -212,8 +246,8 @@ int main(int argc, char* argv[])
 
 		if (keyboard.IsKeyPressed(jej::Keyboard::Key::Space))
 		{
-
-
+			bulletToShoot.position = player.GetComponentPtr<jej::TransformComponent>()->position;
+			bulletToShoot.velocity.y = 0.02f;
 		}
 
 		auto kek = myScene.GetEntities("Enemy");
