@@ -259,7 +259,7 @@ int main(int argc, char* argv[])
 
 
 
-        bulletTex.UseImage(static_cast<unsigned char>(bt));
+        bulletTex.UseImage(static_cast<unsigned char>(bt) );
         bt = !bt;
 
 
