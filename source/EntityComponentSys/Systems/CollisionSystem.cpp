@@ -35,6 +35,7 @@ namespace jej
 
     void CollisionSystem::_update(const float deltaTime)
     {
+        const auto* scene = EngineObject::GetInstance().GetCurrentScene();
 
         for (const auto& AllComponents : m_components)
         {
@@ -43,8 +44,7 @@ namespace jej
                 if (AllComponents->m_parentID == ShapeCompItr->GetParentID())
                 {
                     AllComponents->m_AABB = Math::ConvexCollisionBox(*ShapeCompItr,
-                        EngineObject::GetInstance().GetCurrentScene()->
-                        GetEntityPtr(AllComponents->m_parentID)->
+                        scene->GetEntityPtr(AllComponents->m_parentID)->
                         GetComponentPtr<TransformComponent>()->position);
                 }
             }
@@ -71,15 +71,18 @@ namespace jej
                     // Collision happening if all are true
                     Messenger::Add(Messenger::MessageType::Info, "Collision detected between entities: " + std::to_string(m_components[i]->GetParentID()) + " and " + std::to_string(m_components[j]->GetParentID()));
 
-                    m_components[i]->isColliding = true;
-                    m_components[j]->isColliding = true;
+                    m_components[i]->IsColliding = true;
+                    m_components[j]->IsColliding = true;
                 }
-                else
-                {
-                    m_components[i]->isColliding = false;
-                    m_components[j]->isColliding = false;
-                }
+                //TODO: fix
+             //   else
+             //   {
+             //       m_components[i]->IsColliding = false;
+             //       m_components[j]->IsColliding = false;
+             //   }
             }
+            int a = 0;
+            ++a;
         }
 
 

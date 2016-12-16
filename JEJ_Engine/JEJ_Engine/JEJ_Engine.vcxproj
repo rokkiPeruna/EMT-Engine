@@ -86,9 +86,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\..\source\Core\EngineObject.cpp" />
     <ClCompile Include="..\..\source\Core\Scene.cpp" />
     <ClCompile Include="..\..\source\Core\Settings.cpp" />
@@ -170,10 +167,6 @@
     <None Include="..\..\include\Texture\Inl\Shape.inl" />
     <None Include="..\..\include\Utility\Inl\Messenger.inl" />
     <None Include="..\..\include\Utility\Inl\Random.inl" />
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
-    <None Include="ClassDiagram3.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
