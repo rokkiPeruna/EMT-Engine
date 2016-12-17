@@ -281,15 +281,15 @@ int main(int argc, char* argv[])
                 itr->UseImage(bulletTexIndex);
             }
 
-            auto* playerTra = player.GetComponentPtr<jej::TransformComponent>();
+            auto& playerPos = player.GetComponentPtr<jej::TransformComponent>()->position.x;
 
             if (keyboard.IsKeyPressed(jej::Keyboard::Key::A))
             {
-                playerTra->velocity.x -= enemyVel;
+                playerPos -= 0.02f;
             }
             else if (keyboard.IsKeyPressed(jej::Keyboard::Key::D))
             {
-                playerTra->velocity.x += enemyVel;
+                playerPos += 0.02f;
             }
             if (keyboard.IsKeyPressed(jej::Keyboard::Key::Space))
             {
@@ -306,7 +306,7 @@ int main(int argc, char* argv[])
                 loop = false;
             }
 
-            playerTra->position.x < -1.f ? playerTra->position.x = -1.f : playerTra->position.x > 1.f ? playerTra->position.x = 1.f : NULL;
+            playerPos < -1.f ? playerPos = -1.f : playerPos > 1.f ? playerPos = 1.f : NULL;
 
             
             enemies = myScene.GetEntities("Enemy");
