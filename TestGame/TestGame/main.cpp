@@ -25,7 +25,16 @@ int main(int argc, char* argv[])
 {
 
     //Create new EngineObject, initialize it and get alias handle to it
-    if (!jej::EngineObject::Initialize(argv[0]))
+    jej::Window::WindowBaseInitData data;
+    data.nameWindow = L"Jejuna Engine demo";
+    data.sizeX = 1700;
+    data.sizeY = 800;
+
+    jej::Window::WindowOSInitData osdata;
+    osdata.offsetX = 80;
+    osdata.offsetY = 80;
+
+    if (!jej::EngineObject::Initialize(argv[0], &data, &osdata))
         return 1;
     auto& game = jej::EngineObject::GetInstance();
 
@@ -41,8 +50,6 @@ int main(int argc, char* argv[])
     auto& bg = myScene.AddEntity("bg");
     bg.AddComponent<jej::TextureComponent>(bg.AddComponent<jej::ShapeComponent>().AddShape(jej::Vector2f(-1, 1)).GetID()).AddImage("JEJDemoBackG.png");
     bg.AddComponent<jej::RenderComponent>();
-
-
 
 
     ////Then we create and add ShapeComponent to give our entity some form and color
@@ -75,35 +82,39 @@ int main(int argc, char* argv[])
 
 #if 1
 
-    auto& bullet = myScene.AddEntity("Bullet");
+    const unsigned char bulletCount = 5u;
 
-    auto& bulletToShoot = bullet.AddComponent<jej::TransformComponent>(
-        jej::Vector2f(0.f, -0.75f),		//Position, we start at center of the screen
-        jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
-        jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
-        );
+    for (signed char i = 0; i < bulletCount; ++i)
+    {
+        auto& bullet = myScene.AddEntity("Bullet " + std::to_string(i));
 
-    bullet.AddComponent<jej::ShaderComponent>(
-        "PixelShader.frag",			//First we must give vertex shader name and file extension
-        "VertexShader.vert"			//Second we give fragment shader name and file extension
-        );
+        bullet.AddComponent<jej::TransformComponent>(
+            jej::Vector2f(static_cast<float>(i), 1.75f),		//Position
+            jej::Vector2f(1.f, 1.f),		//Scale in x, y - axises
+            jej::Vector4f(0.f, 0.f, 0.f, 0.f)//Rotation x, y, z, w
+            );
+
+        bullet.AddComponent<jej::ShaderComponent>(
+            "PixelShader.frag",			//First we must give vertex shader name and file extension
+            "VertexShader.vert"			//Second we give fragment shader name and file extension
+            );
+
+        auto& bulletTex = bullet.AddComponent<jej::TextureComponent>(
+            bullet.AddComponent<jej::ShapeComponent>
+            (
+            jej::Vector4i(0, 255, 0, 150)
+            ).AddShape(
+            jej::Vector2f(0.025f, 0.02f)
+            ).GetID()
+            );
+
+        bulletTex.AddImage("bullets.png", jej::Vector2i(3, 4));
+        bulletTex.UseImage(2);
 
 
-    auto& bulletTex = bullet.AddComponent<jej::TextureComponent>(
-        bullet.AddComponent<jej::ShapeComponent>
-        (
-        jej::Vector4i(0, 255, 0, 150)
-        ).AddShape(
-        jej::Vector2f(0.025f, 0.02f)
-        ).GetID()
-        );
-
-    bulletTex.AddImage("JEJDemoSheet.png", jej::Vector2i(2, 2));
-    bulletTex.UseImage(2);
-
-
-    bullet.AddComponent<jej::RenderComponent>();
-    bullet.AddComponent<jej::CollisionComponent>();
+        bullet.AddComponent<jej::RenderComponent>();
+        bullet.AddComponent<jej::CollisionComponent>();
+    }
 
 #endif
 
@@ -155,25 +166,14 @@ int main(int argc, char* argv[])
     ////Creating
     player.AddComponent<jej::RenderComponent>();
 
-    ////Don't try setting components to other entities other than the one calling the function
-
-    //player.AddComponent<jej::CollisionComponent>();
-
 #endif
 
-
-
-    //Enemies:
-    //Creates as many enemies as enemyNumber is
 
     //ENEMIES
 #if 1
 
     const char enemyNumber = 10;
     const char rows = 3;
-    bool EnemyMove = false;
-
-    auto& myTimer = jej::Timer::GetInstance();
 
     for (signed char j = 0; j < rows; ++j)
     {
@@ -185,7 +185,6 @@ int main(int argc, char* argv[])
 
             auto& enemy = *myScene.GetEntityPtr("Enemy " + std::to_string(j) + " " + std::to_string(i));
 
-            enemy.userData = &EnemyMove;
 
             //Adds growing position for current enemy
             enemy.AddComponent<jej::TransformComponent>(
@@ -219,141 +218,139 @@ int main(int argc, char* argv[])
 
 #endif
 
-
-    //#if 1
-    //
-    //    auto& tex = myCharacter.AddComponent<jej::TextureComponent>(s.GetID());
-    //
-    //#endif
-    //
-    //#if 1
-    //
-    //    if (tex.AddImage("Capture.png"))
-    //        jej::Messenger::Add(jej::Messenger::MessageType::Info, "image loaded successfully");
-    //    else
-    //        jej::Messenger::Add(jej::Messenger::MessageType::Warning, "image loading unsuccessful");
-    //#endif
-    //
-    //#if 0
-    //
-    //    if (tex.AddFont("Textures/Bungee_Regular.ttf"))
-    //        jej::Messenger::Add(jej::Messenger::MessageType::Info, "font loaded successfully");
-    //    else
-    //        jej::Messenger::Add(jej::Messenger::MessageType::Warning, "font loading unsuccessful");
-    //#endif
-
-
-    auto& mouse = jej::Mouse::GetInstance();
-    auto& keyboard = jej::Keyboard::GetInstance();
-
-    //Finalize EngineObject
-    bool bt = true;
+    //Prepare for gameloop
+#if 1 
+    
     game.Finalize();
+    
+    const auto& keyboard = jej::Keyboard::GetInstance();
+
+    std::vector<jej::TextureComponent*> bulletTextures;
+    std::vector<jej::CollisionComponent*> bulletCollisions;
+    std::vector<jej::TransformComponent*> bulletTransforms;
+
+    for (const auto& itr : myScene.GetEntities("Bullet"))
+    {
+        bulletCollisions.emplace_back(itr->GetComponentPtr<jej::CollisionComponent>());
+        bulletTextures.emplace_back(itr->GetComponentPtr<jej::TextureComponent>());
+        bulletTransforms.emplace_back(itr->GetComponentPtr<jej::TransformComponent>());
+    }
+
+    std::vector<jej::Entity*> enemies = myScene.GetEntities("Enemy");
+
+    static const float enemyVel = 0.008f;
+    for (const auto& itr : enemies)
+    {
+        itr->GetComponentPtr<jej::TransformComponent>()->velocity.x = enemyVel;
+    }
+
+    static const float bulletCD = 0.75f;
+    unsigned char shootThisBullet = 0u;
+    unsigned char bulletTexIndex = 0u;
+    const float deltaTime = 1.f / 60.f;
     bool loop = true;
-    float deltaTime;
+
+    while (true)
+    {
+        if (keyboard.IsKeyPressed(jej::Keyboard::Key::Return))
+        {
+            break;
+        }
+    }
+
+
+    jej::Timer myTimer(true);
+    jej::Timer bulletTimer(true);
+
+#endif
+
+
+    //Gameloop
+#if 1
+
     while (loop)
     {
-        deltaTime = myTimer.GetTime();
 
         game.EngineUpdate();
 
-
-
-        bulletTex.UseImage(static_cast<unsigned char>(bt) );
-        bt = !bt;
-
-
-        auto* charLocChange = player.GetComponentPtr<jej::TransformComponent>();
-
-        if (keyboard.IsKeyPressed(jej::Keyboard::Key::A))
-            charLocChange->position.x -= 0.05f;
-
-        if (charLocChange->position.x < -1.f)
-            charLocChange->position.x = -1.f;
-
-        if (keyboard.IsKeyPressed(jej::Keyboard::Key::D))
-            charLocChange->position.x += 0.05f;
-
-        if (charLocChange->position.x > 1.f)
-            charLocChange->position.x = 1.f;
-
-        if (keyboard.IsKeyPressed(jej::Keyboard::Key::Space))
+        if (myTimer.GetTime() > deltaTime)
         {
-            bulletToShoot.position = player.GetComponentPtr<jej::TransformComponent>()->position;
-            bulletToShoot.velocity.y = 0.02f;
-        }
+            bulletTexIndex == 11u ? bulletTexIndex = 0u : ++bulletTexIndex;
+            for (const auto& itr : bulletTextures)
+            {
+                itr->UseImage(bulletTexIndex);
+            }
 
-        auto kek = myScene.GetEntities("Enemy");
+            auto* playerTra = player.GetComponentPtr<jej::TransformComponent>();
 
-        for (const auto& itr : kek)
-        {
-            auto& enemyPosition = itr->GetComponentPtr<jej::TransformComponent>()->position;
-
-            //end game if enemy through
-            if (enemyPosition.y < -0.8f)
+            if (keyboard.IsKeyPressed(jej::Keyboard::Key::A))
+            {
+                playerTra->velocity.x -= enemyVel;
+            }
+            else if (keyboard.IsKeyPressed(jej::Keyboard::Key::D))
+            {
+                playerTra->velocity.x += enemyVel;
+            }
+            if (keyboard.IsKeyPressed(jej::Keyboard::Key::Space))
+            {
+                if (bulletCD < bulletTimer.GetTime())
+                {
+                    bulletTransforms[shootThisBullet]->position = player.GetComponentPtr<jej::TransformComponent>()->position;
+                    bulletTransforms[shootThisBullet]->velocity.y = 0.02f;
+                    shootThisBullet == 4u ? shootThisBullet = 0u : ++shootThisBullet;
+                    bulletTimer.Reset();
+                }
+            }
+            if (keyboard.IsKeyPressed(jej::Keyboard::Key::Escape))
             {
                 loop = false;
             }
 
+            playerTra->position.x < -1.f ? playerTra->position.x = -1.f : playerTra->position.x > 1.f ? playerTra->position.x = 1.f : NULL;
 
+            
+            enemies = myScene.GetEntities("Enemy");
 
-            if (!itr->userData)
+            for (const auto& itr : enemies)
             {
-                enemyPosition.x += -0.5f * deltaTime;
+                auto& enemyPosition = itr->GetComponentPtr<jej::TransformComponent>()->position.x;
 
-                if (enemyPosition.x < -1)
+                if (enemyPosition < -1)
                 {
-                    for (unsigned char i = 0u; i < kek.size(); ++i)
+                    for (const auto& itr2 : enemies)
                     {
-                        //EnemyMove = true;
-                        enemyPosition.x = -1.f;
-                        kek[i]->userData = (void*)true;
-                    }
+                        auto* tra = itr2->GetComponentPtr<jej::TransformComponent>();
+                        tra->velocity.x = enemyVel;
+                        tra->position.y < -0.5f ? loop = false : tra->position.y -= 0.15f;
 
-                    for (unsigned char i = 0u; i < kek.size(); ++i)
-                    {
-                        kek[i]->GetComponentPtr<jej::TransformComponent>()->position.y -= 0.15f;
                     }
+                    break;
                 }
-
-            }
-
-            else if (itr->userData)
-            {
-                enemyPosition.x += 0.5f * deltaTime;
-
-                if (enemyPosition.x > 1)
+                else if (enemyPosition > 1)
                 {
-
-                    for (unsigned char i = 0u; i < kek.size(); ++i)
+                    for (const auto& itr2 : enemies)
                     {
-                        //EnemyMove = false;
-                        enemyPosition.x = 1.f;
-                        kek[i]->userData = (void*)false;
+                        auto* tra = itr2->GetComponentPtr<jej::TransformComponent>();
+                        tra->velocity.x = -enemyVel;
+                        tra->position.y < -0.5f ? loop = false : tra->position.y -= 0.15f;
                     }
-
-                    for (unsigned char i = 0u; i < kek.size(); ++i)
-                    {
-                        kek[i]->GetComponentPtr<jej::TransformComponent>()->position.y -= 0.15f;
-                    }
+                    break;
                 }
             }
 
 
-            if (itr->GetComponentPtr<jej::CollisionComponent>()->IsColliding)
+            for (const auto& itrRemove : enemies)
             {
-                myScene.RemoveEntity(itr->GetID());
+                if (itrRemove->GetComponentPtr<jej::CollisionComponent>()->IsColliding)
+                {
+                    myScene.RemoveEntity(itrRemove->GetID());
+                }
             }
 
+            myTimer.Reset();
         }
-
-        if (keyboard.IsKeyPressed(jej::Keyboard::Key::Escape))
-            loop = false;
-
-        //break;
-        //std::cout << mouse.GetMousePosition().x << "   " << mouse.GetMousePosition().y << std::endl;
-
     }
+#endif
 
     return 0;
 }

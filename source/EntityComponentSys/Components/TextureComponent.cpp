@@ -102,6 +102,7 @@ namespace jej
         }
 
         m_textureData.usingImage = p_imageIndex;
+        m_textureData.hasChanged = true;
         return true;
     }
     //////////////////////////////////////////

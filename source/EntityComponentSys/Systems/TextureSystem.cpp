@@ -98,11 +98,11 @@ namespace jej
     //////////////////////////////////////////
 
 
-    void TextureSystem::_update(const float p_deltaTime)
+    void TextureSystem::_update(const float)
     {
         for (auto& itr : m_components)
         {
-            if (itr->m_textureData.usingImage != itr->m_textureData.previousImage)
+            if (itr->m_textureData.hasChanged)
             {
                 _drawFromSheet(itr.get());
             }
@@ -180,12 +180,18 @@ namespace jej
     {
         for (auto& itr : EngineObject::GetInstance().GetSceneRef()->GetEntityPtr(p_component->m_shapeData.parentID)->GetComponentPtr<ShapeComponent>()->m_shapes)
         {
+            //Tells RenderSystem to update buffers
+            itr->m_myDrawData.hasChanged = true;
+
             switch (itr->m_shapeType)
             {
 
             case ShapeType::Rectangle:
             {
-                if (p_component->m_textureData.usingImage == -1)
+
+                auto& td = p_component->m_textureData;
+
+                if (td.usingImage == -1)
                 {
                     itr->m_myDrawData.textureCoords = {
                         0.0f, -1.f,
@@ -196,9 +202,6 @@ namespace jej
                 }
                 else
                 {
-                    p_component->m_textureData.previousImage = p_component->m_textureData.usingImage;
-
-                    auto& td = p_component->m_textureData;
                     const float singleImageX = static_cast<float>(td.x / td.imagesInTexture.x);
                     const float singleImageY = static_cast<float>(td.y / td.imagesInTexture.y);
                     int row = 0u;

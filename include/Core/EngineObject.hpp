@@ -3,7 +3,7 @@
 
 #include <Core/Settings.hpp>
 #include <Core/BaseStructs.hpp>
-
+#include <Core/Timer.hpp>
 #include <Window/Window.hpp>
 
 #include <memory>
@@ -74,25 +74,25 @@ namespace jej //NAMESPACE jej
         //Mother of all updates
         void EngineUpdate();
 
+        //Create scene
+        //p_active: Set active upon creation
         Scene* CreateScene(const bool p_active, const std::string& p_name = "");
 
+        //Set scene active
         Scene* SetCurrentScene(const JEJ_COUNT p_ID);
 
+        //Get active scene
         Scene* GetCurrentScene();
         const Scene* GetCurrentScene() const;
 
+        //Remove scene and release all entities etc. used by it
         bool RemoveScene(const JEJ_COUNT p_ID);
 
+        //TODO: Somewhat useless, change so that user cannot access smart pointers
         std::shared_ptr<Graphics>& GetGraphicsRef();
         std::shared_ptr<Scene>& GetSceneRef();
         const std::shared_ptr<Scene>& GetSceneRef() const;
-
-
         std::shared_ptr<Window>& GetWindowRef();
-
-        //#ifdef JEJ_DEBUG_MODE
-        //        std::vector<unsigned int> _getAllCompIDs() const;
-        //#endif
 
     private:
 
@@ -105,6 +105,7 @@ namespace jej //NAMESPACE jej
 
         JEJ_COUNT m_currentSceneID;
 
+        Timer m_updateTimer;
 
     };
 

@@ -27,16 +27,25 @@ namespace jej
             GLuint textureCoordIndex;
             GLuint colorValuesIndex;
 
-            ShapeType m_shapeType = ShapeType::Failed;
+            ShapeType shapeType;
+            bool hasChanged;
 
             GLuint shaderProgID;
 
             DrawableData() :
+                indices(),
+                vertices(),
+                textureCoords(),
+                colorValues(),
                 indicesBuffer(0),
                 vertexPosBuffer(0),
                 texCoordBuffer(0),
+                colorValBuffer(),
                 vertexPositionIndex(0),
                 textureCoordIndex(0),
+                colorValuesIndex(),
+                shapeType(ShapeType::Failed),
+                hasChanged(false),
                 shaderProgID(0)
             {
             }

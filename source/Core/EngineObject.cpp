@@ -2,8 +2,6 @@
 
 #include <Core/EngineObject.hpp>
 
-#include <Core/Timer.hpp>
-
 #include <IO_Manager/InputManagerImpl.hpp>
 
 
@@ -44,7 +42,8 @@ namespace jej //NAMESPACE jej
         &ShapeSystem::GetInstance(),
         &TextureSystem::GetInstance(),
         &TransformSystem::GetInstance()
-        )
+        ),
+        m_updateTimer(Timer(true))
     {
 
     }
@@ -83,8 +82,6 @@ namespace jej //NAMESPACE jej
         if (entityLeak != 0)
             Messenger::Add(Messenger::MessageType::Warning, "Amount of leaking components: ", entityLeak);
 
-        Messenger::Add(Messenger::MessageType::Debug, std::to_string(Timer::GetInstance().GetTime()));
-
         Messenger::WriteLog();
 
 #endif
@@ -120,7 +117,6 @@ namespace jej //NAMESPACE jej
 
         //Initialize minor areas
         InputManager::GetInstance();
-        Timer::GetInstance(true);
 
 #elif defined __ANDROID__
         engine.m_windowPtr = std::make_shared<AndroidWindow>();
@@ -179,8 +175,7 @@ namespace jej //NAMESPACE jej
         //TODO: Call update on all systems
         static EngineObject& engine = EngineObject::GetInstance();
 
-        Timer& timer = Timer::GetInstance();
-        const float deltaTime = timer.GetTime();
+        const float deltaTime = m_updateTimer.GetTime();
         if (deltaTime > 1.f / 60.f)
         {
             std::get<0>(engine.m_systems)->_update(deltaTime);
@@ -189,7 +184,7 @@ namespace jej //NAMESPACE jej
             std::get<3>(engine.m_systems)->_update(deltaTime);
             std::get<4>(engine.m_systems)->_update(deltaTime);
             std::get<5>(engine.m_systems)->_update(deltaTime);
-            timer.Reset();
+            m_updateTimer.Reset();
         }
 
         Messenger::PrintMessages();
@@ -233,7 +228,7 @@ namespace jej //NAMESPACE jej
 
     Scene* EngineObject::GetCurrentScene()
     {
-        for (auto& itr : m_scenes)
+        for (const auto& itr : m_scenes)
             if (itr->m_active)
                 return itr.get();
 
@@ -296,49 +291,5 @@ namespace jej //NAMESPACE jej
     }
 
     //////////////////////////////////////////
-
-//#ifdef JEJ_DEBUG_MODE
-//    std::vector<unsigned int> EngineObject::_getAllCompIDs() const
-//    {
-//        std::vector<unsigned int> IDs;
-//        IDs.reserve(Component::m_componentIDCounter);
-//
-//        for (const auto& itr : std::get<ComponentHelper<RenderComponent>::index>(m_systems)->m_components)
-//        {
-//            unsigned int id = itr->m_componentID;
-//            IDs.emplace_back(id);
-//        }
-//        for (const auto& itr : std::get<ComponentHelper<ShaderComponent>::index>(m_systems)->m_components)
-//        {
-//            unsigned int id = itr->m_componentID;
-//            IDs.emplace_back(id);
-//        }
-//        for (const auto& itr : std::get<ComponentHelper<ShapeComponent>::index>(m_systems)->m_components)
-//        {
-//            unsigned int id = itr->m_componentID;
-//            IDs.emplace_back(id);
-//        }
-//        for (const auto& itr : std::get<ComponentHelper<TextureComponent>::index>(m_systems)->m_components)
-//        {
-//            unsigned int id = itr->m_componentID;
-//            IDs.emplace_back(id);
-//        }
-//        for (const auto& itr : std::get<ComponentHelper<TransformComponent>::index>(m_systems)->m_components)
-//        {
-//            unsigned int id = itr->m_componentID;
-//            IDs.emplace_back(id);
-//        }
-//
-//        return IDs;
-//    }
-//    //////////////////////////////////////////
-//#endif
-
-#ifdef __ANDROID__
-    //void EngineObject::SetAndroidApp(android_app* p_app)
-    //{
-    //	state = p_app;
-    //}
-#endif
 
 } //NAMESPACE jej
