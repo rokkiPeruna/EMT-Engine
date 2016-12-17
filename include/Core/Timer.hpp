@@ -17,10 +17,11 @@ namespace jej
 #endif
         JEJ_TIME_TYPE m_time;
 
-        //Constructor
-        Timer();
-
     public:
+
+        //Constructor
+        //Reset timer upon creating
+        Timer(const bool p_reset = false);
 
         //Disabled copy-constructors
         NOCOPY(Timer);
@@ -33,8 +34,6 @@ namespace jej
 
         //Return elapsed time since last reset
         float GetTime() const;
-
-        static Timer& GetInstance(const bool p_reset = false);
 
     };
 }

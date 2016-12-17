@@ -56,12 +56,15 @@ namespace jej
 
     ////////////////////////////////////////////////////////////
 
-    Timer::Timer() :
+    Timer::Timer(const bool p_reset) :
         m_time(0)
     {
 #if defined(_WIN32)
         available = QueryPerformanceFrequency(&freq);
 #endif
+
+        if (p_reset)
+            Reset();
     }
 
     ////////////////////////////////////////////////////////////
@@ -87,15 +90,5 @@ namespace jej
     }
 
     ////////////////////////////////////////////////////////////
-
-    Timer& Timer::GetInstance(const bool p_reset)
-    {
-        static Timer instance;
-
-        if (p_reset)
-            instance.Reset();
-
-        return instance;
-    }
 
 }

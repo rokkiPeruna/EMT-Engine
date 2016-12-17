@@ -22,7 +22,7 @@ inline T* Entity::GetComponentPtr()
 {
     static_assert(std::is_base_of<Component, T>::value, "Tried to get component that doesn't inherit from Component.");
 
-    for (auto i : std::get<ComponentHelper<T>::index>(EngineObject::GetInstance().m_systems)->m_components)
+    for (const auto& i : std::get<ComponentHelper<T>::index>(EngineObject::GetInstance().m_systems)->m_components)
         if (i->m_parentID == m_entityID)
             return i.get();
 
@@ -33,7 +33,13 @@ inline T* Entity::GetComponentPtr()
 template <typename T>
 inline const T* Entity::GetComponentPtr() const
 {
-    return GetComponentPtr<T>();
+    static_assert(std::is_base_of<Component, T>::value, "Tried to get component that doesn't inherit from Component.");
+
+    for (const auto& i : std::get<ComponentHelper<T>::index>(EngineObject::GetInstance().m_systems)->m_components)
+        if (i->m_parentID == m_entityID)
+            return i.get();
+
+    return nullptr;
 }
 
 
@@ -42,7 +48,7 @@ inline bool Entity::HasComponent()
 {
     static_assert(std::is_base_of<Component, T>::value, "Tried to compare component that doesn't inherit from Component.");
 
-    for (auto i : std::get<ComponentHelper<T>::index>(EngineObject::GetInstance().m_systems)->m_components)
+    for (const auto& i : std::get<ComponentHelper<T>::index>(EngineObject::GetInstance().m_systems)->m_components)
         if (i->m_parentID == m_entityID)
             return true;
 
@@ -59,7 +65,7 @@ inline bool Entity::RemoveComponent()
 
     auto& v = std::get<ComponentHelper<T>::index>(EngineObject::GetInstance().m_systems)->m_components;
 
-    for (auto itr = v.begin(); itr != v.end(); ++itr)
+    for (auto&& itr = v.begin(); itr != v.end(); ++itr)
         if (itr->get()->m_parentID == m_entityID)
         {
             removedID = itr->get()->m_componentID;  //Remember what component was removed

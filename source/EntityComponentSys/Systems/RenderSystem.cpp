@@ -83,7 +83,7 @@ namespace jej
         m_winOffsetY = 0;
 #endif
         //Clear color and depth buffer with color
-        _clearScreen();
+        //_clearScreen();
 
         //Update all changed vertices, etc. some entity has moved
         _updateVertices();
@@ -212,11 +212,11 @@ namespace jej
                 glBindBuffer(GL_ARRAY_BUFFER, drawData.vertexPosBuffer);
                 glVertexAttribPointer(drawData.vertexPositionIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
                 glBindBuffer(GL_ARRAY_BUFFER, 0);
-
+            
                 glBindBuffer(GL_ARRAY_BUFFER, drawData.texCoordBuffer);
                 glVertexAttribPointer(drawData.textureCoordIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
                 glBindBuffer(GL_ARRAY_BUFFER, 0);
-
+            
                 glBindBuffer(GL_ARRAY_BUFFER, drawData.colorValBuffer);
                 glVertexAttribPointer(drawData.colorValuesIndex, 4, GL_BYTE, GL_TRUE, 0, 0);
                 glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -262,7 +262,6 @@ namespace jej
         }
         else
         {
-
             Messenger::Add(Messenger::MessageType::Error, "Shader has zero attributes, shader parent ID: " + std::to_string(shaderComp.m_parentID));
             //No rest for the living - Ee
         }
@@ -611,10 +610,13 @@ namespace jej
                     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(drawData.vertices[0]) * drawData.vertices.size(), drawData.vertices.data());
                     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-                    glBindBuffer(GL_ARRAY_BUFFER, drawData.texCoordBuffer);
-                    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(drawData.textureCoords[0]) * drawData.textureCoords.size(), drawData.textureCoords.data());
-                    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
+                    if (drawData.hasChanged)
+                    {
+                        glBindBuffer(GL_ARRAY_BUFFER, drawData.texCoordBuffer);
+                        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(drawData.textureCoords[0]) * drawData.textureCoords.size(), drawData.textureCoords.data());
+                        glBindBuffer(GL_ARRAY_BUFFER, 0);
+                        drawData.hasChanged = false;
+                    }
                 }
             }
         }

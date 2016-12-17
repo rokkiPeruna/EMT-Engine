@@ -57,8 +57,8 @@ namespace jej
             unsigned int size = 0u;
             unsigned char* data = nullptr;
             int usingImage = -1;
-            int previousImage = -1;
             Vector2i imagesInTexture = Vector2i(0, 0);
+            bool hasChanged = false;
 
             TextureData(){};
             ~TextureData()

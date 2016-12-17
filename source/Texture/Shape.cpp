@@ -59,7 +59,8 @@ namespace jej
             theta += radians;
         }
         m_radius = p_radius;
-        m_myDrawData.m_shapeType = m_shapeType = ShapeType::Circle;
+        m_myDrawData.shapeType = m_shapeType = ShapeType::Circle;
+        m_myDrawData.hasChanged = true;
 
         m_myDrawData.colorValues.push_back((GLint)p_myColor.x);
         m_myDrawData.colorValues.push_back((GLint)p_myColor.y);
@@ -79,7 +80,8 @@ namespace jej
         m_points.emplace_back(-p_extents.x, -p_extents.y);
         m_points.emplace_back(p_extents.x, -p_extents.y);
 
-        m_myDrawData.m_shapeType = m_shapeType = ShapeType::Rectangle;
+        m_myDrawData.shapeType = m_shapeType = ShapeType::Rectangle;
+        m_myDrawData.hasChanged = true;
 
         m_myDrawData.colorValues.push_back((GLint)p_myColor.x);
         m_myDrawData.colorValues.push_back((GLint)p_myColor.y);
@@ -95,9 +97,11 @@ namespace jej
         m_points = p_points;
 
         if (m_points.size() == 3u)
-            m_myDrawData.m_shapeType = m_shapeType = ShapeType::Triangle;
+            m_myDrawData.shapeType = m_shapeType = ShapeType::Triangle;
         else
-            m_myDrawData.m_shapeType = m_shapeType = ShapeType::Convex;
+            m_myDrawData.shapeType = m_shapeType = ShapeType::Convex;
+
+        m_myDrawData.hasChanged = true;
 
         m_myDrawData.colorValues.push_back((GLint)p_myColor.x);
         m_myDrawData.colorValues.push_back((GLint)p_myColor.y);
@@ -113,7 +117,8 @@ namespace jej
         m_points.emplace_back(0.f, 1.f);
         m_points.emplace_back(-1.f, 0.f);
         m_points.emplace_back(1.f, 0.f);
-        m_myDrawData.m_shapeType = m_shapeType = ShapeType::Triangle;
+        m_myDrawData.shapeType = m_shapeType = ShapeType::Triangle;
+        m_myDrawData.hasChanged = true;
         m_myDrawData.colorValues.push_back((GLint)p_myColor.x);
         m_myDrawData.colorValues.push_back((GLint)p_myColor.y);
         m_myDrawData.colorValues.push_back((GLint)p_myColor.z);
