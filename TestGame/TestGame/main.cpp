@@ -24,6 +24,9 @@
 int main(int argc, char* argv[])
 {
 
+	//Tämän tästä muutimme
+	//int 2 = 5;
+
     //Create new EngineObject, initialize it and get alias handle to it
     jej::Window::WindowBaseInitData data;
     data.nameWindow = L"Jejuna Engine demo";
